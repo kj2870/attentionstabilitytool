@@ -1,110 +1,106 @@
-# Protocol and Open Questions
+# Algorithm Overview
 
-## Protocol Overview
+## Objective
 
-This prototype uses a short structured visual fixation task to observe simple behavioral signals during sustained attention. The task is performed while webcam video is recorded so that eye-related signals such as blink behavior and eye position can be estimated across time.
+The purpose of the algorithm is to extract simple behavioral signals from webcam video recorded during a visual fixation task. These signals are intended to describe how stable a participant’s visual engagement remains over the course of a session.
 
-During the session, the participant maintains visual fixation on a small visual target (for example, a candle flame) displayed on the screen. The session also includes brief preparatory phases before the fixation period.
-
-The current protocol includes the following sequence:
-
-1. posture settling  
-2. brief whole-body tension and release  
-3. paced breathing  
-4. sustained visual fixation  
-5. short open-awareness period after fixation  
-
-These steps were included partly to make the task easier to repeat consistently, and partly because they may influence behavioral stability during the fixation period.
-
-The goal of the protocol is not to measure attention directly, but to create a simple and repeatable behavioral context where changes in blink behavior or gaze stability can be observed over time.
+The system does not attempt to measure attention directly. Instead, it focuses on observable patterns such as blink behavior and changes in eye position that occur while the user maintains fixation on a visual target.
 
 ---
 
-## Protocol Structure
+## Inputs
 
-### Posture Settling
+The prototype currently uses a minimal set of inputs:
 
-The session begins with a short period where the participant adjusts posture and aligns the screen at eye level. The aim is to reduce large head movements and create a consistent starting position for each session.
+- webcam video recorded during the fixation task  
+- the location of the visual fixation target on the screen  
+- session timing information  
 
----
-
-### Whole-Body Tension and Release
-
-Participants briefly contract major muscle groups and then release them. This step is intended to reduce background muscular tension and restlessness that might otherwise lead to subtle posture shifts during the fixation task.
+No specialized eye-tracking hardware or calibration procedures are required in the current version.
 
 ---
 
-### Paced Breathing
+## Processing Pipeline
 
-The participant performs several slow breaths with slightly longer exhalations. This phase may help stabilize breathing and reduce restlessness before the fixation period begins.
+### Frame Processing
 
----
-
-### Sustained Visual Fixation
-
-The main portion of the session involves maintaining gaze on the visual target for several minutes. During this phase, webcam video is analyzed to estimate behavioral signals such as blink events and changes in eye position relative to the target.
-
-These signals form the basis for the session-level behavioral summaries described in the algorithm documentation.
+Video frames are processed sequentially. Each frame is analyzed to locate the face and isolate the region containing the eyes. Restricting analysis to this region reduces the influence of unrelated motion elsewhere in the frame.
 
 ---
 
-### Post-Fixation Open Awareness
+### Eye-State Feature Extraction
 
-After the fixation period, the task briefly transitions to a more relaxed monitoring phase where the participant releases narrow visual focus. This phase mainly serves to ease the transition out of the task and may also allow comparison of eye behavior before and after the fixation period.
+Within the eye region, frame-level features are estimated that describe the current state of the eyes. These may include measures related to eye openness, landmark geometry, or approximate eye position.
 
----
-
-## Open Questions
-
-The following questions are areas where feedback and further investigation would be especially valuable.
+These signals provide the basis for detecting blink events and identifying changes in eye position relative to the fixation target.
 
 ---
 
-### Behavioral Signals
+### Blink Event Detection
 
-- Which webcam-derived signals are most likely to provide meaningful information during a fixation task (for example blink behavior vs. gaze position changes)?
-- How reliably can blink events be detected across different users and lighting conditions?
-- Which signals remain stable enough across sessions to support repeated measurements within the same individual?
-- Are simple measures such as blink rate and fixation interruptions sufficient, or are additional signals needed?
+Blink events are detected by identifying rapid transitions in eye openness across consecutive frames. When the eye closes and reopens within a short time window, the system records a blink event.
 
----
-
-### Protocol Design
-
-- Does including regulation steps before fixation improve the stability of the behavioral signals?
-- Would a shorter or longer fixation period produce more reliable measurements?
-- How sensitive are the signals to differences in posture, viewing distance, or screen setup?
-- Should the fixation task be studied independently from the preparatory phases?
+From these events, additional metrics can be derived such as blink count, blink rate, and blink duration.
 
 ---
 
-### Measurement Reliability
+### Target-Relative Eye Position
 
-- How strongly do lighting conditions and camera quality affect the extracted signals?
-- How much head movement can occur before gaze-related features become unreliable?
-- Is a simple target-region approach sufficient without explicit gaze calibration?
-- What signal quality checks would be useful to detect unreliable sessions?
+Eye position is estimated relative to the screen location of the fixation target. The goal is not precise gaze tracking but rather a coarse indication of whether the eye remains near the intended target region.
 
----
-
-### Repeated Measurement
-
-- Are the extracted signals consistent when the same person repeats the task across multiple days?
-- Which features change most when a participant is fatigued or distracted?
-- How much natural variability should be expected within the same individual?
-- What methods are best suited for comparing sessions over time?
+Changes in this estimate can indicate brief interruptions in fixation.
 
 ---
 
-### Integration With Physiological Signals
+### Time-Series Feature Construction
 
-- Which wearable-derived signals might be most useful for interpreting behavioral changes during the task (for example sleep, HRV, or resting heart rate)?
-- Do days with poorer physiological recovery correspond to greater fixation instability or changes in blink behavior?
-- Can behavioral and physiological signals together provide a clearer picture than either one alone?
-- What types of datasets would be needed to study these relationships meaningfully?
+Frame-level signals are aggregated across the session to create behavioral time-series features. These features describe how eye behavior evolves over the duration of the task.
+
+Examples include:
+
+- blink rate across the session  
+- frequency of fixation interruptions  
+- variability of eye position relative to the target  
+- duration of continuous fixation intervals  
 
 ---
 
-## Feedback
+### Session-Level Summary
 
-Feedback on both the protocol design and the measurement approach would be extremely valuable. In particular, suggestions for simple validation experiments or improvements to the behavioral features would help guide the next steps of the project.
+The time-series features can be combined into a small number of descriptive session-level metrics. These summaries are intended to reflect the overall stability of eye behavior during the task rather than produce a definitive measure of attention.
+
+In the current prototype, these outputs are best understood as exploratory indicators that can be compared across repeated sessions.
+
+---
+
+## Design Approach
+
+The system is intentionally simple and interpretable. The focus is on behavioral features that can be inspected directly rather than complex models that are difficult to interpret.
+
+This approach makes it easier to evaluate whether the extracted signals behave in reasonable ways before introducing more advanced analysis methods.
+
+---
+
+## Technical Constraints
+
+Several practical factors influence the reliability of the extracted signals:
+
+- variability in webcam quality and frame rate  
+- sensitivity to lighting conditions  
+- head movement affecting apparent eye position  
+- limited spatial resolution of consumer cameras  
+
+Because of these constraints, the current implementation should be viewed as a feasibility prototype rather than a precise eye-tracking system.
+
+---
+
+## Next Steps
+
+Further development will likely focus on:
+
+- improving robustness of eye region detection  
+- introducing simple calibration procedures  
+- evaluating signal stability across repeated sessions  
+- identifying which behavioral features remain reliable under different recording conditions
+
+These steps will help determine whether webcam-derived signals can support meaningful behavioral measurements over time.
