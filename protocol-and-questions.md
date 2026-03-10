@@ -2,154 +2,109 @@
 
 ## Protocol Overview
 
-This prototype uses a short structured visual fixation task designed to observe simple behavioral markers of attentional stability using a standard webcam.
+This prototype uses a short structured visual fixation task to observe simple behavioral signals during sustained attention. The task is performed while webcam video is recorded so that eye-related signals such as blink behavior and eye position can be estimated across time.
 
-During the task, the participant maintains visual fixation on a small on-screen target (for example, a candle flame) for several minutes while webcam video is recorded. The system attempts to extract behavioral features such as blink events, brief gaze interruptions, and fixation instability across the session.
+During the session, the participant maintains visual fixation on a small visual target (for example, a candle flame) displayed on the screen. The session also includes brief preparatory phases before the fixation period.
 
-The protocol includes several short preparatory phases before the fixation period:
+The current protocol includes the following sequence:
 
 1. posture settling  
 2. brief whole-body tension and release  
 3. paced breathing  
 4. sustained visual fixation  
-5. a short open-awareness period after fixation  
+5. short open-awareness period after fixation  
 
-These preparatory phases are included partly for experiential reasons, but also because they may influence the stability of the behavioral signal during the fixation task.
+These steps were included partly to make the task easier to repeat consistently, and partly because they may influence behavioral stability during the fixation period.
 
-The broader goal of the prototype is to explore whether repeated measurements of simple behavioral signals during a standardized task could eventually be used to study changes in attentional steadiness across sessions.
-
-This project should be understood as an exploratory measurement concept rather than a validated cognitive assessment.
+The goal of the protocol is not to measure attention directly, but to create a simple and repeatable behavioral context where changes in blink behavior or gaze stability can be observed over time.
 
 ---
 
-## Structure of the Protocol
+## Protocol Structure
 
-### 1. Posture Settling
+### Posture Settling
 
-The session begins with a short period in which the participant adjusts posture, aligns the screen at eye level, and minimizes unnecessary movement.
-
-The intention is to reduce large head or body movements that would introduce noise into webcam-derived eye measurements. A stable setup may also make repeated sessions more comparable.
+The session begins with a short period where the participant adjusts posture and aligns the screen at eye level. The aim is to reduce large head movements and create a consistent starting position for each session.
 
 ---
 
-### 2. Whole-Body Tension and Release
+### Whole-Body Tension and Release
 
-Participants briefly contract major muscle groups and then release them.
-
-This step is included because background muscular tension often produces subtle restlessness and postural shifts during sustained tasks. A brief tension–release cycle may reduce this background movement and help the participant settle before the fixation phase begins.
-
-From a measurement perspective, this step may reduce non-task movement that could otherwise appear as gaze instability.
+Participants briefly contract major muscle groups and then release them. This step is intended to reduce background muscular tension and restlessness that might otherwise lead to subtle posture shifts during the fixation task.
 
 ---
 
-### 3. Paced Breathing
+### Paced Breathing
 
-The participant then performs a small number of slow breaths with extended exhalation.
-
-This phase is intended to reduce physiological arousal and stabilize attention before the fixation task begins. Slow breathing can influence autonomic activity and may reduce motor restlessness or impulsive blinking.
-
-An open question is whether this step improves measurement stability or changes the internal state being measured.
+The participant performs several slow breaths with slightly longer exhalations. This phase may help stabilize breathing and reduce restlessness before the fixation period begins.
 
 ---
 
-### 4. Sustained Visual Fixation
+### Sustained Visual Fixation
 
-The main measurement period involves maintaining visual fixation on a stable visual target for several minutes.
+The main portion of the session involves maintaining gaze on the visual target for several minutes. During this phase, webcam video is analyzed to estimate behavioral signals such as blink events and changes in eye position relative to the target.
 
-During this phase, webcam video is analyzed to estimate simple behavioral features such as:
-
-- blink events and blink rate  
-- brief gaze interruptions  
-- variability of gaze position  
-- duration of stable fixation intervals  
-
-The working assumption is that sustained engagement with the fixation target produces observable patterns in blink behavior and gaze stability that may vary with fatigue, distraction, or fluctuations in attentional control.
-
-The system does not attempt to measure attention directly. Instead, it extracts behavioral signals that may correlate with attentional steadiness during the task.
+These signals form the basis for the session-level behavioral summaries described in the algorithm documentation.
 
 ---
 
-### 5. Post-Fixation Open Awareness
+### Post-Fixation Open Awareness
 
-After the fixation period, the task briefly transitions into a more open monitoring phase in which the participant relaxes visual focus and observes sensations or breathing.
-
-This phase mainly serves to soften the transition out of the fixation task and may improve the experience of repeated sessions. It may also allow observation of how blink and gaze behavior change when narrow fixation is released.
+After the fixation period, the task briefly transitions to a more relaxed monitoring phase where the participant releases narrow visual focus. This phase mainly serves to ease the transition out of the task and may also allow comparison of eye behavior before and after the fixation period.
 
 ---
 
-## Conceptual Framing
+## Open Questions
 
-The protocol combines elements of a classical visual fixation task with short preparatory steps that may influence the participant’s physiological and behavioral state.
-
-Because of this structure, the task may not isolate visual attention in a strict laboratory sense. Instead, it may capture a broader construct related to steadiness of engagement during a simple repeated task.
-
-Understanding what aspect of behavior the extracted features actually reflect is one of the central questions for this project.
+The following questions are areas where feedback and further investigation would be especially valuable.
 
 ---
 
-## Key Questions
+### Behavioral Signals
 
-Several questions are important for determining whether this type of measurement is meaningful.
-
-### Feature Validity
-
-Which webcam-derived signals are most likely to reflect meaningful changes in engagement rather than measurement noise?
-
-Possible candidates include blink rate, fixation interruption frequency, and short-term gaze variability. However, each of these signals may also be influenced by fatigue, eye dryness, lighting conditions, or head movement.
-
-Determining which features are robust enough for repeated measurement is a central challenge.
+- Which webcam-derived signals are most likely to provide meaningful information during a fixation task (for example blink behavior vs. gaze position changes)?
+- How reliably can blink events be detected across different users and lighting conditions?
+- Which signals remain stable enough across sessions to support repeated measurements within the same individual?
+- Are simple measures such as blink rate and fixation interruptions sufficient, or are additional signals needed?
 
 ---
 
 ### Protocol Design
 
-It is unclear whether the preparatory regulation phases strengthen or complicate the task.
-
-They may improve measurement stability by reducing movement and restlessness. However, they may also introduce state changes that make interpretation of the output less clear.
-
-Understanding whether the fixation task should stand alone or remain embedded within a short regulation sequence is an open design question.
+- Does including regulation steps before fixation improve the stability of the behavioral signals?
+- Would a shorter or longer fixation period produce more reliable measurements?
+- How sensitive are the signals to differences in posture, viewing distance, or screen setup?
+- Should the fixation task be studied independently from the preparatory phases?
 
 ---
 
 ### Measurement Reliability
 
-Webcam-based eye measurements are inherently noisy.
-
-Important practical questions include:
-
-- how sensitive blink detection is to lighting conditions  
-- how much head movement disrupts gaze estimates  
-- whether consumer webcams provide sufficient consistency across sessions  
-- whether a simple target-region approach is adequate without explicit gaze calibration  
-
-These constraints will likely determine which behavioral features are usable.
+- How strongly do lighting conditions and camera quality affect the extracted signals?
+- How much head movement can occur before gaze-related features become unreliable?
+- Is a simple target-region approach sufficient without explicit gaze calibration?
+- What signal quality checks would be useful to detect unreliable sessions?
 
 ---
 
 ### Repeated Measurement
 
-The project is motivated partly by the idea of measuring behavioral signals repeatedly over time.
-
-This raises questions about whether the extracted features are stable within the same individual across sessions, and whether they are sensitive to day-to-day changes such as fatigue, stress, or sleep disruption.
-
----
-
-### Integration with Physiological Signals
-
-Another motivation for the prototype is to explore how behavioral measurements might eventually be studied alongside physiological data from wearable devices.
-
-Signals such as sleep metrics, heart rate variability, resting heart rate, or stress indicators may provide useful context for interpreting changes in behavioral steadiness during the fixation task.
-
-Understanding which physiological signals are most informative for this type of comparison is an open question.
+- Are the extracted signals consistent when the same person repeats the task across multiple days?
+- Which features change most when a participant is fatigued or distracted?
+- How much natural variability should be expected within the same individual?
+- What methods are best suited for comparing sessions over time?
 
 ---
 
-## Feedback I Would Value
+### Integration With Physiological Signals
 
-Some areas where feedback from researchers would be especially helpful include:
+- Which wearable-derived signals might be most useful for interpreting behavioral changes during the task (for example sleep, HRV, or resting heart rate)?
+- Do days with poorer physiological recovery correspond to greater fixation instability or changes in blink behavior?
+- Can behavioral and physiological signals together provide a clearer picture than either one alone?
+- What types of datasets would be needed to study these relationships meaningfully?
 
-- Which webcam-derived behavioral features seem most promising as early markers of attentional stability?
-- How would you approach validating a prototype measurement like this in an early research setting?
-- Does including regulation before fixation strengthen the protocol or make interpretation less clear?
-- What would be the most sensible first validation step for a system like this?
-- If this were paired with wearable data, which physiological signals would you prioritize first?
+---
+
+## Feedback
+
+Feedback on both the protocol design and the measurement approach would be extremely valuable. In particular, suggestions for simple validation experiments or improvements to the behavioral features would help guide the next steps of the project.
