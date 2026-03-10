@@ -1,3 +1,4 @@
+```mermaid
 flowchart TD
     A[User begins fixation session] --> B[Webcam video stream]
     B --> C[Face detection]
