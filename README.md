@@ -1,3 +1,9 @@
+## Repository Structure
+
+- `README.md` – project overview
+- `algorithm-overview.md` – high-level signal processing pipeline
+- `protocol-and-open-questions.md` – rationale for the fixation protocol and research questions
+
 # Attention Stability Prototype
 
 This repository documents an early-stage exploratory prototype for estimating simple behavioral markers of attentional stability during a sustained visual fixation task using a standard webcam.
