@@ -1,73 +1,49 @@
-# React + TypeScript + Vite
+# FocusFlow
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+FocusFlow is a React + TypeScript + Vite app for guided attention sessions with local tracking, Supabase auth, and Supabase session persistence.
 
-Currently, two official plugins are available:
+Project location:
+`C:\Users\kj287\Documents\01_Projects\focusflow`
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+GitHub repository:
+[https://github.com/kj2870/attentionstabilitytool](https://github.com/kj2870/attentionstabilitytool)
 
-## React Compiler
+## Current Wiring
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+- Frontend: React 19 + Vite
+- Auth: Supabase Auth
+- Session data: local cache plus `public.sessions` in Supabase
+- Database schema: [`supabase-schema.sql`](./supabase-schema.sql)
+- URL sharing / SPA routing: [`vercel.json`](./vercel.json)
 
-## Expanding the ESLint configuration
+## Local Setup
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+1. Work from `C:\Users\kj287\Documents\01_Projects\focusflow`.
+2. Install dependencies with `npm install`.
+3. Copy `.env.example` to `.env`.
+4. Add your Supabase project URL and anon key.
+5. Run `npm run dev`.
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+## Supabase Setup
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+1. Open your Supabase project SQL editor.
+2. Run the SQL in [`supabase-schema.sql`](./supabase-schema.sql).
+3. Confirm `VITE_SUPABASE_URL` and `VITE_SUPABASE_ANON_KEY` are present in `.env`.
+4. Test signup, login, and saving a completed session.
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+The app already writes completed sessions to Supabase through `saveSessionRemote()` in `src/lib/storage.ts`.
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+## GitHub And Sharing
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+- Local git remote should use:
+  `https://github.com/kj2870/attentionstabilitytool.git`
+- Primary repository page:
+  [https://github.com/kj2870/attentionstabilitytool](https://github.com/kj2870/attentionstabilitytool)
+- Vercel SPA rewrites are already configured so shared app URLs resolve correctly.
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+## Commands
+
+- `npm run dev`
+- `npm run build`
+- `npm run preview`
+- `npm run lint`

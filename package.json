@@ -2,6 +2,15 @@
   "name": "focusflow",
   "private": true,
   "version": "0.0.0",
+  "description": "FocusFlow guided attention app with Supabase-backed auth and session persistence.",
+  "homepage": "https://github.com/kj2870/attentionstabilitytool",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/kj2870/attentionstabilitytool.git"
+  },
+  "bugs": {
+    "url": "https://github.com/kj2870/attentionstabilitytool/issues"
+  },
   "type": "module",
   "scripts": {
     "dev": "vite",
