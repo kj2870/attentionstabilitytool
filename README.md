@@ -16,6 +16,12 @@ GitHub repository:
 - Database schema: [`supabase-schema.sql`](./supabase-schema.sql)
 - URL sharing / SPA routing: [`vercel.json`](./vercel.json)
 
+## Research Docs
+
+- [`algorithm-overview.md`](./algorithm-overview.md)
+- [`protocol-and-questions.md`](./protocol-and-questions.md)
+- [`system-diagrams.md`](./system-diagrams.md)
+
 ## Local Setup
 
 1. Work from `C:\Users\kj287\Documents\01_Projects\focusflow`.
