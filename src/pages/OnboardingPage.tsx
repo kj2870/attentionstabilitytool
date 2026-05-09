@@ -1,53 +1,23 @@
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
 import Diya from "../components/Diya";
 import MeditationBackground from "../components/MeditationBackground";
 import { RESEARCH_MODE } from "../lib/presentationMode";
-import { signUp } from "../lib/auth";
+import { signInWithGoogle } from "../lib/auth";
 
 export default function OnboardingPage() {
-  const navigate = useNavigate();
-
   const [step, setStep] = useState(RESEARCH_MODE ? 4 : 0);
-
-  // Step 4 — account creation fields
-  const [username, setUsername] = useState("");
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [confirmPassword, setConfirmPassword] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const [authError, setAuthError] = useState("");
-  const [emailSent, setEmailSent] = useState(false);
 
   const next = () => setStep((prev) => prev + 1);
 
-  const handleCreateAccount = async () => {
-    const normalizedUsername = username.trim();
-
-    if (!normalizedUsername) { setAuthError("Please enter a display name."); return; }
-    if (!email.trim()) { setAuthError("Please enter your email."); return; }
-    if (password.length < 6) { setAuthError("Password must be at least 6 characters."); return; }
-    if (password !== confirmPassword) { setAuthError("Passwords do not match."); return; }
-
+  const handleGoogleSignIn = async () => {
     setIsLoading(true);
     setAuthError("");
-
     try {
-      const { needsEmailConfirmation } = await signUp({
-        email,
-        password,
-        username: normalizedUsername,
-      });
-
-      if (needsEmailConfirmation) {
-        setEmailSent(true);
-      } else {
-        // Session created immediately — App.tsx will detect it and redirect.
-        navigate("/", { replace: true });
-      }
+      await signInWithGoogle();
     } catch (err) {
-      setAuthError((err as Error).message ?? "Account creation failed. Please try again.");
-    } finally {
+      setAuthError((err as Error).message ?? "Sign in failed. Please try again.");
       setIsLoading(false);
     }
   };
@@ -442,18 +412,22 @@ export default function OnboardingPage() {
           </div>
         )}
 
-        {step === 4 && !emailSent && (
+        {step === 4 && (
           <div
             className="glass-card"
             style={{
               width: "100%",
-              maxWidth: "480px",
-              padding: "36px 30px",
+              maxWidth: "440px",
+              padding: "48px 36px",
               textAlign: "center",
             }}
           >
-            <h1 className="section-title" style={{ marginBottom: "14px" }}>
-              Create your account
+            <div style={{ marginBottom: "24px", transform: "scale(0.85)" }}>
+              <Diya />
+            </div>
+
+            <h1 className="section-title" style={{ marginBottom: "10px" }}>
+              Save your practice
             </h1>
 
             <p
@@ -461,72 +435,18 @@ export default function OnboardingPage() {
                 color: "#bfae97",
                 fontSize: "16px",
                 lineHeight: 1.65,
-                marginBottom: "24px",
+                marginBottom: "36px",
               }}
             >
-              Choose a display name and set up your login to save your
-              progress across devices.
+              Create an account to track your sessions and streaks across devices.
             </p>
-
-            {(
-              [
-                {
-                  type: "text",
-                  placeholder: "Display name",
-                  value: username,
-                  onChange: (e: React.ChangeEvent<HTMLInputElement>) => setUsername(e.target.value),
-                  autoComplete: "name",
-                },
-                {
-                  type: "email",
-                  placeholder: "Email",
-                  value: email,
-                  onChange: (e: React.ChangeEvent<HTMLInputElement>) => setEmail(e.target.value),
-                  autoComplete: "email",
-                },
-                {
-                  type: "password",
-                  placeholder: "Password (min 6 characters)",
-                  value: password,
-                  onChange: (e: React.ChangeEvent<HTMLInputElement>) => setPassword(e.target.value),
-                  autoComplete: "new-password",
-                },
-                {
-                  type: "password",
-                  placeholder: "Confirm password",
-                  value: confirmPassword,
-                  onChange: (e: React.ChangeEvent<HTMLInputElement>) => setConfirmPassword(e.target.value),
-                  autoComplete: "new-password",
-                },
-              ] as const
-            ).map((field) => (
-              <input
-                key={field.placeholder}
-                type={field.type}
-                placeholder={field.placeholder}
-                value={field.value}
-                onChange={field.onChange}
-                autoComplete={field.autoComplete}
-                style={{
-                  width: "100%",
-                  padding: "15px 16px",
-                  marginBottom: "12px",
-                  borderRadius: "16px",
-                  border: "1px solid rgba(255,179,71,0.16)",
-                  background: "rgba(255,255,255,0.05)",
-                  color: "#F5E9DA",
-                  outline: "none",
-                  fontSize: "16px",
-                }}
-              />
-            ))}
 
             {authError && (
               <div
                 style={{
                   color: "#ff8080",
                   fontSize: "14px",
-                  marginBottom: "14px",
+                  marginBottom: "20px",
                   lineHeight: 1.5,
                 }}
               >
@@ -535,71 +455,41 @@ export default function OnboardingPage() {
             )}
 
             <button
-              className="primary-button"
-              onClick={() => void handleCreateAccount()}
+              onClick={() => void handleGoogleSignIn()}
               disabled={isLoading}
-              style={{ width: "100%", opacity: isLoading ? 0.7 : 1 }}
+              style={{
+                width: "100%",
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+                gap: "12px",
+                padding: "14px 20px",
+                borderRadius: "16px",
+                border: "1px solid rgba(255,179,71,0.25)",
+                background: "rgba(255,255,255,0.07)",
+                color: "#F5E9DA",
+                fontSize: "16px",
+                cursor: isLoading ? "not-allowed" : "pointer",
+                opacity: isLoading ? 0.7 : 1,
+                transition: "background 0.2s, border-color 0.2s",
+              }}
+              onMouseEnter={(e) => {
+                if (!isLoading) (e.currentTarget.style.background = "rgba(255,255,255,0.12)");
+              }}
+              onMouseLeave={(e) => {
+                (e.currentTarget.style.background = "rgba(255,255,255,0.07)");
+              }}
             >
-              {isLoading ? "Creating account…" : "Start Practice"}
+              {!isLoading && (
+                <svg width="20" height="20" viewBox="0 0 48 48" fill="none">
+                  <path fill="#FFC107" d="M43.6 20.5H42V20H24v8h11.3C33.7 32.7 29.2 36 24 36c-6.6 0-12-5.4-12-12s5.4-12 12-12c3.1 0 5.8 1.1 7.9 3l5.7-5.7C34.5 6.5 29.5 4 24 4 12.9 4 4 12.9 4 24s8.9 20 20 20 20-8.9 20-20c0-1.2-.1-2.3-.4-3.5z"/>
+                  <path fill="#FF3D00" d="M6.3 14.7l6.6 4.8C14.7 16.1 19 13 24 13c3.1 0 5.8 1.1 7.9 3l5.7-5.7C34.5 6.5 29.5 4 24 4 16.3 4 9.7 8.3 6.3 14.7z"/>
+                  <path fill="#4CAF50" d="M24 44c5.3 0 10.1-2 13.7-5.2l-6.3-5.4C29.5 35.1 26.9 36 24 36c-5.1 0-9.5-3.2-11.3-7.8l-6.5 5C9.5 39.5 16.3 44 24 44z"/>
+                  <path fill="#1976D2" d="M43.6 20.5H42V20H24v8h11.3c-.8 2.3-2.3 4.2-4.3 5.5l6.3 5.4C37 38.1 44 33 44 24c0-1.2-.1-2.3-.4-3.5z"/>
+                </svg>
+              )}
+              {isLoading ? "Redirecting…" : "Continue with Google"}
             </button>
-
-            <div
-              style={{
-                marginTop: "20px",
-                color: "#bfae97",
-                fontSize: "15px",
-              }}
-            >
-              Already have an account?{" "}
-              <span
-                onClick={() => navigate("/login")}
-                style={{ color: "#FFB347", cursor: "pointer" }}
-              >
-                Log in
-              </span>
-            </div>
-          </div>
-        )}
-
-        {step === 4 && emailSent && (
-          <div
-            className="glass-card"
-            style={{
-              width: "100%",
-              maxWidth: "480px",
-              padding: "40px 36px",
-              textAlign: "center",
-            }}
-          >
-            <div style={{ fontSize: "40px", marginBottom: "20px" }}>✉</div>
-
-            <h1 className="section-title" style={{ marginBottom: "14px" }}>
-              Check your email
-            </h1>
-
-            <p
-              style={{
-                color: "#d9cbb8",
-                fontSize: "17px",
-                lineHeight: 1.7,
-                marginBottom: "12px",
-              }}
-            >
-              We sent a confirmation link to{" "}
-              <span style={{ color: "#FFB347" }}>{email}</span>.
-            </p>
-
-            <p style={{ color: "#bfae97", fontSize: "15px", lineHeight: 1.65 }}>
-              Click the link in that email to activate your account, then return
-              here and{" "}
-              <span
-                onClick={() => navigate("/login")}
-                style={{ color: "#FFB347", cursor: "pointer" }}
-              >
-                sign in
-              </span>
-              .
-            </p>
           </div>
         )}
       </div>

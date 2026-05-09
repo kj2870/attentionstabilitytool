@@ -3,51 +3,16 @@ import { supabase } from "./supabase";
 import { createProfile, clearActiveProfile, getActiveProfile } from "./storage";
 
 // ---------------------------------------------------------------------------
-// Sign up — creates a Supabase account and a local profile cache.
+// Google sign-in — redirects to Google, then back to the app.
 // ---------------------------------------------------------------------------
-export async function signUp(params: {
-  email: string;
-  password: string;
-  username: string;
-}): Promise<{ needsEmailConfirmation: boolean }> {
-  const { data, error } = await supabase.auth.signUp({
-    email: params.email.trim(),
-    password: params.password,
+export async function signInWithGoogle(): Promise<void> {
+  const { error } = await supabase.auth.signInWithOAuth({
+    provider: "google",
     options: {
-      data: { username: params.username.trim() },
+      redirectTo: `${window.location.origin}/`,
     },
   });
-
   if (error) throw error;
-
-  // When email confirmation is disabled in Supabase, a session is returned
-  // immediately and we can create the local profile right away.
-  if (data.session) {
-    createProfile({ username: params.username.trim(), pin: "****" });
-    return { needsEmailConfirmation: false };
-  }
-
-  // Email confirmation is enabled — user must verify before they can log in.
-  return { needsEmailConfirmation: true };
-}
-
-// ---------------------------------------------------------------------------
-// Sign in — authenticates with Supabase and syncs local profile.
-// ---------------------------------------------------------------------------
-export async function signIn(params: {
-  email: string;
-  password: string;
-}): Promise<void> {
-  const { data, error } = await supabase.auth.signInWithPassword({
-    email: params.email.trim(),
-    password: params.password,
-  });
-
-  if (error) throw error;
-
-  if (data.user) {
-    syncLocalProfileFromUser(data.user);
-  }
 }
 
 // ---------------------------------------------------------------------------
@@ -65,10 +30,11 @@ export async function signOut(): Promise<void> {
 // ---------------------------------------------------------------------------
 export function syncLocalProfileFromUser(user: User): void {
   const existing = getActiveProfile();
-  if (existing) return; // local profile already in place
+  if (existing) return;
 
   const username =
-    (user.user_metadata?.username as string | undefined) ??
+    (user.user_metadata?.full_name as string | undefined) ??
+    (user.user_metadata?.name as string | undefined) ??
     user.email?.split("@")[0] ??
     "User";
 
