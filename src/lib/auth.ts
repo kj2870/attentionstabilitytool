@@ -1,6 +1,6 @@
 import type { User } from "@supabase/supabase-js";
 import { supabase } from "./supabase";
-import { createProfile, clearActiveProfile, getActiveProfile } from "./storage";
+import { createProfile, clearActiveProfile, getActiveProfile, mergeRemoteHistory } from "./storage";
 
 // ---------------------------------------------------------------------------
 // Google sign-in — redirects to Google, then back to the app.
@@ -25,18 +25,23 @@ export async function signOut(): Promise<void> {
 }
 
 // ---------------------------------------------------------------------------
-// Sync — creates a local profile from the Supabase user if none exists.
-// Called on app startup when a returning user already has a valid session.
+// Sync — creates a local profile from the Supabase user if none exists,
+// then pulls down their session history from Supabase.
+// Called on app startup and on every auth state change.
 // ---------------------------------------------------------------------------
-export function syncLocalProfileFromUser(user: User): void {
+export async function syncLocalProfileFromUser(user: User): Promise<void> {
   const existing = getActiveProfile();
-  if (existing) return;
 
-  const username =
-    (user.user_metadata?.full_name as string | undefined) ??
-    (user.user_metadata?.name as string | undefined) ??
-    user.email?.split("@")[0] ??
-    "User";
+  if (!existing) {
+    const username =
+      (user.user_metadata?.full_name as string | undefined) ??
+      (user.user_metadata?.name as string | undefined) ??
+      user.email?.split("@")[0] ??
+      "User";
 
-  createProfile({ username, pin: "****" });
+    createProfile({ username, pin: "****" });
+  }
+
+  // Pull remote history in the background — won't block the UI.
+  void mergeRemoteHistory();
 }
