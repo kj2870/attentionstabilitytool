@@ -293,6 +293,61 @@ export async function saveSessionRemote(record: SessionRecord): Promise<void> {
   }
 }
 
+// ---------------------------------------------------------------------------
+// Remote history load — fetches all sessions for the logged-in user.
+// ---------------------------------------------------------------------------
+export async function loadHistoryRemote(): Promise<SessionRecord[]> {
+  const { data: { user } } = await supabase.auth.getUser();
+  if (!user) return [];
+
+  const { data, error } = await supabase
+    .from("sessions")
+    .select("*")
+    .eq("user_id", user.id)
+    .order("created_at", { ascending: false })
+    .limit(200);
+
+  if (error) {
+    console.error("[Drishti] Remote history load failed:", error.message);
+    return [];
+  }
+
+  return (data ?? []).map((row) => ({
+    id: row.id as string,
+    date: row.date as string,
+    durationMin: row.duration_min as number,
+    timeOfDay: row.time_of_day as "Morning" | "Midday" | "Night",
+    attentionScore: row.attention_score as number,
+    feeling: (row.feeling ?? "") as SessionFeeling,
+    grade: row.grade as "A" | "B" | "C",
+    blinkCount: row.blink_count ?? undefined,
+    avgDrift: row.avg_drift ?? undefined,
+    avgRecovery: row.avg_recovery ?? undefined,
+  }));
+}
+
+// ---------------------------------------------------------------------------
+// Merge remote history into local storage — called on login so history is
+// available across devices. Deduplicates by session date to avoid doubles.
+// ---------------------------------------------------------------------------
+export async function mergeRemoteHistory(): Promise<void> {
+  const remote = await loadHistoryRemote();
+  if (remote.length === 0) return;
+
+  const local = loadHistory();
+  const localDates = new Set(local.map((r) => r.date));
+
+  const newRecords = remote.filter((r) => !localDates.has(r.date));
+  if (newRecords.length === 0) return;
+
+  updateActiveProfile((profile) => ({
+    ...profile,
+    history: [...newRecords, ...profile.history]
+      .sort((a, b) => (a.date < b.date ? 1 : -1))
+      .slice(0, 200),
+  }));
+}
+
 export function getMandalaDay(records: SessionRecord[] = loadHistory()) {
   const uniqueDaysCount = new Set(records.map((record) => toLocalDateKey(record.date)))
     .size;

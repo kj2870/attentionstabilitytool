@@ -62,9 +62,9 @@ export default function App() {
 
   useEffect(() => {
     // Resolve the existing session on first load.
-    supabase.auth.getSession().then(({ data: { session } }) => {
+    supabase.auth.getSession().then(async ({ data: { session } }) => {
       const u = session?.user ?? null;
-      if (u) syncLocalProfileFromUser(u);
+      if (u) await syncLocalProfileFromUser(u);
       setUser(u);
       setAuthReady(true);
     });
@@ -73,7 +73,7 @@ export default function App() {
     const { data: { subscription } } = supabase.auth.onAuthStateChange(
       (_event, session) => {
         const u = session?.user ?? null;
-        if (u) syncLocalProfileFromUser(u);
+        if (u) void syncLocalProfileFromUser(u);
         setUser(u);
       }
     );
