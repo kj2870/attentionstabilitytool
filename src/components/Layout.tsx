@@ -9,19 +9,13 @@ type LayoutProps = {
 export default function Layout({ children }: LayoutProps) {
   const location = useLocation();
 
-  const navItems = RESEARCH_MODE
-    ? [
-        { to: "/", label: "Home" },
-        { to: "/session", label: "Session" },
-        { to: "/privacy", label: "Privacy" },
-      ]
-    : [
-        { to: "/", label: "Home" },
-        { to: "/history", label: "History" },
-        { to: "/philosophy", label: "Philosophy" },
-        { to: "/science", label: "Science" },
-        { to: "/privacy", label: "Privacy" },
-      ];
+  const navLeft = RESEARCH_MODE
+    ? [{ to: "/", label: "Home" }, { to: "/session", label: "Session" }]
+    : [{ to: "/", label: "Home" }, { to: "/philosophy", label: "Philosophy" }, { to: "/science", label: "Science" }];
+
+  const navRight = RESEARCH_MODE
+    ? [{ to: "/privacy", label: "Privacy" }]
+    : [{ to: "/history", label: "History" }, { to: "/privacy", label: "Privacy" }];
 
   const isSessionRoute = location.pathname === "/session";
 
@@ -50,25 +44,33 @@ export default function Layout({ children }: LayoutProps) {
               display: "flex",
               justifyContent: "space-between",
               alignItems: "center",
-              padding: "20px 24px",
+              padding: "18px 24px",
             }}
           >
-            <div style={{ fontSize: "24px", letterSpacing: "1.5px" }}>
-              {RESEARCH_MODE ? "VISUAL ATTENTION PROTOTYPE" : ""}
-            </div>
-
-            <nav
-              style={{
-                display: "flex",
-                gap: "22px",
-                fontSize: "15px",
-                flexWrap: "wrap",
-                justifyContent: "flex-end",
-              }}
-            >
-              {navItems.map((item) => {
+            {/* Left nav */}
+            <nav style={{ display: "flex", gap: "22px", fontSize: "15px" }}>
+              {navLeft.map((item) => {
                 const active = location.pathname === item.to;
+                return (
+                  <Link
+                    key={item.to}
+                    to={item.to}
+                    style={{
+                      color: active ? "rgba(255,179,71,0.85)" : "rgba(245,233,218,0.5)",
+                      textDecoration: "none",
+                      transition: "color 0.18s ease",
+                    }}
+                  >
+                    {item.label}
+                  </Link>
+                );
+              })}
+            </nav>
 
+            {/* Right nav */}
+            <nav style={{ display: "flex", gap: "22px", fontSize: "15px" }}>
+              {navRight.map((item) => {
+                const active = location.pathname === item.to;
                 return (
                   <Link
                     key={item.to}
