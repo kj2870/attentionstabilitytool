@@ -17,7 +17,6 @@ export default function Layout({ children }: LayoutProps) {
       ]
     : [
         { to: "/", label: "Home" },
-        { to: "/routine", label: "Routine" },
         { to: "/history", label: "History" },
         { to: "/philosophy", label: "Philosophy" },
         { to: "/science", label: "Science" },
@@ -54,13 +53,8 @@ export default function Layout({ children }: LayoutProps) {
               padding: "20px 24px",
             }}
           >
-            <div
-              style={{
-                fontSize: "24px",
-                letterSpacing: "1.5px",
-              }}
-            >
-              {RESEARCH_MODE ? "VISUAL ATTENTION PROTOTYPE" : "TRATAKA"}
+            <div style={{ fontSize: "24px", letterSpacing: "1.5px" }}>
+              {RESEARCH_MODE ? "VISUAL ATTENTION PROTOTYPE" : ""}
             </div>
 
             <nav
