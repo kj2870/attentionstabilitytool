@@ -64,17 +64,18 @@ export default function HomePage() {
       <div
         className="page-shell"
         style={{
-          minHeight: "100vh",
+          height: "100vh",
+          overflow: "hidden",
           display: "flex",
           flexDirection: "column",
           justifyContent: "center",
           alignItems: "center",
           textAlign: "center",
-          padding: "36px 24px",
+          padding: "16px 24px",
         }}
       >
         {/* Diya + wordmark — tight unit */}
-        <div style={{ marginBottom: "10px", display: "flex", justifyContent: "center" }}>
+        <div style={{ marginBottom: "6px", display: "flex", justifyContent: "center" }}>
           <div style={{ transform: "translateX(-8px)" }}>
             <Diya />
           </div>
@@ -82,8 +83,8 @@ export default function HomePage() {
 
         <h1
           style={{
-            fontSize: "clamp(52px, 8vw, 78px)",
-            marginBottom: "14px",
+            fontSize: "clamp(48px, 7vw, 72px)",
+            marginBottom: "10px",
             fontWeight: 400,
             lineHeight: 1.02,
             letterSpacing: "-0.02em",
@@ -96,10 +97,10 @@ export default function HomePage() {
         <p
           style={{
             maxWidth: "36ch",
-            fontSize: "clamp(17px, 2.2vw, 20px)",
+            fontSize: "clamp(15px, 1.8vw, 18px)",
             lineHeight: 1.55,
             color: "rgba(217, 203, 184, 0.62)",
-            marginBottom: "36px",
+            marginBottom: "24px",
           }}
         >
           A daily ritual to train attention and calm the mind.
@@ -110,8 +111,8 @@ export default function HomePage() {
           style={{
             width: "100%",
             maxWidth: "420px",
-            padding: "22px 24px",
-            marginBottom: "28px",
+            padding: "16px 20px",
+            marginBottom: "20px",
             border: "1px solid rgba(255,255,255,0.06)",
             borderRadius: "28px",
             background: "rgba(255,255,255,0.025)",
@@ -122,7 +123,7 @@ export default function HomePage() {
               display: "grid",
               gridTemplateColumns: "repeat(7, 1fr)",
               gap: "6px",
-              marginBottom: "18px",
+              marginBottom: "14px",
             }}
           >
             {days.map((day, index) => (
@@ -156,7 +157,7 @@ export default function HomePage() {
                 <span style={{ opacity: 0.3 }}>·</span>
               </>
             )}
-            <span>mandala day {mandalaDay} / 48</span>
+            <span>{mandalaDay}/48</span>
           </div>
         </div>
 
