@@ -1,0 +1,6168 @@
+{
+  "directed": false,
+  "multigraph": false,
+  "graph": {},
+  "nodes": [
+    {
+      "label": "eslint.config.js",
+      "file_type": "code",
+      "source_file": "eslint.config.js",
+      "source_location": "L1",
+      "id": "eslint_config_js",
+      "community": 17,
+      "norm_label": "eslint.config.js"
+    },
+    {
+      "label": "vite.config.ts",
+      "file_type": "code",
+      "source_file": "vite.config.ts",
+      "source_location": "L1",
+      "id": "vite_config_ts",
+      "community": 18,
+      "norm_label": "vite.config.ts"
+    },
+    {
+      "label": "App.tsx",
+      "file_type": "code",
+      "source_file": "src/App.tsx",
+      "source_location": "L1",
+      "id": "src_app_tsx",
+      "community": 1,
+      "norm_label": "app.tsx"
+    },
+    {
+      "label": "UnauthRoutes()",
+      "file_type": "code",
+      "source_file": "src/App.tsx",
+      "source_location": "L21",
+      "id": "src_app_unauthroutes",
+      "community": 1,
+      "norm_label": "unauthroutes()"
+    },
+    {
+      "label": "AuthedRoutes()",
+      "file_type": "code",
+      "source_file": "src/App.tsx",
+      "source_location": "L41",
+      "id": "src_app_authedroutes",
+      "community": 1,
+      "norm_label": "authedroutes()"
+    },
+    {
+      "label": "App()",
+      "file_type": "code",
+      "source_file": "src/App.tsx",
+      "source_location": "L63",
+      "id": "src_app_app",
+      "community": 2,
+      "norm_label": "app()"
+    },
+    {
+      "label": "main.tsx",
+      "file_type": "code",
+      "source_file": "src/main.tsx",
+      "source_location": "L1",
+      "id": "src_main_tsx",
+      "community": 1,
+      "norm_label": "main.tsx"
+    },
+    {
+      "label": "vite-env.d.ts",
+      "file_type": "code",
+      "source_file": "src/vite-env.d.ts",
+      "source_location": "L1",
+      "id": "src_vite_env_d_ts",
+      "community": 15,
+      "norm_label": "vite-env.d.ts"
+    },
+    {
+      "label": "ImportMetaEnv",
+      "file_type": "code",
+      "source_file": "src/vite-env.d.ts",
+      "source_location": "L3",
+      "id": "src_vite_env_d_importmetaenv",
+      "community": 15,
+      "norm_label": "importmetaenv"
+    },
+    {
+      "label": "ImportMeta",
+      "file_type": "code",
+      "source_file": "src/vite-env.d.ts",
+      "source_location": "L9",
+      "id": "src_vite_env_d_importmeta",
+      "community": 15,
+      "norm_label": "importmeta"
+    },
+    {
+      "label": "BodyGuideOverlay.tsx",
+      "file_type": "code",
+      "source_file": "src/components/BodyGuideOverlay.tsx",
+      "source_location": "L1",
+      "id": "src_components_bodyguideoverlay_tsx",
+      "community": 3,
+      "norm_label": "bodyguideoverlay.tsx"
+    },
+    {
+      "label": "BodyGuideOverlayProps",
+      "file_type": "code",
+      "source_file": "src/components/BodyGuideOverlay.tsx",
+      "source_location": "L3",
+      "id": "components_bodyguideoverlay_bodyguideoverlayprops",
+      "community": 3,
+      "norm_label": "bodyguideoverlayprops"
+    },
+    {
+      "label": "CueState",
+      "file_type": "code",
+      "source_file": "src/components/BodyGuideOverlay.tsx",
+      "source_location": "L8",
+      "id": "components_bodyguideoverlay_cuestate",
+      "community": 3,
+      "norm_label": "cuestate"
+    },
+    {
+      "label": "getCueState()",
+      "file_type": "code",
+      "source_file": "src/components/BodyGuideOverlay.tsx",
+      "source_location": "L12",
+      "id": "components_bodyguideoverlay_getcuestate",
+      "community": 3,
+      "norm_label": "getcuestate()"
+    },
+    {
+      "label": "partFill()",
+      "file_type": "code",
+      "source_file": "src/components/BodyGuideOverlay.tsx",
+      "source_location": "L16",
+      "id": "components_bodyguideoverlay_partfill",
+      "community": 3,
+      "norm_label": "partfill()"
+    },
+    {
+      "label": "partStroke()",
+      "file_type": "code",
+      "source_file": "src/components/BodyGuideOverlay.tsx",
+      "source_location": "L23",
+      "id": "components_bodyguideoverlay_partstroke",
+      "community": 3,
+      "norm_label": "partstroke()"
+    },
+    {
+      "label": "BodyGuideOverlay()",
+      "file_type": "code",
+      "source_file": "src/components/BodyGuideOverlay.tsx",
+      "source_location": "L30",
+      "id": "components_bodyguideoverlay_bodyguideoverlay",
+      "community": 3,
+      "norm_label": "bodyguideoverlay()"
+    },
+    {
+      "label": "BreathGuide.tsx",
+      "file_type": "code",
+      "source_file": "src/components/BreathGuide.tsx",
+      "source_location": "L1",
+      "id": "src_components_breathguide_tsx",
+      "community": 3,
+      "norm_label": "breathguide.tsx"
+    },
+    {
+      "label": "BreathGuideProps",
+      "file_type": "code",
+      "source_file": "src/components/BreathGuide.tsx",
+      "source_location": "L3",
+      "id": "components_breathguide_breathguideprops",
+      "community": 3,
+      "norm_label": "breathguideprops"
+    },
+    {
+      "label": "BreathGuide()",
+      "file_type": "code",
+      "source_file": "src/components/BreathGuide.tsx",
+      "source_location": "L8",
+      "id": "components_breathguide_breathguide",
+      "community": 3,
+      "norm_label": "breathguide()"
+    },
+    {
+      "label": "CameraPreview.tsx",
+      "file_type": "code",
+      "source_file": "src/components/CameraPreview.tsx",
+      "source_location": "L1",
+      "id": "src_components_camerapreview_tsx",
+      "community": 16,
+      "norm_label": "camerapreview.tsx"
+    },
+    {
+      "label": "CameraPreviewProps",
+      "file_type": "code",
+      "source_file": "src/components/CameraPreview.tsx",
+      "source_location": "L3",
+      "id": "components_camerapreview_camerapreviewprops",
+      "community": 16,
+      "norm_label": "camerapreviewprops"
+    },
+    {
+      "label": "CameraPreview()",
+      "file_type": "code",
+      "source_file": "src/components/CameraPreview.tsx",
+      "source_location": "L8",
+      "id": "components_camerapreview_camerapreview",
+      "community": 16,
+      "norm_label": "camerapreview()"
+    },
+    {
+      "label": "Diya.tsx",
+      "file_type": "code",
+      "source_file": "src/components/Diya.tsx",
+      "source_location": "L1",
+      "id": "src_components_diya_tsx",
+      "community": 1,
+      "norm_label": "diya.tsx"
+    },
+    {
+      "label": "DiyaProps",
+      "file_type": "code",
+      "source_file": "src/components/Diya.tsx",
+      "source_location": "L3",
+      "id": "components_diya_diyaprops",
+      "community": 1,
+      "norm_label": "diyaprops"
+    },
+    {
+      "label": "Diya()",
+      "file_type": "code",
+      "source_file": "src/components/Diya.tsx",
+      "source_location": "L7",
+      "id": "components_diya_diya",
+      "community": 1,
+      "norm_label": "diya()"
+    },
+    {
+      "label": "Flame.tsx",
+      "file_type": "code",
+      "source_file": "src/components/Flame.tsx",
+      "source_location": "L1",
+      "id": "src_components_flame_tsx",
+      "community": 1,
+      "norm_label": "flame.tsx"
+    },
+    {
+      "label": "FlameProps",
+      "file_type": "code",
+      "source_file": "src/components/Flame.tsx",
+      "source_location": "L1",
+      "id": "components_flame_flameprops",
+      "community": 1,
+      "norm_label": "flameprops"
+    },
+    {
+      "label": "Flame()",
+      "file_type": "code",
+      "source_file": "src/components/Flame.tsx",
+      "source_location": "L5",
+      "id": "components_flame_flame",
+      "community": 1,
+      "norm_label": "flame()"
+    },
+    {
+      "label": "Layout.tsx",
+      "file_type": "code",
+      "source_file": "src/components/Layout.tsx",
+      "source_location": "L1",
+      "id": "src_components_layout_tsx",
+      "community": 11,
+      "norm_label": "layout.tsx"
+    },
+    {
+      "label": "LayoutProps",
+      "file_type": "code",
+      "source_file": "src/components/Layout.tsx",
+      "source_location": "L5",
+      "id": "components_layout_layoutprops",
+      "community": 11,
+      "norm_label": "layoutprops"
+    },
+    {
+      "label": "Layout()",
+      "file_type": "code",
+      "source_file": "src/components/Layout.tsx",
+      "source_location": "L9",
+      "id": "components_layout_layout",
+      "community": 11,
+      "norm_label": "layout()"
+    },
+    {
+      "label": "MeditationBackground.tsx",
+      "file_type": "code",
+      "source_file": "src/components/MeditationBackground.tsx",
+      "source_location": "L1",
+      "id": "src_components_meditationbackground_tsx",
+      "community": 1,
+      "norm_label": "meditationbackground.tsx"
+    },
+    {
+      "label": "MeditationBackgroundProps",
+      "file_type": "code",
+      "source_file": "src/components/MeditationBackground.tsx",
+      "source_location": "L1",
+      "id": "components_meditationbackground_meditationbackgroundprops",
+      "community": 1,
+      "norm_label": "meditationbackgroundprops"
+    },
+    {
+      "label": "MeditationBackground()",
+      "file_type": "code",
+      "source_file": "src/components/MeditationBackground.tsx",
+      "source_location": "L6",
+      "id": "components_meditationbackground_meditationbackground",
+      "community": 1,
+      "norm_label": "meditationbackground()"
+    },
+    {
+      "label": "SessionEndModal.tsx",
+      "file_type": "code",
+      "source_file": "src/components/SessionEndModal.tsx",
+      "source_location": "L1",
+      "id": "src_components_sessionendmodal_tsx",
+      "community": 13,
+      "norm_label": "sessionendmodal.tsx"
+    },
+    {
+      "label": "SessionProgressProps",
+      "file_type": "code",
+      "source_file": "src/components/SessionEndModal.tsx",
+      "source_location": "L1",
+      "id": "components_sessionendmodal_sessionprogressprops",
+      "community": 13,
+      "norm_label": "sessionprogressprops"
+    },
+    {
+      "label": "YogiIcon()",
+      "file_type": "code",
+      "source_file": "src/components/SessionEndModal.tsx",
+      "source_location": "L5",
+      "id": "components_sessionendmodal_yogiicon",
+      "community": 13,
+      "norm_label": "yogiicon()"
+    },
+    {
+      "label": "SessionProgress()",
+      "file_type": "code",
+      "source_file": "src/components/SessionEndModal.tsx",
+      "source_location": "L37",
+      "id": "components_sessionendmodal_sessionprogress",
+      "community": 13,
+      "norm_label": "sessionprogress()"
+    },
+    {
+      "label": "SessionProgress.tsx",
+      "file_type": "code",
+      "source_file": "src/components/SessionProgress.tsx",
+      "source_location": "L1",
+      "id": "src_components_sessionprogress_tsx",
+      "community": 14,
+      "norm_label": "sessionprogress.tsx"
+    },
+    {
+      "label": "SessionProgressProps",
+      "file_type": "code",
+      "source_file": "src/components/SessionProgress.tsx",
+      "source_location": "L1",
+      "id": "components_sessionprogress_sessionprogressprops",
+      "community": 14,
+      "norm_label": "sessionprogressprops"
+    },
+    {
+      "label": "YogiIcon()",
+      "file_type": "code",
+      "source_file": "src/components/SessionProgress.tsx",
+      "source_location": "L5",
+      "id": "components_sessionprogress_yogiicon",
+      "community": 14,
+      "norm_label": "yogiicon()"
+    },
+    {
+      "label": "SessionProgress()",
+      "file_type": "code",
+      "source_file": "src/components/SessionProgress.tsx",
+      "source_location": "L42",
+      "id": "components_sessionprogress_sessionprogress",
+      "community": 14,
+      "norm_label": "sessionprogress()"
+    },
+    {
+      "label": "auth.ts",
+      "file_type": "code",
+      "source_file": "src/lib/auth.ts",
+      "source_location": "L1",
+      "id": "src_lib_auth_ts",
+      "community": 1,
+      "norm_label": "auth.ts"
+    },
+    {
+      "label": "signInWithGoogle()",
+      "file_type": "code",
+      "source_file": "src/lib/auth.ts",
+      "source_location": "L8",
+      "id": "lib_auth_signinwithgoogle",
+      "community": 1,
+      "norm_label": "signinwithgoogle()"
+    },
+    {
+      "label": "signOut()",
+      "file_type": "code",
+      "source_file": "src/lib/auth.ts",
+      "source_location": "L21",
+      "id": "lib_auth_signout",
+      "community": 1,
+      "norm_label": "signout()"
+    },
+    {
+      "label": "syncLocalProfileFromUser()",
+      "file_type": "code",
+      "source_file": "src/lib/auth.ts",
+      "source_location": "L32",
+      "id": "lib_auth_synclocalprofilefromuser",
+      "community": 1,
+      "norm_label": "synclocalprofilefromuser()"
+    },
+    {
+      "label": "faceDetection.ts",
+      "file_type": "code",
+      "source_file": "src/lib/faceDetection.ts",
+      "source_location": "L1",
+      "id": "src_lib_facedetection_ts",
+      "community": 0,
+      "norm_label": "facedetection.ts"
+    },
+    {
+      "label": "FaceDetectionSnapshot",
+      "file_type": "code",
+      "source_file": "src/lib/faceDetection.ts",
+      "source_location": "L3",
+      "id": "lib_facedetection_facedetectionsnapshot",
+      "community": 0,
+      "norm_label": "facedetectionsnapshot"
+    },
+    {
+      "label": "SessionFaceDetector",
+      "file_type": "code",
+      "source_file": "src/lib/faceDetection.ts",
+      "source_location": "L10",
+      "id": "lib_facedetection_sessionfacedetector",
+      "community": 0,
+      "norm_label": "sessionfacedetector"
+    },
+    {
+      "label": ".init()",
+      "file_type": "code",
+      "source_file": "src/lib/faceDetection.ts",
+      "source_location": "L14",
+      "id": "lib_facedetection_sessionfacedetector_init",
+      "community": 0,
+      "norm_label": ".init()"
+    },
+    {
+      "label": ".detect()",
+      "file_type": "code",
+      "source_file": "src/lib/faceDetection.ts",
+      "source_location": "L37",
+      "id": "lib_facedetection_sessionfacedetector_detect",
+      "community": 0,
+      "norm_label": ".detect()"
+    },
+    {
+      "label": ".close()",
+      "file_type": "code",
+      "source_file": "src/lib/faceDetection.ts",
+      "source_location": "L84",
+      "id": "lib_facedetection_sessionfacedetector_close",
+      "community": 0,
+      "norm_label": ".close()"
+    },
+    {
+      "label": "faceLandmarks.ts",
+      "file_type": "code",
+      "source_file": "src/lib/faceLandmarks.ts",
+      "source_location": "L1",
+      "id": "src_lib_facelandmarks_ts",
+      "community": 0,
+      "norm_label": "facelandmarks.ts"
+    },
+    {
+      "label": "EyeMetricsSnapshot",
+      "file_type": "code",
+      "source_file": "src/lib/faceLandmarks.ts",
+      "source_location": "L5",
+      "id": "lib_facelandmarks_eyemetricssnapshot",
+      "community": 0,
+      "norm_label": "eyemetricssnapshot"
+    },
+    {
+      "label": "SessionFaceLandmarker",
+      "file_type": "code",
+      "source_file": "src/lib/faceLandmarks.ts",
+      "source_location": "L25",
+      "id": "lib_facelandmarks_sessionfacelandmarker",
+      "community": 0,
+      "norm_label": "sessionfacelandmarker"
+    },
+    {
+      "label": ".init()",
+      "file_type": "code",
+      "source_file": "src/lib/faceLandmarks.ts",
+      "source_location": "L31",
+      "id": "lib_facelandmarks_sessionfacelandmarker_init",
+      "community": 0,
+      "norm_label": ".init()"
+    },
+    {
+      "label": ".detect()",
+      "file_type": "code",
+      "source_file": "src/lib/faceLandmarks.ts",
+      "source_location": "L57",
+      "id": "lib_facelandmarks_sessionfacelandmarker_detect",
+      "community": 0,
+      "norm_label": ".detect()"
+    },
+    {
+      "label": ".close()",
+      "file_type": "code",
+      "source_file": "src/lib/faceLandmarks.ts",
+      "source_location": "L108",
+      "id": "lib_facelandmarks_sessionfacelandmarker_close",
+      "community": 0,
+      "norm_label": ".close()"
+    },
+    {
+      "label": "presentationMode.ts",
+      "file_type": "code",
+      "source_file": "src/lib/presentationMode.ts",
+      "source_location": "L1",
+      "id": "src_lib_presentationmode_ts",
+      "community": 11,
+      "norm_label": "presentationmode.ts"
+    },
+    {
+      "label": "AppMode",
+      "file_type": "code",
+      "source_file": "src/lib/presentationMode.ts",
+      "source_location": "L21",
+      "id": "lib_presentationmode_appmode",
+      "community": 11,
+      "norm_label": "appmode"
+    },
+    {
+      "label": "resolveMode()",
+      "file_type": "code",
+      "source_file": "src/lib/presentationMode.ts",
+      "source_location": "L23",
+      "id": "lib_presentationmode_resolvemode",
+      "community": 11,
+      "norm_label": "resolvemode()"
+    },
+    {
+      "label": "_mode",
+      "file_type": "code",
+      "source_file": "src/lib/presentationMode.ts",
+      "source_location": "L62",
+      "id": "lib_presentationmode_mode",
+      "community": 11,
+      "norm_label": "_mode"
+    },
+    {
+      "label": "quotes.ts",
+      "file_type": "code",
+      "source_file": "src/lib/quotes.ts",
+      "source_location": "L1",
+      "id": "src_lib_quotes_ts",
+      "community": 0,
+      "norm_label": "quotes.ts"
+    },
+    {
+      "label": "beginnerQuotes",
+      "file_type": "code",
+      "source_file": "src/lib/quotes.ts",
+      "source_location": "L1",
+      "id": "lib_quotes_beginnerquotes",
+      "community": 0,
+      "norm_label": "beginnerquotes"
+    },
+    {
+      "label": "midQuotes",
+      "file_type": "code",
+      "source_file": "src/lib/quotes.ts",
+      "source_location": "L7",
+      "id": "lib_quotes_midquotes",
+      "community": 0,
+      "norm_label": "midquotes"
+    },
+    {
+      "label": "deepQuotes",
+      "file_type": "code",
+      "source_file": "src/lib/quotes.ts",
+      "source_location": "L13",
+      "id": "lib_quotes_deepquotes",
+      "community": 0,
+      "norm_label": "deepquotes"
+    },
+    {
+      "label": "getQuoteForStreak()",
+      "file_type": "code",
+      "source_file": "src/lib/quotes.ts",
+      "source_location": "L19",
+      "id": "lib_quotes_getquoteforstreak",
+      "community": 0,
+      "norm_label": "getquoteforstreak()"
+    },
+    {
+      "label": "sessionAudio.ts",
+      "file_type": "code",
+      "source_file": "src/lib/sessionAudio.ts",
+      "source_location": "L1",
+      "id": "src_lib_sessionaudio_ts",
+      "community": 0,
+      "norm_label": "sessionaudio.ts"
+    },
+    {
+      "label": "SessionAudioController",
+      "file_type": "code",
+      "source_file": "src/lib/sessionAudio.ts",
+      "source_location": "L6",
+      "id": "lib_sessionaudio_sessionaudiocontroller",
+      "community": 6,
+      "norm_label": "sessionaudiocontroller"
+    },
+    {
+      "label": ".preload()",
+      "file_type": "code",
+      "source_file": "src/lib/sessionAudio.ts",
+      "source_location": "L13",
+      "id": "lib_sessionaudio_sessionaudiocontroller_preload",
+      "community": 6,
+      "norm_label": ".preload()"
+    },
+    {
+      "label": ".getAudioContext()",
+      "file_type": "code",
+      "source_file": "src/lib/sessionAudio.ts",
+      "source_location": "L23",
+      "id": "lib_sessionaudio_sessionaudiocontroller_getaudiocontext",
+      "community": 6,
+      "norm_label": ".getaudiocontext()"
+    },
+    {
+      "label": ".playBellWithFade()",
+      "file_type": "code",
+      "source_file": "src/lib/sessionAudio.ts",
+      "source_location": "L41",
+      "id": "lib_sessionaudio_sessionaudiocontroller_playbellwithfade",
+      "community": 6,
+      "norm_label": ".playbellwithfade()"
+    },
+    {
+      "label": ".playToneCluster()",
+      "file_type": "code",
+      "source_file": "src/lib/sessionAudio.ts",
+      "source_location": "L84",
+      "id": "lib_sessionaudio_sessionaudiocontroller_playtonecluster",
+      "community": 6,
+      "norm_label": ".playtonecluster()"
+    },
+    {
+      "label": ".playOpeningBell()",
+      "file_type": "code",
+      "source_file": "src/lib/sessionAudio.ts",
+      "source_location": "L123",
+      "id": "lib_sessionaudio_sessionaudiocontroller_playopeningbell",
+      "community": 6,
+      "norm_label": ".playopeningbell()"
+    },
+    {
+      "label": ".playClosingBell()",
+      "file_type": "code",
+      "source_file": "src/lib/sessionAudio.ts",
+      "source_location": "L127",
+      "id": "lib_sessionaudio_sessionaudiocontroller_playclosingbell",
+      "community": 6,
+      "norm_label": ".playclosingbell()"
+    },
+    {
+      "label": ".playSoftTransitionCue()",
+      "file_type": "code",
+      "source_file": "src/lib/sessionAudio.ts",
+      "source_location": "L132",
+      "id": "lib_sessionaudio_sessionaudiocontroller_playsofttransitioncue",
+      "community": 6,
+      "norm_label": ".playsofttransitioncue()"
+    },
+    {
+      "label": ".playAwarenessCue()",
+      "file_type": "code",
+      "source_file": "src/lib/sessionAudio.ts",
+      "source_location": "L143",
+      "id": "lib_sessionaudio_sessionaudiocontroller_playawarenesscue",
+      "community": 6,
+      "norm_label": ".playawarenesscue()"
+    },
+    {
+      "label": ".startFireSound()",
+      "file_type": "code",
+      "source_file": "src/lib/sessionAudio.ts",
+      "source_location": "L154",
+      "id": "lib_sessionaudio_sessionaudiocontroller_startfiresound",
+      "community": 6,
+      "norm_label": ".startfiresound()"
+    },
+    {
+      "label": ".stopFireSound()",
+      "file_type": "code",
+      "source_file": "src/lib/sessionAudio.ts",
+      "source_location": "L168",
+      "id": "lib_sessionaudio_sessionaudiocontroller_stopfiresound",
+      "community": 6,
+      "norm_label": ".stopfiresound()"
+    },
+    {
+      "label": ".syncPhase()",
+      "file_type": "code",
+      "source_file": "src/lib/sessionAudio.ts",
+      "source_location": "L176",
+      "id": "lib_sessionaudio_sessionaudiocontroller_syncphase",
+      "community": 6,
+      "norm_label": ".syncphase()"
+    },
+    {
+      "label": ".reset()",
+      "file_type": "code",
+      "source_file": "src/lib/sessionAudio.ts",
+      "source_location": "L226",
+      "id": "lib_sessionaudio_sessionaudiocontroller_reset",
+      "community": 6,
+      "norm_label": ".reset()"
+    },
+    {
+      "label": ".cleanup()",
+      "file_type": "code",
+      "source_file": "src/lib/sessionAudio.ts",
+      "source_location": "L241",
+      "id": "lib_sessionaudio_sessionaudiocontroller_cleanup",
+      "community": 6,
+      "norm_label": ".cleanup()"
+    },
+    {
+      "label": "sessionScript.ts",
+      "file_type": "code",
+      "source_file": "src/lib/sessionScript.ts",
+      "source_location": "L1",
+      "id": "src_lib_sessionscript_ts",
+      "community": 3,
+      "norm_label": "sessionscript.ts"
+    },
+    {
+      "label": "BodyRegion",
+      "file_type": "code",
+      "source_file": "src/lib/sessionScript.ts",
+      "source_location": "L1",
+      "id": "lib_sessionscript_bodyregion",
+      "community": 3,
+      "norm_label": "bodyregion"
+    },
+    {
+      "label": "BreathAction",
+      "file_type": "code",
+      "source_file": "src/lib/sessionScript.ts",
+      "source_location": "L11",
+      "id": "lib_sessionscript_breathaction",
+      "community": 3,
+      "norm_label": "breathaction"
+    },
+    {
+      "label": "VisualMode",
+      "file_type": "code",
+      "source_file": "src/lib/sessionScript.ts",
+      "source_location": "L13",
+      "id": "lib_sessionscript_visualmode",
+      "community": 3,
+      "norm_label": "visualmode"
+    },
+    {
+      "label": "SessionPhase",
+      "file_type": "code",
+      "source_file": "src/lib/sessionScript.ts",
+      "source_location": "L21",
+      "id": "lib_sessionscript_sessionphase",
+      "community": 0,
+      "norm_label": "sessionphase"
+    },
+    {
+      "label": "BODY_SEQUENCE",
+      "file_type": "code",
+      "source_file": "src/lib/sessionScript.ts",
+      "source_location": "L32",
+      "id": "lib_sessionscript_body_sequence",
+      "community": 3,
+      "norm_label": "body_sequence"
+    },
+    {
+      "label": "createSessionScript()",
+      "file_type": "code",
+      "source_file": "src/lib/sessionScript.ts",
+      "source_location": "L43",
+      "id": "lib_sessionscript_createsessionscript",
+      "community": 3,
+      "norm_label": "createsessionscript()"
+    },
+    {
+      "label": "getScriptTotalDuration()",
+      "file_type": "code",
+      "source_file": "src/lib/sessionScript.ts",
+      "source_location": "L131",
+      "id": "lib_sessionscript_getscripttotalduration",
+      "community": 3,
+      "norm_label": "getscripttotalduration()"
+    },
+    {
+      "label": "sessionSettings.ts",
+      "file_type": "code",
+      "source_file": "src/lib/sessionSettings.ts",
+      "source_location": "L1",
+      "id": "src_lib_sessionsettings_ts",
+      "community": 0,
+      "norm_label": "sessionsettings.ts"
+    },
+    {
+      "label": "SessionSettings",
+      "file_type": "code",
+      "source_file": "src/lib/sessionSettings.ts",
+      "source_location": "L1",
+      "id": "lib_sessionsettings_sessionsettings",
+      "community": 0,
+      "norm_label": "sessionsettings"
+    },
+    {
+      "label": "defaultSessionSettings",
+      "file_type": "code",
+      "source_file": "src/lib/sessionSettings.ts",
+      "source_location": "L7",
+      "id": "lib_sessionsettings_defaultsessionsettings",
+      "community": 0,
+      "norm_label": "defaultsessionsettings"
+    },
+    {
+      "label": "simulatedTracking.ts",
+      "file_type": "code",
+      "source_file": "src/lib/simulatedTracking.ts",
+      "source_location": "L1",
+      "id": "src_lib_simulatedtracking_ts",
+      "community": 8,
+      "norm_label": "simulatedtracking.ts"
+    },
+    {
+      "label": "clamp()",
+      "file_type": "code",
+      "source_file": "src/lib/simulatedTracking.ts",
+      "source_location": "L3",
+      "id": "lib_simulatedtracking_clamp",
+      "community": 8,
+      "norm_label": "clamp()"
+    },
+    {
+      "label": "SimulatedTrackingEngine",
+      "file_type": "code",
+      "source_file": "src/lib/simulatedTracking.ts",
+      "source_location": "L7",
+      "id": "lib_simulatedtracking_simulatedtrackingengine",
+      "community": 8,
+      "norm_label": "simulatedtrackingengine"
+    },
+    {
+      "label": ".start()",
+      "file_type": "code",
+      "source_file": "src/lib/simulatedTracking.ts",
+      "source_location": "L16",
+      "id": "lib_simulatedtracking_simulatedtrackingengine_start",
+      "community": 8,
+      "norm_label": ".start()"
+    },
+    {
+      "label": ".stop()",
+      "file_type": "code",
+      "source_file": "src/lib/simulatedTracking.ts",
+      "source_location": "L63",
+      "id": "lib_simulatedtracking_simulatedtrackingengine_stop",
+      "community": 8,
+      "norm_label": ".stop()"
+    },
+    {
+      "label": ".reset()",
+      "file_type": "code",
+      "source_file": "src/lib/simulatedTracking.ts",
+      "source_location": "L70",
+      "id": "lib_simulatedtracking_simulatedtrackingengine_reset",
+      "community": 8,
+      "norm_label": ".reset()"
+    },
+    {
+      "label": "storage.ts",
+      "file_type": "code",
+      "source_file": "src/lib/storage.ts",
+      "source_location": "L1",
+      "id": "src_lib_storage_ts",
+      "community": 2,
+      "norm_label": "storage.ts"
+    },
+    {
+      "label": "RoutineSelection",
+      "file_type": "code",
+      "source_file": "src/lib/storage.ts",
+      "source_location": "L3",
+      "id": "lib_storage_routineselection",
+      "community": 2,
+      "norm_label": "routineselection"
+    },
+    {
+      "label": "SessionFeeling",
+      "file_type": "code",
+      "source_file": "src/lib/storage.ts",
+      "source_location": "L7",
+      "id": "lib_storage_sessionfeeling",
+      "community": 2,
+      "norm_label": "sessionfeeling"
+    },
+    {
+      "label": "SessionRecord",
+      "file_type": "code",
+      "source_file": "src/lib/storage.ts",
+      "source_location": "L9",
+      "id": "lib_storage_sessionrecord",
+      "community": 4,
+      "norm_label": "sessionrecord"
+    },
+    {
+      "label": "LocalProfile",
+      "file_type": "code",
+      "source_file": "src/lib/storage.ts",
+      "source_location": "L22",
+      "id": "lib_storage_localprofile",
+      "community": 2,
+      "norm_label": "localprofile"
+    },
+    {
+      "label": "safeParse()",
+      "file_type": "code",
+      "source_file": "src/lib/storage.ts",
+      "source_location": "L35",
+      "id": "lib_storage_safeparse",
+      "community": 2,
+      "norm_label": "safeparse()"
+    },
+    {
+      "label": "loadProfiles()",
+      "file_type": "code",
+      "source_file": "src/lib/storage.ts",
+      "source_location": "L45",
+      "id": "lib_storage_loadprofiles",
+      "community": 2,
+      "norm_label": "loadprofiles()"
+    },
+    {
+      "label": "saveProfiles()",
+      "file_type": "code",
+      "source_file": "src/lib/storage.ts",
+      "source_location": "L49",
+      "id": "lib_storage_saveprofiles",
+      "community": 2,
+      "norm_label": "saveprofiles()"
+    },
+    {
+      "label": "createProfile()",
+      "file_type": "code",
+      "source_file": "src/lib/storage.ts",
+      "source_location": "L53",
+      "id": "lib_storage_createprofile",
+      "community": 2,
+      "norm_label": "createprofile()"
+    },
+    {
+      "label": "getActiveProfileId()",
+      "file_type": "code",
+      "source_file": "src/lib/storage.ts",
+      "source_location": "L76",
+      "id": "lib_storage_getactiveprofileid",
+      "community": 2,
+      "norm_label": "getactiveprofileid()"
+    },
+    {
+      "label": "setActiveProfileId()",
+      "file_type": "code",
+      "source_file": "src/lib/storage.ts",
+      "source_location": "L80",
+      "id": "lib_storage_setactiveprofileid",
+      "community": 2,
+      "norm_label": "setactiveprofileid()"
+    },
+    {
+      "label": "clearActiveProfile()",
+      "file_type": "code",
+      "source_file": "src/lib/storage.ts",
+      "source_location": "L84",
+      "id": "lib_storage_clearactiveprofile",
+      "community": 1,
+      "norm_label": "clearactiveprofile()"
+    },
+    {
+      "label": "getActiveProfile()",
+      "file_type": "code",
+      "source_file": "src/lib/storage.ts",
+      "source_location": "L88",
+      "id": "lib_storage_getactiveprofile",
+      "community": 2,
+      "norm_label": "getactiveprofile()"
+    },
+    {
+      "label": "updateActiveProfile()",
+      "file_type": "code",
+      "source_file": "src/lib/storage.ts",
+      "source_location": "L96",
+      "id": "lib_storage_updateactiveprofile",
+      "community": 2,
+      "norm_label": "updateactiveprofile()"
+    },
+    {
+      "label": "hasCompletedOnboarding()",
+      "file_type": "code",
+      "source_file": "src/lib/storage.ts",
+      "source_location": "L111",
+      "id": "lib_storage_hascompletedonboarding",
+      "community": 2,
+      "norm_label": "hascompletedonboarding()"
+    },
+    {
+      "label": "loadHistory()",
+      "file_type": "code",
+      "source_file": "src/lib/storage.ts",
+      "source_location": "L116",
+      "id": "lib_storage_loadhistory",
+      "community": 2,
+      "norm_label": "loadhistory()"
+    },
+    {
+      "label": "saveSession()",
+      "file_type": "code",
+      "source_file": "src/lib/storage.ts",
+      "source_location": "L120",
+      "id": "lib_storage_savesession",
+      "community": 2,
+      "norm_label": "savesession()"
+    },
+    {
+      "label": "clearHistory()",
+      "file_type": "code",
+      "source_file": "src/lib/storage.ts",
+      "source_location": "L127",
+      "id": "lib_storage_clearhistory",
+      "community": 2,
+      "norm_label": "clearhistory()"
+    },
+    {
+      "label": "saveRoutineSelection()",
+      "file_type": "code",
+      "source_file": "src/lib/storage.ts",
+      "source_location": "L134",
+      "id": "lib_storage_saveroutineselection",
+      "community": 2,
+      "norm_label": "saveroutineselection()"
+    },
+    {
+      "label": "loadRoutineSelection()",
+      "file_type": "code",
+      "source_file": "src/lib/storage.ts",
+      "source_location": "L141",
+      "id": "lib_storage_loadroutineselection",
+      "community": 2,
+      "norm_label": "loadroutineselection()"
+    },
+    {
+      "label": "toLocalDateKey()",
+      "file_type": "code",
+      "source_file": "src/lib/storage.ts",
+      "source_location": "L145",
+      "id": "lib_storage_tolocaldatekey",
+      "community": 2,
+      "norm_label": "tolocaldatekey()"
+    },
+    {
+      "label": "shiftDateKey()",
+      "file_type": "code",
+      "source_file": "src/lib/storage.ts",
+      "source_location": "L153",
+      "id": "lib_storage_shiftdatekey",
+      "community": 4,
+      "norm_label": "shiftdatekey()"
+    },
+    {
+      "label": "getCurrentStreak()",
+      "file_type": "code",
+      "source_file": "src/lib/storage.ts",
+      "source_location": "L162",
+      "id": "lib_storage_getcurrentstreak",
+      "community": 4,
+      "norm_label": "getcurrentstreak()"
+    },
+    {
+      "label": "getFlexibleStreak()",
+      "file_type": "code",
+      "source_file": "src/lib/storage.ts",
+      "source_location": "L202",
+      "id": "lib_storage_getflexiblestreak",
+      "community": 2,
+      "norm_label": "getflexiblestreak()"
+    },
+    {
+      "label": "getWeeklyCompletion()",
+      "file_type": "code",
+      "source_file": "src/lib/storage.ts",
+      "source_location": "L246",
+      "id": "lib_storage_getweeklycompletion",
+      "community": 2,
+      "norm_label": "getweeklycompletion()"
+    },
+    {
+      "label": "saveSessionRemote()",
+      "file_type": "code",
+      "source_file": "src/lib/storage.ts",
+      "source_location": "L271",
+      "id": "lib_storage_savesessionremote",
+      "community": 2,
+      "norm_label": "savesessionremote()"
+    },
+    {
+      "label": "loadHistoryRemote()",
+      "file_type": "code",
+      "source_file": "src/lib/storage.ts",
+      "source_location": "L299",
+      "id": "lib_storage_loadhistoryremote",
+      "community": 2,
+      "norm_label": "loadhistoryremote()"
+    },
+    {
+      "label": "mergeRemoteHistory()",
+      "file_type": "code",
+      "source_file": "src/lib/storage.ts",
+      "source_location": "L333",
+      "id": "lib_storage_mergeremotehistory",
+      "community": 2,
+      "norm_label": "mergeremotehistory()"
+    },
+    {
+      "label": "getMandalaDay()",
+      "file_type": "code",
+      "source_file": "src/lib/storage.ts",
+      "source_location": "L351",
+      "id": "lib_storage_getmandaladay",
+      "community": 4,
+      "norm_label": "getmandaladay()"
+    },
+    {
+      "label": "supabase.ts",
+      "file_type": "code",
+      "source_file": "src/lib/supabase.ts",
+      "source_location": "L1",
+      "id": "src_lib_supabase_ts",
+      "community": 1,
+      "norm_label": "supabase.ts"
+    },
+    {
+      "label": "supabase",
+      "file_type": "code",
+      "source_file": "src/lib/supabase.ts",
+      "source_location": "L13",
+      "id": "lib_supabase_supabase",
+      "community": 1,
+      "norm_label": "supabase"
+    },
+    {
+      "label": "trackingEngine.ts",
+      "file_type": "code",
+      "source_file": "src/lib/trackingEngine.ts",
+      "source_location": "L1",
+      "id": "src_lib_trackingengine_ts",
+      "community": 8,
+      "norm_label": "trackingengine.ts"
+    },
+    {
+      "label": "TrackingMetrics",
+      "file_type": "code",
+      "source_file": "src/lib/trackingEngine.ts",
+      "source_location": "L1",
+      "id": "lib_trackingengine_trackingmetrics",
+      "community": 8,
+      "norm_label": "trackingmetrics"
+    },
+    {
+      "label": "TrackingListener",
+      "file_type": "code",
+      "source_file": "src/lib/trackingEngine.ts",
+      "source_location": "L9",
+      "id": "lib_trackingengine_trackinglistener",
+      "community": 8,
+      "norm_label": "trackinglistener"
+    },
+    {
+      "label": "TrackingEngine",
+      "file_type": "code",
+      "source_file": "src/lib/trackingEngine.ts",
+      "source_location": "L11",
+      "id": "lib_trackingengine_trackingengine",
+      "community": 8,
+      "norm_label": "trackingengine"
+    },
+    {
+      "label": "HistoryPage.tsx",
+      "file_type": "code",
+      "source_file": "src/pages/HistoryPage.tsx",
+      "source_location": "L1",
+      "id": "src_pages_historypage_tsx",
+      "community": 4,
+      "norm_label": "historypage.tsx"
+    },
+    {
+      "label": "avg()",
+      "file_type": "code",
+      "source_file": "src/pages/HistoryPage.tsx",
+      "source_location": "L8",
+      "id": "pages_historypage_avg",
+      "community": 4,
+      "norm_label": "avg()"
+    },
+    {
+      "label": "SmallFlame()",
+      "file_type": "code",
+      "source_file": "src/pages/HistoryPage.tsx",
+      "source_location": "L16",
+      "id": "pages_historypage_smallflame",
+      "community": 4,
+      "norm_label": "smallflame()"
+    },
+    {
+      "label": "polar()",
+      "file_type": "code",
+      "source_file": "src/pages/HistoryPage.tsx",
+      "source_location": "L57",
+      "id": "pages_historypage_polar",
+      "community": 4,
+      "norm_label": "polar()"
+    },
+    {
+      "label": "segmentPath()",
+      "file_type": "code",
+      "source_file": "src/pages/HistoryPage.tsx",
+      "source_location": "L62",
+      "id": "pages_historypage_segmentpath",
+      "community": 4,
+      "norm_label": "segmentpath()"
+    },
+    {
+      "label": "MandalaFlame()",
+      "file_type": "code",
+      "source_file": "src/pages/HistoryPage.tsx",
+      "source_location": "L80",
+      "id": "pages_historypage_mandalaflame",
+      "community": 4,
+      "norm_label": "mandalaflame()"
+    },
+    {
+      "label": "MandalaRing()",
+      "file_type": "code",
+      "source_file": "src/pages/HistoryPage.tsx",
+      "source_location": "L172",
+      "id": "pages_historypage_mandalaring",
+      "community": 4,
+      "norm_label": "mandalaring()"
+    },
+    {
+      "label": "TrendChart()",
+      "file_type": "code",
+      "source_file": "src/pages/HistoryPage.tsx",
+      "source_location": "L310",
+      "id": "pages_historypage_trendchart",
+      "community": 4,
+      "norm_label": "trendchart()"
+    },
+    {
+      "label": "HistoryPage()",
+      "file_type": "code",
+      "source_file": "src/pages/HistoryPage.tsx",
+      "source_location": "L401",
+      "id": "pages_historypage_historypage",
+      "community": 4,
+      "norm_label": "historypage()"
+    },
+    {
+      "label": "HomePage.tsx",
+      "file_type": "code",
+      "source_file": "src/pages/HomePage.tsx",
+      "source_location": "L1",
+      "id": "src_pages_homepage_tsx",
+      "community": 2,
+      "norm_label": "homepage.tsx"
+    },
+    {
+      "label": "HomePage()",
+      "file_type": "code",
+      "source_file": "src/pages/HomePage.tsx",
+      "source_location": "L13",
+      "id": "pages_homepage_homepage",
+      "community": 2,
+      "norm_label": "homepage()"
+    },
+    {
+      "label": "LoginPage.tsx",
+      "file_type": "code",
+      "source_file": "src/pages/LoginPage.tsx",
+      "source_location": "L1",
+      "id": "src_pages_loginpage_tsx",
+      "community": 1,
+      "norm_label": "loginpage.tsx"
+    },
+    {
+      "label": "LoginPage()",
+      "file_type": "code",
+      "source_file": "src/pages/LoginPage.tsx",
+      "source_location": "L6",
+      "id": "pages_loginpage_loginpage",
+      "community": 1,
+      "norm_label": "loginpage()"
+    },
+    {
+      "label": "OnboardingPage.tsx",
+      "file_type": "code",
+      "source_file": "src/pages/OnboardingPage.tsx",
+      "source_location": "L1",
+      "id": "src_pages_onboardingpage_tsx",
+      "community": 1,
+      "norm_label": "onboardingpage.tsx"
+    },
+    {
+      "label": "OnboardingPage()",
+      "file_type": "code",
+      "source_file": "src/pages/OnboardingPage.tsx",
+      "source_location": "L7",
+      "id": "pages_onboardingpage_onboardingpage",
+      "community": 1,
+      "norm_label": "onboardingpage()"
+    },
+    {
+      "label": "PhilosophyPage.tsx",
+      "file_type": "code",
+      "source_file": "src/pages/PhilosophyPage.tsx",
+      "source_location": "L1",
+      "id": "src_pages_philosophypage_tsx",
+      "community": 1,
+      "norm_label": "philosophypage.tsx"
+    },
+    {
+      "label": "PhilosophyPage()",
+      "file_type": "code",
+      "source_file": "src/pages/PhilosophyPage.tsx",
+      "source_location": "L1",
+      "id": "pages_philosophypage_philosophypage",
+      "community": 1,
+      "norm_label": "philosophypage()"
+    },
+    {
+      "label": "PrivacyPage.tsx",
+      "file_type": "code",
+      "source_file": "src/pages/PrivacyPage.tsx",
+      "source_location": "L1",
+      "id": "src_pages_privacypage_tsx",
+      "community": 1,
+      "norm_label": "privacypage.tsx"
+    },
+    {
+      "label": "PrivacyPage()",
+      "file_type": "code",
+      "source_file": "src/pages/PrivacyPage.tsx",
+      "source_location": "L5",
+      "id": "pages_privacypage_privacypage",
+      "community": 1,
+      "norm_label": "privacypage()"
+    },
+    {
+      "label": "RoutinePage.tsx",
+      "file_type": "code",
+      "source_file": "src/pages/RoutinePage.tsx",
+      "source_location": "L1",
+      "id": "src_pages_routinepage_tsx",
+      "community": 2,
+      "norm_label": "routinepage.tsx"
+    },
+    {
+      "label": "RoutinePage()",
+      "file_type": "code",
+      "source_file": "src/pages/RoutinePage.tsx",
+      "source_location": "L6",
+      "id": "pages_routinepage_routinepage",
+      "community": 2,
+      "norm_label": "routinepage()"
+    },
+    {
+      "label": "SciencePage.tsx",
+      "file_type": "code",
+      "source_file": "src/pages/SciencePage.tsx",
+      "source_location": "L1",
+      "id": "src_pages_sciencepage_tsx",
+      "community": 1,
+      "norm_label": "sciencepage.tsx"
+    },
+    {
+      "label": "findings",
+      "file_type": "code",
+      "source_file": "src/pages/SciencePage.tsx",
+      "source_location": "L1",
+      "id": "pages_sciencepage_findings",
+      "community": 1,
+      "norm_label": "findings"
+    },
+    {
+      "label": "SciencePage()",
+      "file_type": "code",
+      "source_file": "src/pages/SciencePage.tsx",
+      "source_location": "L46",
+      "id": "pages_sciencepage_sciencepage",
+      "community": 1,
+      "norm_label": "sciencepage()"
+    },
+    {
+      "label": "SessionPage.tsx",
+      "file_type": "code",
+      "source_file": "src/pages/SessionPage.tsx",
+      "source_location": "L1",
+      "id": "src_pages_sessionpage_tsx",
+      "community": 0,
+      "norm_label": "sessionpage.tsx"
+    },
+    {
+      "label": "BODY_REGION_LABELS",
+      "file_type": "code",
+      "source_file": "src/pages/SessionPage.tsx",
+      "source_location": "L39",
+      "id": "pages_sessionpage_body_region_labels",
+      "community": 0,
+      "norm_label": "body_region_labels"
+    },
+    {
+      "label": "avg()",
+      "file_type": "code",
+      "source_file": "src/pages/SessionPage.tsx",
+      "source_location": "L51",
+      "id": "pages_sessionpage_avg",
+      "community": 0,
+      "norm_label": "avg()"
+    },
+    {
+      "label": "avgDiff()",
+      "file_type": "code",
+      "source_file": "src/pages/SessionPage.tsx",
+      "source_location": "L56",
+      "id": "pages_sessionpage_avgdiff",
+      "community": 0,
+      "norm_label": "avgdiff()"
+    },
+    {
+      "label": "clamp()",
+      "file_type": "code",
+      "source_file": "src/pages/SessionPage.tsx",
+      "source_location": "L66",
+      "id": "pages_sessionpage_clamp",
+      "community": 0,
+      "norm_label": "clamp()"
+    },
+    {
+      "label": "standardDeviation()",
+      "file_type": "code",
+      "source_file": "src/pages/SessionPage.tsx",
+      "source_location": "L70",
+      "id": "pages_sessionpage_standarddeviation",
+      "community": 0,
+      "norm_label": "standarddeviation()"
+    },
+    {
+      "label": "formatSecondsCompact()",
+      "file_type": "code",
+      "source_file": "src/pages/SessionPage.tsx",
+      "source_location": "L77",
+      "id": "pages_sessionpage_formatsecondscompact",
+      "community": 0,
+      "norm_label": "formatsecondscompact()"
+    },
+    {
+      "label": "formatTimestampForKey()",
+      "file_type": "code",
+      "source_file": "src/pages/SessionPage.tsx",
+      "source_location": "L83",
+      "id": "pages_sessionpage_formattimestampforkey",
+      "community": 0,
+      "norm_label": "formattimestampforkey()"
+    },
+    {
+      "label": "csvEscape()",
+      "file_type": "code",
+      "source_file": "src/pages/SessionPage.tsx",
+      "source_location": "L87",
+      "id": "pages_sessionpage_csvescape",
+      "community": 0,
+      "norm_label": "csvescape()"
+    },
+    {
+      "label": "buildPilotCsvRow()",
+      "file_type": "code",
+      "source_file": "src/pages/SessionPage.tsx",
+      "source_location": "L95",
+      "id": "pages_sessionpage_buildpilotcsvrow",
+      "community": 0,
+      "norm_label": "buildpilotcsvrow()"
+    },
+    {
+      "label": "appendCsvWithHeader()",
+      "file_type": "code",
+      "source_file": "src/pages/SessionPage.tsx",
+      "source_location": "L144",
+      "id": "pages_sessionpage_appendcsvwithheader",
+      "community": 0,
+      "norm_label": "appendcsvwithheader()"
+    },
+    {
+      "label": "readResearchUserId()",
+      "file_type": "code",
+      "source_file": "src/pages/SessionPage.tsx",
+      "source_location": "L151",
+      "id": "pages_sessionpage_readresearchuserid",
+      "community": 0,
+      "norm_label": "readresearchuserid()"
+    },
+    {
+      "label": "downloadTextFile()",
+      "file_type": "code",
+      "source_file": "src/pages/SessionPage.tsx",
+      "source_location": "L162",
+      "id": "pages_sessionpage_downloadtextfile",
+      "community": 0,
+      "norm_label": "downloadtextfile()"
+    },
+    {
+      "label": "attachStreamToVideo()",
+      "file_type": "code",
+      "source_file": "src/pages/SessionPage.tsx",
+      "source_location": "L171",
+      "id": "pages_sessionpage_attachstreamtovideo",
+      "community": 0,
+      "norm_label": "attachstreamtovideo()"
+    },
+    {
+      "label": "getBodyCue()",
+      "file_type": "code",
+      "source_file": "src/pages/SessionPage.tsx",
+      "source_location": "L192",
+      "id": "pages_sessionpage_getbodycue",
+      "community": 0,
+      "norm_label": "getbodycue()"
+    },
+    {
+      "label": "CameraState",
+      "file_type": "code",
+      "source_file": "src/pages/SessionPage.tsx",
+      "source_location": "L196",
+      "id": "pages_sessionpage_camerastate",
+      "community": 0,
+      "norm_label": "camerastate"
+    },
+    {
+      "label": "SparklineProps",
+      "file_type": "code",
+      "source_file": "src/pages/SessionPage.tsx",
+      "source_location": "L198",
+      "id": "pages_sessionpage_sparklineprops",
+      "community": 0,
+      "norm_label": "sparklineprops"
+    },
+    {
+      "label": "TrendCardProps",
+      "file_type": "code",
+      "source_file": "src/pages/SessionPage.tsx",
+      "source_location": "L206",
+      "id": "pages_sessionpage_trendcardprops",
+      "community": 0,
+      "norm_label": "trendcardprops"
+    },
+    {
+      "label": "SignalQuality",
+      "file_type": "code",
+      "source_file": "src/pages/SessionPage.tsx",
+      "source_location": "L216",
+      "id": "pages_sessionpage_signalquality",
+      "community": 0,
+      "norm_label": "signalquality"
+    },
+    {
+      "label": "ResearchStep",
+      "file_type": "code",
+      "source_file": "src/pages/SessionPage.tsx",
+      "source_location": "L217",
+      "id": "pages_sessionpage_researchstep",
+      "community": 0,
+      "norm_label": "researchstep"
+    },
+    {
+      "label": "PanelState",
+      "file_type": "code",
+      "source_file": "src/pages/SessionPage.tsx",
+      "source_location": "L219",
+      "id": "pages_sessionpage_panelstate",
+      "community": 0,
+      "norm_label": "panelstate"
+    },
+    {
+      "label": "PilotSurveyState",
+      "file_type": "code",
+      "source_file": "src/pages/SessionPage.tsx",
+      "source_location": "L226",
+      "id": "pages_sessionpage_pilotsurveystate",
+      "community": 0,
+      "norm_label": "pilotsurveystate"
+    },
+    {
+      "label": "PilotSummaryRecord",
+      "file_type": "code",
+      "source_file": "src/pages/SessionPage.tsx",
+      "source_location": "L234",
+      "id": "pages_sessionpage_pilotsummaryrecord",
+      "community": 0,
+      "norm_label": "pilotsummaryrecord"
+    },
+    {
+      "label": "CollapsibleCardProps",
+      "file_type": "code",
+      "source_file": "src/pages/SessionPage.tsx",
+      "source_location": "L255",
+      "id": "pages_sessionpage_collapsiblecardprops",
+      "community": 0,
+      "norm_label": "collapsiblecardprops"
+    },
+    {
+      "label": "QualityWindowSnapshot",
+      "file_type": "code",
+      "source_file": "src/pages/SessionPage.tsx",
+      "source_location": "L262",
+      "id": "pages_sessionpage_qualitywindowsnapshot",
+      "community": 0,
+      "norm_label": "qualitywindowsnapshot"
+    },
+    {
+      "label": "isPlausibleEyeOpenness()",
+      "file_type": "code",
+      "source_file": "src/pages/SessionPage.tsx",
+      "source_location": "L270",
+      "id": "pages_sessionpage_isplausibleeyeopenness",
+      "community": 0,
+      "norm_label": "isplausibleeyeopenness()"
+    },
+    {
+      "label": "deriveSignalQuality()",
+      "file_type": "code",
+      "source_file": "src/pages/SessionPage.tsx",
+      "source_location": "L275",
+      "id": "pages_sessionpage_derivesignalquality",
+      "community": 0,
+      "norm_label": "derivesignalquality()"
+    },
+    {
+      "label": "Sparkline()",
+      "file_type": "code",
+      "source_file": "src/pages/SessionPage.tsx",
+      "source_location": "L283",
+      "id": "pages_sessionpage_sparkline",
+      "community": 0,
+      "norm_label": "sparkline()"
+    },
+    {
+      "label": "TrendCard()",
+      "file_type": "code",
+      "source_file": "src/pages/SessionPage.tsx",
+      "source_location": "L334",
+      "id": "pages_sessionpage_trendcard",
+      "community": 0,
+      "norm_label": "trendcard()"
+    },
+    {
+      "label": "CollapsibleCard()",
+      "file_type": "code",
+      "source_file": "src/pages/SessionPage.tsx",
+      "source_location": "L403",
+      "id": "pages_sessionpage_collapsiblecard",
+      "community": 0,
+      "norm_label": "collapsiblecard()"
+    },
+    {
+      "label": "SessionPage()",
+      "file_type": "code",
+      "source_file": "src/pages/SessionPage.tsx",
+      "source_location": "L445",
+      "id": "pages_sessionpage_sessionpage",
+      "community": 0,
+      "norm_label": "sessionpage()"
+    },
+    {
+      "label": "algorithm-overview.md",
+      "file_type": "document",
+      "source_file": "algorithm-overview.md",
+      "source_location": "L1",
+      "id": "algorithm_overview_md",
+      "community": 7,
+      "norm_label": "algorithm-overview.md"
+    },
+    {
+      "label": "Algorithm Overview",
+      "file_type": "document",
+      "source_file": "algorithm-overview.md",
+      "source_location": "L1",
+      "id": "zen_kalam_eba609_algorithm_overview_algorithm_overview",
+      "community": 7,
+      "norm_label": "algorithm overview"
+    },
+    {
+      "label": "Objective",
+      "file_type": "document",
+      "source_file": "algorithm-overview.md",
+      "source_location": "L3",
+      "id": "zen_kalam_eba609_algorithm_overview_objective",
+      "community": 7,
+      "norm_label": "objective"
+    },
+    {
+      "label": "Inputs",
+      "file_type": "document",
+      "source_file": "algorithm-overview.md",
+      "source_location": "L11",
+      "id": "zen_kalam_eba609_algorithm_overview_inputs",
+      "community": 7,
+      "norm_label": "inputs"
+    },
+    {
+      "label": "Processing Pipeline",
+      "file_type": "document",
+      "source_file": "algorithm-overview.md",
+      "source_location": "L23",
+      "id": "zen_kalam_eba609_algorithm_overview_processing_pipeline",
+      "community": 7,
+      "norm_label": "processing pipeline"
+    },
+    {
+      "label": "Frame Processing",
+      "file_type": "document",
+      "source_file": "algorithm-overview.md",
+      "source_location": "L25",
+      "id": "zen_kalam_eba609_algorithm_overview_frame_processing",
+      "community": 7,
+      "norm_label": "frame processing"
+    },
+    {
+      "label": "Eye-State Feature Extraction",
+      "file_type": "document",
+      "source_file": "algorithm-overview.md",
+      "source_location": "L31",
+      "id": "zen_kalam_eba609_algorithm_overview_eye_state_feature_extraction",
+      "community": 7,
+      "norm_label": "eye-state feature extraction"
+    },
+    {
+      "label": "Blink Event Detection",
+      "file_type": "document",
+      "source_file": "algorithm-overview.md",
+      "source_location": "L39",
+      "id": "zen_kalam_eba609_algorithm_overview_blink_event_detection",
+      "community": 7,
+      "norm_label": "blink event detection"
+    },
+    {
+      "label": "Target-Relative Eye Position",
+      "file_type": "document",
+      "source_file": "algorithm-overview.md",
+      "source_location": "L47",
+      "id": "zen_kalam_eba609_algorithm_overview_target_relative_eye_position",
+      "community": 7,
+      "norm_label": "target-relative eye position"
+    },
+    {
+      "label": "Time-Series Feature Construction",
+      "file_type": "document",
+      "source_file": "algorithm-overview.md",
+      "source_location": "L55",
+      "id": "zen_kalam_eba609_algorithm_overview_time_series_feature_construction",
+      "community": 7,
+      "norm_label": "time-series feature construction"
+    },
+    {
+      "label": "Session-Level Summary",
+      "file_type": "document",
+      "source_file": "algorithm-overview.md",
+      "source_location": "L68",
+      "id": "zen_kalam_eba609_algorithm_overview_session_level_summary",
+      "community": 7,
+      "norm_label": "session-level summary"
+    },
+    {
+      "label": "Design Approach",
+      "file_type": "document",
+      "source_file": "algorithm-overview.md",
+      "source_location": "L76",
+      "id": "zen_kalam_eba609_algorithm_overview_design_approach",
+      "community": 7,
+      "norm_label": "design approach"
+    },
+    {
+      "label": "Technical Constraints",
+      "file_type": "document",
+      "source_file": "algorithm-overview.md",
+      "source_location": "L84",
+      "id": "zen_kalam_eba609_algorithm_overview_technical_constraints",
+      "community": 7,
+      "norm_label": "technical constraints"
+    },
+    {
+      "label": "Next Steps",
+      "file_type": "document",
+      "source_file": "algorithm-overview.md",
+      "source_location": "L97",
+      "id": "zen_kalam_eba609_algorithm_overview_next_steps",
+      "community": 7,
+      "norm_label": "next steps"
+    },
+    {
+      "label": "CLAUDE.md",
+      "file_type": "document",
+      "source_file": "CLAUDE.md",
+      "source_location": "L1",
+      "id": "claude_md",
+      "community": 12,
+      "norm_label": "claude.md"
+    },
+    {
+      "label": "Agent Routing",
+      "file_type": "document",
+      "source_file": "CLAUDE.md",
+      "source_location": "L1",
+      "id": "zen_kalam_eba609_claude_agent_routing",
+      "community": 12,
+      "norm_label": "agent routing"
+    },
+    {
+      "label": "/lint-agent",
+      "file_type": "document",
+      "source_file": "CLAUDE.md",
+      "source_location": "L16",
+      "id": "zen_kalam_eba609_claude_lint_agent",
+      "community": 12,
+      "norm_label": "/lint-agent"
+    },
+    {
+      "label": "/doc-agent",
+      "file_type": "document",
+      "source_file": "CLAUDE.md",
+      "source_location": "L25",
+      "id": "zen_kalam_eba609_claude_doc_agent",
+      "community": 12,
+      "norm_label": "/doc-agent"
+    },
+    {
+      "label": "graphify",
+      "file_type": "document",
+      "source_file": "CLAUDE.md",
+      "source_location": "L34",
+      "id": "zen_kalam_eba609_claude_graphify",
+      "community": 12,
+      "norm_label": "graphify"
+    },
+    {
+      "label": "protocol-and-questions.md",
+      "file_type": "document",
+      "source_file": "protocol-and-questions.md",
+      "source_location": "L1",
+      "id": "protocol_and_questions_md",
+      "community": 5,
+      "norm_label": "protocol-and-questions.md"
+    },
+    {
+      "label": "Protocol and Open Questions",
+      "file_type": "document",
+      "source_file": "protocol-and-questions.md",
+      "source_location": "L1",
+      "id": "zen_kalam_eba609_protocol_and_questions_protocol_and_open_questions",
+      "community": 5,
+      "norm_label": "protocol and open questions"
+    },
+    {
+      "label": "Protocol Overview",
+      "file_type": "document",
+      "source_file": "protocol-and-questions.md",
+      "source_location": "L3",
+      "id": "zen_kalam_eba609_protocol_and_questions_protocol_overview",
+      "community": 5,
+      "norm_label": "protocol overview"
+    },
+    {
+      "label": "Protocol Structure",
+      "file_type": "document",
+      "source_file": "protocol-and-questions.md",
+      "source_location": "L23",
+      "id": "zen_kalam_eba609_protocol_and_questions_protocol_structure",
+      "community": 5,
+      "norm_label": "protocol structure"
+    },
+    {
+      "label": "Posture Settling",
+      "file_type": "document",
+      "source_file": "protocol-and-questions.md",
+      "source_location": "L25",
+      "id": "zen_kalam_eba609_protocol_and_questions_posture_settling",
+      "community": 5,
+      "norm_label": "posture settling"
+    },
+    {
+      "label": "Whole-Body Tension and Release",
+      "file_type": "document",
+      "source_file": "protocol-and-questions.md",
+      "source_location": "L31",
+      "id": "zen_kalam_eba609_protocol_and_questions_whole_body_tension_and_release",
+      "community": 5,
+      "norm_label": "whole-body tension and release"
+    },
+    {
+      "label": "Paced Breathing",
+      "file_type": "document",
+      "source_file": "protocol-and-questions.md",
+      "source_location": "L37",
+      "id": "zen_kalam_eba609_protocol_and_questions_paced_breathing",
+      "community": 5,
+      "norm_label": "paced breathing"
+    },
+    {
+      "label": "Sustained Visual Fixation",
+      "file_type": "document",
+      "source_file": "protocol-and-questions.md",
+      "source_location": "L43",
+      "id": "zen_kalam_eba609_protocol_and_questions_sustained_visual_fixation",
+      "community": 5,
+      "norm_label": "sustained visual fixation"
+    },
+    {
+      "label": "Post-Fixation Open Awareness",
+      "file_type": "document",
+      "source_file": "protocol-and-questions.md",
+      "source_location": "L51",
+      "id": "zen_kalam_eba609_protocol_and_questions_post_fixation_open_awareness",
+      "community": 5,
+      "norm_label": "post-fixation open awareness"
+    },
+    {
+      "label": "Open Questions",
+      "file_type": "document",
+      "source_file": "protocol-and-questions.md",
+      "source_location": "L57",
+      "id": "zen_kalam_eba609_protocol_and_questions_open_questions",
+      "community": 5,
+      "norm_label": "open questions"
+    },
+    {
+      "label": "Behavioral Signals",
+      "file_type": "document",
+      "source_file": "protocol-and-questions.md",
+      "source_location": "L63",
+      "id": "zen_kalam_eba609_protocol_and_questions_behavioral_signals",
+      "community": 5,
+      "norm_label": "behavioral signals"
+    },
+    {
+      "label": "Protocol Design",
+      "file_type": "document",
+      "source_file": "protocol-and-questions.md",
+      "source_location": "L72",
+      "id": "zen_kalam_eba609_protocol_and_questions_protocol_design",
+      "community": 5,
+      "norm_label": "protocol design"
+    },
+    {
+      "label": "Measurement Reliability",
+      "file_type": "document",
+      "source_file": "protocol-and-questions.md",
+      "source_location": "L81",
+      "id": "zen_kalam_eba609_protocol_and_questions_measurement_reliability",
+      "community": 5,
+      "norm_label": "measurement reliability"
+    },
+    {
+      "label": "Repeated Measurement",
+      "file_type": "document",
+      "source_file": "protocol-and-questions.md",
+      "source_location": "L90",
+      "id": "zen_kalam_eba609_protocol_and_questions_repeated_measurement",
+      "community": 5,
+      "norm_label": "repeated measurement"
+    },
+    {
+      "label": "Integration With Physiological Signals",
+      "file_type": "document",
+      "source_file": "protocol-and-questions.md",
+      "source_location": "L99",
+      "id": "zen_kalam_eba609_protocol_and_questions_integration_with_physiological_signals",
+      "community": 5,
+      "norm_label": "integration with physiological signals"
+    },
+    {
+      "label": "Feedback",
+      "file_type": "document",
+      "source_file": "protocol-and-questions.md",
+      "source_location": "L108",
+      "id": "zen_kalam_eba609_protocol_and_questions_feedback",
+      "community": 5,
+      "norm_label": "feedback"
+    },
+    {
+      "label": "README.md",
+      "file_type": "document",
+      "source_file": "README.md",
+      "source_location": "L1",
+      "id": "readme_md",
+      "community": 10,
+      "norm_label": "readme.md"
+    },
+    {
+      "label": "FocusFlow",
+      "file_type": "document",
+      "source_file": "README.md",
+      "source_location": "L1",
+      "id": "zen_kalam_eba609_readme_focusflow",
+      "community": 10,
+      "norm_label": "focusflow"
+    },
+    {
+      "label": "Current Wiring",
+      "file_type": "document",
+      "source_file": "README.md",
+      "source_location": "L11",
+      "id": "zen_kalam_eba609_readme_current_wiring",
+      "community": 10,
+      "norm_label": "current wiring"
+    },
+    {
+      "label": "Research Docs",
+      "file_type": "document",
+      "source_file": "README.md",
+      "source_location": "L19",
+      "id": "zen_kalam_eba609_readme_research_docs",
+      "community": 10,
+      "norm_label": "research docs"
+    },
+    {
+      "label": "Local Setup",
+      "file_type": "document",
+      "source_file": "README.md",
+      "source_location": "L25",
+      "id": "zen_kalam_eba609_readme_local_setup",
+      "community": 10,
+      "norm_label": "local setup"
+    },
+    {
+      "label": "Supabase Setup",
+      "file_type": "document",
+      "source_file": "README.md",
+      "source_location": "L33",
+      "id": "zen_kalam_eba609_readme_supabase_setup",
+      "community": 10,
+      "norm_label": "supabase setup"
+    },
+    {
+      "label": "GitHub And Sharing",
+      "file_type": "document",
+      "source_file": "README.md",
+      "source_location": "L42",
+      "id": "zen_kalam_eba609_readme_github_and_sharing",
+      "community": 10,
+      "norm_label": "github and sharing"
+    },
+    {
+      "label": "Commands",
+      "file_type": "document",
+      "source_file": "README.md",
+      "source_location": "L50",
+      "id": "zen_kalam_eba609_readme_commands",
+      "community": 10,
+      "norm_label": "commands"
+    },
+    {
+      "label": "system-diagrams.md",
+      "file_type": "document",
+      "source_file": "system-diagrams.md",
+      "source_location": "L1",
+      "id": "system_diagrams_md",
+      "community": 9,
+      "norm_label": "system-diagrams.md"
+    },
+    {
+      "label": "System Diagrams",
+      "file_type": "document",
+      "source_file": "system-diagrams.md",
+      "source_location": "L1",
+      "id": "zen_kalam_eba609_system_diagrams_system_diagrams",
+      "community": 9,
+      "norm_label": "system diagrams"
+    },
+    {
+      "label": "Figure 1. High-Level Measurement Pipeline",
+      "file_type": "document",
+      "source_file": "system-diagrams.md",
+      "source_location": "L7",
+      "id": "zen_kalam_eba609_system_diagrams_figure_1_high_level_measurement_pipeline",
+      "community": 9,
+      "norm_label": "figure 1. high-level measurement pipeline"
+    },
+    {
+      "label": "code:mermaid (flowchart TD)",
+      "file_type": "document",
+      "source_file": "system-diagrams.md",
+      "source_location": "L11",
+      "id": "zen_kalam_eba609_system_diagrams_codeblock_1",
+      "community": 9,
+      "norm_label": "code:mermaid (flowchart td)"
+    },
+    {
+      "label": "Figure 2. Eye Feature Extraction Pathway",
+      "file_type": "document",
+      "source_file": "system-diagrams.md",
+      "source_location": "L31",
+      "id": "zen_kalam_eba609_system_diagrams_figure_2_eye_feature_extraction_pathway",
+      "community": 9,
+      "norm_label": "figure 2. eye feature extraction pathway"
+    },
+    {
+      "label": "code:mermaid (flowchart TD)",
+      "file_type": "document",
+      "source_file": "system-diagrams.md",
+      "source_location": "L35",
+      "id": "zen_kalam_eba609_system_diagrams_codeblock_2",
+      "community": 9,
+      "norm_label": "code:mermaid (flowchart td)"
+    },
+    {
+      "label": "Figure 3. Protocol Structure",
+      "file_type": "document",
+      "source_file": "system-diagrams.md",
+      "source_location": "L59",
+      "id": "zen_kalam_eba609_system_diagrams_figure_3_protocol_structure",
+      "community": 9,
+      "norm_label": "figure 3. protocol structure"
+    },
+    {
+      "label": "code:mermaid (flowchart LR)",
+      "file_type": "document",
+      "source_file": "system-diagrams.md",
+      "source_location": "L63",
+      "id": "zen_kalam_eba609_system_diagrams_codeblock_3",
+      "community": 9,
+      "norm_label": "code:mermaid (flowchart lr)"
+    },
+    {
+      "label": "Figure 4. Repeated Session Comparison",
+      "file_type": "document",
+      "source_file": "system-diagrams.md",
+      "source_location": "L73",
+      "id": "zen_kalam_eba609_system_diagrams_figure_4_repeated_session_comparison",
+      "community": 9,
+      "norm_label": "figure 4. repeated session comparison"
+    },
+    {
+      "label": "code:mermaid (flowchart LR)",
+      "file_type": "document",
+      "source_file": "system-diagrams.md",
+      "source_location": "L77",
+      "id": "zen_kalam_eba609_system_diagrams_codeblock_4",
+      "community": 9,
+      "norm_label": "code:mermaid (flowchart lr)"
+    },
+    {
+      "label": "CalendarHeatmap()",
+      "file_type": "code",
+      "source_file": "src/pages/HistoryPage.tsx",
+      "source_location": "L401",
+      "community": 4,
+      "norm_label": "calendarheatmap()",
+      "id": "pages_historypage_calendarheatmap"
+    },
+    {
+      "label": "toDateKey()",
+      "file_type": "code",
+      "source_file": "src/pages/HistoryPage.tsx",
+      "source_location": "L8",
+      "community": 4,
+      "norm_label": "todatekey()",
+      "id": "pages_historypage_todatekey"
+    },
+    {
+      "label": "WeeklySummary()",
+      "file_type": "code",
+      "source_file": "src/pages/HistoryPage.tsx",
+      "source_location": "L289",
+      "community": 4,
+      "norm_label": "weeklysummary()",
+      "id": "pages_historypage_weeklysummary"
+    },
+    {
+      "label": "signUp()",
+      "file_type": "code",
+      "source_file": "src/lib/auth.ts",
+      "source_location": "L8",
+      "community": 2,
+      "norm_label": "signup()",
+      "id": "lib_auth_signup"
+    },
+    {
+      "label": "signIn()",
+      "file_type": "code",
+      "source_file": "src/lib/auth.ts",
+      "source_location": "L37",
+      "community": 1,
+      "norm_label": "signin()",
+      "id": "lib_auth_signin"
+    },
+    {
+      "label": "inputStyle",
+      "file_type": "code",
+      "source_file": "src/pages/LoginPage.tsx",
+      "source_location": "L7",
+      "community": 1,
+      "norm_label": "inputstyle",
+      "id": "pages_loginpage_inputstyle"
+    }
+  ],
+  "links": [
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/App.tsx",
+      "source_location": "L4",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "src_app_tsx",
+      "target": "src_components_layout_tsx"
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/App.tsx",
+      "source_location": "L5",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "src_app_tsx",
+      "target": "src_pages_homepage_tsx"
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/App.tsx",
+      "source_location": "L6",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "src_app_tsx",
+      "target": "src_pages_routinepage_tsx"
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/App.tsx",
+      "source_location": "L7",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "src_app_tsx",
+      "target": "src_pages_historypage_tsx"
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/App.tsx",
+      "source_location": "L8",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "src_app_tsx",
+      "target": "src_pages_privacypage_tsx"
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/App.tsx",
+      "source_location": "L9",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "src_app_tsx",
+      "target": "src_pages_sciencepage_tsx"
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/App.tsx",
+      "source_location": "L10",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "src_app_tsx",
+      "target": "src_pages_philosophypage_tsx"
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/App.tsx",
+      "source_location": "L9",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "src_app_tsx",
+      "target": "src_pages_sessionpage_tsx"
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/App.tsx",
+      "source_location": "L10",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "src_app_tsx",
+      "target": "src_pages_onboardingpage_tsx"
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/App.tsx",
+      "source_location": "L11",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "src_app_tsx",
+      "target": "src_pages_loginpage_tsx"
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/App.tsx",
+      "source_location": "L12",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "src_app_tsx",
+      "target": "src_lib_supabase_ts"
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/App.tsx",
+      "source_location": "L12",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "src_app_tsx",
+      "target": "lib_supabase_supabase"
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/App.tsx",
+      "source_location": "L13",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "src_app_tsx",
+      "target": "src_lib_auth_ts"
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/App.tsx",
+      "source_location": "L13",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "src_app_tsx",
+      "target": "lib_auth_synclocalprofilefromuser"
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/App.tsx",
+      "source_location": "L14",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "src_app_tsx",
+      "target": "src_lib_storage_ts"
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/App.tsx",
+      "source_location": "L14",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "src_app_tsx",
+      "target": "lib_storage_getactiveprofile"
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/App.tsx",
+      "source_location": "L14",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "src_app_tsx",
+      "target": "lib_storage_hascompletedonboarding"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/App.tsx",
+      "source_location": "L19",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "src_app_tsx",
+      "target": "src_app_unauthroutes"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/App.tsx",
+      "source_location": "L39",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "src_app_tsx",
+      "target": "src_app_authedroutes"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/App.tsx",
+      "source_location": "L59",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "src_app_tsx",
+      "target": "src_app_app"
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/main.tsx",
+      "source_location": "L4",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "src_main_tsx",
+      "target": "src_app_tsx"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "src/App.tsx",
+      "source_location": "L104",
+      "weight": 1.0,
+      "source": "src_app_app",
+      "target": "lib_storage_getactiveprofile"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "src/App.tsx",
+      "source_location": "L105",
+      "weight": 1.0,
+      "source": "src_app_app",
+      "target": "lib_storage_hascompletedonboarding"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/vite-env.d.ts",
+      "source_location": "L3",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "src_vite_env_d_ts",
+      "target": "src_vite_env_d_importmetaenv"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/vite-env.d.ts",
+      "source_location": "L9",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "src_vite_env_d_ts",
+      "target": "src_vite_env_d_importmeta"
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/BodyGuideOverlay.tsx",
+      "source_location": "L1",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "src_components_bodyguideoverlay_tsx",
+      "target": "src_lib_sessionscript_ts"
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/BodyGuideOverlay.tsx",
+      "source_location": "L1",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "src_components_bodyguideoverlay_tsx",
+      "target": "lib_sessionscript_bodyregion"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/BodyGuideOverlay.tsx",
+      "source_location": "L3",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "src_components_bodyguideoverlay_tsx",
+      "target": "components_bodyguideoverlay_bodyguideoverlayprops"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/BodyGuideOverlay.tsx",
+      "source_location": "L8",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "src_components_bodyguideoverlay_tsx",
+      "target": "components_bodyguideoverlay_cuestate"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/BodyGuideOverlay.tsx",
+      "source_location": "L12",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "src_components_bodyguideoverlay_tsx",
+      "target": "components_bodyguideoverlay_getcuestate"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/BodyGuideOverlay.tsx",
+      "source_location": "L16",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "src_components_bodyguideoverlay_tsx",
+      "target": "components_bodyguideoverlay_partfill"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/BodyGuideOverlay.tsx",
+      "source_location": "L23",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "src_components_bodyguideoverlay_tsx",
+      "target": "components_bodyguideoverlay_partstroke"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/BodyGuideOverlay.tsx",
+      "source_location": "L30",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "src_components_bodyguideoverlay_tsx",
+      "target": "components_bodyguideoverlay_bodyguideoverlay"
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/pages/SessionPage.tsx",
+      "source_location": "L5",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "src_pages_sessionpage_tsx",
+      "target": "src_components_bodyguideoverlay_tsx"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/BodyGuideOverlay.tsx",
+      "source_location": "L34",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "components_bodyguideoverlay_bodyguideoverlay",
+      "target": "components_bodyguideoverlay_getcuestate"
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/BreathGuide.tsx",
+      "source_location": "L1",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "src_components_breathguide_tsx",
+      "target": "src_lib_sessionscript_ts"
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/BreathGuide.tsx",
+      "source_location": "L1",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "src_components_breathguide_tsx",
+      "target": "lib_sessionscript_breathaction"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/BreathGuide.tsx",
+      "source_location": "L3",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "src_components_breathguide_tsx",
+      "target": "components_breathguide_breathguideprops"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/BreathGuide.tsx",
+      "source_location": "L8",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "src_components_breathguide_tsx",
+      "target": "components_breathguide_breathguide"
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/pages/SessionPage.tsx",
+      "source_location": "L6",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "src_pages_sessionpage_tsx",
+      "target": "src_components_breathguide_tsx"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/CameraPreview.tsx",
+      "source_location": "L3",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "src_components_camerapreview_tsx",
+      "target": "components_camerapreview_camerapreviewprops"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/CameraPreview.tsx",
+      "source_location": "L8",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "src_components_camerapreview_tsx",
+      "target": "components_camerapreview_camerapreview"
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/Diya.tsx",
+      "source_location": "L1",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "src_components_diya_tsx",
+      "target": "src_components_flame_tsx"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/Diya.tsx",
+      "source_location": "L3",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "src_components_diya_tsx",
+      "target": "components_diya_diyaprops"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/Diya.tsx",
+      "source_location": "L7",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "src_components_diya_tsx",
+      "target": "components_diya_diya"
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/pages/HomePage.tsx",
+      "source_location": "L2",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "src_pages_homepage_tsx",
+      "target": "src_components_diya_tsx"
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/pages/LoginPage.tsx",
+      "source_location": "L3",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "src_pages_loginpage_tsx",
+      "target": "src_components_diya_tsx"
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/pages/OnboardingPage.tsx",
+      "source_location": "L3",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "src_pages_onboardingpage_tsx",
+      "target": "src_components_diya_tsx"
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/pages/SessionPage.tsx",
+      "source_location": "L3",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "src_pages_sessionpage_tsx",
+      "target": "src_components_diya_tsx"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/Flame.tsx",
+      "source_location": "L1",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "src_components_flame_tsx",
+      "target": "components_flame_flameprops"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/Flame.tsx",
+      "source_location": "L5",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "src_components_flame_tsx",
+      "target": "components_flame_flame"
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/Layout.tsx",
+      "source_location": "L3",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "src_components_layout_tsx",
+      "target": "src_lib_presentationmode_ts"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/Layout.tsx",
+      "source_location": "L5",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "src_components_layout_tsx",
+      "target": "components_layout_layoutprops"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/Layout.tsx",
+      "source_location": "L9",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "src_components_layout_tsx",
+      "target": "components_layout_layout"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/MeditationBackground.tsx",
+      "source_location": "L1",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "src_components_meditationbackground_tsx",
+      "target": "components_meditationbackground_meditationbackgroundprops"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/MeditationBackground.tsx",
+      "source_location": "L6",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "src_components_meditationbackground_tsx",
+      "target": "components_meditationbackground_meditationbackground"
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/pages/HomePage.tsx",
+      "source_location": "L3",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "src_pages_homepage_tsx",
+      "target": "src_components_meditationbackground_tsx"
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/pages/LoginPage.tsx",
+      "source_location": "L4",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "src_pages_loginpage_tsx",
+      "target": "src_components_meditationbackground_tsx"
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/pages/OnboardingPage.tsx",
+      "source_location": "L4",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "src_pages_onboardingpage_tsx",
+      "target": "src_components_meditationbackground_tsx"
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/pages/SessionPage.tsx",
+      "source_location": "L4",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "src_pages_sessionpage_tsx",
+      "target": "src_components_meditationbackground_tsx"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/SessionEndModal.tsx",
+      "source_location": "L1",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "src_components_sessionendmodal_tsx",
+      "target": "components_sessionendmodal_sessionprogressprops"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/SessionEndModal.tsx",
+      "source_location": "L5",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "src_components_sessionendmodal_tsx",
+      "target": "components_sessionendmodal_yogiicon"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/SessionEndModal.tsx",
+      "source_location": "L37",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "src_components_sessionendmodal_tsx",
+      "target": "components_sessionendmodal_sessionprogress"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/SessionProgress.tsx",
+      "source_location": "L1",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "src_components_sessionprogress_tsx",
+      "target": "components_sessionprogress_sessionprogressprops"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/SessionProgress.tsx",
+      "source_location": "L5",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "src_components_sessionprogress_tsx",
+      "target": "components_sessionprogress_yogiicon"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/SessionProgress.tsx",
+      "source_location": "L42",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "src_components_sessionprogress_tsx",
+      "target": "components_sessionprogress_sessionprogress"
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/lib/auth.ts",
+      "source_location": "L2",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "src_lib_auth_ts",
+      "target": "src_lib_supabase_ts"
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/lib/auth.ts",
+      "source_location": "L2",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "src_lib_auth_ts",
+      "target": "lib_supabase_supabase"
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/lib/auth.ts",
+      "source_location": "L3",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "src_lib_auth_ts",
+      "target": "src_lib_storage_ts"
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/lib/auth.ts",
+      "source_location": "L3",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "src_lib_auth_ts",
+      "target": "lib_storage_createprofile"
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/lib/auth.ts",
+      "source_location": "L3",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "src_lib_auth_ts",
+      "target": "lib_storage_clearactiveprofile"
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/lib/auth.ts",
+      "source_location": "L3",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "src_lib_auth_ts",
+      "target": "lib_storage_getactiveprofile"
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/lib/auth.ts",
+      "source_location": "L3",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "src_lib_auth_ts",
+      "target": "lib_storage_mergeremotehistory"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/lib/auth.ts",
+      "source_location": "L8",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "src_lib_auth_ts",
+      "target": "lib_auth_signinwithgoogle"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/lib/auth.ts",
+      "source_location": "L56",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "src_lib_auth_ts",
+      "target": "lib_auth_signout"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/lib/auth.ts",
+      "source_location": "L66",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "src_lib_auth_ts",
+      "target": "lib_auth_synclocalprofilefromuser"
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/pages/LoginPage.tsx",
+      "source_location": "L5",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "src_pages_loginpage_tsx",
+      "target": "src_lib_auth_ts"
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/pages/OnboardingPage.tsx",
+      "source_location": "L6",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "src_pages_onboardingpage_tsx",
+      "target": "src_lib_auth_ts"
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/pages/PrivacyPage.tsx",
+      "source_location": "L3",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "src_pages_privacypage_tsx",
+      "target": "src_lib_auth_ts"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/lib/auth.ts",
+      "source_location": "L8",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "src_lib_auth_ts",
+      "target": "lib_auth_signup"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/lib/auth.ts",
+      "source_location": "L37",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "src_lib_auth_ts",
+      "target": "lib_auth_signin"
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/pages/LoginPage.tsx",
+      "source_location": "L4",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "src_pages_loginpage_tsx",
+      "target": "lib_auth_signinwithgoogle"
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/pages/OnboardingPage.tsx",
+      "source_location": "L5",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "src_pages_onboardingpage_tsx",
+      "target": "lib_auth_signinwithgoogle"
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/pages/PrivacyPage.tsx",
+      "source_location": "L3",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "src_pages_privacypage_tsx",
+      "target": "lib_auth_signout"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "src/lib/auth.ts",
+      "source_location": "L57",
+      "weight": 1.0,
+      "source": "lib_auth_signout",
+      "target": "lib_storage_clearactiveprofile"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "src/lib/auth.ts",
+      "source_location": "L67",
+      "weight": 1.0,
+      "source": "lib_auth_synclocalprofilefromuser",
+      "target": "lib_storage_getactiveprofile"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "src/lib/auth.ts",
+      "source_location": "L75",
+      "weight": 1.0,
+      "source": "lib_auth_synclocalprofilefromuser",
+      "target": "lib_storage_createprofile"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "src/lib/auth.ts",
+      "source_location": "L46",
+      "weight": 1.0,
+      "source": "lib_auth_synclocalprofilefromuser",
+      "target": "lib_storage_mergeremotehistory"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "src/lib/auth.ts",
+      "source_location": "L49",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "lib_auth_signin",
+      "target": "lib_auth_synclocalprofilefromuser"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/lib/faceDetection.ts",
+      "source_location": "L3",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "src_lib_facedetection_ts",
+      "target": "lib_facedetection_facedetectionsnapshot"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/lib/faceDetection.ts",
+      "source_location": "L10",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "src_lib_facedetection_ts",
+      "target": "lib_facedetection_sessionfacedetector"
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/pages/SessionPage.tsx",
+      "source_location": "L28",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "src_pages_sessionpage_tsx",
+      "target": "src_lib_facedetection_ts"
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/pages/SessionPage.tsx",
+      "source_location": "L28",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "src_pages_sessionpage_tsx",
+      "target": "lib_facedetection_facedetectionsnapshot"
+    },
+    {
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "src/lib/faceDetection.ts",
+      "source_location": "L14",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "lib_facedetection_sessionfacedetector",
+      "target": "lib_facedetection_sessionfacedetector_init"
+    },
+    {
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "src/lib/faceDetection.ts",
+      "source_location": "L37",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "lib_facedetection_sessionfacedetector",
+      "target": "lib_facedetection_sessionfacedetector_detect"
+    },
+    {
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "src/lib/faceDetection.ts",
+      "source_location": "L84",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "lib_facedetection_sessionfacedetector",
+      "target": "lib_facedetection_sessionfacedetector_close"
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/pages/SessionPage.tsx",
+      "source_location": "L28",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "src_pages_sessionpage_tsx",
+      "target": "lib_facedetection_sessionfacedetector"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/lib/faceLandmarks.ts",
+      "source_location": "L5",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "src_lib_facelandmarks_ts",
+      "target": "lib_facelandmarks_eyemetricssnapshot"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/lib/faceLandmarks.ts",
+      "source_location": "L25",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "src_lib_facelandmarks_ts",
+      "target": "lib_facelandmarks_sessionfacelandmarker"
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/pages/SessionPage.tsx",
+      "source_location": "L32",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "src_pages_sessionpage_tsx",
+      "target": "src_lib_facelandmarks_ts"
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/pages/SessionPage.tsx",
+      "source_location": "L32",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "src_pages_sessionpage_tsx",
+      "target": "lib_facelandmarks_eyemetricssnapshot"
+    },
+    {
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "src/lib/faceLandmarks.ts",
+      "source_location": "L31",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "lib_facelandmarks_sessionfacelandmarker",
+      "target": "lib_facelandmarks_sessionfacelandmarker_init"
+    },
+    {
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "src/lib/faceLandmarks.ts",
+      "source_location": "L57",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "lib_facelandmarks_sessionfacelandmarker",
+      "target": "lib_facelandmarks_sessionfacelandmarker_detect"
+    },
+    {
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "src/lib/faceLandmarks.ts",
+      "source_location": "L108",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "lib_facelandmarks_sessionfacelandmarker",
+      "target": "lib_facelandmarks_sessionfacelandmarker_close"
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/pages/SessionPage.tsx",
+      "source_location": "L32",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "src_pages_sessionpage_tsx",
+      "target": "lib_facelandmarks_sessionfacelandmarker"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/lib/presentationMode.ts",
+      "source_location": "L21",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "src_lib_presentationmode_ts",
+      "target": "lib_presentationmode_appmode"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/lib/presentationMode.ts",
+      "source_location": "L23",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "src_lib_presentationmode_ts",
+      "target": "lib_presentationmode_resolvemode"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/lib/presentationMode.ts",
+      "source_location": "L62",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "src_lib_presentationmode_ts",
+      "target": "lib_presentationmode_mode"
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/pages/HistoryPage.tsx",
+      "source_location": "L1",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "src_pages_historypage_tsx",
+      "target": "src_lib_presentationmode_ts"
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/pages/HomePage.tsx",
+      "source_location": "L4",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "src_pages_homepage_tsx",
+      "target": "src_lib_presentationmode_ts"
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/pages/OnboardingPage.tsx",
+      "source_location": "L5",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "src_pages_onboardingpage_tsx",
+      "target": "src_lib_presentationmode_ts"
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/pages/RoutinePage.tsx",
+      "source_location": "L3",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "src_pages_routinepage_tsx",
+      "target": "src_lib_presentationmode_ts"
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/pages/SessionPage.tsx",
+      "source_location": "L36",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "src_pages_sessionpage_tsx",
+      "target": "src_lib_presentationmode_ts"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/lib/quotes.ts",
+      "source_location": "L1",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "src_lib_quotes_ts",
+      "target": "lib_quotes_beginnerquotes"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/lib/quotes.ts",
+      "source_location": "L7",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "src_lib_quotes_ts",
+      "target": "lib_quotes_midquotes"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/lib/quotes.ts",
+      "source_location": "L13",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "src_lib_quotes_ts",
+      "target": "lib_quotes_deepquotes"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/lib/quotes.ts",
+      "source_location": "L19",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "src_lib_quotes_ts",
+      "target": "lib_quotes_getquoteforstreak"
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/pages/SessionPage.tsx",
+      "source_location": "L22",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "src_pages_sessionpage_tsx",
+      "target": "src_lib_quotes_ts"
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/pages/SessionPage.tsx",
+      "source_location": "L22",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "src_pages_sessionpage_tsx",
+      "target": "lib_quotes_getquoteforstreak"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "src/pages/SessionPage.tsx",
+      "source_location": "L1121",
+      "weight": 1.0,
+      "source": "pages_sessionpage_sessionpage",
+      "target": "lib_quotes_getquoteforstreak"
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/lib/sessionAudio.ts",
+      "source_location": "L3",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "src_lib_sessionaudio_ts",
+      "target": "src_lib_sessionscript_ts"
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/lib/sessionAudio.ts",
+      "source_location": "L3",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "src_lib_sessionaudio_ts",
+      "target": "lib_sessionscript_sessionphase"
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/lib/sessionAudio.ts",
+      "source_location": "L4",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "src_lib_sessionaudio_ts",
+      "target": "src_lib_sessionsettings_ts"
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/lib/sessionAudio.ts",
+      "source_location": "L4",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "src_lib_sessionaudio_ts",
+      "target": "lib_sessionsettings_sessionsettings"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/lib/sessionAudio.ts",
+      "source_location": "L6",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "src_lib_sessionaudio_ts",
+      "target": "lib_sessionaudio_sessionaudiocontroller"
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/pages/SessionPage.tsx",
+      "source_location": "L23",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "src_pages_sessionpage_tsx",
+      "target": "src_lib_sessionaudio_ts"
+    },
+    {
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "src/lib/sessionAudio.ts",
+      "source_location": "L13",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "lib_sessionaudio_sessionaudiocontroller",
+      "target": "lib_sessionaudio_sessionaudiocontroller_preload"
+    },
+    {
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "src/lib/sessionAudio.ts",
+      "source_location": "L23",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "lib_sessionaudio_sessionaudiocontroller",
+      "target": "lib_sessionaudio_sessionaudiocontroller_getaudiocontext"
+    },
+    {
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "src/lib/sessionAudio.ts",
+      "source_location": "L41",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "lib_sessionaudio_sessionaudiocontroller",
+      "target": "lib_sessionaudio_sessionaudiocontroller_playbellwithfade"
+    },
+    {
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "src/lib/sessionAudio.ts",
+      "source_location": "L84",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "lib_sessionaudio_sessionaudiocontroller",
+      "target": "lib_sessionaudio_sessionaudiocontroller_playtonecluster"
+    },
+    {
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "src/lib/sessionAudio.ts",
+      "source_location": "L123",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "lib_sessionaudio_sessionaudiocontroller",
+      "target": "lib_sessionaudio_sessionaudiocontroller_playopeningbell"
+    },
+    {
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "src/lib/sessionAudio.ts",
+      "source_location": "L127",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "lib_sessionaudio_sessionaudiocontroller",
+      "target": "lib_sessionaudio_sessionaudiocontroller_playclosingbell"
+    },
+    {
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "src/lib/sessionAudio.ts",
+      "source_location": "L132",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "lib_sessionaudio_sessionaudiocontroller",
+      "target": "lib_sessionaudio_sessionaudiocontroller_playsofttransitioncue"
+    },
+    {
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "src/lib/sessionAudio.ts",
+      "source_location": "L143",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "lib_sessionaudio_sessionaudiocontroller",
+      "target": "lib_sessionaudio_sessionaudiocontroller_playawarenesscue"
+    },
+    {
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "src/lib/sessionAudio.ts",
+      "source_location": "L154",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "lib_sessionaudio_sessionaudiocontroller",
+      "target": "lib_sessionaudio_sessionaudiocontroller_startfiresound"
+    },
+    {
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "src/lib/sessionAudio.ts",
+      "source_location": "L168",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "lib_sessionaudio_sessionaudiocontroller",
+      "target": "lib_sessionaudio_sessionaudiocontroller_stopfiresound"
+    },
+    {
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "src/lib/sessionAudio.ts",
+      "source_location": "L176",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "lib_sessionaudio_sessionaudiocontroller",
+      "target": "lib_sessionaudio_sessionaudiocontroller_syncphase"
+    },
+    {
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "src/lib/sessionAudio.ts",
+      "source_location": "L226",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "lib_sessionaudio_sessionaudiocontroller",
+      "target": "lib_sessionaudio_sessionaudiocontroller_reset"
+    },
+    {
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "src/lib/sessionAudio.ts",
+      "source_location": "L241",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "lib_sessionaudio_sessionaudiocontroller",
+      "target": "lib_sessionaudio_sessionaudiocontroller_cleanup"
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/pages/SessionPage.tsx",
+      "source_location": "L23",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "src_pages_sessionpage_tsx",
+      "target": "lib_sessionaudio_sessionaudiocontroller"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "src/lib/sessionAudio.ts",
+      "source_location": "L97",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "lib_sessionaudio_sessionaudiocontroller_playtonecluster",
+      "target": "lib_sessionaudio_sessionaudiocontroller_getaudiocontext"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "src/lib/sessionAudio.ts",
+      "source_location": "L124",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "lib_sessionaudio_sessionaudiocontroller_playopeningbell",
+      "target": "lib_sessionaudio_sessionaudiocontroller_playbellwithfade"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "src/lib/sessionAudio.ts",
+      "source_location": "L129",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "lib_sessionaudio_sessionaudiocontroller_playclosingbell",
+      "target": "lib_sessionaudio_sessionaudiocontroller_playbellwithfade"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "src/lib/sessionAudio.ts",
+      "source_location": "L133",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "lib_sessionaudio_sessionaudiocontroller_playsofttransitioncue",
+      "target": "lib_sessionaudio_sessionaudiocontroller_playtonecluster"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "src/lib/sessionAudio.ts",
+      "source_location": "L144",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "lib_sessionaudio_sessionaudiocontroller_playawarenesscue",
+      "target": "lib_sessionaudio_sessionaudiocontroller_playtonecluster"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "src/lib/sessionAudio.ts",
+      "source_location": "L200",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "lib_sessionaudio_sessionaudiocontroller_syncphase",
+      "target": "lib_sessionaudio_sessionaudiocontroller_playopeningbell"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "src/lib/sessionAudio.ts",
+      "source_location": "L128",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "lib_sessionaudio_sessionaudiocontroller_playclosingbell",
+      "target": "lib_sessionaudio_sessionaudiocontroller_stopfiresound"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "src/lib/sessionAudio.ts",
+      "source_location": "L208",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "lib_sessionaudio_sessionaudiocontroller_syncphase",
+      "target": "lib_sessionaudio_sessionaudiocontroller_playsofttransitioncue"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "src/lib/sessionAudio.ts",
+      "source_location": "L216",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "lib_sessionaudio_sessionaudiocontroller_syncphase",
+      "target": "lib_sessionaudio_sessionaudiocontroller_playawarenesscue"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "src/lib/sessionAudio.ts",
+      "source_location": "L220",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "lib_sessionaudio_sessionaudiocontroller_syncphase",
+      "target": "lib_sessionaudio_sessionaudiocontroller_startfiresound"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "src/lib/sessionAudio.ts",
+      "source_location": "L185",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "lib_sessionaudio_sessionaudiocontroller_syncphase",
+      "target": "lib_sessionaudio_sessionaudiocontroller_stopfiresound"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "src/lib/sessionAudio.ts",
+      "source_location": "L232",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "lib_sessionaudio_sessionaudiocontroller_reset",
+      "target": "lib_sessionaudio_sessionaudiocontroller_stopfiresound"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "src/lib/sessionAudio.ts",
+      "source_location": "L242",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "lib_sessionaudio_sessionaudiocontroller_cleanup",
+      "target": "lib_sessionaudio_sessionaudiocontroller_reset"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/lib/sessionScript.ts",
+      "source_location": "L1",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "src_lib_sessionscript_ts",
+      "target": "lib_sessionscript_bodyregion"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/lib/sessionScript.ts",
+      "source_location": "L11",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "src_lib_sessionscript_ts",
+      "target": "lib_sessionscript_breathaction"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/lib/sessionScript.ts",
+      "source_location": "L13",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "src_lib_sessionscript_ts",
+      "target": "lib_sessionscript_visualmode"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/lib/sessionScript.ts",
+      "source_location": "L21",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "src_lib_sessionscript_ts",
+      "target": "lib_sessionscript_sessionphase"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/lib/sessionScript.ts",
+      "source_location": "L32",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "src_lib_sessionscript_ts",
+      "target": "lib_sessionscript_body_sequence"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/lib/sessionScript.ts",
+      "source_location": "L43",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "src_lib_sessionscript_ts",
+      "target": "lib_sessionscript_createsessionscript"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/lib/sessionScript.ts",
+      "source_location": "L131",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "src_lib_sessionscript_ts",
+      "target": "lib_sessionscript_getscripttotalduration"
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/pages/SessionPage.tsx",
+      "source_location": "L8",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "src_pages_sessionpage_tsx",
+      "target": "src_lib_sessionscript_ts"
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/pages/SessionPage.tsx",
+      "source_location": "L8",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "src_pages_sessionpage_tsx",
+      "target": "lib_sessionscript_bodyregion"
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/pages/SessionPage.tsx",
+      "source_location": "L8",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "src_pages_sessionpage_tsx",
+      "target": "lib_sessionscript_sessionphase"
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/pages/SessionPage.tsx",
+      "source_location": "L8",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "src_pages_sessionpage_tsx",
+      "target": "lib_sessionscript_createsessionscript"
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/pages/SessionPage.tsx",
+      "source_location": "L8",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "src_pages_sessionpage_tsx",
+      "target": "lib_sessionscript_getscripttotalduration"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/lib/sessionSettings.ts",
+      "source_location": "L1",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "src_lib_sessionsettings_ts",
+      "target": "lib_sessionsettings_sessionsettings"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/lib/sessionSettings.ts",
+      "source_location": "L7",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "src_lib_sessionsettings_ts",
+      "target": "lib_sessionsettings_defaultsessionsettings"
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/pages/SessionPage.tsx",
+      "source_location": "L24",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "src_pages_sessionpage_tsx",
+      "target": "src_lib_sessionsettings_ts"
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/pages/SessionPage.tsx",
+      "source_location": "L24",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "src_pages_sessionpage_tsx",
+      "target": "lib_sessionsettings_sessionsettings"
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/pages/SessionPage.tsx",
+      "source_location": "L24",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "src_pages_sessionpage_tsx",
+      "target": "lib_sessionsettings_defaultsessionsettings"
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/lib/simulatedTracking.ts",
+      "source_location": "L1",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "src_lib_simulatedtracking_ts",
+      "target": "src_lib_trackingengine_ts"
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/lib/simulatedTracking.ts",
+      "source_location": "L1",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "src_lib_simulatedtracking_ts",
+      "target": "lib_trackingengine_trackingengine"
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/lib/simulatedTracking.ts",
+      "source_location": "L1",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "src_lib_simulatedtracking_ts",
+      "target": "lib_trackingengine_trackinglistener"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/lib/simulatedTracking.ts",
+      "source_location": "L3",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "src_lib_simulatedtracking_ts",
+      "target": "lib_simulatedtracking_clamp"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/lib/simulatedTracking.ts",
+      "source_location": "L7",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "src_lib_simulatedtracking_ts",
+      "target": "lib_simulatedtracking_simulatedtrackingengine"
+    },
+    {
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "src/lib/simulatedTracking.ts",
+      "source_location": "L16",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "lib_simulatedtracking_simulatedtrackingengine",
+      "target": "lib_simulatedtracking_simulatedtrackingengine_start"
+    },
+    {
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "src/lib/simulatedTracking.ts",
+      "source_location": "L63",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "lib_simulatedtracking_simulatedtrackingengine",
+      "target": "lib_simulatedtracking_simulatedtrackingengine_stop"
+    },
+    {
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "src/lib/simulatedTracking.ts",
+      "source_location": "L70",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "lib_simulatedtracking_simulatedtrackingengine",
+      "target": "lib_simulatedtracking_simulatedtrackingengine_reset"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "src/lib/simulatedTracking.ts",
+      "source_location": "L71",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "lib_simulatedtracking_simulatedtrackingengine_reset",
+      "target": "lib_simulatedtracking_simulatedtrackingengine_stop"
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/lib/storage.ts",
+      "source_location": "L1",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "src_lib_storage_ts",
+      "target": "src_lib_supabase_ts"
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/lib/storage.ts",
+      "source_location": "L1",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "src_lib_storage_ts",
+      "target": "lib_supabase_supabase"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/lib/storage.ts",
+      "source_location": "L3",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "src_lib_storage_ts",
+      "target": "lib_storage_routineselection"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/lib/storage.ts",
+      "source_location": "L7",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "src_lib_storage_ts",
+      "target": "lib_storage_sessionfeeling"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/lib/storage.ts",
+      "source_location": "L9",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "src_lib_storage_ts",
+      "target": "lib_storage_sessionrecord"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/lib/storage.ts",
+      "source_location": "L22",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "src_lib_storage_ts",
+      "target": "lib_storage_localprofile"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/lib/storage.ts",
+      "source_location": "L35",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "src_lib_storage_ts",
+      "target": "lib_storage_safeparse"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/lib/storage.ts",
+      "source_location": "L45",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "src_lib_storage_ts",
+      "target": "lib_storage_loadprofiles"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/lib/storage.ts",
+      "source_location": "L49",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "src_lib_storage_ts",
+      "target": "lib_storage_saveprofiles"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/lib/storage.ts",
+      "source_location": "L53",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "src_lib_storage_ts",
+      "target": "lib_storage_createprofile"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/lib/storage.ts",
+      "source_location": "L76",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "src_lib_storage_ts",
+      "target": "lib_storage_getactiveprofileid"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/lib/storage.ts",
+      "source_location": "L80",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "src_lib_storage_ts",
+      "target": "lib_storage_setactiveprofileid"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/lib/storage.ts",
+      "source_location": "L84",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "src_lib_storage_ts",
+      "target": "lib_storage_clearactiveprofile"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/lib/storage.ts",
+      "source_location": "L88",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "src_lib_storage_ts",
+      "target": "lib_storage_getactiveprofile"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/lib/storage.ts",
+      "source_location": "L96",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "src_lib_storage_ts",
+      "target": "lib_storage_updateactiveprofile"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/lib/storage.ts",
+      "source_location": "L111",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "src_lib_storage_ts",
+      "target": "lib_storage_hascompletedonboarding"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/lib/storage.ts",
+      "source_location": "L116",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "src_lib_storage_ts",
+      "target": "lib_storage_loadhistory"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/lib/storage.ts",
+      "source_location": "L120",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "src_lib_storage_ts",
+      "target": "lib_storage_savesession"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/lib/storage.ts",
+      "source_location": "L127",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "src_lib_storage_ts",
+      "target": "lib_storage_clearhistory"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/lib/storage.ts",
+      "source_location": "L134",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "src_lib_storage_ts",
+      "target": "lib_storage_saveroutineselection"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/lib/storage.ts",
+      "source_location": "L141",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "src_lib_storage_ts",
+      "target": "lib_storage_loadroutineselection"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/lib/storage.ts",
+      "source_location": "L145",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "src_lib_storage_ts",
+      "target": "lib_storage_tolocaldatekey"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/lib/storage.ts",
+      "source_location": "L153",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "src_lib_storage_ts",
+      "target": "lib_storage_shiftdatekey"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/lib/storage.ts",
+      "source_location": "L162",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "src_lib_storage_ts",
+      "target": "lib_storage_getcurrentstreak"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/lib/storage.ts",
+      "source_location": "L202",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "src_lib_storage_ts",
+      "target": "lib_storage_getflexiblestreak"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/lib/storage.ts",
+      "source_location": "L246",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "src_lib_storage_ts",
+      "target": "lib_storage_getweeklycompletion"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/lib/storage.ts",
+      "source_location": "L271",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "src_lib_storage_ts",
+      "target": "lib_storage_savesessionremote"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/lib/storage.ts",
+      "source_location": "L299",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "src_lib_storage_ts",
+      "target": "lib_storage_loadhistoryremote"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/lib/storage.ts",
+      "source_location": "L333",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "src_lib_storage_ts",
+      "target": "lib_storage_mergeremotehistory"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/lib/storage.ts",
+      "source_location": "L296",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "src_lib_storage_ts",
+      "target": "lib_storage_getmandaladay"
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/pages/HistoryPage.tsx",
+      "source_location": "L2",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "src_pages_historypage_tsx",
+      "target": "src_lib_storage_ts"
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/pages/HomePage.tsx",
+      "source_location": "L5",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "src_pages_homepage_tsx",
+      "target": "src_lib_storage_ts"
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/pages/RoutinePage.tsx",
+      "source_location": "L4",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "src_pages_routinepage_tsx",
+      "target": "src_lib_storage_ts"
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/pages/SessionPage.tsx",
+      "source_location": "L14",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "src_pages_sessionpage_tsx",
+      "target": "src_lib_storage_ts"
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/pages/SessionPage.tsx",
+      "source_location": "L14",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "src_pages_sessionpage_tsx",
+      "target": "lib_storage_sessionfeeling"
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/pages/HistoryPage.tsx",
+      "source_location": "L3",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "src_pages_historypage_tsx",
+      "target": "lib_storage_sessionrecord"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "src/lib/storage.ts",
+      "source_location": "L46",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "lib_storage_loadprofiles",
+      "target": "lib_storage_safeparse"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "src/lib/storage.ts",
+      "source_location": "L57",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "lib_storage_createprofile",
+      "target": "lib_storage_loadprofiles"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "src/lib/storage.ts",
+      "source_location": "L92",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "lib_storage_getactiveprofile",
+      "target": "lib_storage_loadprofiles"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "src/lib/storage.ts",
+      "source_location": "L102",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "lib_storage_updateactiveprofile",
+      "target": "lib_storage_loadprofiles"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "src/lib/storage.ts",
+      "source_location": "L70",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "lib_storage_createprofile",
+      "target": "lib_storage_saveprofiles"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "src/lib/storage.ts",
+      "source_location": "L108",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "lib_storage_updateactiveprofile",
+      "target": "lib_storage_saveprofiles"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "src/lib/storage.ts",
+      "source_location": "L71",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "lib_storage_createprofile",
+      "target": "lib_storage_setactiveprofileid"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "src/lib/auth.ts",
+      "source_location": "L26",
+      "weight": 1.0,
+      "source": "lib_auth_signup",
+      "target": "lib_storage_createprofile"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "src/lib/storage.ts",
+      "source_location": "L89",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "lib_storage_getactiveprofile",
+      "target": "lib_storage_getactiveprofileid"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "src/lib/storage.ts",
+      "source_location": "L99",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "lib_storage_updateactiveprofile",
+      "target": "lib_storage_getactiveprofileid"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "src/lib/storage.ts",
+      "source_location": "L112",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "lib_storage_hascompletedonboarding",
+      "target": "lib_storage_getactiveprofile"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "src/lib/storage.ts",
+      "source_location": "L117",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "lib_storage_loadhistory",
+      "target": "lib_storage_getactiveprofile"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "src/lib/storage.ts",
+      "source_location": "L142",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "lib_storage_loadroutineselection",
+      "target": "lib_storage_getactiveprofile"
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/pages/HomePage.tsx",
+      "source_location": "L5",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "src_pages_homepage_tsx",
+      "target": "lib_storage_getactiveprofile"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "src/pages/HomePage.tsx",
+      "source_location": "L14",
+      "weight": 1.0,
+      "source": "pages_homepage_homepage",
+      "target": "lib_storage_getactiveprofile"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "src/lib/storage.ts",
+      "source_location": "L121",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "lib_storage_savesession",
+      "target": "lib_storage_updateactiveprofile"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "src/lib/storage.ts",
+      "source_location": "L128",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "lib_storage_clearhistory",
+      "target": "lib_storage_updateactiveprofile"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "src/lib/storage.ts",
+      "source_location": "L135",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "lib_storage_saveroutineselection",
+      "target": "lib_storage_updateactiveprofile"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "src/lib/storage.ts",
+      "source_location": "L343",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "lib_storage_mergeremotehistory",
+      "target": "lib_storage_updateactiveprofile"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "src/lib/storage.ts",
+      "source_location": "L337",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "lib_storage_mergeremotehistory",
+      "target": "lib_storage_loadhistory"
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/pages/HistoryPage.tsx",
+      "source_location": "L2",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "src_pages_historypage_tsx",
+      "target": "lib_storage_loadhistory"
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/pages/HomePage.tsx",
+      "source_location": "L5",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "src_pages_homepage_tsx",
+      "target": "lib_storage_loadhistory"
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/pages/SessionPage.tsx",
+      "source_location": "L14",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "src_pages_sessionpage_tsx",
+      "target": "lib_storage_loadhistory"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "src/pages/HistoryPage.tsx",
+      "source_location": "L5",
+      "weight": 1.0,
+      "source": "pages_historypage_historypage",
+      "target": "lib_storage_loadhistory"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "src/pages/HomePage.tsx",
+      "source_location": "L15",
+      "weight": 1.0,
+      "source": "pages_homepage_homepage",
+      "target": "lib_storage_loadhistory"
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/pages/SessionPage.tsx",
+      "source_location": "L14",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "src_pages_sessionpage_tsx",
+      "target": "lib_storage_savesession"
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/pages/HistoryPage.tsx",
+      "source_location": "L2",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "src_pages_historypage_tsx",
+      "target": "lib_storage_clearhistory"
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/pages/RoutinePage.tsx",
+      "source_location": "L4",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "src_pages_routinepage_tsx",
+      "target": "lib_storage_saveroutineselection"
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/pages/RoutinePage.tsx",
+      "source_location": "L4",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "src_pages_routinepage_tsx",
+      "target": "lib_storage_loadroutineselection"
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/pages/SessionPage.tsx",
+      "source_location": "L14",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "src_pages_sessionpage_tsx",
+      "target": "lib_storage_loadroutineselection"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "src/pages/RoutinePage.tsx",
+      "source_location": "L7",
+      "weight": 1.0,
+      "source": "pages_routinepage_routinepage",
+      "target": "lib_storage_loadroutineselection"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "src/pages/SessionPage.tsx",
+      "source_location": "L447",
+      "weight": 1.0,
+      "source": "pages_sessionpage_sessionpage",
+      "target": "lib_storage_loadroutineselection"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "src/lib/storage.ts",
+      "source_location": "L169",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "lib_storage_getcurrentstreak",
+      "target": "lib_storage_shiftdatekey"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "src/lib/storage.ts",
+      "source_location": "L209",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "lib_storage_getflexiblestreak",
+      "target": "lib_storage_shiftdatekey"
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/pages/HistoryPage.tsx",
+      "source_location": "L2",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "src_pages_historypage_tsx",
+      "target": "lib_storage_getcurrentstreak"
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/pages/SessionPage.tsx",
+      "source_location": "L14",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "src_pages_sessionpage_tsx",
+      "target": "lib_storage_getcurrentstreak"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "src/pages/HistoryPage.tsx",
+      "source_location": "L13",
+      "weight": 1.0,
+      "source": "pages_historypage_historypage",
+      "target": "lib_storage_getcurrentstreak"
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/pages/HomePage.tsx",
+      "source_location": "L5",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "src_pages_homepage_tsx",
+      "target": "lib_storage_getflexiblestreak"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "src/pages/HomePage.tsx",
+      "source_location": "L17",
+      "weight": 1.0,
+      "source": "pages_homepage_homepage",
+      "target": "lib_storage_getflexiblestreak"
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/pages/HomePage.tsx",
+      "source_location": "L5",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "src_pages_homepage_tsx",
+      "target": "lib_storage_getweeklycompletion"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "src/pages/HomePage.tsx",
+      "source_location": "L16",
+      "weight": 1.0,
+      "source": "pages_homepage_homepage",
+      "target": "lib_storage_getweeklycompletion"
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/pages/SessionPage.tsx",
+      "source_location": "L14",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "src_pages_sessionpage_tsx",
+      "target": "lib_storage_savesessionremote"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "src/lib/storage.ts",
+      "source_location": "L334",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "lib_storage_mergeremotehistory",
+      "target": "lib_storage_loadhistoryremote"
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/pages/HistoryPage.tsx",
+      "source_location": "L3",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "src_pages_historypage_tsx",
+      "target": "lib_storage_getmandaladay"
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/pages/HomePage.tsx",
+      "source_location": "L5",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "src_pages_homepage_tsx",
+      "target": "lib_storage_getmandaladay"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "src/pages/HistoryPage.tsx",
+      "source_location": "L178",
+      "weight": 1.0,
+      "source": "pages_historypage_mandalaring",
+      "target": "lib_storage_getmandaladay"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "src/pages/HomePage.tsx",
+      "source_location": "L18",
+      "weight": 1.0,
+      "source": "pages_homepage_homepage",
+      "target": "lib_storage_getmandaladay"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/lib/supabase.ts",
+      "source_location": "L13",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "src_lib_supabase_ts",
+      "target": "lib_supabase_supabase"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/lib/trackingEngine.ts",
+      "source_location": "L1",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "src_lib_trackingengine_ts",
+      "target": "lib_trackingengine_trackingmetrics"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/lib/trackingEngine.ts",
+      "source_location": "L9",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "src_lib_trackingengine_ts",
+      "target": "lib_trackingengine_trackinglistener"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/lib/trackingEngine.ts",
+      "source_location": "L11",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "src_lib_trackingengine_ts",
+      "target": "lib_trackingengine_trackingengine"
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/pages/SessionPage.tsx",
+      "source_location": "L7",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "src_pages_sessionpage_tsx",
+      "target": "src_lib_trackingengine_ts"
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/pages/SessionPage.tsx",
+      "source_location": "L7",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "src_pages_sessionpage_tsx",
+      "target": "lib_trackingengine_trackingmetrics"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/pages/HistoryPage.tsx",
+      "source_location": "L13",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "src_pages_historypage_tsx",
+      "target": "pages_historypage_avg"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/pages/HistoryPage.tsx",
+      "source_location": "L21",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "src_pages_historypage_tsx",
+      "target": "pages_historypage_smallflame"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/pages/HistoryPage.tsx",
+      "source_location": "L62",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "src_pages_historypage_tsx",
+      "target": "pages_historypage_polar"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/pages/HistoryPage.tsx",
+      "source_location": "L67",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "src_pages_historypage_tsx",
+      "target": "pages_historypage_segmentpath"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/pages/HistoryPage.tsx",
+      "source_location": "L85",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "src_pages_historypage_tsx",
+      "target": "pages_historypage_mandalaflame"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/pages/HistoryPage.tsx",
+      "source_location": "L177",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "src_pages_historypage_tsx",
+      "target": "pages_historypage_mandalaring"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/pages/HistoryPage.tsx",
+      "source_location": "L57",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "src_pages_historypage_tsx",
+      "target": "pages_historypage_trendchart"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/pages/HistoryPage.tsx",
+      "source_location": "L4",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "src_pages_historypage_tsx",
+      "target": "pages_historypage_historypage"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/pages/HistoryPage.tsx",
+      "source_location": "L151",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "src_pages_historypage_tsx",
+      "target": "pages_historypage_calendarheatmap"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/pages/HistoryPage.tsx",
+      "source_location": "L8",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "src_pages_historypage_tsx",
+      "target": "pages_historypage_todatekey"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/pages/HistoryPage.tsx",
+      "source_location": "L289",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "src_pages_historypage_tsx",
+      "target": "pages_historypage_weeklysummary"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "src/pages/HistoryPage.tsx",
+      "source_location": "L84",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "pages_historypage_trendchart",
+      "target": "pages_historypage_avg"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "src/pages/HistoryPage.tsx",
+      "source_location": "L368",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "pages_historypage_historypage",
+      "target": "pages_historypage_avg"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "src/pages/HistoryPage.tsx",
+      "source_location": "L71",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "pages_historypage_segmentpath",
+      "target": "pages_historypage_polar"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "INFERRED",
+      "confidence_score": 0.8,
+      "source_file": "src/pages/HistoryPage.tsx",
+      "source_location": "L15",
+      "weight": 1.0,
+      "source": "pages_historypage_historypage",
+      "target": "pages_sessionpage_avg"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/pages/HomePage.tsx",
+      "source_location": "L13",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "src_pages_homepage_tsx",
+      "target": "pages_homepage_homepage"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/pages/LoginPage.tsx",
+      "source_location": "L19",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "src_pages_loginpage_tsx",
+      "target": "pages_loginpage_loginpage"
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/pages/LoginPage.tsx",
+      "source_location": "L5",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "src_pages_loginpage_tsx",
+      "target": "lib_auth_signin"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/pages/LoginPage.tsx",
+      "source_location": "L7",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "src_pages_loginpage_tsx",
+      "target": "pages_loginpage_inputstyle"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/pages/OnboardingPage.tsx",
+      "source_location": "L8",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "src_pages_onboardingpage_tsx",
+      "target": "pages_onboardingpage_onboardingpage"
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/pages/OnboardingPage.tsx",
+      "source_location": "L6",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "src_pages_onboardingpage_tsx",
+      "target": "lib_auth_signup"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/pages/PhilosophyPage.tsx",
+      "source_location": "L1",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "src_pages_philosophypage_tsx",
+      "target": "pages_philosophypage_philosophypage"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/pages/PrivacyPage.tsx",
+      "source_location": "L5",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "src_pages_privacypage_tsx",
+      "target": "pages_privacypage_privacypage"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/pages/RoutinePage.tsx",
+      "source_location": "L6",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "src_pages_routinepage_tsx",
+      "target": "pages_routinepage_routinepage"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/pages/SciencePage.tsx",
+      "source_location": "L1",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "src_pages_sciencepage_tsx",
+      "target": "pages_sciencepage_findings"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/pages/SciencePage.tsx",
+      "source_location": "L46",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "src_pages_sciencepage_tsx",
+      "target": "pages_sciencepage_sciencepage"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/pages/SessionPage.tsx",
+      "source_location": "L39",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "src_pages_sessionpage_tsx",
+      "target": "pages_sessionpage_body_region_labels"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/pages/SessionPage.tsx",
+      "source_location": "L51",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "src_pages_sessionpage_tsx",
+      "target": "pages_sessionpage_avg"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/pages/SessionPage.tsx",
+      "source_location": "L56",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "src_pages_sessionpage_tsx",
+      "target": "pages_sessionpage_avgdiff"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/pages/SessionPage.tsx",
+      "source_location": "L66",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "src_pages_sessionpage_tsx",
+      "target": "pages_sessionpage_clamp"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/pages/SessionPage.tsx",
+      "source_location": "L70",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "src_pages_sessionpage_tsx",
+      "target": "pages_sessionpage_standarddeviation"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/pages/SessionPage.tsx",
+      "source_location": "L77",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "src_pages_sessionpage_tsx",
+      "target": "pages_sessionpage_formatsecondscompact"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/pages/SessionPage.tsx",
+      "source_location": "L83",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "src_pages_sessionpage_tsx",
+      "target": "pages_sessionpage_formattimestampforkey"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/pages/SessionPage.tsx",
+      "source_location": "L87",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "src_pages_sessionpage_tsx",
+      "target": "pages_sessionpage_csvescape"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/pages/SessionPage.tsx",
+      "source_location": "L95",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "src_pages_sessionpage_tsx",
+      "target": "pages_sessionpage_buildpilotcsvrow"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/pages/SessionPage.tsx",
+      "source_location": "L144",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "src_pages_sessionpage_tsx",
+      "target": "pages_sessionpage_appendcsvwithheader"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/pages/SessionPage.tsx",
+      "source_location": "L151",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "src_pages_sessionpage_tsx",
+      "target": "pages_sessionpage_readresearchuserid"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/pages/SessionPage.tsx",
+      "source_location": "L162",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "src_pages_sessionpage_tsx",
+      "target": "pages_sessionpage_downloadtextfile"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/pages/SessionPage.tsx",
+      "source_location": "L171",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "src_pages_sessionpage_tsx",
+      "target": "pages_sessionpage_attachstreamtovideo"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/pages/SessionPage.tsx",
+      "source_location": "L192",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "src_pages_sessionpage_tsx",
+      "target": "pages_sessionpage_getbodycue"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/pages/SessionPage.tsx",
+      "source_location": "L196",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "src_pages_sessionpage_tsx",
+      "target": "pages_sessionpage_camerastate"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/pages/SessionPage.tsx",
+      "source_location": "L198",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "src_pages_sessionpage_tsx",
+      "target": "pages_sessionpage_sparklineprops"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/pages/SessionPage.tsx",
+      "source_location": "L206",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "src_pages_sessionpage_tsx",
+      "target": "pages_sessionpage_trendcardprops"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/pages/SessionPage.tsx",
+      "source_location": "L216",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "src_pages_sessionpage_tsx",
+      "target": "pages_sessionpage_signalquality"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/pages/SessionPage.tsx",
+      "source_location": "L217",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "src_pages_sessionpage_tsx",
+      "target": "pages_sessionpage_researchstep"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/pages/SessionPage.tsx",
+      "source_location": "L219",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "src_pages_sessionpage_tsx",
+      "target": "pages_sessionpage_panelstate"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/pages/SessionPage.tsx",
+      "source_location": "L226",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "src_pages_sessionpage_tsx",
+      "target": "pages_sessionpage_pilotsurveystate"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/pages/SessionPage.tsx",
+      "source_location": "L234",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "src_pages_sessionpage_tsx",
+      "target": "pages_sessionpage_pilotsummaryrecord"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/pages/SessionPage.tsx",
+      "source_location": "L255",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "src_pages_sessionpage_tsx",
+      "target": "pages_sessionpage_collapsiblecardprops"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/pages/SessionPage.tsx",
+      "source_location": "L262",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "src_pages_sessionpage_tsx",
+      "target": "pages_sessionpage_qualitywindowsnapshot"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/pages/SessionPage.tsx",
+      "source_location": "L270",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "src_pages_sessionpage_tsx",
+      "target": "pages_sessionpage_isplausibleeyeopenness"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/pages/SessionPage.tsx",
+      "source_location": "L275",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "src_pages_sessionpage_tsx",
+      "target": "pages_sessionpage_derivesignalquality"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/pages/SessionPage.tsx",
+      "source_location": "L283",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "src_pages_sessionpage_tsx",
+      "target": "pages_sessionpage_sparkline"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/pages/SessionPage.tsx",
+      "source_location": "L334",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "src_pages_sessionpage_tsx",
+      "target": "pages_sessionpage_trendcard"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/pages/SessionPage.tsx",
+      "source_location": "L403",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "src_pages_sessionpage_tsx",
+      "target": "pages_sessionpage_collapsiblecard"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/pages/SessionPage.tsx",
+      "source_location": "L445",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "src_pages_sessionpage_tsx",
+      "target": "pages_sessionpage_sessionpage"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "src/pages/SessionPage.tsx",
+      "source_location": "L72",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "pages_sessionpage_standarddeviation",
+      "target": "pages_sessionpage_avg"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "src/pages/SessionPage.tsx",
+      "source_location": "L1258",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "pages_sessionpage_sessionpage",
+      "target": "pages_sessionpage_getbodycue"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "algorithm-overview.md",
+      "source_location": "L1",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "algorithm_overview_md",
+      "target": "zen_kalam_eba609_algorithm_overview_algorithm_overview"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "algorithm-overview.md",
+      "source_location": "L3",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "zen_kalam_eba609_algorithm_overview_algorithm_overview",
+      "target": "zen_kalam_eba609_algorithm_overview_objective"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "algorithm-overview.md",
+      "source_location": "L11",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "zen_kalam_eba609_algorithm_overview_algorithm_overview",
+      "target": "zen_kalam_eba609_algorithm_overview_inputs"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "algorithm-overview.md",
+      "source_location": "L23",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "zen_kalam_eba609_algorithm_overview_algorithm_overview",
+      "target": "zen_kalam_eba609_algorithm_overview_processing_pipeline"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "algorithm-overview.md",
+      "source_location": "L76",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "zen_kalam_eba609_algorithm_overview_algorithm_overview",
+      "target": "zen_kalam_eba609_algorithm_overview_design_approach"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "algorithm-overview.md",
+      "source_location": "L84",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "zen_kalam_eba609_algorithm_overview_algorithm_overview",
+      "target": "zen_kalam_eba609_algorithm_overview_technical_constraints"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "algorithm-overview.md",
+      "source_location": "L97",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "zen_kalam_eba609_algorithm_overview_algorithm_overview",
+      "target": "zen_kalam_eba609_algorithm_overview_next_steps"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "algorithm-overview.md",
+      "source_location": "L25",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "zen_kalam_eba609_algorithm_overview_processing_pipeline",
+      "target": "zen_kalam_eba609_algorithm_overview_frame_processing"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "algorithm-overview.md",
+      "source_location": "L31",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "zen_kalam_eba609_algorithm_overview_processing_pipeline",
+      "target": "zen_kalam_eba609_algorithm_overview_eye_state_feature_extraction"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "algorithm-overview.md",
+      "source_location": "L39",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "zen_kalam_eba609_algorithm_overview_processing_pipeline",
+      "target": "zen_kalam_eba609_algorithm_overview_blink_event_detection"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "algorithm-overview.md",
+      "source_location": "L47",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "zen_kalam_eba609_algorithm_overview_processing_pipeline",
+      "target": "zen_kalam_eba609_algorithm_overview_target_relative_eye_position"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "algorithm-overview.md",
+      "source_location": "L55",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "zen_kalam_eba609_algorithm_overview_processing_pipeline",
+      "target": "zen_kalam_eba609_algorithm_overview_time_series_feature_construction"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "algorithm-overview.md",
+      "source_location": "L68",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "zen_kalam_eba609_algorithm_overview_processing_pipeline",
+      "target": "zen_kalam_eba609_algorithm_overview_session_level_summary"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "CLAUDE.md",
+      "source_location": "L1",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "claude_md",
+      "target": "zen_kalam_eba609_claude_agent_routing"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "CLAUDE.md",
+      "source_location": "L1",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "claude_md",
+      "target": "zen_kalam_eba609_claude_graphify"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "CLAUDE.md",
+      "source_location": "L16",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "zen_kalam_eba609_claude_agent_routing",
+      "target": "zen_kalam_eba609_claude_lint_agent"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "CLAUDE.md",
+      "source_location": "L25",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "zen_kalam_eba609_claude_agent_routing",
+      "target": "zen_kalam_eba609_claude_doc_agent"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "protocol-and-questions.md",
+      "source_location": "L1",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "protocol_and_questions_md",
+      "target": "zen_kalam_eba609_protocol_and_questions_protocol_and_open_questions"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "protocol-and-questions.md",
+      "source_location": "L3",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "zen_kalam_eba609_protocol_and_questions_protocol_and_open_questions",
+      "target": "zen_kalam_eba609_protocol_and_questions_protocol_overview"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "protocol-and-questions.md",
+      "source_location": "L23",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "zen_kalam_eba609_protocol_and_questions_protocol_and_open_questions",
+      "target": "zen_kalam_eba609_protocol_and_questions_protocol_structure"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "protocol-and-questions.md",
+      "source_location": "L57",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "zen_kalam_eba609_protocol_and_questions_protocol_and_open_questions",
+      "target": "zen_kalam_eba609_protocol_and_questions_open_questions"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "protocol-and-questions.md",
+      "source_location": "L108",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "zen_kalam_eba609_protocol_and_questions_protocol_and_open_questions",
+      "target": "zen_kalam_eba609_protocol_and_questions_feedback"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "protocol-and-questions.md",
+      "source_location": "L25",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "zen_kalam_eba609_protocol_and_questions_protocol_structure",
+      "target": "zen_kalam_eba609_protocol_and_questions_posture_settling"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "protocol-and-questions.md",
+      "source_location": "L31",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "zen_kalam_eba609_protocol_and_questions_protocol_structure",
+      "target": "zen_kalam_eba609_protocol_and_questions_whole_body_tension_and_release"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "protocol-and-questions.md",
+      "source_location": "L37",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "zen_kalam_eba609_protocol_and_questions_protocol_structure",
+      "target": "zen_kalam_eba609_protocol_and_questions_paced_breathing"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "protocol-and-questions.md",
+      "source_location": "L43",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "zen_kalam_eba609_protocol_and_questions_protocol_structure",
+      "target": "zen_kalam_eba609_protocol_and_questions_sustained_visual_fixation"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "protocol-and-questions.md",
+      "source_location": "L51",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "zen_kalam_eba609_protocol_and_questions_protocol_structure",
+      "target": "zen_kalam_eba609_protocol_and_questions_post_fixation_open_awareness"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "protocol-and-questions.md",
+      "source_location": "L63",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "zen_kalam_eba609_protocol_and_questions_open_questions",
+      "target": "zen_kalam_eba609_protocol_and_questions_behavioral_signals"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "protocol-and-questions.md",
+      "source_location": "L72",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "zen_kalam_eba609_protocol_and_questions_open_questions",
+      "target": "zen_kalam_eba609_protocol_and_questions_protocol_design"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "protocol-and-questions.md",
+      "source_location": "L81",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "zen_kalam_eba609_protocol_and_questions_open_questions",
+      "target": "zen_kalam_eba609_protocol_and_questions_measurement_reliability"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "protocol-and-questions.md",
+      "source_location": "L90",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "zen_kalam_eba609_protocol_and_questions_open_questions",
+      "target": "zen_kalam_eba609_protocol_and_questions_repeated_measurement"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "protocol-and-questions.md",
+      "source_location": "L99",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "zen_kalam_eba609_protocol_and_questions_open_questions",
+      "target": "zen_kalam_eba609_protocol_and_questions_integration_with_physiological_signals"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "README.md",
+      "source_location": "L1",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "readme_md",
+      "target": "zen_kalam_eba609_readme_focusflow"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "README.md",
+      "source_location": "L11",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "zen_kalam_eba609_readme_focusflow",
+      "target": "zen_kalam_eba609_readme_current_wiring"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "README.md",
+      "source_location": "L19",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "zen_kalam_eba609_readme_focusflow",
+      "target": "zen_kalam_eba609_readme_research_docs"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "README.md",
+      "source_location": "L25",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "zen_kalam_eba609_readme_focusflow",
+      "target": "zen_kalam_eba609_readme_local_setup"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "README.md",
+      "source_location": "L33",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "zen_kalam_eba609_readme_focusflow",
+      "target": "zen_kalam_eba609_readme_supabase_setup"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "README.md",
+      "source_location": "L42",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "zen_kalam_eba609_readme_focusflow",
+      "target": "zen_kalam_eba609_readme_github_and_sharing"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "README.md",
+      "source_location": "L50",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "zen_kalam_eba609_readme_focusflow",
+      "target": "zen_kalam_eba609_readme_commands"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "system-diagrams.md",
+      "source_location": "L1",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "system_diagrams_md",
+      "target": "zen_kalam_eba609_system_diagrams_system_diagrams"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "system-diagrams.md",
+      "source_location": "L7",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "zen_kalam_eba609_system_diagrams_system_diagrams",
+      "target": "zen_kalam_eba609_system_diagrams_figure_1_high_level_measurement_pipeline"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "system-diagrams.md",
+      "source_location": "L31",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "zen_kalam_eba609_system_diagrams_system_diagrams",
+      "target": "zen_kalam_eba609_system_diagrams_figure_2_eye_feature_extraction_pathway"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "system-diagrams.md",
+      "source_location": "L59",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "zen_kalam_eba609_system_diagrams_system_diagrams",
+      "target": "zen_kalam_eba609_system_diagrams_figure_3_protocol_structure"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "system-diagrams.md",
+      "source_location": "L73",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "zen_kalam_eba609_system_diagrams_system_diagrams",
+      "target": "zen_kalam_eba609_system_diagrams_figure_4_repeated_session_comparison"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "system-diagrams.md",
+      "source_location": "L11",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "zen_kalam_eba609_system_diagrams_figure_1_high_level_measurement_pipeline",
+      "target": "zen_kalam_eba609_system_diagrams_codeblock_1"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "system-diagrams.md",
+      "source_location": "L35",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "zen_kalam_eba609_system_diagrams_figure_2_eye_feature_extraction_pathway",
+      "target": "zen_kalam_eba609_system_diagrams_codeblock_2"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "system-diagrams.md",
+      "source_location": "L63",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "zen_kalam_eba609_system_diagrams_figure_3_protocol_structure",
+      "target": "zen_kalam_eba609_system_diagrams_codeblock_3"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "system-diagrams.md",
+      "source_location": "L77",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "zen_kalam_eba609_system_diagrams_figure_4_repeated_session_comparison",
+      "target": "zen_kalam_eba609_system_diagrams_codeblock_4"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "src/pages/HistoryPage.tsx",
+      "source_location": "L439",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "pages_historypage_calendarheatmap",
+      "target": "pages_historypage_todatekey"
+    }
+  ],
+  "hyperedges": [],
+  "built_at_commit": "19d26a153d354fcf82644e57f71d16f526f18f0f"
+}
