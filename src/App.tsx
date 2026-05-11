@@ -6,6 +6,7 @@ import HomePage from "./pages/HomePage";
 import RoutinePage from "./pages/RoutinePage";
 import HistoryPage from "./pages/HistoryPage";
 import PrivacyPage from "./pages/PrivacyPage";
+import SciencePage from "./pages/SciencePage";
 import SessionPage from "./pages/SessionPage";
 import OnboardingPage from "./pages/OnboardingPage";
 import LoginPage from "./pages/LoginPage";
@@ -44,6 +45,7 @@ function AuthedRoutes() {
         <Route path="/routine" element={<RoutinePage />} />
         <Route path="/session" element={<SessionPage />} />
         <Route path="/history" element={<HistoryPage />} />
+        <Route path="/science" element={<SciencePage />} />
         <Route path="/privacy" element={<PrivacyPage />} />
         <Route path="/onboarding" element={<Navigate to="/" replace />} />
         <Route path="/login" element={<Navigate to="/" replace />} />
