@@ -108,7 +108,7 @@ export default function PhilosophyPage() {
             fontSize: "20px",
             lineHeight: 1.6,
             color: "var(--text)",
-            fontFamily: '"Fraunces", Georgia, serif',
+            fontFamily: '"Instrument Serif", Georgia, serif',
             fontWeight: 400,
             margin: "8px 0",
           }}

@@ -3,7 +3,6 @@ import Diya from "../components/Diya";
 import MeditationBackground from "../components/MeditationBackground";
 import { RESEARCH_MODE } from "../lib/presentationMode";
 import {
-  getActiveProfile,
   getFlexibleStreak,
   getMandalaDay,
   getWeeklyCompletion,
@@ -11,7 +10,6 @@ import {
 } from "../lib/storage";
 
 export default function HomePage() {
-  const profile = getActiveProfile();
   const history = loadHistory();
   const weekly = getWeeklyCompletion(history);
   const flexibleStreak = getFlexibleStreak(history);
@@ -56,19 +54,6 @@ export default function HomePage() {
           >
             Browser-based prototype for measuring visual fixation stability during guided sessions.
           </p>
-
-          {profile && (
-            <p
-              style={{
-                fontSize: "16px",
-                lineHeight: 1.5,
-                color: "#bfae97",
-                marginBottom: "24px",
-              }}
-            >
-              Participant: {profile.username}
-            </p>
-          )}
 
           <div
             style={{
@@ -141,64 +126,45 @@ export default function HomePage() {
           A simple daily ritual to train attention and calm the mind.
         </p>
 
-        {profile && (
-          <p
-            style={{
-              fontSize: "16px",
-              lineHeight: 1.5,
-              color: "#bfae97",
-              marginBottom: "30px",
-            }}
-          >
-            Welcome back, {profile.username}
-          </p>
-        )}
-
         <div
           className="glass-card"
           style={{
             width: "100%",
-            maxWidth: "720px",
-            padding: "22px",
-            marginBottom: "26px",
+            maxWidth: "480px",
+            padding: "24px 28px",
+            marginBottom: "28px",
           }}
         >
           <div
             style={{
-              fontSize: "16px",
-              color: "#cbbba7",
-              marginBottom: "10px",
+              fontSize: "13px",
+              color: "var(--muted)",
+              letterSpacing: "0.04em",
+              marginBottom: "16px",
             }}
           >
-            This week
+            THIS WEEK
           </div>
 
           <div
             style={{
               display: "grid",
               gridTemplateColumns: "repeat(7, 1fr)",
-              gap: "10px",
-              marginBottom: "16px",
+              gap: "6px",
+              marginBottom: "20px",
             }}
           >
             {days.map((day, index) => (
-              <div key={day}>
-                <div
-                  style={{
-                    fontSize: "13px",
-                    color: "#bfae97",
-                    marginBottom: "8px",
-                  }}
-                >
-                  {day}
+              <div key={day} style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: "8px" }}>
+                <div style={{ fontSize: "11px", color: "var(--muted-2)", letterSpacing: "0.02em" }}>
+                  {day.charAt(0)}
                 </div>
-                <div
-                  style={{
-                    fontSize: "22px",
-                    color: weekly[index] ? "#FFB347" : "#8e7f71",
-                  }}
-                >
-                  {weekly[index] ? "●" : "○"}
+                <div style={{ opacity: weekly[index] ? 1 : 0.18 }}>
+                  <svg width="14" height="18" viewBox="0 0 80 100" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M40 5 C52 25 60 42 50 65 C45 80 35 80 30 65 C20 42 28 25 40 5Z" fill="#ffb347" />
+                    <path d="M40 22 C47 38 48 52 43 62 C40 68 36 68 33 62 C28 52 33 38 40 22Z" fill="#ffd27d" />
+                    <ellipse cx="40" cy="60" rx="6" ry="9" fill="white" opacity="0.9" />
+                  </svg>
                 </div>
               </div>
             ))}
@@ -208,49 +174,20 @@ export default function HomePage() {
             style={{
               display: "flex",
               justifyContent: "center",
-              gap: "20px",
-              flexWrap: "wrap",
-              color: "#d9cbb8",
+              gap: "24px",
+              color: "var(--muted)",
+              fontSize: "14px",
             }}
           >
-            <div>🔥 {flexibleStreak} day streak</div>
-            <div>◈ Mandala Day {mandalaDay}/48</div>
+            <span>{flexibleStreak} day streak</span>
+            <span style={{ opacity: 0.3 }}>·</span>
+            <span>Mandala day {mandalaDay} / 48</span>
           </div>
         </div>
 
-        <div
-          style={{
-            display: "flex",
-            gap: "14px",
-            flexWrap: "wrap",
-            justifyContent: "center",
-            marginBottom: "24px",
-          }}
-        >
-          <Link to="/routine" style={{ textDecoration: "none" }}>
-            <button className="primary-button">Begin Practice</button>
-          </Link>
-
-          <Link to="/history" style={{ textDecoration: "none" }}>
-            <button className="secondary-button">View Progress</button>
-          </Link>
-        </div>
-
-        <div
-          style={{
-            display: "flex",
-            gap: "18px",
-            flexWrap: "wrap",
-            justifyContent: "center",
-            color: "#bfae97",
-            fontSize: "15px",
-          }}
-        >
-          <span>Science</span>
-          <span>Philosophy</span>
-          <span>Contact</span>
-          <span>Privacy</span>
-        </div>
+        <Link to="/routine" style={{ textDecoration: "none" }}>
+          <button className="primary-button">Begin Practice</button>
+        </Link>
       </div>
     </MeditationBackground>
   );

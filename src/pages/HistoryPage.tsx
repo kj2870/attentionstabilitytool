@@ -1,6 +1,6 @@
 import { useMemo } from "react";
 import { RESEARCH_MODE } from "../lib/presentationMode";
-import { getCurrentStreak, loadHistory, type SessionRecord } from "../lib/storage";
+import { getCurrentStreak, getMandalaDay, loadHistory, type SessionRecord } from "../lib/storage";
 
 // ---------------------------------------------------------------------------
 // Helpers
@@ -52,12 +52,268 @@ function SmallFlame({ size = 16, opacity = 1 }: { size?: number; opacity?: numbe
 }
 
 // ---------------------------------------------------------------------------
-// Trend Chart — attention score over last N sessions
+// Mandala Ring — 48-segment clockwise progress circle
+// ---------------------------------------------------------------------------
+const N = 48;
+const R_OUT = 230;
+const R_IN = 178;
+const GAP_DEG = 1.6;
+
+function polar(r: number, deg: number): [number, number] {
+  const a = ((deg - 90) * Math.PI) / 180;
+  return [r * Math.cos(a), r * Math.sin(a)];
+}
+
+function segmentPath(i: number): string {
+  const step = 360 / N;
+  const start = i * step + GAP_DEG / 2;
+  const end = (i + 1) * step - GAP_DEG / 2;
+  const [x1, y1] = polar(R_OUT, start);
+  const [x2, y2] = polar(R_OUT, end);
+  const [x3, y3] = polar(R_IN, end);
+  const [x4, y4] = polar(R_IN, start);
+  const large = end - start > 180 ? 1 : 0;
+  return [
+    `M ${x1.toFixed(2)} ${y1.toFixed(2)}`,
+    `A ${R_OUT} ${R_OUT} 0 ${large} 1 ${x2.toFixed(2)} ${y2.toFixed(2)}`,
+    `L ${x3.toFixed(2)} ${y3.toFixed(2)}`,
+    `A ${R_IN} ${R_IN} 0 ${large} 0 ${x4.toFixed(2)} ${y4.toFixed(2)}`,
+    "Z",
+  ].join(" ");
+}
+
+function MandalaFlame({ day }: { day: number }) {
+  const complete = day >= 48;
+  // Scale from 20px at day 1 to 64px at day 48
+  const size = Math.round(20 + Math.min(day, 48) * (44 / 48));
+  const w = Math.round(size * 0.75);
+
+  return (
+    <div
+      style={{
+        display: "flex",
+        flexDirection: "column",
+        alignItems: "center",
+        gap: "10px",
+      }}
+    >
+      <div
+        style={{
+          filter: complete
+            ? "drop-shadow(0 0 18px rgba(255,160,60,0.7))"
+            : day > 0
+            ? `drop-shadow(0 0 ${Math.round(4 + day * 0.3)}px rgba(255,160,60,0.35))`
+            : "none",
+          transition: "filter 0.6s ease",
+        }}
+      >
+        <svg
+          width={w}
+          height={size}
+          viewBox="0 0 80 100"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M40 5 C52 25 60 42 50 65 C45 80 35 80 30 65 C20 42 28 25 40 5Z"
+            fill="url(#mf-grad)"
+          >
+            {complete && (
+              <animateTransform
+                attributeName="transform"
+                type="scale"
+                values="1 1;1.04 0.97;1 1"
+                dur="2.8s"
+                repeatCount="indefinite"
+                additive="sum"
+              />
+            )}
+          </path>
+          <path
+            d="M40 22 C47 38 48 52 43 62 C40 68 36 68 33 62 C28 52 33 38 40 22Z"
+            fill="url(#mf-inner)"
+          />
+          <ellipse cx="40" cy="60" rx="6" ry="9" fill="white" opacity="0.9">
+            {complete && (
+              <animate
+                attributeName="opacity"
+                values="0.9;0.6;0.9"
+                dur="2.8s"
+                repeatCount="indefinite"
+              />
+            )}
+          </ellipse>
+          <defs>
+            <linearGradient id="mf-grad" x1="0" x2="0" y1="0" y2="1">
+              <stop offset="0%" stopColor="#ff7a30" />
+              <stop offset="60%" stopColor="#ffb347" />
+              <stop offset="100%" stopColor="#ffcf80" />
+            </linearGradient>
+            <linearGradient id="mf-inner" x1="0" x2="0" y1="0" y2="1">
+              <stop offset="0%" stopColor="#ffd27d" />
+              <stop offset="100%" stopColor="#fff4c9" />
+            </linearGradient>
+          </defs>
+        </svg>
+      </div>
+
+      <div
+        style={{
+          fontSize: "12px",
+          color: "rgba(255,179,71,0.6)",
+          letterSpacing: "0.06em",
+          fontFamily: "inherit",
+        }}
+      >
+        {day === 0
+          ? "begin"
+          : day >= 48
+          ? "complete"
+          : `day ${day}`}
+      </div>
+    </div>
+  );
+}
+
+function MandalaRing({ history }: { history: SessionRecord[] }) {
+  const day = getMandalaDay(history);
+  const complete = day >= 48;
+
+  // Celebration glow ring at day 48
+  const celebrationStyle = complete
+    ? {
+        boxShadow:
+          "0 0 60px rgba(255,179,71,0.12), 0 0 120px rgba(255,179,71,0.06)",
+        borderColor: "rgba(255,179,71,0.4)",
+      }
+    : {};
+
+  return (
+    <div
+      className="glass-card"
+      style={{
+        padding: "28px 24px 24px",
+        transition: "box-shadow 1s ease, border-color 1s ease",
+        ...celebrationStyle,
+      }}
+    >
+      <div
+        style={{
+          color: "var(--muted)",
+          fontSize: "13px",
+          letterSpacing: "0.04em",
+          marginBottom: "20px",
+        }}
+      >
+        48-DAY MANDALA
+      </div>
+
+      <div
+        style={{
+          position: "relative",
+          width: "100%",
+          maxWidth: "280px",
+          margin: "0 auto",
+          aspectRatio: "1 / 1",
+        }}
+      >
+        {/* SVG ring */}
+        <svg
+          viewBox="-260 -260 520 520"
+          style={{ width: "100%", height: "100%", display: "block" }}
+          aria-label={`Mandala progress: ${day} of 48 days`}
+        >
+          {/* Segment glow filter for complete state */}
+          <defs>
+            <filter id="seg-glow">
+              <feGaussianBlur stdDeviation="4" result="blur" />
+              <feMerge>
+                <feMergeNode in="blur" />
+                <feMergeNode in="SourceGraphic" />
+              </feMerge>
+            </filter>
+          </defs>
+
+          {Array.from({ length: N }, (_, i) => {
+            const on = i < day;
+            const isLast = i === day - 1;
+            return (
+              <path
+                key={i}
+                d={segmentPath(i)}
+                style={{
+                  fill: on ? "#ffb347" : "rgba(255,255,255,0.04)",
+                  opacity: on ? (complete ? 1 : 0.55 + (i / day) * 0.45) : 1,
+                  transition: "fill 0.4s ease, opacity 0.4s ease",
+                  filter: isLast && !complete ? "url(#seg-glow)" : "none",
+                }}
+              />
+            );
+          })}
+
+          {/* Top tick mark */}
+          <line
+            x1="0" y1={-(R_OUT + 8)}
+            x2="0" y2={-(R_OUT + 18)}
+            stroke="rgba(255,179,71,0.3)"
+            strokeWidth="1.5"
+            strokeLinecap="round"
+          />
+
+          {/* Celebration: outer pulse ring at day 48 */}
+          {complete && (
+            <circle cx="0" cy="0" r={R_OUT + 18} fill="none" stroke="rgba(255,179,71,0.25)" strokeWidth="2">
+              <animate attributeName="r" values={`${R_OUT + 14};${R_OUT + 28};${R_OUT + 14}`} dur="3s" repeatCount="indefinite" />
+              <animate attributeName="opacity" values="0.3;0;0.3" dur="3s" repeatCount="indefinite" />
+            </circle>
+          )}
+        </svg>
+
+        {/* Centre flame */}
+        <div
+          style={{
+            position: "absolute",
+            inset: 0,
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            pointerEvents: "none",
+          }}
+        >
+          <MandalaFlame day={day} />
+        </div>
+      </div>
+
+      {/* Footer label */}
+      <div
+        style={{
+          textAlign: "center",
+          marginTop: "16px",
+          color: "var(--muted)",
+          fontSize: "14px",
+          lineHeight: 1.5,
+        }}
+      >
+        {complete ? (
+          <span style={{ color: "#ffb347" }}>
+            Mandala complete. A full cycle of practice.
+          </span>
+        ) : day === 0 ? (
+          "Complete your first session to begin."
+        ) : (
+          <>
+            <span style={{ color: "var(--text)" }}>{48 - day}</span> days remaining
+          </>
+        )}
+      </div>
+    </div>
+  );
+}
+
+// ---------------------------------------------------------------------------
+// Trend Chart
 // ---------------------------------------------------------------------------
 function TrendChart({ history }: { history: SessionRecord[] }) {
-  const points = useMemo(() => {
-    return [...history].reverse().slice(-30);
-  }, [history]);
+  const points = useMemo(() => [...history].reverse().slice(-30), [history]);
 
   if (points.length < 2) return null;
 
@@ -73,25 +329,30 @@ function TrendChart({ history }: { history: SessionRecord[] }) {
   const range = maxScore - minScore || 1;
 
   const x = (i: number) => PAD.left + (i / (points.length - 1)) * chartW;
-  const y = (score: number) => PAD.top + chartH - ((score - minScore) / range) * chartH;
+  const y = (score: number) =>
+    PAD.top + chartH - ((score - minScore) / range) * chartH;
 
   const linePath = points
     .map((p, i) => `${i === 0 ? "M" : "L"} ${x(i)} ${y(p.attentionScore)}`)
     .join(" ");
 
   const areaPath = `${linePath} L ${x(points.length - 1)} ${PAD.top + chartH} L ${x(0)} ${PAD.top + chartH} Z`;
-
   const avgScore = Math.round(avg(scores));
 
   return (
     <div className="glass-card" style={{ padding: "24px 20px 16px" }}>
-      <div style={{ display: "flex", justifyContent: "space-between", alignItems: "baseline", marginBottom: "8px" }}>
+      <div
+        style={{
+          display: "flex",
+          justifyContent: "space-between",
+          alignItems: "baseline",
+          marginBottom: "8px",
+        }}
+      >
         <span style={{ color: "var(--muted)", fontSize: "13px", letterSpacing: "0.04em" }}>
           ATTENTION TREND
         </span>
-        <span style={{ color: "var(--muted)", fontSize: "13px" }}>
-          avg {avgScore}
-        </span>
+        <span style={{ color: "var(--muted)", fontSize: "13px" }}>avg {avgScore}</span>
       </div>
 
       <svg
@@ -106,7 +367,6 @@ function TrendChart({ history }: { history: SessionRecord[] }) {
           </linearGradient>
         </defs>
 
-        {/* Y-axis gridlines */}
         {[25, 50, 75].map((tick) => {
           const yPos = y(Math.min(Math.max(tick, minScore), maxScore));
           if (yPos < PAD.top || yPos > PAD.top + chartH) return null;
@@ -123,13 +383,8 @@ function TrendChart({ history }: { history: SessionRecord[] }) {
           );
         })}
 
-        {/* Area fill */}
         <path d={areaPath} fill="url(#area-grad)" />
-
-        {/* Line */}
         <path d={linePath} fill="none" stroke="#ffb347" strokeWidth="2" strokeLinejoin="round" strokeLinecap="round" />
-
-        {/* Dots — only show last point */}
         <circle
           cx={x(points.length - 1)}
           cy={y(points[points.length - 1].attentionScore)}
@@ -146,7 +401,7 @@ function TrendChart({ history }: { history: SessionRecord[] }) {
 }
 
 // ---------------------------------------------------------------------------
-// Calendar Heatmap — 12 weeks, flames on completed days
+// Calendar Heatmap
 // ---------------------------------------------------------------------------
 function CalendarHeatmap({ history }: { history: SessionRecord[] }) {
   const sessionDates = useMemo(() => {
@@ -158,12 +413,10 @@ function CalendarHeatmap({ history }: { history: SessionRecord[] }) {
     return map;
   }, [history]);
 
-  // Build 15 weeks of days ending today
   const WEEKS = 15;
   const today = new Date();
   today.setHours(0, 0, 0, 0);
 
-  // Find the most recent Sunday
   const endSunday = new Date(today);
   endSunday.setDate(today.getDate() + (7 - today.getDay()) % 7);
 
@@ -182,8 +435,8 @@ function CalendarHeatmap({ history }: { history: SessionRecord[] }) {
   const CELL = 28;
   const GAP = 4;
   const LABEL_W = 28;
-
   const dayLabels = ["S", "M", "T", "W", "T", "F", "S"];
+  const todayKey = toDateKey(today.toISOString());
 
   return (
     <div className="glass-card" style={{ padding: "24px 20px" }}>
@@ -193,7 +446,6 @@ function CalendarHeatmap({ history }: { history: SessionRecord[] }) {
 
       <div style={{ overflowX: "auto" }}>
         <div style={{ display: "flex", gap: `${GAP}px`, minWidth: "fit-content" }}>
-          {/* Day labels */}
           <div style={{ display: "flex", flexDirection: "column", gap: `${GAP}px`, paddingTop: "24px" }}>
             {dayLabels.map((label, i) => (
               <div
@@ -213,7 +465,6 @@ function CalendarHeatmap({ history }: { history: SessionRecord[] }) {
             ))}
           </div>
 
-          {/* Week columns */}
           {Array.from({ length: WEEKS }, (_, wk) => {
             const weekDays = days.slice(wk * 7, wk * 7 + 7);
             const firstOfWeek = weekDays[0].date;
@@ -221,26 +472,14 @@ function CalendarHeatmap({ history }: { history: SessionRecord[] }) {
 
             return (
               <div key={wk} style={{ display: "flex", flexDirection: "column", gap: `${GAP}px` }}>
-                {/* Month label */}
-                <div
-                  style={{
-                    height: "20px",
-                    fontSize: "11px",
-                    color: "var(--muted)",
-                    display: "flex",
-                    alignItems: "center",
-                  }}
-                >
-                  {showMonthLabel
-                    ? firstOfWeek.toLocaleString("default", { month: "short" })
-                    : ""}
+                <div style={{ height: "20px", fontSize: "11px", color: "var(--muted)", display: "flex", alignItems: "center" }}>
+                  {showMonthLabel ? firstOfWeek.toLocaleString("default", { month: "short" }) : ""}
                 </div>
 
-                {/* Day cells */}
                 {weekDays.map(({ date, key }) => {
                   const count = sessionDates.get(key) ?? 0;
                   const isFuture = date > today;
-                  const isToday = key === toDateKey(today.toISOString());
+                  const isToday = key === todayKey;
 
                   return (
                     <div
@@ -262,96 +501,15 @@ function CalendarHeatmap({ history }: { history: SessionRecord[] }) {
                         alignItems: "center",
                         justifyContent: "center",
                         opacity: isFuture ? 0.2 : 1,
-                        transition: "background 0.15s",
                       }}
                     >
-                      {count > 0 && (
-                        <SmallFlame
-                          size={18}
-                          opacity={count > 1 ? 1 : 0.85}
-                        />
-                      )}
+                      {count > 0 && <SmallFlame size={18} opacity={count > 1 ? 1 : 0.85} />}
                     </div>
                   );
                 })}
               </div>
             );
           })}
-        </div>
-      </div>
-    </div>
-  );
-}
-
-// ---------------------------------------------------------------------------
-// Weekly Summary
-// ---------------------------------------------------------------------------
-function WeeklySummary({ history }: { history: SessionRecord[] }) {
-  const { thisWeek, lastWeek, diff } = useMemo(() => {
-    const now = new Date();
-    const dayOfWeek = now.getDay();
-    const mondayOffset = dayOfWeek === 0 ? -6 : 1 - dayOfWeek;
-
-    const thisMonday = new Date(now);
-    thisMonday.setDate(now.getDate() + mondayOffset);
-    thisMonday.setHours(0, 0, 0, 0);
-
-    const lastMonday = new Date(thisMonday);
-    lastMonday.setDate(thisMonday.getDate() - 7);
-
-    const thisWeekSessions = history.filter((s) => new Date(s.date) >= thisMonday);
-    const lastWeekSessions = history.filter(
-      (s) => new Date(s.date) >= lastMonday && new Date(s.date) < thisMonday
-    );
-
-    const thisAvg = Math.round(avg(thisWeekSessions.map((s) => s.attentionScore)));
-    const lastAvg = Math.round(avg(lastWeekSessions.map((s) => s.attentionScore)));
-
-    const uniqueDays = (sessions: SessionRecord[]) =>
-      new Set(sessions.map((s) => toDateKey(s.date))).size;
-
-    return {
-      thisWeek: { sessions: thisWeekSessions.length, days: uniqueDays(thisWeekSessions), avg: thisAvg },
-      lastWeek: { sessions: lastWeekSessions.length, days: uniqueDays(lastWeekSessions), avg: lastAvg },
-      diff: thisAvg - lastAvg,
-    };
-  }, [history]);
-
-  if (thisWeek.sessions === 0 && lastWeek.sessions === 0) return null;
-
-  return (
-    <div className="glass-card" style={{ padding: "24px" }}>
-      <div style={{ color: "var(--muted)", fontSize: "13px", letterSpacing: "0.04em", marginBottom: "16px" }}>
-        THIS WEEK
-      </div>
-
-      <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr 1fr", gap: "12px" }}>
-        <div>
-          <div style={{ fontSize: "28px", fontFamily: '"Fraunces", serif', color: "var(--text)" }}>
-            {thisWeek.days}<span style={{ fontSize: "14px", color: "var(--muted)", marginLeft: "4px" }}>/ 7</span>
-          </div>
-          <div style={{ color: "var(--muted)", fontSize: "13px", marginTop: "4px" }}>days</div>
-        </div>
-
-        <div>
-          <div style={{ fontSize: "28px", fontFamily: '"Fraunces", serif', color: "var(--text)" }}>
-            {thisWeek.sessions}
-          </div>
-          <div style={{ color: "var(--muted)", fontSize: "13px", marginTop: "4px" }}>sessions</div>
-        </div>
-
-        <div>
-          <div style={{ display: "flex", alignItems: "baseline", gap: "6px" }}>
-            <span style={{ fontSize: "28px", fontFamily: '"Fraunces", serif', color: "var(--text)" }}>
-              {thisWeek.avg || "—"}
-            </span>
-            {lastWeek.sessions > 0 && thisWeek.sessions > 0 && (
-              <span style={{ fontSize: "13px", color: diff > 0 ? "#7ecb8a" : diff < 0 ? "#e07070" : "var(--muted)" }}>
-                {diff > 0 ? `+${diff}` : diff < 0 ? `${diff}` : "—"}
-              </span>
-            )}
-          </div>
-          <div style={{ color: "var(--muted)", fontSize: "13px", marginTop: "4px" }}>avg attention</div>
         </div>
       </div>
     </div>
@@ -371,24 +529,18 @@ export default function HistoryPage() {
     return (
       <div style={{ padding: "80px 24px 100px", maxWidth: "900px", margin: "0 auto", textAlign: "center" }}>
         <h1 style={{ fontSize: "48px", fontWeight: 400, marginBottom: "12px" }}>Session Records</h1>
-        <p style={{ color: "#d9cbb8", fontSize: "20px", lineHeight: 1.5 }}>
-          Hidden in research mode.
-        </p>
+        <p style={{ color: "#d9cbb8", fontSize: "20px", lineHeight: 1.5 }}>Hidden in research mode.</p>
       </div>
     );
   }
 
   return (
     <div style={{ padding: "60px 24px 100px", maxWidth: "760px", margin: "0 auto" }}>
-
-      {/* Header */}
       <div style={{ textAlign: "center", marginBottom: "48px" }}>
         <h1 style={{ fontSize: "clamp(40px, 6vw, 56px)", fontWeight: 400, marginBottom: "10px" }}>
           History
         </h1>
-        <p style={{ color: "var(--muted)", fontSize: "18px" }}>
-          Your practice over time.
-        </p>
+        <p style={{ color: "var(--muted)", fontSize: "18px" }}>Your practice over time.</p>
       </div>
 
       {history.length === 0 ? (
@@ -421,8 +573,8 @@ export default function HistoryPage() {
             ))}
           </div>
 
-          {/* Weekly summary */}
-          <WeeklySummary history={history} />
+          {/* 48-day mandala */}
+          <MandalaRing history={history} />
 
           {/* Trend chart */}
           <TrendChart history={history} />

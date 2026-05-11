@@ -90,7 +90,7 @@ export default function SciencePage() {
             <div
               style={{
                 fontSize: "18px",
-                fontFamily: '"Fraunces", Georgia, serif',
+                fontFamily: '"Instrument Serif", Georgia, serif',
                 marginBottom: "12px",
                 lineHeight: 1.35,
                 color: "var(--text)",

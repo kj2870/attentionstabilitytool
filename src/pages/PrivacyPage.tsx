@@ -41,7 +41,7 @@ export default function PrivacyPage() {
         <div
           style={{
             fontSize: "22px",
-            fontFamily: '"Fraunces", Georgia, serif',
+            fontFamily: '"Instrument Serif", Georgia, serif',
             marginBottom: "16px",
           }}
         >
@@ -71,7 +71,7 @@ export default function PrivacyPage() {
         <div
           style={{
             fontSize: "22px",
-            fontFamily: '"Fraunces", Georgia, serif',
+            fontFamily: '"Instrument Serif", Georgia, serif',
             marginBottom: "16px",
           }}
         >
