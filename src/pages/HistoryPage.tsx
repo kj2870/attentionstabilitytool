@@ -443,7 +443,7 @@ export default function HistoryPage() {
               { label: "Avg Score", value: avgAttention, suffix: "" },
             ].map(({ label, value, suffix }) => (
               <div key={label} className="glass-card" style={{ padding: "20px 16px", textAlign: "center" }}>
-                <div style={{ fontSize: "30px", fontFamily: '"Instrument Serif", Georgia, serif' }}>
+                <div style={{ fontSize: "30px", fontFamily: '"Playfair Display", Georgia, serif' }}>
                   {value}
                   <span style={{ fontSize: "14px", color: "var(--muted)" }}>{suffix}</span>
                 </div>
