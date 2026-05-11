@@ -61,7 +61,7 @@ export default function Layout({ children }: LayoutProps) {
               style={{
                 display: "flex",
                 gap: "22px",
-                fontSize: "17px",
+                fontSize: "15px",
                 flexWrap: "wrap",
                 justifyContent: "flex-end",
               }}
@@ -74,9 +74,9 @@ export default function Layout({ children }: LayoutProps) {
                     key={item.to}
                     to={item.to}
                     style={{
-                      color: active ? "#FFB347" : "#F5E9DA",
+                      color: active ? "rgba(255,179,71,0.85)" : "rgba(245,233,218,0.5)",
                       textDecoration: "none",
-                      opacity: active ? 1 : 0.86,
+                      transition: "color 0.18s ease",
                     }}
                   >
                     {item.label}
