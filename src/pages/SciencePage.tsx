@@ -9,14 +9,14 @@ const findings = [
   {
     claim: "Working memory and spatial attention may improve after a single session",
     detail:
-      "Participants showed improvements in both forward and backward spatial memory spans after one trataka session — more so than after an equivalent period of eye exercises. This suggests the effect comes from focused visual attention, not just eye movement.",
+      "Participants showed improvements in both forward and backward spatial memory spans after one trataka session, more so than after an equivalent period of eye exercises. This suggests the effect comes from focused visual attention, not just eye movement.",
     citation: "Swathi et al., 2021 — Frontiers in Psychology",
     href: "https://consensus.app/papers/details/8c0708514e6d54c5913f5b6bb8609ba8/",
   },
   {
     claim: "Eye stability during fixation correlates with sustained attention",
     detail:
-      "A 2025 eye-tracking study found that how steadily a person holds a visual fixation point predicts their sustained attention performance on a separate task. This provides some basis for using eye drift as a meaningful signal — which is what this app measures.",
+      "A 2025 eye-tracking study found that how steadily a person holds a visual fixation point predicts their sustained attention performance on a separate task. This provides some basis for using eye drift as a meaningful signal, which is what this app measures.",
     citation: "Zhang et al., 2025 — International Journal of Psychophysiology",
     href: "https://consensus.app/papers/details/cd820347342f58a58d8c1ed21cd0e04c/",
   },
@@ -35,7 +35,7 @@ const findings = [
     href: "https://consensus.app/papers/details/ce83f0b28e8857edaec76d0afe7d982a/",
   },
   {
-    claim: "Mindfulness practices broadly improve executive function — across 56 studies",
+    claim: "Mindfulness practices broadly improve executive function, across 56 studies",
     detail:
       "A meta-analysis of 56 randomised mindfulness studies (2,931 participants) found reliable improvements in executive function and working memory. Effect sizes were modest, and the authors note that mindfulness outperformed inactive but not always active comparators. Trataka is a specific form of this broader category.",
     citation: "Whitfield et al., 2021 — Neuropsychology Review",
@@ -58,7 +58,7 @@ export default function SciencePage() {
           style={{
             fontSize: "clamp(40px, 6vw, 56px)",
             fontWeight: 400,
-            marginBottom: "16px",
+            marginBottom: "20px",
             lineHeight: 1.08,
           }}
         >
@@ -67,15 +67,15 @@ export default function SciencePage() {
         <p
           style={{
             color: "var(--muted)",
-            fontSize: "18px",
-            lineHeight: 1.7,
-            maxWidth: "600px",
+            fontSize: "17px",
+            lineHeight: 1.75,
+            margin: "0 0 12px",
           }}
         >
           Trataka is a traditional yogic practice with a small but growing body
-          of research behind it. The studies below suggest it may support
-          attention and reduce mind-wandering — though this is an emerging area
-          and the evidence is not yet definitive.
+          of research behind it. Early studies suggest it may support attention
+          and reduce mind-wandering, though the evidence is still emerging and
+          not yet definitive.
         </p>
       </div>
 
@@ -89,10 +89,10 @@ export default function SciencePage() {
           >
             <div
               style={{
-                fontSize: "19px",
+                fontSize: "18px",
                 fontFamily: '"Fraunces", Georgia, serif',
                 marginBottom: "12px",
-                lineHeight: 1.3,
+                lineHeight: 1.35,
                 color: "var(--text)",
               }}
             >
@@ -117,7 +117,7 @@ export default function SciencePage() {
               style={{
                 fontSize: "13px",
                 color: "var(--accent)",
-                opacity: 0.75,
+                opacity: 0.7,
                 textDecoration: "none",
                 letterSpacing: "0.01em",
               }}
@@ -128,35 +128,59 @@ export default function SciencePage() {
         ))}
       </div>
 
-      {/* Honest caveat */}
-      <div
-        className="glass-card"
-        style={{ padding: "26px 28px" }}
-      >
-        <div
-          style={{
-            fontSize: "18px",
-            fontFamily: '"Fraunces", Georgia, serif',
-            marginBottom: "12px",
-          }}
-        >
-          A note on certainty
-        </div>
+      {/* Closing reflection */}
+      <div className="glass-card" style={{ padding: "32px 28px" }}>
         <p
           style={{
             color: "var(--muted)",
-            fontSize: "15px",
-            lineHeight: 1.75,
-            margin: 0,
+            fontSize: "16px",
+            lineHeight: 1.8,
+            margin: "0 0 20px",
           }}
         >
           Most studies on trataka are small, short-term, and conducted without
-          blinding. Effect sizes are modest. The research is promising enough to
-          take the practice seriously, but not strong enough to make firm claims.
-          We present it here so you can read the sources yourself and form your
-          own view. The most reliable thing we can say is that sitting quietly,
-          breathing slowly, and training your attention for a few minutes each
-          day is unlikely to do any harm — and may do some good.
+          blinding. The reported effects are modest. The research is promising
+          enough to take seriously, but not strong enough to support firm claims.
+        </p>
+
+        <p
+          style={{
+            color: "var(--muted)",
+            fontSize: "16px",
+            lineHeight: 1.8,
+            margin: "0 0 20px",
+          }}
+        >
+          At the same time, meditation is best understood through direct
+          experience. Notice what changes in your body, mind, attention, and
+          daily life over time.
+        </p>
+
+        <p
+          style={{
+            color: "var(--muted)",
+            fontSize: "16px",
+            lineHeight: 1.8,
+            margin: "0 0 20px",
+          }}
+        >
+          For that reason, we recommend practicing trataka for a 48-day mandala,
+          then evaluating it for yourself. Results often compound slowly, and a
+          daily practice can reveal more than a single session.
+        </p>
+
+        <p
+          style={{
+            color: "var(--muted)",
+            fontSize: "16px",
+            lineHeight: 1.8,
+            margin: 0,
+          }}
+        >
+          Trataka is only one form of meditation. Yogic traditions describe many
+          methods, and this is just one doorway. If it does not resonate with
+          you, try another. The methods may differ, but the deeper aim is often
+          the same: stability, clarity, focus, presence, and connection.
         </p>
       </div>
     </div>

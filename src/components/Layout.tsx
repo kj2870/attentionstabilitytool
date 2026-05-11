@@ -19,6 +19,7 @@ export default function Layout({ children }: LayoutProps) {
         { to: "/", label: "Home" },
         { to: "/routine", label: "Routine" },
         { to: "/history", label: "History" },
+        { to: "/philosophy", label: "Philosophy" },
         { to: "/science", label: "Science" },
         { to: "/privacy", label: "Privacy" },
       ];
