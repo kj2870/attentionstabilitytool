@@ -94,9 +94,9 @@ export default function HomePage() {
             fontSize: "clamp(48px, 7vw, 72px)",
             marginBottom: "10px",
             fontWeight: 400,
-            lineHeight: 1.02,
-            letterSpacing: "-0.02em",
-            fontFamily: '"Instrument Serif", Georgia, serif',
+            lineHeight: 1.1,
+            letterSpacing: "0.01em",
+            fontFamily: '"Playfair Display", Georgia, serif',
           }}
         >
           drishti

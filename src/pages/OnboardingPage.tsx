@@ -161,7 +161,7 @@ export default function OnboardingPage() {
                       fontSize: "24px",
                       lineHeight: 1,
                       paddingTop: "6px",
-                      fontFamily: '"Instrument Serif", Georgia, serif',
+                      fontFamily: '"Playfair Display", Georgia, serif',
                     }}
                   >
                     {item.number}
@@ -172,7 +172,7 @@ export default function OnboardingPage() {
                       style={{
                         fontSize: "22px",
                         marginBottom: "7px",
-                        fontFamily: '"Instrument Serif", Georgia, serif',
+                        fontFamily: '"Playfair Display", Georgia, serif',
                       }}
                     >
                       {item.title}
@@ -277,7 +277,7 @@ export default function OnboardingPage() {
                   style={{
                     fontSize: "20px",
                     marginBottom: "8px",
-                    fontFamily: '"Instrument Serif", Georgia, serif',
+                    fontFamily: '"Playfair Display", Georgia, serif',
                   }}
                 >
                   ☀ Morning
@@ -295,7 +295,7 @@ export default function OnboardingPage() {
                   style={{
                     fontSize: "20px",
                     marginBottom: "8px",
-                    fontFamily: '"Instrument Serif", Georgia, serif',
+                    fontFamily: '"Playfair Display", Georgia, serif',
                   }}
                 >
                   🌤 Midday
@@ -313,7 +313,7 @@ export default function OnboardingPage() {
                   style={{
                     fontSize: "20px",
                     marginBottom: "8px",
-                    fontFamily: '"Instrument Serif", Georgia, serif',
+                    fontFamily: '"Playfair Display", Georgia, serif',
                   }}
                 >
                   🌙 Night
@@ -390,7 +390,7 @@ export default function OnboardingPage() {
                 style={{
                   fontSize: "24px",
                   marginBottom: "12px",
-                  fontFamily: '"Instrument Serif", Georgia, serif',
+                  fontFamily: '"Playfair Display", Georgia, serif',
                 }}
               >
                 Your privacy
