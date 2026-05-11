@@ -1,0 +1,186 @@
+{
+  "C:\\Users\\kj287\\Documents\\01_Projects\\focusflow\\.claude\\worktrees\\zen-kalam-eba609\\eslint.config.js": {
+    "mtime": 1778293345.9538248,
+    "hash": "957218024dbfdaaccd46c509d5e3089f"
+  },
+  "C:\\Users\\kj287\\Documents\\01_Projects\\focusflow\\.claude\\worktrees\\zen-kalam-eba609\\supabase-schema.sql": {
+    "mtime": 1778293347.3851688,
+    "hash": "9f66e888daff082315a5ebb7f4d92920"
+  },
+  "C:\\Users\\kj287\\Documents\\01_Projects\\focusflow\\.claude\\worktrees\\zen-kalam-eba609\\vite.config.ts": {
+    "mtime": 1778293347.4150555,
+    "hash": "199e1221ae03d6974fdc8b5e23787b98"
+  },
+  "C:\\Users\\kj287\\Documents\\01_Projects\\focusflow\\.claude\\worktrees\\zen-kalam-eba609\\src\\App.tsx": {
+    "mtime": 1778509491.4688041,
+    "hash": "4e62baab700b7dee7a8a1e898297a874"
+  },
+  "C:\\Users\\kj287\\Documents\\01_Projects\\focusflow\\.claude\\worktrees\\zen-kalam-eba609\\src\\main.tsx": {
+    "mtime": 1778293347.336235,
+    "hash": "f871433b661fbdc142a4e75d9ecc6eb0"
+  },
+  "C:\\Users\\kj287\\Documents\\01_Projects\\focusflow\\.claude\\worktrees\\zen-kalam-eba609\\src\\vite-env.d.ts": {
+    "mtime": 1778293347.3813362,
+    "hash": "3584933d8f7309198b5ced73efe9c814"
+  },
+  "C:\\Users\\kj287\\Documents\\01_Projects\\focusflow\\.claude\\worktrees\\zen-kalam-eba609\\src\\components\\BodyGuideOverlay.tsx": {
+    "mtime": 1778293347.2037961,
+    "hash": "3da9e3aa99ea825db796fe99e6521ddb"
+  },
+  "C:\\Users\\kj287\\Documents\\01_Projects\\focusflow\\.claude\\worktrees\\zen-kalam-eba609\\src\\components\\BreathGuide.tsx": {
+    "mtime": 1778293347.2132535,
+    "hash": "d2738a65b6fd07855c096c3c904fb1d2"
+  },
+  "C:\\Users\\kj287\\Documents\\01_Projects\\focusflow\\.claude\\worktrees\\zen-kalam-eba609\\src\\components\\CameraPreview.tsx": {
+    "mtime": 1778293347.2199938,
+    "hash": "450445e7b4f9a1e39f67493dc09155c1"
+  },
+  "C:\\Users\\kj287\\Documents\\01_Projects\\focusflow\\.claude\\worktrees\\zen-kalam-eba609\\src\\components\\Diya.tsx": {
+    "mtime": 1778293347.2245278,
+    "hash": "613f522ed4794347f0187e9a72d42871"
+  },
+  "C:\\Users\\kj287\\Documents\\01_Projects\\focusflow\\.claude\\worktrees\\zen-kalam-eba609\\src\\components\\Flame.tsx": {
+    "mtime": 1778293347.2278876,
+    "hash": "9af58709de33b988751782b827d159e7"
+  },
+  "C:\\Users\\kj287\\Documents\\01_Projects\\focusflow\\.claude\\worktrees\\zen-kalam-eba609\\src\\components\\Layout.tsx": {
+    "mtime": 1778513825.3595579,
+    "hash": "e4e6342540e54158b40b65c9864af9b4"
+  },
+  "C:\\Users\\kj287\\Documents\\01_Projects\\focusflow\\.claude\\worktrees\\zen-kalam-eba609\\src\\components\\MeditationBackground.tsx": {
+    "mtime": 1778293347.2399957,
+    "hash": "7c37e37d39a5d3df082e4fa7541483e2"
+  },
+  "C:\\Users\\kj287\\Documents\\01_Projects\\focusflow\\.claude\\worktrees\\zen-kalam-eba609\\src\\components\\SessionEndModal.tsx": {
+    "mtime": 1778293347.246044,
+    "hash": "e6df5b97704aa298c78d22d3dab85edf"
+  },
+  "C:\\Users\\kj287\\Documents\\01_Projects\\focusflow\\.claude\\worktrees\\zen-kalam-eba609\\src\\components\\SessionProgress.tsx": {
+    "mtime": 1778293347.2527063,
+    "hash": "88c88741d7edf958ff8876230102d7a2"
+  },
+  "C:\\Users\\kj287\\Documents\\01_Projects\\focusflow\\.claude\\worktrees\\zen-kalam-eba609\\src\\lib\\auth.ts": {
+    "mtime": 1778297864.4683733,
+    "hash": "2c0339895c344e33b0da5ab00a04f6a0"
+  },
+  "C:\\Users\\kj287\\Documents\\01_Projects\\focusflow\\.claude\\worktrees\\zen-kalam-eba609\\src\\lib\\faceDetection.ts": {
+    "mtime": 1778293347.2735012,
+    "hash": "6d0538525e61220b494c84ea6aa037bf"
+  },
+  "C:\\Users\\kj287\\Documents\\01_Projects\\focusflow\\.claude\\worktrees\\zen-kalam-eba609\\src\\lib\\faceLandmarks.ts": {
+    "mtime": 1778293347.281207,
+    "hash": "3ecff2fb21d09eb108837c60535dca73"
+  },
+  "C:\\Users\\kj287\\Documents\\01_Projects\\focusflow\\.claude\\worktrees\\zen-kalam-eba609\\src\\lib\\presentationMode.ts": {
+    "mtime": 1778293347.284263,
+    "hash": "7f8edb10ebf1b71079abf89f9d9e6d98"
+  },
+  "C:\\Users\\kj287\\Documents\\01_Projects\\focusflow\\.claude\\worktrees\\zen-kalam-eba609\\src\\lib\\quotes.ts": {
+    "mtime": 1778293347.2888398,
+    "hash": "13412f620bebdca80692ef445adcbb12"
+  },
+  "C:\\Users\\kj287\\Documents\\01_Projects\\focusflow\\.claude\\worktrees\\zen-kalam-eba609\\src\\lib\\sessionAudio.ts": {
+    "mtime": 1778293347.2967622,
+    "hash": "8e90258c27ba1bb13804401acd5d0466"
+  },
+  "C:\\Users\\kj287\\Documents\\01_Projects\\focusflow\\.claude\\worktrees\\zen-kalam-eba609\\src\\lib\\sessionScript.ts": {
+    "mtime": 1778293347.3013685,
+    "hash": "c2daca8dfef4722785737df1c95b7e0a"
+  },
+  "C:\\Users\\kj287\\Documents\\01_Projects\\focusflow\\.claude\\worktrees\\zen-kalam-eba609\\src\\lib\\sessionSettings.ts": {
+    "mtime": 1778293347.3055778,
+    "hash": "5b95d3448af6e935e44739eba0ef9361"
+  },
+  "C:\\Users\\kj287\\Documents\\01_Projects\\focusflow\\.claude\\worktrees\\zen-kalam-eba609\\src\\lib\\simulatedTracking.ts": {
+    "mtime": 1778293347.3129323,
+    "hash": "e4ef3aff37ea3402559535289021ac15"
+  },
+  "C:\\Users\\kj287\\Documents\\01_Projects\\focusflow\\.claude\\worktrees\\zen-kalam-eba609\\src\\lib\\storage.ts": {
+    "mtime": 1778297844.9672318,
+    "hash": "4b7265615e3aa361ffee76f9df44049d"
+  },
+  "C:\\Users\\kj287\\Documents\\01_Projects\\focusflow\\.claude\\worktrees\\zen-kalam-eba609\\src\\lib\\supabase.ts": {
+    "mtime": 1778293347.323802,
+    "hash": "781a349582fef4ab90ffb222c76364e2"
+  },
+  "C:\\Users\\kj287\\Documents\\01_Projects\\focusflow\\.claude\\worktrees\\zen-kalam-eba609\\src\\lib\\trackingEngine.ts": {
+    "mtime": 1778293347.3296745,
+    "hash": "a34895fc3f7b721e3683e597c91e4fcf"
+  },
+  "C:\\Users\\kj287\\Documents\\01_Projects\\focusflow\\.claude\\worktrees\\zen-kalam-eba609\\src\\pages\\HistoryPage.tsx": {
+    "mtime": 1778513407.2604718,
+    "hash": "2594110dd0452721903bda80ad5f2ed6"
+  },
+  "C:\\Users\\kj287\\Documents\\01_Projects\\focusflow\\.claude\\worktrees\\zen-kalam-eba609\\src\\pages\\HomePage.tsx": {
+    "mtime": 1778515038.8883822,
+    "hash": "b968eb8e4484bf8020915e97e27489d2"
+  },
+  "C:\\Users\\kj287\\Documents\\01_Projects\\focusflow\\.claude\\worktrees\\zen-kalam-eba609\\src\\pages\\LoginPage.tsx": {
+    "mtime": 1778296207.9182782,
+    "hash": "5d3699c768a6f5088d2d8f888ad5a516"
+  },
+  "C:\\Users\\kj287\\Documents\\01_Projects\\focusflow\\.claude\\worktrees\\zen-kalam-eba609\\src\\pages\\OnboardingPage.tsx": {
+    "mtime": 1778512663.0940878,
+    "hash": "04a551a0a74a1d2e630471c657726f4b"
+  },
+  "C:\\Users\\kj287\\Documents\\01_Projects\\focusflow\\.claude\\worktrees\\zen-kalam-eba609\\src\\pages\\PhilosophyPage.tsx": {
+    "mtime": 1778512663.1168997,
+    "hash": "ef866ea9c9674d1bd96bc62c44016a37"
+  },
+  "C:\\Users\\kj287\\Documents\\01_Projects\\focusflow\\.claude\\worktrees\\zen-kalam-eba609\\src\\pages\\PrivacyPage.tsx": {
+    "mtime": 1778512663.1289372,
+    "hash": "2884eb9481df6f2c3de30cccfbba5a72"
+  },
+  "C:\\Users\\kj287\\Documents\\01_Projects\\focusflow\\.claude\\worktrees\\zen-kalam-eba609\\src\\pages\\RoutinePage.tsx": {
+    "mtime": 1778293347.3711727,
+    "hash": "8eeabc0b94ae80b0425a3498f7562334"
+  },
+  "C:\\Users\\kj287\\Documents\\01_Projects\\focusflow\\.claude\\worktrees\\zen-kalam-eba609\\src\\pages\\SciencePage.tsx": {
+    "mtime": 1778512663.144275,
+    "hash": "51f0e9724555680b2d70fc91f3617a4e"
+  },
+  "C:\\Users\\kj287\\Documents\\01_Projects\\focusflow\\.claude\\worktrees\\zen-kalam-eba609\\src\\pages\\SessionPage.tsx": {
+    "mtime": 1778293347.3769803,
+    "hash": "6ca9985724f73d697a64a96d171950af"
+  },
+  "C:\\Users\\kj287\\Documents\\01_Projects\\focusflow\\.claude\\worktrees\\zen-kalam-eba609\\algorithm-overview.md": {
+    "mtime": 1778293345.9503107,
+    "hash": "20fe71f07d4a0083d36545849d19cc28"
+  },
+  "C:\\Users\\kj287\\Documents\\01_Projects\\focusflow\\.claude\\worktrees\\zen-kalam-eba609\\CLAUDE.md": {
+    "mtime": 1778294837.369171,
+    "hash": "9b9c65548cc34dbd355f03b8fdbc7a86"
+  },
+  "C:\\Users\\kj287\\Documents\\01_Projects\\focusflow\\.claude\\worktrees\\zen-kalam-eba609\\index.html": {
+    "mtime": 1778293345.9558315,
+    "hash": "fda803f430096b7c7df0cbe93271c05e"
+  },
+  "C:\\Users\\kj287\\Documents\\01_Projects\\focusflow\\.claude\\worktrees\\zen-kalam-eba609\\protocol-and-questions.md": {
+    "mtime": 1778293345.9696681,
+    "hash": "3013707b9b61f57c3acccf82d9abe150"
+  },
+  "C:\\Users\\kj287\\Documents\\01_Projects\\focusflow\\.claude\\worktrees\\zen-kalam-eba609\\README.md": {
+    "mtime": 1778293345.9460468,
+    "hash": "adbbfe2df778e9ab34a182785ce0bf38"
+  },
+  "C:\\Users\\kj287\\Documents\\01_Projects\\focusflow\\.claude\\worktrees\\zen-kalam-eba609\\system-diagrams.md": {
+    "mtime": 1778293347.393224,
+    "hash": "01c5087d2261ca01ba4d575cb3bb95c3"
+  },
+  "C:\\Users\\kj287\\Documents\\01_Projects\\focusflow\\.claude\\worktrees\\zen-kalam-eba609\\public\\vite.svg": {
+    "mtime": 1778293345.9756935,
+    "hash": "8e3a10e157f75ada21ab742c022d5430"
+  },
+  "C:\\Users\\kj287\\Documents\\01_Projects\\focusflow\\.claude\\worktrees\\zen-kalam-eba609\\src\\assets\\react.svg": {
+    "mtime": 1778293345.9928265,
+    "hash": "f0402b67b6ce880f65666bb49e841696"
+  },
+  "C:\\Users\\kj287\\Documents\\01_Projects\\focusflow\\.claude\\worktrees\\zen-kalam-eba609\\src\\assets\\singing-bowl-hit.mp3": {
+    "mtime": 1778293346.0058458,
+    "hash": "4ed6473a61c59163b7841cf1efddc3aa"
+  },
+  "C:\\Users\\kj287\\Documents\\01_Projects\\focusflow\\.claude\\worktrees\\zen-kalam-eba609\\src\\assets\\sounds\\bell.mp3": {
+    "mtime": 1778293346.633443,
+    "hash": "4ed6473a61c59163b7841cf1efddc3aa"
+  }
+}

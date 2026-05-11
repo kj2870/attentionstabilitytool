@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import { Link } from "react-router-dom";
 import Diya from "../components/Diya";
 import MeditationBackground from "../components/MeditationBackground";
@@ -58,6 +59,13 @@ export default function HomePage() {
       : flexibleStreak === 1
       ? "day 1"
       : `${flexibleStreak} day streak`;
+
+  useEffect(() => {
+    document.body.style.overflow = "hidden";
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, []);
 
   return (
     <MeditationBackground timeOfDay="Night">
