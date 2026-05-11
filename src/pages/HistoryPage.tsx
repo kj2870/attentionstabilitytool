@@ -5,18 +5,13 @@ import { getCurrentStreak, getMandalaDay, loadHistory, type SessionRecord } from
 // ---------------------------------------------------------------------------
 // Helpers
 // ---------------------------------------------------------------------------
-function toDateKey(dateString: string) {
-  const d = new Date(dateString);
-  return `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, "0")}-${String(d.getDate()).padStart(2, "0")}`;
-}
-
 function avg(values: number[]) {
   if (values.length === 0) return 0;
   return values.reduce((s, v) => s + v, 0) / values.length;
 }
 
 // ---------------------------------------------------------------------------
-// Small Flame — used in calendar heatmap
+// Small Flame — used in empty state
 // ---------------------------------------------------------------------------
 function SmallFlame({ size = 16, opacity = 1 }: { size?: number; opacity?: number }) {
   return (
@@ -401,122 +396,6 @@ function TrendChart({ history }: { history: SessionRecord[] }) {
 }
 
 // ---------------------------------------------------------------------------
-// Calendar Heatmap
-// ---------------------------------------------------------------------------
-function CalendarHeatmap({ history }: { history: SessionRecord[] }) {
-  const sessionDates = useMemo(() => {
-    const map = new Map<string, number>();
-    for (const s of history) {
-      const key = toDateKey(s.date);
-      map.set(key, (map.get(key) ?? 0) + 1);
-    }
-    return map;
-  }, [history]);
-
-  const WEEKS = 15;
-  const today = new Date();
-  today.setHours(0, 0, 0, 0);
-
-  const endSunday = new Date(today);
-  endSunday.setDate(today.getDate() + (7 - today.getDay()) % 7);
-
-  const days: { date: Date; key: string }[] = [];
-  for (let w = WEEKS - 1; w >= 0; w--) {
-    for (let d = 0; d < 7; d++) {
-      const date = new Date(endSunday);
-      date.setDate(endSunday.getDate() - w * 7 - (6 - d));
-      days.push({
-        date,
-        key: `${date.getFullYear()}-${String(date.getMonth() + 1).padStart(2, "0")}-${String(date.getDate()).padStart(2, "0")}`,
-      });
-    }
-  }
-
-  const CELL = 28;
-  const GAP = 4;
-  const LABEL_W = 28;
-  const dayLabels = ["S", "M", "T", "W", "T", "F", "S"];
-  const todayKey = toDateKey(today.toISOString());
-
-  return (
-    <div className="glass-card" style={{ padding: "24px 20px" }}>
-      <div style={{ color: "var(--muted)", fontSize: "13px", letterSpacing: "0.04em", marginBottom: "16px" }}>
-        PRACTICE CALENDAR
-      </div>
-
-      <div style={{ overflowX: "auto" }}>
-        <div style={{ display: "flex", gap: `${GAP}px`, minWidth: "fit-content" }}>
-          <div style={{ display: "flex", flexDirection: "column", gap: `${GAP}px`, paddingTop: "24px" }}>
-            {dayLabels.map((label, i) => (
-              <div
-                key={i}
-                style={{
-                  width: `${LABEL_W}px`,
-                  height: `${CELL}px`,
-                  display: "flex",
-                  alignItems: "center",
-                  justifyContent: "center",
-                  color: "var(--muted)",
-                  fontSize: "11px",
-                }}
-              >
-                {i % 2 === 1 ? label : ""}
-              </div>
-            ))}
-          </div>
-
-          {Array.from({ length: WEEKS }, (_, wk) => {
-            const weekDays = days.slice(wk * 7, wk * 7 + 7);
-            const firstOfWeek = weekDays[0].date;
-            const showMonthLabel = firstOfWeek.getDate() <= 7;
-
-            return (
-              <div key={wk} style={{ display: "flex", flexDirection: "column", gap: `${GAP}px` }}>
-                <div style={{ height: "20px", fontSize: "11px", color: "var(--muted)", display: "flex", alignItems: "center" }}>
-                  {showMonthLabel ? firstOfWeek.toLocaleString("default", { month: "short" }) : ""}
-                </div>
-
-                {weekDays.map(({ date, key }) => {
-                  const count = sessionDates.get(key) ?? 0;
-                  const isFuture = date > today;
-                  const isToday = key === todayKey;
-
-                  return (
-                    <div
-                      key={key}
-                      title={`${date.toLocaleDateString()} — ${count > 0 ? `${count} session${count > 1 ? "s" : ""}` : "no session"}`}
-                      style={{
-                        width: `${CELL}px`,
-                        height: `${CELL}px`,
-                        borderRadius: "8px",
-                        border: isToday
-                          ? "1px solid rgba(255,179,71,0.45)"
-                          : "1px solid rgba(255,255,255,0.04)",
-                        background: count > 0
-                          ? "rgba(255,179,71,0.08)"
-                          : isFuture
-                          ? "transparent"
-                          : "rgba(255,255,255,0.02)",
-                        display: "flex",
-                        alignItems: "center",
-                        justifyContent: "center",
-                        opacity: isFuture ? 0.2 : 1,
-                      }}
-                    >
-                      {count > 0 && <SmallFlame size={18} opacity={count > 1 ? 1 : 0.85} />}
-                    </div>
-                  );
-                })}
-              </div>
-            );
-          })}
-        </div>
-      </div>
-    </div>
-  );
-}
-
-// ---------------------------------------------------------------------------
 // Main Page
 // ---------------------------------------------------------------------------
 export default function HistoryPage() {
@@ -564,7 +443,7 @@ export default function HistoryPage() {
               { label: "Avg Score", value: avgAttention, suffix: "" },
             ].map(({ label, value, suffix }) => (
               <div key={label} className="glass-card" style={{ padding: "20px 16px", textAlign: "center" }}>
-                <div style={{ fontSize: "30px", fontFamily: '"Fraunces", serif' }}>
+                <div style={{ fontSize: "30px", fontFamily: '"Instrument Serif", Georgia, serif' }}>
                   {value}
                   <span style={{ fontSize: "14px", color: "var(--muted)" }}>{suffix}</span>
                 </div>
@@ -578,9 +457,6 @@ export default function HistoryPage() {
 
           {/* Trend chart */}
           <TrendChart history={history} />
-
-          {/* Calendar heatmap */}
-          <CalendarHeatmap history={history} />
 
         </div>
       )}

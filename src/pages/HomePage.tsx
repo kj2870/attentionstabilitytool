@@ -32,41 +32,16 @@ export default function HomePage() {
             padding: "36px 24px",
           }}
         >
-          <h1
-            style={{
-              fontSize: "clamp(46px, 7vw, 66px)",
-              marginBottom: "14px",
-              fontWeight: 400,
-              lineHeight: 1.08,
-            }}
-          >
+          <h1 style={{ fontSize: "clamp(46px, 7vw, 66px)", marginBottom: "14px", fontWeight: 400, lineHeight: 1.08 }}>
             Visual Attention Prototype
           </h1>
-
-          <p
-            style={{
-              maxWidth: "760px",
-              fontSize: "clamp(18px, 2.5vw, 24px)",
-              lineHeight: 1.5,
-              color: "#d9cbb8",
-              marginBottom: "30px",
-            }}
-          >
+          <p style={{ maxWidth: "760px", fontSize: "clamp(18px, 2.5vw, 24px)", lineHeight: 1.5, color: "#d9cbb8", marginBottom: "30px" }}>
             Browser-based prototype for measuring visual fixation stability during guided sessions.
           </p>
-
-          <div
-            style={{
-              display: "flex",
-              gap: "14px",
-              flexWrap: "wrap",
-              justifyContent: "center",
-            }}
-          >
+          <div style={{ display: "flex", gap: "14px", flexWrap: "wrap", justifyContent: "center" }}>
             <Link to="/session" style={{ textDecoration: "none" }}>
               <button className="primary-button">Start Session</button>
             </Link>
-
             <Link to="/privacy" style={{ textDecoration: "none" }}>
               <button className="secondary-button">Privacy</button>
             </Link>
@@ -75,6 +50,14 @@ export default function HomePage() {
       </MeditationBackground>
     );
   }
+
+  // Streak display — hide until day 2, show "day 1" on first day
+  const streakLabel =
+    flexibleStreak === 0
+      ? null
+      : flexibleStreak === 1
+      ? "day 1"
+      : `${flexibleStreak} day streak`;
 
   return (
     <MeditationBackground timeOfDay="Night">
@@ -90,14 +73,8 @@ export default function HomePage() {
           padding: "36px 24px",
         }}
       >
-        <div
-          style={{
-            marginBottom: "24px",
-            display: "flex",
-            justifyContent: "center",
-            width: "100%",
-          }}
-        >
+        {/* Diya + wordmark — tight unit */}
+        <div style={{ marginBottom: "10px", display: "flex", justifyContent: "center" }}>
           <div style={{ transform: "translateX(-8px)" }}>
             <Diya />
           </div>
@@ -105,62 +82,56 @@ export default function HomePage() {
 
         <h1
           style={{
-            fontSize: "clamp(56px, 9vw, 82px)",
-            marginBottom: "12px",
+            fontSize: "clamp(52px, 8vw, 78px)",
+            marginBottom: "14px",
             fontWeight: 400,
             lineHeight: 1.02,
+            letterSpacing: "-0.02em",
+            fontFamily: '"Instrument Serif", Georgia, serif',
           }}
         >
-          Drishti
+          drishti
         </h1>
 
         <p
           style={{
-            maxWidth: "720px",
-            fontSize: "clamp(22px, 3vw, 28px)",
-            lineHeight: 1.45,
-            color: "#d9cbb8",
-            marginBottom: "10px",
+            maxWidth: "36ch",
+            fontSize: "clamp(17px, 2.2vw, 20px)",
+            lineHeight: 1.55,
+            color: "rgba(217, 203, 184, 0.62)",
+            marginBottom: "36px",
           }}
         >
-          A simple daily ritual to train attention and calm the mind.
+          A daily ritual to train attention and calm the mind.
         </p>
 
+        {/* Weekly card */}
         <div
-          className="glass-card"
           style={{
             width: "100%",
-            maxWidth: "480px",
-            padding: "24px 28px",
+            maxWidth: "420px",
+            padding: "22px 24px",
             marginBottom: "28px",
+            border: "1px solid rgba(255,255,255,0.06)",
+            borderRadius: "28px",
+            background: "rgba(255,255,255,0.025)",
           }}
         >
-          <div
-            style={{
-              fontSize: "13px",
-              color: "var(--muted)",
-              letterSpacing: "0.04em",
-              marginBottom: "16px",
-            }}
-          >
-            THIS WEEK
-          </div>
-
           <div
             style={{
               display: "grid",
               gridTemplateColumns: "repeat(7, 1fr)",
               gap: "6px",
-              marginBottom: "20px",
+              marginBottom: "18px",
             }}
           >
             {days.map((day, index) => (
               <div key={day} style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: "8px" }}>
-                <div style={{ fontSize: "11px", color: "var(--muted-2)", letterSpacing: "0.02em" }}>
+                <div style={{ fontSize: "11px", color: "rgba(191,174,151,0.55)", letterSpacing: "0.02em" }}>
                   {day.charAt(0)}
                 </div>
-                <div style={{ opacity: weekly[index] ? 1 : 0.18 }}>
-                  <svg width="14" height="18" viewBox="0 0 80 100" xmlns="http://www.w3.org/2000/svg">
+                <div style={{ opacity: weekly[index] ? 0.9 : 0.15 }}>
+                  <svg width="16" height="20" viewBox="0 0 80 100" xmlns="http://www.w3.org/2000/svg">
                     <path d="M40 5 C52 25 60 42 50 65 C45 80 35 80 30 65 C20 42 28 25 40 5Z" fill="#ffb347" />
                     <path d="M40 22 C47 38 48 52 43 62 C40 68 36 68 33 62 C28 52 33 38 40 22Z" fill="#ffd27d" />
                     <ellipse cx="40" cy="60" rx="6" ry="9" fill="white" opacity="0.9" />
@@ -174,19 +145,24 @@ export default function HomePage() {
             style={{
               display: "flex",
               justifyContent: "center",
-              gap: "24px",
-              color: "var(--muted)",
-              fontSize: "14px",
+              gap: "20px",
+              color: "rgba(203,187,167,0.7)",
+              fontSize: "13px",
             }}
           >
-            <span>{flexibleStreak} day streak</span>
-            <span style={{ opacity: 0.3 }}>·</span>
-            <span>Mandala day {mandalaDay} / 48</span>
+            {streakLabel && (
+              <>
+                <span>{streakLabel}</span>
+                <span style={{ opacity: 0.3 }}>·</span>
+              </>
+            )}
+            <span>mandala day {mandalaDay} / 48</span>
           </div>
         </div>
 
+        {/* CTA */}
         <Link to="/routine" style={{ textDecoration: "none" }}>
-          <button className="primary-button">Begin Practice</button>
+          <button className="primary-button">Begin</button>
         </Link>
       </div>
     </MeditationBackground>
