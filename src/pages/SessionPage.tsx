@@ -422,15 +422,24 @@ function CollapsibleCard({ title, open, onToggle, children }: CollapsibleCardPro
           alignItems: "center",
           background: "transparent",
           border: "none",
-          color: "#F5E9DA",
+          color: "rgba(245,233,218,0.7)",
           padding: 0,
           cursor: "pointer",
-          fontSize: "15px",
+          fontSize: "13px",
+          letterSpacing: "0.06em",
+          textTransform: "uppercase",
         }}
       >
         <span>{title}</span>
-        <span style={{ color: "rgba(245,233,218,0.68)", fontSize: "12px" }}>
-          {open ? "Hide" : "Show"}
+        <span style={{
+          fontSize: "18px",
+          lineHeight: 1,
+          color: "rgba(255,179,71,0.6)",
+          transition: "transform 0.2s ease",
+          display: "inline-block",
+          transform: open ? "rotate(180deg)" : "rotate(0deg)",
+        }}>
+          ›
         </span>
       </button>
 
@@ -1274,7 +1283,6 @@ export default function SessionPage() {
     }));
   };
 
-  const phaseLabel = sessionComplete ? "Session Summary" : currentPhase?.label ?? "";
   const bodyCue = isBodyPhase ? getBodyCue(phaseSecondsLeft) : "";
   const bodyRegionLabel =
     isBodyPhase && currentPhase?.bodyRegion
@@ -1283,12 +1291,8 @@ export default function SessionPage() {
 
   const primaryInstruction = sessionComplete
     ? ""
-    : isBodyPhase || isBreathPhase || isGazePhase
+    : isBodyPhase || isBreathPhase || isGazePhase || isEyesClosedPhase || isIntegratePhase
     ? ""
-    : isEyesClosedPhase
-    ? "Rest"
-    : isIntegratePhase
-    ? "Open awareness"
     : currentPhase?.instruction ?? "";
 
   // Interpretable stability label from recent attention variation.
@@ -2067,34 +2071,26 @@ export default function SessionPage() {
                     minHeight: isBodyPhase ? "108px" : "78px",
                   }}
                 >
-                  <div
-                    style={{
-                      fontSize: "20px",
-                      color: "#FFB347",
-                    }}
-                  >
-                    {phaseLabel}
-                  </div>
-
                   {isBodyPhase && (
                     <>
                       <div
                         style={{
-                          fontSize: "14px",
-                          letterSpacing: "0.1em",
+                          fontSize: "12px",
+                          letterSpacing: "0.12em",
                           textTransform: "uppercase",
-                          color: "rgba(223, 203, 178, 0.78)",
+                          color: "rgba(203, 183, 158, 0.55)",
+                          fontFamily: "inherit",
                         }}
                       >
                         {bodyCue}
                       </div>
-
                       <div
                         style={{
-                          fontSize: "28px",
-                          color: "#F5E9DA",
+                          fontSize: "26px",
+                          fontFamily: '"Playfair Display", Georgia, serif',
+                          fontWeight: 400,
+                          color: "rgba(245, 233, 218, 0.88)",
                           lineHeight: 1.2,
-                          minHeight: "34px",
                         }}
                       >
                         {bodyRegionLabel}
@@ -2105,9 +2101,11 @@ export default function SessionPage() {
                   {!isBodyPhase && primaryInstruction && (
                     <div
                       style={{
-                        minHeight: "34px",
-                        fontSize: "24px",
-                        color: "#F5E9DA",
+                        fontSize: "20px",
+                        fontFamily: '"Playfair Display", Georgia, serif',
+                        fontWeight: 400,
+                        color: "rgba(245, 233, 218, 0.72)",
+                        lineHeight: 1.5,
                       }}
                     >
                       {primaryInstruction}
@@ -2642,35 +2640,26 @@ sessionComplete ? (
                   minHeight: isBodyPhase ? "108px" : "78px",
                 }}
               >
-                <div
-                  style={{
-                    fontSize: "20px",
-                    color: "#FFB347",
-                  }}
-                >
-                  {phaseLabel}
-                </div>
-
                 {isBodyPhase && (
                   <>
-
                     <div
                       style={{
-                        fontSize: "14px",
-                        letterSpacing: "0.1em",
+                        fontSize: "12px",
+                        letterSpacing: "0.12em",
                         textTransform: "uppercase",
-                        color: "rgba(223, 203, 178, 0.78)",
+                        color: "rgba(203, 183, 158, 0.55)",
+                        fontFamily: "inherit",
                       }}
                     >
                       {bodyCue}
                     </div>
-
                     <div
                       style={{
-                        fontSize: "28px",
-                        color: "#F5E9DA",
+                        fontSize: "26px",
+                        fontFamily: '"Playfair Display", Georgia, serif',
+                        fontWeight: 400,
+                        color: "rgba(245, 233, 218, 0.88)",
                         lineHeight: 1.2,
-                        minHeight: "34px",
                       }}
                     >
                       {bodyRegionLabel}
@@ -2681,9 +2670,11 @@ sessionComplete ? (
                 {!isBodyPhase && primaryInstruction && (
                   <div
                     style={{
-                      minHeight: "34px",
-                      fontSize: "24px",
-                      color: "#F5E9DA",
+                      fontSize: "20px",
+                      fontFamily: '"Playfair Display", Georgia, serif',
+                      fontWeight: 400,
+                      color: "rgba(245, 233, 218, 0.72)",
+                      lineHeight: 1.5,
                     }}
                   >
                     {primaryInstruction}
