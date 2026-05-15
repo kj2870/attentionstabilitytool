@@ -2061,57 +2061,59 @@ export default function SessionPage() {
                   paddingTop: "8px",
                 }}
               >
+                {/* Centered visual + text group */}
                 <div
                   style={{
+                    flex: 1,
                     width: "100%",
                     display: "flex",
                     flexDirection: "column",
                     alignItems: "center",
-                    gap: "8px",
-                    minHeight: isBodyPhase ? "108px" : "78px",
+                    justifyContent: "center",
+                    gap: "20px",
                   }}
                 >
                   {isBodyPhase && (
-                    <>
+                    <div style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: "10px" }}>
                       <div
                         style={{
-                          fontSize: "12px",
-                          letterSpacing: "0.12em",
+                          fontSize: "11px",
+                          letterSpacing: "0.14em",
                           textTransform: "uppercase",
-                          color: "rgba(203, 183, 158, 0.55)",
-                          fontFamily: "inherit",
+                          color: "rgba(203, 183, 158, 0.45)",
+                          fontFamily: '"Playfair Display", Georgia, serif',
                         }}
                       >
                         {bodyCue}
                       </div>
                       <div
                         style={{
-                          fontSize: "26px",
+                          fontSize: "28px",
                           fontFamily: '"Playfair Display", Georgia, serif',
                           fontWeight: 400,
-                          color: "rgba(245, 233, 218, 0.88)",
+                          color: "rgba(245, 233, 218, 0.82)",
                           lineHeight: 1.2,
                         }}
                       >
                         {bodyRegionLabel}
                       </div>
-                    </>
+                    </div>
                   )}
 
                   {!isBodyPhase && primaryInstruction && (
                     <div
                       style={{
-                        fontSize: "20px",
+                        fontSize: "22px",
                         fontFamily: '"Playfair Display", Georgia, serif',
                         fontWeight: 400,
-                        color: "rgba(245, 233, 218, 0.72)",
+                        color: "rgba(245, 233, 218, 0.68)",
                         lineHeight: 1.5,
+                        letterSpacing: "0.01em",
                       }}
                     >
                       {primaryInstruction}
                     </div>
                   )}
-                </div>
 
                 <div
                   style={{
@@ -2122,7 +2124,6 @@ export default function SessionPage() {
                     display: "flex",
                     alignItems: "center",
                     justifyContent: "center",
-                    marginBottom: "2px",
                   }}
                 >
                   {showDiya && (
@@ -2161,6 +2162,7 @@ export default function SessionPage() {
                     />
                   )}
                 </div>
+                </div>{/* end centered group */}
 
                 {isRunning && (
                   <CollapsibleCard
@@ -2630,108 +2632,104 @@ sessionComplete ? (
                 paddingTop: "8px",
               }}
             >
+              {/* Centered visual + text group */}
               <div
                 style={{
+                  flex: 1,
                   width: "100%",
                   display: "flex",
                   flexDirection: "column",
                   alignItems: "center",
-                  gap: "8px",
-                  minHeight: isBodyPhase ? "108px" : "78px",
+                  justifyContent: "center",
+                  gap: "20px",
                 }}
               >
                 {isBodyPhase && (
-                  <>
+                  <div style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: "10px" }}>
                     <div
                       style={{
-                        fontSize: "12px",
-                        letterSpacing: "0.12em",
+                        fontSize: "11px",
+                        letterSpacing: "0.14em",
                         textTransform: "uppercase",
-                        color: "rgba(203, 183, 158, 0.55)",
-                        fontFamily: "inherit",
+                        color: "rgba(203, 183, 158, 0.45)",
+                        fontFamily: '"Playfair Display", Georgia, serif',
                       }}
                     >
                       {bodyCue}
                     </div>
                     <div
                       style={{
-                        fontSize: "26px",
+                        fontSize: "28px",
                         fontFamily: '"Playfair Display", Georgia, serif',
                         fontWeight: 400,
-                        color: "rgba(245, 233, 218, 0.88)",
+                        color: "rgba(245, 233, 218, 0.82)",
                         lineHeight: 1.2,
                       }}
                     >
                       {bodyRegionLabel}
                     </div>
-                  </>
+                  </div>
                 )}
 
                 {!isBodyPhase && primaryInstruction && (
                   <div
                     style={{
-                      fontSize: "20px",
+                      fontSize: "22px",
                       fontFamily: '"Playfair Display", Georgia, serif',
                       fontWeight: 400,
-                      color: "rgba(245, 233, 218, 0.72)",
+                      color: "rgba(245, 233, 218, 0.68)",
                       lineHeight: 1.5,
+                      letterSpacing: "0.01em",
                     }}
                   >
                     {primaryInstruction}
                   </div>
                 )}
-              </div>
 
-              <div
-                style={{
-                  position: "relative",
-                  width: "100%",
-                  maxWidth: "760px",
-                  minHeight: isSettlePhase ? "120px" : "360px",
-                  display: "flex",
-                  alignItems: "center",
-                  justifyContent: "center",
-                  marginBottom: "2px",
-                }}
-              >
+                <div
+                  style={{
+                    position: "relative",
+                    width: "100%",
+                    maxWidth: "760px",
+                    minHeight: isSettlePhase ? "120px" : "360px",
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                  }}
+                >
+                  {showDiya && (
+                    <div style={{ transition: "opacity 0.5s ease" }}>
+                      <video
+                        src="/diya-session.mp4"
+                        autoPlay
+                        loop
+                        muted
+                        playsInline
+                        style={{
+                          width: "clamp(220px, 36vw, 380px)",
+                          mixBlendMode: "screen",
+                          pointerEvents: "none",
+                          display: "block",
+                        }}
+                      />
+                    </div>
+                  )}
 
-
-                {showDiya && (
-                  <div
-                    style={{
-                      transition: "opacity 0.5s ease",
-                    }}
-                  >
-                    <video
-                      src="/diya-session.mp4"
-                      autoPlay
-                      loop
-                      muted
-                      playsInline
-                      style={{
-                        width: "clamp(220px, 36vw, 380px)",
-                        mixBlendMode: "screen",
-                        pointerEvents: "none",
-                        display: "block",
-                      }}
+                  {isBodyPhase && currentPhase?.bodyRegion && (
+                    <BodyGuideOverlay
+                      activeRegion={currentPhase.bodyRegion}
+                      phaseSecondsLeft={phaseSecondsLeft}
                     />
-                  </div>
-                )}
+                  )}
 
-                {isBodyPhase && currentPhase?.bodyRegion && (
-                  <BodyGuideOverlay
-                    activeRegion={currentPhase.bodyRegion}
-                    phaseSecondsLeft={phaseSecondsLeft}
-                  />
-                )}
-
-                {isBreathPhase && currentPhase?.breathAction && (
-                  <BreathGuide
-                    action={currentPhase.breathAction}
-                    durationSec={currentPhase.durationSec}
-                  />
-                )}
-              </div>
+                  {isBreathPhase && currentPhase?.breathAction && (
+                    <BreathGuide
+                      action={currentPhase.breathAction}
+                      durationSec={currentPhase.durationSec}
+                    />
+                  )}
+                </div>
+              </div>{/* end centered group */}
 
               {isRunning && (
                 <div
