@@ -2110,10 +2110,22 @@ export default function SessionPage() {
                   {showDiya && (
                     <div
                       style={{
-                        transition: "0.5s ease",
+                        transition: "opacity 0.5s ease",
                       }}
                     >
-                      <Diya breathingGlow={isGazePhase} />
+                      <video
+                        src="/Session Diya Animation.mp4"
+                        autoPlay
+                        loop
+                        muted
+                        playsInline
+                        style={{
+                          width: "clamp(220px, 36vw, 380px)",
+                          mixBlendMode: "screen",
+                          pointerEvents: "none",
+                          display: "block",
+                        }}
+                      />
                     </div>
                   )}
 
@@ -2643,10 +2655,22 @@ sessionComplete ? (
                 {showDiya && (
                   <div
                     style={{
-                      transition: "0.5s ease",
+                      transition: "opacity 0.5s ease",
                     }}
                   >
-                    <Diya breathingGlow={isGazePhase} />
+                    <video
+                      src="/Session Diya Animation.mp4"
+                      autoPlay
+                      loop
+                      muted
+                      playsInline
+                      style={{
+                        width: "clamp(220px, 36vw, 380px)",
+                        mixBlendMode: "screen",
+                        pointerEvents: "none",
+                        display: "block",
+                      }}
+                    />
                   </div>
                 )}
 
