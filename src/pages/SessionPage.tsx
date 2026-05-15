@@ -2114,7 +2114,7 @@ export default function SessionPage() {
                       }}
                     >
                       <video
-                        src="/Session Diya Animation.mp4"
+                        src="/diya-session.mp4"
                         autoPlay
                         loop
                         muted
@@ -2659,7 +2659,7 @@ sessionComplete ? (
                     }}
                   >
                     <video
-                      src="/Session Diya Animation.mp4"
+                      src="/diya-session.mp4"
                       autoPlay
                       loop
                       muted
