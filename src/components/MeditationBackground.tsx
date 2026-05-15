@@ -1,30 +1,13 @@
 type MeditationBackgroundProps = {
-  timeOfDay: "Morning" | "Midday" | "Night";
   children: React.ReactNode;
 };
 
-export default function MeditationBackground({
-  timeOfDay,
-  children,
-}: MeditationBackgroundProps) {
-  const palette =
-    timeOfDay === "Morning"
-      ? {
-          sky: "linear-gradient(180deg, #2b2430 0%, #5a4a45 35%, #a06e47 70%, #0E0E10 100%)",
-          glow: "rgba(255, 190, 120, 0.10)",
-          accent: "rgba(255, 210, 140, 0.10)",
-        }
-      : timeOfDay === "Midday"
-      ? {
-          sky: "linear-gradient(180deg, #1f2430 0%, #3c404f 30%, #665c52 70%, #0E0E10 100%)",
-          glow: "rgba(255, 179, 71, 0.08)",
-          accent: "rgba(255, 220, 160, 0.06)",
-        }
-      : {
-          sky: "linear-gradient(180deg, #10131d 0%, #181624 35%, #241c21 65%, #0E0E10 100%)",
-          glow: "rgba(255, 150, 70, 0.08)",
-          accent: "rgba(255, 180, 110, 0.05)",
-        };
+export default function MeditationBackground({ children }: MeditationBackgroundProps) {
+  const palette = {
+    sky: "linear-gradient(180deg, #10131d 0%, #181624 35%, #241c21 65%, #0E0E10 100%)",
+    glow: "rgba(255, 150, 70, 0.08)",
+    accent: "rgba(255, 180, 110, 0.05)",
+  };
 
   return (
     <div

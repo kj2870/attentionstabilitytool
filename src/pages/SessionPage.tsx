@@ -1830,7 +1830,7 @@ export default function SessionPage() {
 
 
   return (
-    <MeditationBackground timeOfDay={routine.timeOfDay}>
+    <MeditationBackground >
       <div
         className="page-shell mobile-stack"
         style={{
