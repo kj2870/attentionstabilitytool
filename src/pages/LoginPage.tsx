@@ -19,7 +19,7 @@ export default function LoginPage() {
   };
 
   return (
-    <MeditationBackground timeOfDay="Night">
+    <MeditationBackground >
       <div
         style={{
           minHeight: "100vh",

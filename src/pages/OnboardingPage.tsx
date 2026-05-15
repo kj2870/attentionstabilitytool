@@ -23,7 +23,7 @@ export default function OnboardingPage() {
   };
 
   return (
-    <MeditationBackground timeOfDay="Night">
+    <MeditationBackground >
       <div
         className="page-shell"
         style={{

@@ -20,7 +20,7 @@ export default function HomePage() {
 
   if (RESEARCH_MODE) {
     return (
-      <MeditationBackground timeOfDay="Night">
+      <MeditationBackground >
         <div
           className="page-shell"
           style={{
@@ -68,7 +68,7 @@ export default function HomePage() {
   }, []);
 
   return (
-    <MeditationBackground timeOfDay="Night">
+    <MeditationBackground >
       <div
         className="page-shell"
         style={{
