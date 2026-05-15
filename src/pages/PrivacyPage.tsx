@@ -20,7 +20,7 @@ export default function PrivacyPage() {
     <div
       style={{
         padding: "60px 24px 100px",
-        maxWidth: "680px",
+        maxWidth: "600px",
         margin: "0 auto",
       }}
     >
@@ -28,69 +28,31 @@ export default function PrivacyPage() {
         style={{
           fontSize: "clamp(40px, 6vw, 56px)",
           fontWeight: 400,
-          marginBottom: "32px",
+          marginBottom: "40px",
         }}
       >
         Privacy
       </h1>
 
-      <div
-        className="glass-card"
-        style={{ padding: "28px 30px", marginBottom: "20px" }}
-      >
-        <div
-          style={{
-            fontSize: "22px",
-            fontFamily: '"Playfair Display", Georgia, serif',
-            marginBottom: "16px",
-          }}
-        >
-          How your data is handled
-        </div>
-
-        <div
-          style={{
-            display: "grid",
-            gap: "12px",
-            color: "#d9cbb8",
-            fontSize: "16px",
-            lineHeight: 1.7,
-          }}
-        >
-          <div>● All video processing happens locally on your device. No video is ever stored or uploaded.</div>
-          <div>● Session metrics — attention score, blink count, and duration — are saved to your account so you can track progress over time.</div>
-          <div>● Your account is secured with email and password via Supabase. We do not sell or share your data.</div>
-          <div>● You can delete your account and all associated data at any time by contacting us.</div>
+      <div className="glass-card" style={{ padding: "28px 30px", marginBottom: "16px" }}>
+        <h2 style={{ fontWeight: 400, fontSize: "18px", marginTop: 0, marginBottom: "16px" }}>
+          Your data
+        </h2>
+        <div style={{ display: "flex", flexDirection: "column", gap: "12px", color: "var(--muted)", fontSize: "16px", lineHeight: 1.7 }}>
+          <p style={{ margin: 0 }}>Video is processed entirely on your device. Nothing is recorded or uploaded.</p>
+          <p style={{ margin: 0 }}>Session metrics — attention score, duration, and blink count — are saved to your account to track progress over time.</p>
+          <p style={{ margin: 0 }}>Your account is secured through Google. We do not store passwords or sell your data.</p>
+          <p style={{ margin: 0 }}>To delete your account and all associated data, contact us at privacy@drishti.app.</p>
         </div>
       </div>
 
-      <div
-        className="glass-card"
-        style={{ padding: "28px 30px", marginBottom: "32px" }}
-      >
-        <div
-          style={{
-            fontSize: "22px",
-            fontFamily: '"Playfair Display", Georgia, serif',
-            marginBottom: "16px",
-          }}
-        >
+      <div className="glass-card" style={{ padding: "28px 30px" }}>
+        <h2 style={{ fontWeight: 400, fontSize: "18px", marginTop: 0, marginBottom: "12px" }}>
           Account
-        </div>
-
-        <p
-          style={{
-            color: "#bfae97",
-            fontSize: "15px",
-            lineHeight: 1.65,
-            marginBottom: "20px",
-          }}
-        >
-          Signing out will clear your local session. Your practice history
-          remains saved to your account and will be available when you sign
-          back in.
+        </h2>
+        <p style={{ color: "var(--muted)", fontSize: "16px", lineHeight: 1.7, marginBottom: "20px", marginTop: 0 }}>
+          Signing out clears your local session. Your practice history remains saved and will sync when you sign back in.
         </p>
-
         <button
           onClick={() => void handleSignOut()}
           disabled={isSigningOut}
@@ -106,7 +68,7 @@ export default function PrivacyPage() {
             fontFamily: "inherit",
           }}
         >
-          {isSigningOut ? "Signing out…" : "Sign Out"}
+          {isSigningOut ? "Signing out…" : "Sign out"}
         </button>
       </div>
     </div>

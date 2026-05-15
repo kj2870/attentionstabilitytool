@@ -419,7 +419,6 @@ export default function HistoryPage() {
         <h1 style={{ fontSize: "clamp(40px, 6vw, 56px)", fontWeight: 400, marginBottom: "10px" }}>
           History
         </h1>
-        <p style={{ color: "var(--muted)", fontSize: "18px" }}>Your practice over time.</p>
       </div>
 
       {history.length === 0 ? (

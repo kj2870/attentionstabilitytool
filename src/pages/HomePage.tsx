@@ -170,7 +170,7 @@ export default function HomePage() {
         </div>
 
         {/* CTA */}
-        <Link to="/routine" style={{ textDecoration: "none" }}>
+        <Link to="/session" style={{ textDecoration: "none" }}>
           <button className="primary-button">Begin</button>
         </Link>
       </div>
