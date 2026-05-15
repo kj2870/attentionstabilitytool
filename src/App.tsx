@@ -3,7 +3,6 @@ import { Navigate, Route, Routes, useLocation } from "react-router-dom";
 import type { User } from "@supabase/supabase-js";
 import Layout from "./components/Layout";
 import HomePage from "./pages/HomePage";
-import RoutinePage from "./pages/RoutinePage";
 import HistoryPage from "./pages/HistoryPage";
 import PrivacyPage from "./pages/PrivacyPage";
 import SciencePage from "./pages/SciencePage";
@@ -43,7 +42,6 @@ function AuthedRoutes() {
     <Layout>
       <Routes>
         <Route path="/" element={<HomePage />} />
-        <Route path="/routine" element={<RoutinePage />} />
         <Route path="/session" element={<SessionPage />} />
         <Route path="/history" element={<HistoryPage />} />
         <Route path="/science" element={<SciencePage />} />
