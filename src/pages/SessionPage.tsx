@@ -1,6 +1,5 @@
 ﻿import { Fragment, useCallback, useEffect, useMemo, useRef, useState, type ReactNode } from "react";
 import { useNavigate } from "react-router-dom";
-import Diya from "../components/Diya";
 import MeditationBackground from "../components/MeditationBackground";
 import BodyGuideOverlay from "../components/BodyGuideOverlay";
 import BreathGuide from "../components/BreathGuide";
@@ -531,6 +530,27 @@ export default function SessionPage() {
     lastValidAttentionScoreRef.current = attentionScore;
   }, [attentionScore]);
 
+
+  const isDebugMode = useMemo(
+    () => new URLSearchParams(window.location.search).get("debug") === "true",
+    []
+  );
+
+  const scrubToElapsed = useCallback(
+    (targetElapsed: number) => {
+      let acc = 0;
+      for (let i = 0; i < script.length; i++) {
+        const phase = script[i];
+        if (acc + phase.durationSec >= targetElapsed || i === script.length - 1) {
+          setPhaseIndex(i);
+          setPhaseSecondsLeft(Math.max(1, Math.round(phase.durationSec - (targetElapsed - acc))));
+          return;
+        }
+        acc += phase.durationSec;
+      }
+    },
+    [script]
+  );
 
   const currentPhase: SessionPhase | undefined = script[phaseIndex];
 
@@ -2308,6 +2328,39 @@ export default function SessionPage() {
                     }}
                   />
                 </div>
+
+                {/* Debug scrubber — only visible at ?debug=true */}
+                {isDebugMode && (
+                  <div style={{ marginTop: "12px" }}>
+                    <div style={{ display: "flex", justifyContent: "space-between", fontSize: "11px", color: "rgba(255,255,255,0.35)", marginBottom: "4px", fontFamily: "monospace" }}>
+                      <span>{Math.floor(elapsedSeconds / 60)}:{String(elapsedSeconds % 60).padStart(2, "0")}</span>
+                      <span style={{ color: "rgba(255,179,71,0.6)" }}>{currentPhase?.visualMode ?? "—"}</span>
+                      <span>{Math.floor(totalDuration / 60)}:{String(totalDuration % 60).padStart(2, "0")}</span>
+                    </div>
+                    <input
+                      type="range"
+                      min={0}
+                      max={totalDuration}
+                      value={elapsedSeconds}
+                      onChange={(e) => scrubToElapsed(Number(e.target.value))}
+                      style={{ width: "100%", accentColor: "#ffb347", cursor: "pointer" }}
+                    />
+                    <div style={{ display: "flex", fontSize: "10px", color: "rgba(255,255,255,0.2)", fontFamily: "monospace", marginTop: "2px", position: "relative", height: "14px" }}>
+                      {(() => {
+                        let acc = 0;
+                        return script.map((phase, i) => {
+                          const left = (acc / totalDuration) * 100;
+                          acc += phase.durationSec;
+                          return (
+                            <span key={i} style={{ position: "absolute", left: `${left}%`, transform: "translateX(-50%)", whiteSpace: "nowrap" }}>
+                              |
+                            </span>
+                          );
+                        });
+                      })()}
+                    </div>
+                  </div>
+                )}
               </div>
             </>
           )
