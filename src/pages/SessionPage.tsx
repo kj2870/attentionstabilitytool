@@ -11,14 +11,13 @@ import {
   type SessionPhase,
 } from "../lib/sessionScript";
 import {
-  getCurrentStreak,
   loadHistory,
   loadRoutineSelection,
   saveSession,
   saveSessionRemote,
   type SessionFeeling,
 } from "../lib/storage";
-import { getQuoteForStreak } from "../lib/quotes";
+import { detectNewlyUnlocked, milestoneLabel } from "../lib/milestones";
 import { SessionAudioController } from "../lib/sessionAudio";
 import {
   defaultSessionSettings,
@@ -582,6 +581,10 @@ export default function SessionPage() {
   const [sessionComplete, setSessionComplete] = useState(false);
   const [saved, setSaved] = useState(false);
   const [feeling, setFeeling] = useState<SessionFeeling>("");
+  // Free-form feedback note shown on summary screen (1000 char limit removed per user).
+  const [note, setNote] = useState("");
+  // Milestone IDs newly unlocked this session — computed when sessionComplete fires.
+  const [pendingMilestones, setPendingMilestones] = useState<string[]>([]);
   const [settings] = useState<SessionSettings>(defaultSessionSettings);
 
   const [metrics, setMetrics] = useState<TrackingMetrics>({
@@ -893,7 +896,26 @@ export default function SessionPage() {
 
     if (RESEARCH_MODE) {
       setResearchStep("survey");
+      return;
     }
+
+    // Compute newly-unlocked milestones for the summary screen.
+    // We construct a provisional record with the session's gaze metrics
+    // so the milestone tests can evaluate "what's true after tonight."
+    const history = loadHistory();
+    const provisional = {
+      id: "pending",
+      date: new Date().toISOString(),
+      durationMin: Number((totalDuration / 60).toFixed(1)),
+      timeOfDay: routine.timeOfDay,
+      attentionScore,
+      feeling,
+      grade: "B" as const,
+      longestGazeSec: longestGazeRef.current,
+      totalStillnessSec: totalStillnessRef.current,
+    };
+    const unlocked = detectNewlyUnlocked(history, provisional);
+    setPendingMilestones(unlocked);
   }, [sessionComplete]);
 
 
@@ -1406,27 +1428,6 @@ export default function SessionPage() {
     };
   }, []);
 
-  // Keeps quote/streak logic available for non-research mode.
-  const projectedStreak = useMemo(() => {
-    if (RESEARCH_MODE) return 0;
-
-    const history = loadHistory();
-
-    return getCurrentStreak([
-      ...history,
-      {
-        id: "preview",
-        date: new Date().toISOString(),
-        durationMin: Number((totalDuration / 60).toFixed(1)),
-        timeOfDay: routine.timeOfDay,
-        attentionScore,
-        feeling,
-        grade: attentionScore >= 85 ? "A" : attentionScore >= 72 ? "B" : "C",
-      },
-    ]);
-  }, [attentionScore, feeling, routine.timeOfDay, totalDuration]);
-
-  const quote = RESEARCH_MODE ? "" : getQuoteForStreak(projectedStreak);
 
   const handleContinueFromSetup = async () => {
     if (!setupConfirmed || !safetyConfirmed) return;
@@ -1461,6 +1462,9 @@ export default function SessionPage() {
     // If pre-session baseline is set, debug flag stays true; otherwise it
     // will flip true once settle calibration completes.
     setDebugIrisBaselineSet(irisBaselineRef.current !== null);
+    // Clear summary-screen state from any previous session.
+    setNote("");
+    setPendingMilestones([]);
 
     if (!cameraStream) {
       await enableCamera();
@@ -1484,6 +1488,7 @@ export default function SessionPage() {
     if (saved) return;
 
     if (!RESEARCH_MODE) {
+      const trimmedNote = note.trim();
       const record = {
         id: crypto.randomUUID(),
         date: new Date().toISOString(),
@@ -1497,6 +1502,8 @@ export default function SessionPage() {
         avgRecovery,
         longestGazeSec: longestGazeRef.current,
         totalStillnessSec: totalStillnessRef.current,
+        note: trimmedNote.length > 0 ? trimmedNote : undefined,
+        newMilestones: pendingMilestones.length > 0 ? pendingMilestones : undefined,
       };
 
       saveSession(record);           // local cache — instant
@@ -2728,97 +2735,121 @@ export default function SessionPage() {
           )
         ) : (
 sessionComplete ? (
+          RESEARCH_MODE ? renderResearchSummaryCard() : (
           <div
-            className="glass-card"
             style={{
               width: "100%",
-              maxWidth: "760px",
-              padding: "24px 24px 28px",
-              marginTop: "0",
+              maxWidth: "560px",
+              padding: "60px 28px 40px",
+              margin: "0 auto",
               textAlign: "center",
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "center",
+              gap: "44px",
             }}
           >
-            <h2 style={{ marginTop: 0, marginBottom: "20px", fontWeight: 400 }}>
-              Session Summary
-            </h2>
-
-            <div
-              style={{
-                fontSize: "64px",
-                color: "#FFB347",
-                marginBottom: "8px",
-              }}
-            >
-              {attentionScore}
-            </div>
-
-            <div
-              style={{
-                color: "#cbbba7",
-                fontSize: "18px",
-                marginBottom: "22px",
-              }}
-            >
-              {RESEARCH_MODE ? "Attention Estimate" : "Attention Score"}
-            </div>
-
-            {!RESEARCH_MODE && (
+            {/* Hero: longest gaze this session */}
+            <div style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: "10px" }}>
               <div
                 style={{
-                  padding: "18px",
-                  borderRadius: "18px",
-                  background: "rgba(255,255,255,0.03)",
-                  border: "1px solid rgba(255,179,71,0.14)",
-                  marginBottom: "22px",
-                  color: "#F5E9DA",
-                  lineHeight: 1.55,
+                  fontSize: "13px",
+                  letterSpacing: "0.12em",
+                  textTransform: "uppercase",
+                  color: "rgba(203, 183, 158, 0.55)",
+                  fontFamily: '"Playfair Display", Georgia, serif',
                 }}
               >
-                {quote}
+                Longest gaze
+              </div>
+              <div
+                style={{
+                  fontSize: "clamp(64px, 12vw, 96px)",
+                  fontFamily: '"Playfair Display", Georgia, serif',
+                  fontWeight: 400,
+                  color: "rgba(245, 233, 218, 0.92)",
+                  lineHeight: 1,
+                }}
+              >
+                {longestGazeRef.current}s
+              </div>
+            </div>
+
+            {/* Lifetime line */}
+            <div
+              style={{
+                fontSize: "14px",
+                color: "rgba(203, 183, 158, 0.6)",
+                fontFamily: '"Playfair Display", Georgia, serif',
+              }}
+            >
+              {(() => {
+                const allHistory = [...loadHistory()];
+                const sessionN = allHistory.length + 1;
+                const totalMin = Math.round(
+                  (allHistory.reduce((s, r) => s + (r.totalStillnessSec ?? 0), 0) + totalStillnessRef.current) / 60
+                );
+                const bestEver = Math.max(
+                  longestGazeRef.current,
+                  ...allHistory.map((r) => r.longestGazeSec ?? 0)
+                );
+                return `Session ${sessionN} · ${totalMin}m total · ${bestEver}s best`;
+              })()}
+            </div>
+
+            {/* Newly unlocked milestones */}
+            {pendingMilestones.length > 0 && (
+              <div style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: "8px" }}>
+                {pendingMilestones.map((id) => (
+                  <div key={id} style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: "4px" }}>
+                    <div style={{ fontSize: "12px", letterSpacing: "0.14em", textTransform: "uppercase", color: "rgba(255, 179, 71, 0.75)" }}>
+                      ★ New milestone
+                    </div>
+                    <div style={{ fontSize: "18px", fontFamily: '"Playfair Display", Georgia, serif', color: "rgba(245, 233, 218, 0.85)" }}>
+                      {milestoneLabel(id)}
+                    </div>
+                  </div>
+                ))}
               </div>
             )}
 
-            <div style={{ marginBottom: "22px" }}>
-              <div
-                style={{
-                  color: "#cbbba7",
-                  marginBottom: "12px",
-                  fontSize: "16px",
-                }}
-              >
-                How did it feel?
+            {/* Feedback note */}
+            <div style={{ width: "100%", display: "flex", flexDirection: "column", alignItems: "center", gap: "10px" }}>
+              <div style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: "4px" }}>
+                <div style={{ fontSize: "13px", letterSpacing: "0.06em", color: "rgba(245, 233, 218, 0.7)", fontFamily: '"Playfair Display", Georgia, serif' }}>
+                  Feedback (optional)
+                </div>
+                <div style={{ fontSize: "12px", color: "rgba(203, 183, 158, 0.5)" }}>
+                  Sent to the developer to improve the app.
+                </div>
               </div>
-
-              <div
+              <textarea
+                value={note}
+                onChange={(e) => setNote(e.target.value)}
+                rows={4}
                 style={{
-                  display: "flex",
-                  gap: "10px",
-                  flexWrap: "wrap",
-                  justifyContent: "center",
+                  width: "100%",
+                  padding: "14px 16px",
+                  borderRadius: "14px",
+                  border: "1px solid rgba(255,255,255,0.10)",
+                  background: "rgba(255,255,255,0.03)",
+                  color: "#F5E9DA",
+                  fontSize: "15px",
+                  lineHeight: 1.55,
+                  fontFamily: "inherit",
+                  resize: "vertical",
+                  outline: "none",
                 }}
-              >
-                {(["Calm", "Neutral", "Restless"] as SessionFeeling[]).map((item) => (
-                  <button
-                    key={item}
-                    className="secondary-button"
-                    onClick={() => setFeeling(item)}
-                    style={{
-                      background:
-                        feeling === item
-                          ? "rgba(255,179,71,0.14)"
-                          : "rgba(255,255,255,0.04)",
-                    }}
-                  >
-                    {item}
-                  </button>
-                ))}
-              </div>
+                onFocus={(e) => (e.currentTarget.style.borderColor = "rgba(255,179,71,0.35)")}
+                onBlur={(e) => (e.currentTarget.style.borderColor = "rgba(255,255,255,0.10)")}
+              />
             </div>
 
             <button className="primary-button" onClick={handleSaveSession} disabled={saved}>
-              Save Session
+              {saved ? "Saved" : "Save and finish"}
             </button>
           </div>
+          )
         ) : (
           <>
             {isRunning && (
