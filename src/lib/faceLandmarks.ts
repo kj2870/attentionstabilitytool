@@ -34,6 +34,17 @@ export type EyeMetricsSnapshot = {
   irisY: number;
   // True if iris landmarks were available (model has them by default but be defensive).
   irisAvailable: boolean;
+
+  // --- Head pose (Phase 1b) ---
+  // Euler angles in radians, derived from MediaPipe's facial transformation matrix.
+  // yaw   = rotation around vertical axis (turning head left/right)
+  // pitch = rotation around horizontal axis (nodding up/down)
+  // roll  = rotation around forward axis (tilting head sideways)
+  headYaw: number;
+  headPitch: number;
+  headRoll: number;
+  // True if a head pose matrix was produced this frame.
+  headPoseAvailable: boolean;
 };
 
 // --- Landmark indices (MediaPipe Face Landmarker, 478-point mesh) ---
@@ -74,6 +85,40 @@ function computeEAR(landmarks: Pt[], idx: number[]): number {
   if (horizontal === 0) return 0;
 
   return (dist(p2, p6) + dist(p3, p5)) / (2 * horizontal);
+}
+
+// Extracts (yaw, pitch, roll) in radians from a 4x4 head-pose matrix.
+// MediaPipe returns a column-major flat array of 16 numbers (OpenGL convention).
+// Column-major index for row r, column c: m[c * 4 + r].
+function extractEulerAngles(matrix: number[]): { yaw: number; pitch: number; roll: number } {
+  // Rotation submatrix R (3x3) — column-major. Only the entries we need.
+  const r00 = matrix[0];
+  const r02 = matrix[8];
+  const r10 = matrix[1];
+  const r11 = matrix[5];
+  const r12 = matrix[9];
+  const r20 = matrix[2];
+  const r22 = matrix[10];
+
+  // YXZ Euler order (yaw around Y, pitch around X, roll around Z).
+  // Standard derivation: pitch = asin(-r12); yaw = atan2(r02, r22); roll = atan2(r10, r11).
+  // We clamp the asin argument to avoid NaN from floating-point drift outside [-1, 1].
+  const sinPitch = Math.min(1, Math.max(-1, -r12));
+  const pitch = Math.asin(sinPitch);
+
+  let yaw: number;
+  let roll: number;
+
+  // Gimbal-lock guard: when |pitch| ≈ pi/2, yaw and roll become indeterminate.
+  if (Math.abs(sinPitch) < 0.9999) {
+    yaw = Math.atan2(r02, r22);
+    roll = Math.atan2(r10, r11);
+  } else {
+    yaw = Math.atan2(-r20, r00);
+    roll = 0;
+  }
+
+  return { yaw, pitch, roll };
 }
 
 // Returns iris position relative to its own eye socket, normalised 0..1 in both axes.
@@ -139,6 +184,10 @@ export class SessionFaceLandmarker {
         },
         runningMode: "VIDEO",
         numFaces: 1,
+        // Provides a 4x4 head pose matrix per frame — we extract Euler angles
+        // from it to detect head rotation (the user can otherwise look at
+        // screen corners by turning their head without iris moving).
+        outputFacialTransformationMatrixes: true,
       });
     } finally {
       this.initializing = false;
@@ -174,7 +223,28 @@ export class SessionFaceLandmarker {
         irisX: 0.5,
         irisY: 0.5,
         irisAvailable: false,
+        headYaw: 0,
+        headPitch: 0,
+        headRoll: 0,
+        headPoseAvailable: false,
       };
+    }
+
+    // Head pose — extract Euler angles from the 4x4 transformation matrix if present.
+    let headYaw = 0;
+    let headPitch = 0;
+    let headRoll = 0;
+    let headPoseAvailable = false;
+    const matrices = result.facialTransformationMatrixes;
+    if (matrices && matrices.length > 0 && matrices[0].data) {
+      const arr = Array.from(matrices[0].data);
+      if (arr.length >= 16) {
+        const angles = extractEulerAngles(arr);
+        headYaw = angles.yaw;
+        headPitch = angles.pitch;
+        headRoll = angles.roll;
+        headPoseAvailable = true;
+      }
     }
 
     // --- Legacy single-pair measure (kept so existing blink code keeps working) ---
@@ -238,6 +308,10 @@ export class SessionFaceLandmarker {
       irisX,
       irisY,
       irisAvailable,
+      headYaw,
+      headPitch,
+      headRoll,
+      headPoseAvailable,
     };
   }
 
