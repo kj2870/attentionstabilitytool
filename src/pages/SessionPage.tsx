@@ -519,6 +519,10 @@ export default function SessionPage() {
   const settleIrisSamplesRef = useRef<{ x: number; y: number }[]>([]);
   // Calibrated baseline iris position (median of settle samples). Null until computed.
   const irisBaselineRef = useRef<{ x: number; y: number } | null>(null);
+  // Head pose samples collected during settle phase.
+  const settleHeadSamplesRef = useRef<{ yaw: number; pitch: number; roll: number }[]>([]);
+  // Calibrated baseline head pose.
+  const headBaselineRef = useRef<{ yaw: number; pitch: number; roll: number } | null>(null);
   // Whether a blink occurred during the current 1-second tick window.
   const blinkInCurrentSecondRef = useRef(false);
   // Current unbroken held-gaze streak in seconds.
@@ -535,6 +539,9 @@ export default function SessionPage() {
   // Live iris position vs baseline — surfaced in debug panel to diagnose drift.
   const [debugIrisDrift, setDebugIrisDrift] = useState<{ dx: number; dy: number } | null>(null);
   const [debugIrisOk, setDebugIrisOk] = useState(true);
+  // Live head pose vs baseline.
+  const [debugHeadDrift, setDebugHeadDrift] = useState<{ dyaw: number; dpitch: number; droll: number } | null>(null);
+  const [debugHeadOk, setDebugHeadOk] = useState(true);
 
   // Iris tolerance for "looking at diya" (fraction of normalised eye width).
   // Tightened from 0.12 → 0.08 so peripheral glances actually fail the check.
@@ -545,6 +552,11 @@ export default function SessionPage() {
   const latestIrisRef = useRef<{ x: number; y: number } | null>(null);
   // Latest EAR (eye openness) from the most recent landmark frame.
   const latestEAROpenRef = useRef(0);
+  // Latest head pose from the most recent landmark frame.
+  const latestHeadRef = useRef<{ yaw: number; pitch: number; roll: number } | null>(null);
+  // Head pose tolerance in radians (~8.6° per axis). Covers small natural settling
+  // but catches actual head rotation to look at a screen corner.
+  const HEAD_TOLERANCE_RAD = 0.15;
   // Mirrors signalQuality state in a ref so the held-gaze tick can read it
   // without needing to be in the effect's dependency array.
   const signalQualityRef = useRef<SignalQuality>("poor");
@@ -920,6 +932,26 @@ export default function SessionPage() {
       setDebugIrisBaselineSet(true);
     }
 
+    // Lazy-compute head baseline on first gaze tick.
+    if (!headBaselineRef.current) {
+      const samples = settleHeadSamplesRef.current;
+      if (samples.length >= 5) {
+        const yaws = samples.map((s) => s.yaw).sort((a, b) => a - b);
+        const pitches = samples.map((s) => s.pitch).sort((a, b) => a - b);
+        const rolls = samples.map((s) => s.roll).sort((a, b) => a - b);
+        const mid = Math.floor(samples.length / 2);
+        headBaselineRef.current = {
+          yaw: yaws[mid],
+          pitch: pitches[mid],
+          roll: rolls[mid],
+        };
+      } else {
+        // No head pose data captured — fall back to "current position is baseline"
+        // on first valid frame inside the tick below.
+        headBaselineRef.current = null;
+      }
+    }
+
     const interval = window.setInterval(() => {
       // Pull current state from refs to avoid stale-closure issues.
       const facePresent =
@@ -943,7 +975,32 @@ export default function SessionPage() {
         setDebugIrisOk(true);
       }
 
-      const heldGaze = facePresent && eyesOpen && noBlinkThisSecond && qualityOk && irisOk;
+      // Head pose check — if user turns head to look at screen corner, this catches it.
+      let headOk = true; // graceful degrade if head pose unavailable
+      const head = latestHeadRef.current;
+      // If we never got a settle baseline (no head pose during settle), lock in
+      // the first valid gaze-phase frame as the baseline so we still get a reference.
+      if (head && !headBaselineRef.current) {
+        headBaselineRef.current = { yaw: head.yaw, pitch: head.pitch, roll: head.roll };
+      }
+      const headBase = headBaselineRef.current;
+      if (head && headBase) {
+        const dyaw = head.yaw - headBase.yaw;
+        const dpitch = head.pitch - headBase.pitch;
+        const droll = head.roll - headBase.roll;
+        headOk =
+          Math.abs(dyaw) <= HEAD_TOLERANCE_RAD &&
+          Math.abs(dpitch) <= HEAD_TOLERANCE_RAD &&
+          Math.abs(droll) <= HEAD_TOLERANCE_RAD;
+        setDebugHeadDrift({ dyaw, dpitch, droll });
+        setDebugHeadOk(headOk);
+      } else {
+        setDebugHeadDrift(null);
+        setDebugHeadOk(true);
+      }
+
+      const heldGaze =
+        facePresent && eyesOpen && noBlinkThisSecond && qualityOk && irisOk && headOk;
 
       if (heldGaze) {
         currentGazeStreakRef.current += 1;
@@ -1117,27 +1174,37 @@ export default function SessionPage() {
             processBlinkState(snapshot.eyeState);
 
             // --- Phase 1 gaze tracking ---
-            // Collect iris samples during settle phase for baseline calibration.
-            if (
-              isRunning &&
-              currentPhase?.visualMode === "settle" &&
-              snapshot.irisAvailable
-            ) {
-              settleIrisSamplesRef.current.push({
-                x: snapshot.irisX,
-                y: snapshot.irisY,
-              });
-              // Cap at a sensible number to keep memory bounded across long settle.
-              if (settleIrisSamplesRef.current.length > 600) {
-                settleIrisSamplesRef.current = settleIrisSamplesRef.current.slice(-600);
+            // Collect iris + head pose samples during settle phase for baseline calibration.
+            if (isRunning && currentPhase?.visualMode === "settle") {
+              if (snapshot.irisAvailable) {
+                settleIrisSamplesRef.current.push({
+                  x: snapshot.irisX,
+                  y: snapshot.irisY,
+                });
+                if (settleIrisSamplesRef.current.length > 600) {
+                  settleIrisSamplesRef.current = settleIrisSamplesRef.current.slice(-600);
+                }
+              }
+              if (snapshot.headPoseAvailable) {
+                settleHeadSamplesRef.current.push({
+                  yaw: snapshot.headYaw,
+                  pitch: snapshot.headPitch,
+                  roll: snapshot.headRoll,
+                });
+                if (settleHeadSamplesRef.current.length > 600) {
+                  settleHeadSamplesRef.current = settleHeadSamplesRef.current.slice(-600);
+                }
               }
             }
 
-            // Stash latest iris snapshot for the per-second held-gaze tick.
+            // Stash latest snapshot for the per-second held-gaze tick.
             latestIrisRef.current = snapshot.irisAvailable
               ? { x: snapshot.irisX, y: snapshot.irisY }
               : null;
             latestEAROpenRef.current = snapshot.earAvg;
+            latestHeadRef.current = snapshot.headPoseAvailable
+              ? { yaw: snapshot.headYaw, pitch: snapshot.headPitch, roll: snapshot.headRoll }
+              : null;
 
             const now = performance.now();
             if (now - lastEyeTrendSampleAtRef.current >= 120) {
@@ -1307,7 +1374,9 @@ export default function SessionPage() {
 
     // Reset all gaze-tracking state at session start.
     settleIrisSamplesRef.current = [];
+    settleHeadSamplesRef.current = [];
     irisBaselineRef.current = null;
+    headBaselineRef.current = null;
     blinkInCurrentSecondRef.current = false;
     currentGazeStreakRef.current = 0;
     longestGazeRef.current = 0;
@@ -1316,6 +1385,10 @@ export default function SessionPage() {
     setDebugLongestGaze(0);
     setDebugTotalStillness(0);
     setDebugIrisBaselineSet(false);
+    setDebugIrisDrift(null);
+    setDebugHeadDrift(null);
+    setDebugIrisOk(true);
+    setDebugHeadOk(true);
 
     if (!cameraStream) {
       await enableCamera();
@@ -2527,12 +2600,21 @@ export default function SessionPage() {
                     </div>
                     <div style={{ display: "flex", justifyContent: "space-between", fontSize: "11px", color: debugIrisOk ? "rgba(180,220,160,0.6)" : "rgba(255,140,140,0.85)", marginTop: "2px", fontFamily: "monospace" }}>
                       <span>
-                        iris drift: {debugIrisDrift
+                        iris: {debugIrisDrift
                           ? `dx=${debugIrisDrift.dx >= 0 ? "+" : ""}${debugIrisDrift.dx.toFixed(3)}  dy=${debugIrisDrift.dy >= 0 ? "+" : ""}${debugIrisDrift.dy.toFixed(3)}`
                           : "—"}
                       </span>
                       <span>tol: ±{IRIS_TOLERANCE.toFixed(3)}</span>
                       <span>{debugIrisOk ? "ok" : "DRIFT"}</span>
+                    </div>
+                    <div style={{ display: "flex", justifyContent: "space-between", fontSize: "11px", color: debugHeadOk ? "rgba(180,220,160,0.6)" : "rgba(255,140,140,0.85)", marginTop: "2px", fontFamily: "monospace" }}>
+                      <span>
+                        head: {debugHeadDrift
+                          ? `yaw=${(debugHeadDrift.dyaw * 180 / Math.PI).toFixed(1)}° pitch=${(debugHeadDrift.dpitch * 180 / Math.PI).toFixed(1)}° roll=${(debugHeadDrift.droll * 180 / Math.PI).toFixed(1)}°`
+                          : "—"}
+                      </span>
+                      <span>tol: ±{(HEAD_TOLERANCE_RAD * 180 / Math.PI).toFixed(1)}°</span>
+                      <span>{debugHeadOk ? "ok" : "ROT"}</span>
                     </div>
                   </div>
                 )}
