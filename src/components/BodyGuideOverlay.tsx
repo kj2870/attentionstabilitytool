@@ -5,36 +5,74 @@ type BodyGuideOverlayProps = {
   phaseSecondsLeft: number;
 };
 
-type CueState = "clench" | "release";
+// Matches sessionScript.ts — each body phase is 10s, halfway flips clench → release.
+const PHASE_TOTAL = 10;
+const PHASE_HALF = 5;
 
-const phaseDurationHalf = 5;
+// SVG viewBox is 240 wide × 420 tall. These coordinates locate each region on the figure.
+// y-positions are tuned to the silhouette path below.
+const REGION_POSITIONS: Record<BodyRegion, { cx: number; cy: number; r: number }> = {
+  face:          { cx: 120, cy: 48,  r: 36 },
+  neck:          { cx: 120, cy: 92,  r: 28 },
+  backShoulders: { cx: 120, cy: 130, r: 56 },
+  armsFingers:   { cx: 120, cy: 175, r: 80 },
+  pelvis:        { cx: 120, cy: 215, r: 52 },
+  thighs:        { cx: 120, cy: 270, r: 48 },
+  calves:        { cx: 120, cy: 340, r: 44 },
+  feet:          { cx: 120, cy: 400, r: 50 },
+};
 
-function getCueState(phaseSecondsLeft: number): CueState {
-  return phaseSecondsLeft > phaseDurationHalf ? "clench" : "release";
-}
-
-function partFill(active: boolean, cueState: CueState) {
-  if (!active) return "rgba(119, 100, 82, 0.64)";
-  return cueState === "clench"
-    ? "rgba(242, 173, 92, 0.9)"
-    : "rgba(118, 150, 184, 0.78)";
-}
-
-function partStroke(active: boolean, cueState: CueState) {
-  if (!active) return "rgba(182, 156, 127, 0.28)";
-  return cueState === "clench"
-    ? "rgba(255, 224, 177, 0.95)"
-    : "rgba(192, 215, 236, 0.85)";
-}
+// Smooth, contiguous humanoid silhouette path designed to match the mockup.
+// Head → neck → shoulders → torso narrowing at waist → legs together → ground.
+const FIGURE_PATH = `
+  M 120 18
+  C 138 18, 152 32, 152 52
+  C 152 70, 142 82, 132 87
+  C 138 92, 144 96, 148 102
+  C 156 110, 168 120, 178 132
+  C 188 144, 192 156, 192 170
+  C 192 188, 184 198, 174 204
+  C 168 212, 162 220, 158 230
+  L 158 250
+  C 158 264, 154 280, 152 296
+  L 150 326
+  C 148 340, 146 352, 144 366
+  C 142 380, 140 392, 138 402
+  C 137 410, 134 414, 130 416
+  L 110 416
+  C 106 414, 103 410, 102 402
+  C 100 392, 98 380, 96 366
+  C 94 352, 92 340, 90 326
+  L 88 296
+  C 86 280, 82 264, 82 250
+  L 82 230
+  C 78 220, 72 212, 66 204
+  C 56 198, 48 188, 48 170
+  C 48 156, 52 144, 62 132
+  C 72 120, 84 110, 92 102
+  C 96 96, 102 92, 108 87
+  C 98 82, 88 70, 88 52
+  C 88 32, 102 18, 120 18
+  Z
+`;
 
 export default function BodyGuideOverlay({
   activeRegion,
   phaseSecondsLeft,
 }: BodyGuideOverlayProps) {
-  const cueState = getCueState(phaseSecondsLeft);
+  const isClench = phaseSecondsLeft > PHASE_HALF;
+  const elapsedInHalf = isClench
+    ? PHASE_TOTAL - phaseSecondsLeft
+    : PHASE_HALF - phaseSecondsLeft;
+  // Progress 0..1 across each half — used for glow intensity envelope.
+  const halfProgress = Math.max(0, Math.min(1, elapsedInHalf / PHASE_HALF));
 
-  const fill = (region: BodyRegion) => partFill(activeRegion === region, cueState);
-  const stroke = (region: BodyRegion) => partStroke(activeRegion === region, cueState);
+  // Clench: glow builds up. Release: glow softens. Eased for organic feel.
+  const intensity = isClench
+    ? 0.55 + halfProgress * 0.45 // 0.55 → 1.0
+    : 1.0 - halfProgress * 0.7;  // 1.0 → 0.3
+
+  const pos = REGION_POSITIONS[activeRegion];
 
   return (
     <div
@@ -42,7 +80,6 @@ export default function BodyGuideOverlay({
         position: "absolute",
         inset: 0,
         display: "flex",
-        flexDirection: "column",
         alignItems: "center",
         justifyContent: "center",
         pointerEvents: "none",
@@ -50,163 +87,88 @@ export default function BodyGuideOverlay({
     >
       <div
         style={{
-          position: "absolute",
-          inset: 0,
-          background: "rgba(8, 7, 10, 0.2)",
-        }}
-      />
-
-      <div
-        style={{
+          width: "clamp(220px, 32vw, 300px)",
+          aspectRatio: "240 / 440",
           position: "relative",
-          zIndex: 2,
-          width: "100%",
-          maxWidth: "560px",
-          display: "flex",
-          flexDirection: "column",
-          alignItems: "center",
-          gap: "12px",
         }}
       >
-        <div
-          style={{
-            position: "relative",
-            width: "280px",
-            height: "330px",
-          }}
+        <svg
+          viewBox="0 0 240 440"
+          width="100%"
+          height="100%"
+          style={{ display: "block", overflow: "visible" }}
         >
-          <svg
-            width="280"
-            height="330"
-            viewBox="0 0 240 360"
-            fill="none"
-            style={{ width: "100%", height: "100%" }}
-          >
+          <defs>
+            {/* Soft humanoid silhouette gradient — faded so it bleeds into the background. */}
+            <radialGradient id="figureGradient" cx="50%" cy="48%" r="62%">
+              <stop offset="0%" stopColor="rgba(120, 102, 84, 0.42)" />
+              <stop offset="55%" stopColor="rgba(80, 68, 56, 0.32)" />
+              <stop offset="100%" stopColor="rgba(40, 32, 24, 0)" />
+            </radialGradient>
+
+            {/* Warm amber glow gradient for the active region. */}
+            <radialGradient id="regionGlow" cx="50%" cy="50%" r="50%">
+              <stop offset="0%" stopColor="rgba(255, 210, 140, 0.95)" />
+              <stop offset="35%" stopColor="rgba(255, 179, 71, 0.65)" />
+              <stop offset="70%" stopColor="rgba(220, 130, 60, 0.22)" />
+              <stop offset="100%" stopColor="rgba(180, 90, 40, 0)" />
+            </radialGradient>
+
+            {/* Heavy Gaussian blur so the glow bleeds into the silhouette. */}
+            <filter id="softBloom" x="-50%" y="-50%" width="200%" height="200%">
+              <feGaussianBlur stdDeviation="14" />
+            </filter>
+
+            {/* Even softer outer halo. */}
+            <filter id="outerHalo" x="-100%" y="-100%" width="300%" height="300%">
+              <feGaussianBlur stdDeviation="28" />
+            </filter>
+
+            {/* Clip glow to silhouette so light only appears within the body. */}
+            <clipPath id="silhouetteClip">
+              <path d={FIGURE_PATH} />
+            </clipPath>
+          </defs>
+
+          {/* Outer halo — soft warm light spreading beyond the body, blending with background. */}
+          <g style={{ opacity: intensity * 0.6, transition: "opacity 1.2s ease" }}>
             <circle
-              cx="120"
-              cy="55"
-              r="24"
-              fill={fill("face")}
-              stroke={stroke("face")}
-              strokeWidth="2"
+              cx={pos.cx}
+              cy={pos.cy}
+              r={pos.r * 2.2}
+              fill="url(#regionGlow)"
+              filter="url(#outerHalo)"
+              style={{ transition: "cx 1.4s ease, cy 1.4s ease, r 1.4s ease" }}
             />
+          </g>
 
-            <rect
-              x="110"
-              y="82"
-              width="20"
-              height="20"
-              rx="10"
-              fill={fill("neck")}
-              stroke={stroke("neck")}
-              strokeWidth="2"
-            />
+          {/* Base silhouette — soft, fades into dark. */}
+          <path d={FIGURE_PATH} fill="url(#figureGradient)" />
 
-            <rect
-              x="85"
-              y="102"
-              width="70"
-              height="95"
-              rx="30"
-              fill={fill("backShoulders")}
-              stroke={stroke("backShoulders")}
-              strokeWidth="2"
+          {/* Glow clipped to the body — the active region lights up from inside. */}
+          <g clipPath="url(#silhouetteClip)" style={{ opacity: intensity, transition: "opacity 1.2s ease" }}>
+            <circle
+              cx={pos.cx}
+              cy={pos.cy}
+              r={pos.r * 1.4}
+              fill="url(#regionGlow)"
+              filter="url(#softBloom)"
+              style={{ transition: "cx 1.4s ease, cy 1.4s ease, r 1.4s ease" }}
             />
+          </g>
 
-            <rect
-              x="45"
-              y="110"
-              width="34"
-              height="105"
-              rx="17"
-              fill={fill("armsFingers")}
-              stroke={stroke("armsFingers")}
-              strokeWidth="2"
+          {/* Bright core for the active region. */}
+          <g style={{ opacity: intensity * 0.85, transition: "opacity 1.2s ease" }}>
+            <circle
+              cx={pos.cx}
+              cy={pos.cy}
+              r={pos.r * 0.55}
+              fill="url(#regionGlow)"
+              filter="url(#softBloom)"
+              style={{ transition: "cx 1.4s ease, cy 1.4s ease, r 1.4s ease" }}
             />
-            <rect
-              x="161"
-              y="110"
-              width="34"
-              height="105"
-              rx="17"
-              fill={fill("armsFingers")}
-              stroke={stroke("armsFingers")}
-              strokeWidth="2"
-            />
-
-            <rect
-              x="80"
-              y="196"
-              width="80"
-              height="32"
-              rx="16"
-              fill={fill("pelvis")}
-              stroke={stroke("pelvis")}
-              strokeWidth="2"
-            />
-
-            <rect
-              x="70"
-              y="228"
-              width="42"
-              height="70"
-              rx="20"
-              fill={fill("thighs")}
-              stroke={stroke("thighs")}
-              strokeWidth="2"
-            />
-            <rect
-              x="128"
-              y="228"
-              width="42"
-              height="70"
-              rx="20"
-              fill={fill("thighs")}
-              stroke={stroke("thighs")}
-              strokeWidth="2"
-            />
-
-            <rect
-              x="74"
-              y="294"
-              width="30"
-              height="42"
-              rx="15"
-              fill={fill("calves")}
-              stroke={stroke("calves")}
-              strokeWidth="2"
-            />
-            <rect
-              x="136"
-              y="294"
-              width="30"
-              height="42"
-              rx="15"
-              fill={fill("calves")}
-              stroke={stroke("calves")}
-              strokeWidth="2"
-            />
-
-            <ellipse
-              cx="89"
-              cy="342"
-              rx="28"
-              ry="12"
-              fill={fill("feet")}
-              stroke={stroke("feet")}
-              strokeWidth="2"
-            />
-            <ellipse
-              cx="151"
-              cy="342"
-              rx="28"
-              ry="12"
-              fill={fill("feet")}
-              stroke={stroke("feet")}
-              strokeWidth="2"
-            />
-          </svg>
-        </div>
+          </g>
+        </svg>
       </div>
     </div>
   );
