@@ -557,6 +557,19 @@ export default function SessionPage() {
   // Head pose tolerance in radians (~8.6° per axis). Covers small natural settling
   // but catches actual head rotation to look at a screen corner.
   const HEAD_TOLERANCE_RAD = 0.15;
+
+  // --- Pre-session baseline calibration ---
+  // Samples collected while camera is on but session hasn't started yet.
+  // Separate from settle samples so we can lock in baseline BEFORE the session.
+  const preSessionIrisSamplesRef = useRef<{ x: number; y: number }[]>([]);
+  const preSessionHeadSamplesRef = useRef<{ yaw: number; pitch: number; roll: number }[]>([]);
+  // Status of the pre-session calibration shown to the user.
+  // 'idle' = waiting for camera, 'calibrating' = collecting samples, 'ready' = baseline locked.
+  const [baselineStatus, setBaselineStatus] = useState<"idle" | "calibrating" | "ready">("idle");
+  // How many usable frames we've collected. Used for the progress display.
+  const [baselineProgress, setBaselineProgress] = useState(0);
+  // Threshold for "good enough" baseline — about 3 seconds at 30fps.
+  const BASELINE_REQUIRED_FRAMES = 90;
   // Mirrors signalQuality state in a ref so the held-gaze tick can read it
   // without needing to be in the effect's dependency array.
   const signalQualityRef = useRef<SignalQuality>("poor");
@@ -747,6 +760,14 @@ export default function SessionPage() {
     setSignalQuality("poor");
     lastEyeTrendSampleAtRef.current = 0;
     lastDerivedTrendSampleAtRef.current = 0;
+    // Reset pre-session baseline calibration — camera off means we need to recalibrate.
+    preSessionIrisSamplesRef.current = [];
+    preSessionHeadSamplesRef.current = [];
+    irisBaselineRef.current = null;
+    headBaselineRef.current = null;
+    setBaselineStatus("idle");
+    setBaselineProgress(0);
+    setDebugIrisBaselineSet(false);
   };
 
   // Requests webcam access and stores stream state for preview/detection loops.
@@ -1206,6 +1227,54 @@ export default function SessionPage() {
               ? { yaw: snapshot.headYaw, pitch: snapshot.headPitch, roll: snapshot.headRoll }
               : null;
 
+            // --- Pre-session baseline calibration ---
+            // While camera is on but session hasn't started, accumulate clean
+            // iris + head samples so the user can see a "Ready" indicator
+            // before they click Start Session.
+            if (
+              !isRunning &&
+              !irisBaselineRef.current &&
+              snapshot.irisAvailable &&
+              snapshot.headPoseAvailable
+            ) {
+              preSessionIrisSamplesRef.current.push({
+                x: snapshot.irisX,
+                y: snapshot.irisY,
+              });
+              preSessionHeadSamplesRef.current.push({
+                yaw: snapshot.headYaw,
+                pitch: snapshot.headPitch,
+                roll: snapshot.headRoll,
+              });
+
+              const count = preSessionIrisSamplesRef.current.length;
+              setBaselineProgress(Math.min(count, BASELINE_REQUIRED_FRAMES));
+
+              if (count < BASELINE_REQUIRED_FRAMES) {
+                setBaselineStatus("calibrating");
+              } else if (!irisBaselineRef.current) {
+                // Lock in baseline from collected samples (median for robustness).
+                const irisSamples = preSessionIrisSamplesRef.current;
+                const headSamples = preSessionHeadSamplesRef.current;
+
+                const ix = irisSamples.map((s) => s.x).sort((a, b) => a - b);
+                const iy = irisSamples.map((s) => s.y).sort((a, b) => a - b);
+                const hy = headSamples.map((s) => s.yaw).sort((a, b) => a - b);
+                const hp = headSamples.map((s) => s.pitch).sort((a, b) => a - b);
+                const hr = headSamples.map((s) => s.roll).sort((a, b) => a - b);
+                const mid = Math.floor(irisSamples.length / 2);
+
+                irisBaselineRef.current = { x: ix[mid], y: iy[mid] };
+                headBaselineRef.current = {
+                  yaw: hy[mid],
+                  pitch: hp[mid],
+                  roll: hr[mid],
+                };
+                setDebugIrisBaselineSet(true);
+                setBaselineStatus("ready");
+              }
+            }
+
             const now = performance.now();
             if (now - lastEyeTrendSampleAtRef.current >= 120) {
               lastEyeTrendSampleAtRef.current = now;
@@ -1372,11 +1441,12 @@ export default function SessionPage() {
 
     setSaved(false);
 
-    // Reset all gaze-tracking state at session start.
+    // Reset per-session counters at session start.
+    // NOTE: we deliberately do NOT clear iris/head baselines here — if
+    // pre-session calibration already locked them in, we want to keep them.
+    // They'll only be re-derived (from settle) if calibration didn't complete.
     settleIrisSamplesRef.current = [];
     settleHeadSamplesRef.current = [];
-    irisBaselineRef.current = null;
-    headBaselineRef.current = null;
     blinkInCurrentSecondRef.current = false;
     currentGazeStreakRef.current = 0;
     longestGazeRef.current = 0;
@@ -1384,11 +1454,13 @@ export default function SessionPage() {
     setDebugGazeStreak(0);
     setDebugLongestGaze(0);
     setDebugTotalStillness(0);
-    setDebugIrisBaselineSet(false);
     setDebugIrisDrift(null);
     setDebugHeadDrift(null);
     setDebugIrisOk(true);
     setDebugHeadOk(true);
+    // If pre-session baseline is set, debug flag stays true; otherwise it
+    // will flip true once settle calibration completes.
+    setDebugIrisBaselineSet(irisBaselineRef.current !== null);
 
     if (!cameraStream) {
       await enableCamera();
@@ -2509,23 +2581,56 @@ export default function SessionPage() {
                 </CollapsibleCard>
 
                 {!isRunning && (
-                  <div
-                    style={{
-                      display: "flex",
-                      gap: "12px",
-                      flexWrap: "wrap",
-                      justifyContent: "center",
-                    }}
-                  >
-                    <button className="primary-button" onClick={handleStart}>
-                      Start Session
-                    </button>
-
+                  <div style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: "14px" }}>
+                    {/* Baseline calibration status — gives the user confidence
+                        that face/iris/head tracking is set up before starting. */}
                     {cameraStream && (
-                      <button className="secondary-button" onClick={disableCamera}>
-                        Disconnect Camera
-                      </button>
+                      <div
+                        style={{
+                          display: "flex",
+                          alignItems: "center",
+                          gap: "10px",
+                          fontSize: "13px",
+                          fontFamily: '"Playfair Display", Georgia, serif',
+                          color:
+                            baselineStatus === "ready"
+                              ? "rgba(180, 220, 160, 0.85)"
+                              : baselineStatus === "calibrating"
+                              ? "rgba(245, 233, 218, 0.6)"
+                              : "rgba(245, 233, 218, 0.4)",
+                        }}
+                      >
+                        <span style={{ fontSize: "16px" }}>
+                          {baselineStatus === "ready" ? "✓" : baselineStatus === "calibrating" ? "◐" : "○"}
+                        </span>
+                        <span>
+                          {baselineStatus === "ready"
+                            ? "Ready to begin"
+                            : baselineStatus === "calibrating"
+                            ? `Calibrating… ${Math.round((baselineProgress / BASELINE_REQUIRED_FRAMES) * 100)}%`
+                            : "Waiting for face"}
+                        </span>
+                      </div>
                     )}
+
+                    <div
+                      style={{
+                        display: "flex",
+                        gap: "12px",
+                        flexWrap: "wrap",
+                        justifyContent: "center",
+                      }}
+                    >
+                      <button className="primary-button" onClick={handleStart}>
+                        Start Session
+                      </button>
+
+                      {cameraStream && (
+                        <button className="secondary-button" onClick={disableCamera}>
+                          Disconnect Camera
+                        </button>
+                      )}
+                    </div>
                   </div>
                 )}
               </div>
@@ -3115,23 +3220,54 @@ sessionComplete ? (
               )}
 
               {!isRunning && (
-                <div
-                  style={{
-                    display: "flex",
-                    gap: "12px",
-                    flexWrap: "wrap",
-                    justifyContent: "center",
-                  }}
-                >
-                  <button className="primary-button" onClick={handleStart}>
-                    Start Session
-                  </button>
-
+                <div style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: "14px" }}>
                   {cameraStream && (
-                    <button className="secondary-button" onClick={disableCamera}>
-                      Disconnect Camera
-                    </button>
+                    <div
+                      style={{
+                        display: "flex",
+                        alignItems: "center",
+                        gap: "10px",
+                        fontSize: "13px",
+                        fontFamily: '"Playfair Display", Georgia, serif',
+                        color:
+                          baselineStatus === "ready"
+                            ? "rgba(180, 220, 160, 0.85)"
+                            : baselineStatus === "calibrating"
+                            ? "rgba(245, 233, 218, 0.6)"
+                            : "rgba(245, 233, 218, 0.4)",
+                      }}
+                    >
+                      <span style={{ fontSize: "16px" }}>
+                        {baselineStatus === "ready" ? "✓" : baselineStatus === "calibrating" ? "◐" : "○"}
+                      </span>
+                      <span>
+                        {baselineStatus === "ready"
+                          ? "Ready to begin"
+                          : baselineStatus === "calibrating"
+                          ? `Calibrating… ${Math.round((baselineProgress / BASELINE_REQUIRED_FRAMES) * 100)}%`
+                          : "Waiting for face"}
+                      </span>
+                    </div>
                   )}
+
+                  <div
+                    style={{
+                      display: "flex",
+                      gap: "12px",
+                      flexWrap: "wrap",
+                      justifyContent: "center",
+                    }}
+                  >
+                    <button className="primary-button" onClick={handleStart}>
+                      Start Session
+                    </button>
+
+                    {cameraStream && (
+                      <button className="secondary-button" onClick={disableCamera}>
+                        Disconnect Camera
+                      </button>
+                    )}
+                  </div>
                 </div>
               )}
             </div>
