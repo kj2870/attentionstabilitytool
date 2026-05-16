@@ -532,10 +532,15 @@ export default function SessionPage() {
   const [debugLongestGaze, setDebugLongestGaze] = useState(0);
   const [debugTotalStillness, setDebugTotalStillness] = useState(0);
   const [debugIrisBaselineSet, setDebugIrisBaselineSet] = useState(false);
+  // Live iris position vs baseline — surfaced in debug panel to diagnose drift.
+  const [debugIrisDrift, setDebugIrisDrift] = useState<{ dx: number; dy: number } | null>(null);
+  const [debugIrisOk, setDebugIrisOk] = useState(true);
 
   // Iris tolerance for "looking at diya" (fraction of normalised eye width).
-  // Tunable; loose enough that small unconscious shifts don't break the streak.
-  const IRIS_TOLERANCE = 0.12;
+  // Tightened from 0.12 → 0.08 so peripheral glances actually fail the check.
+  // NOTE: this still won't catch head rotation — that requires head pose tracking
+  // (planned for next phase). For now, assumes user keeps head still.
+  const IRIS_TOLERANCE = 0.08;
   // Latest iris position from the most recent landmark frame (null if unavailable).
   const latestIrisRef = useRef<{ x: number; y: number } | null>(null);
   // Latest EAR (eye openness) from the most recent landmark frame.
@@ -892,10 +897,10 @@ export default function SessionPage() {
   // ---------------------------------------------------------------------------
   useEffect(() => {
     if (!isRunning || !isGazePhase) {
-      // Reset the streak when leaving a gaze phase so each gaze segment is
-      // measured independently. Longest + total persist across the session.
-      currentGazeStreakRef.current = 0;
-      setDebugGazeStreak(0);
+      // PAUSE the streak when leaving a gaze phase — do NOT reset.
+      // Eyes-closed segments between gaze phases shouldn't break a streak;
+      // only blinks, iris drift, or face loss during gaze should.
+      // The streak resumes when the next gaze phase starts.
       blinkInCurrentSecondRef.current = false;
       return;
     }
@@ -928,9 +933,14 @@ export default function SessionPage() {
       const iris = latestIrisRef.current;
       const baseline = irisBaselineRef.current;
       if (iris && baseline) {
-        const dx = Math.abs(iris.x - baseline.x);
-        const dy = Math.abs(iris.y - baseline.y);
-        irisOk = dx <= IRIS_TOLERANCE && dy <= IRIS_TOLERANCE;
+        const dx = iris.x - baseline.x;
+        const dy = iris.y - baseline.y;
+        irisOk = Math.abs(dx) <= IRIS_TOLERANCE && Math.abs(dy) <= IRIS_TOLERANCE;
+        setDebugIrisDrift({ dx, dy });
+        setDebugIrisOk(irisOk);
+      } else {
+        setDebugIrisDrift(null);
+        setDebugIrisOk(true);
       }
 
       const heldGaze = facePresent && eyesOpen && noBlinkThisSecond && qualityOk && irisOk;
@@ -2514,6 +2524,15 @@ export default function SessionPage() {
                       <span style={{ color: debugIrisBaselineSet ? "rgba(180,220,160,0.7)" : "rgba(255,255,255,0.3)" }}>
                         baseline: {debugIrisBaselineSet ? "set" : "—"}
                       </span>
+                    </div>
+                    <div style={{ display: "flex", justifyContent: "space-between", fontSize: "11px", color: debugIrisOk ? "rgba(180,220,160,0.6)" : "rgba(255,140,140,0.85)", marginTop: "2px", fontFamily: "monospace" }}>
+                      <span>
+                        iris drift: {debugIrisDrift
+                          ? `dx=${debugIrisDrift.dx >= 0 ? "+" : ""}${debugIrisDrift.dx.toFixed(3)}  dy=${debugIrisDrift.dy >= 0 ? "+" : ""}${debugIrisDrift.dy.toFixed(3)}`
+                          : "—"}
+                      </span>
+                      <span>tol: ±{IRIS_TOLERANCE.toFixed(3)}</span>
+                      <span>{debugIrisOk ? "ok" : "DRIFT"}</span>
                     </div>
                   </div>
                 )}
