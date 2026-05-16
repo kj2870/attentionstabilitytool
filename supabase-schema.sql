@@ -27,8 +27,17 @@ create table if not exists public.sessions (
   -- Eye-tracking derived metrics (nullable — may be absent if camera off)
   blink_count     integer,
   avg_drift       numeric,
-  avg_recovery    numeric
+  avg_recovery    numeric,
+
+  -- Phase 1 gaze metrics (nullable for back-compat with older rows)
+  longest_gaze_sec     integer,
+  total_stillness_sec  integer
 );
+
+-- Backfill columns for existing deployments. Safe to re-run.
+alter table public.sessions
+  add column if not exists longest_gaze_sec integer,
+  add column if not exists total_stillness_sec integer;
 
 -- Index for fast per-user history queries
 create index if not exists sessions_user_id_created_at

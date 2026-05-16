@@ -17,6 +17,11 @@ export type SessionRecord = {
   blinkCount?: number;
   avgDrift?: number;
   avgRecovery?: number;
+  // New gaze metrics (Phase 1 — measurement infrastructure).
+  // Longest unbroken held-gaze in seconds across all gaze segments this session.
+  longestGazeSec?: number;
+  // Sum of all held-gaze seconds across all gaze segments this session.
+  totalStillnessSec?: number;
 };
 
 export type LocalProfile = {
@@ -286,6 +291,8 @@ export async function saveSessionRemote(record: SessionRecord): Promise<void> {
     blink_count: record.blinkCount ?? null,
     avg_drift: record.avgDrift ?? null,
     avg_recovery: record.avgRecovery ?? null,
+    longest_gaze_sec: record.longestGazeSec ?? null,
+    total_stillness_sec: record.totalStillnessSec ?? null,
   });
 
   if (error) {
@@ -323,6 +330,8 @@ export async function loadHistoryRemote(): Promise<SessionRecord[]> {
     blinkCount: row.blink_count ?? undefined,
     avgDrift: row.avg_drift ?? undefined,
     avgRecovery: row.avg_recovery ?? undefined,
+    longestGazeSec: row.longest_gaze_sec ?? undefined,
+    totalStillnessSec: row.total_stillness_sec ?? undefined,
   }));
 }
 

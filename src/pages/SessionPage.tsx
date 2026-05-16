@@ -514,6 +514,36 @@ export default function SessionPage() {
   const sessionSignalCoverageSamplesRef = useRef<number[]>([]);
   const sessionSignalQualitySamplesRef = useRef<SignalQuality[]>([]);
 
+  // --- Phase 1 gaze tracking infrastructure ---
+  // Iris position samples collected during settle phase, used to compute baseline.
+  const settleIrisSamplesRef = useRef<{ x: number; y: number }[]>([]);
+  // Calibrated baseline iris position (median of settle samples). Null until computed.
+  const irisBaselineRef = useRef<{ x: number; y: number } | null>(null);
+  // Whether a blink occurred during the current 1-second tick window.
+  const blinkInCurrentSecondRef = useRef(false);
+  // Current unbroken held-gaze streak in seconds.
+  const currentGazeStreakRef = useRef(0);
+  // Longest unbroken gaze across the whole session in seconds.
+  const longestGazeRef = useRef(0);
+  // Total stillness seconds across the session.
+  const totalStillnessRef = useRef(0);
+  // For UI: expose current values to debug panel without forcing re-renders elsewhere.
+  const [debugGazeStreak, setDebugGazeStreak] = useState(0);
+  const [debugLongestGaze, setDebugLongestGaze] = useState(0);
+  const [debugTotalStillness, setDebugTotalStillness] = useState(0);
+  const [debugIrisBaselineSet, setDebugIrisBaselineSet] = useState(false);
+
+  // Iris tolerance for "looking at diya" (fraction of normalised eye width).
+  // Tunable; loose enough that small unconscious shifts don't break the streak.
+  const IRIS_TOLERANCE = 0.12;
+  // Latest iris position from the most recent landmark frame (null if unavailable).
+  const latestIrisRef = useRef<{ x: number; y: number } | null>(null);
+  // Latest EAR (eye openness) from the most recent landmark frame.
+  const latestEAROpenRef = useRef(0);
+  // Mirrors signalQuality state in a ref so the held-gaze tick can read it
+  // without needing to be in the effect's dependency array.
+  const signalQualityRef = useRef<SignalQuality>("poor");
+
   const [isRunning, setIsRunning] = useState(false);
   const [phaseIndex, setPhaseIndex] = useState(0);
   const [phaseSecondsLeft, setPhaseSecondsLeft] = useState(
@@ -538,6 +568,12 @@ export default function SessionPage() {
   useEffect(() => {
     lastValidAttentionScoreRef.current = attentionScore;
   }, [attentionScore]);
+
+  // Keep signalQualityRef in sync so the held-gaze tick can read it
+  // without subscribing to state.
+  useEffect(() => {
+    signalQualityRef.current = signalQuality;
+  }, [signalQuality]);
 
 
   const isDebugMode = useMemo(
@@ -770,6 +806,8 @@ export default function SessionPage() {
         blinkEventTimesRef.current = [...blinkEventTimesRef.current, now].slice(-24);
         closureDurationsRef.current = [...closureDurationsRef.current, closedDuration].slice(-24);
         setBlinkCountLive((count) => count + 1);
+        // Mark this 1-second tick as containing a blink — used by held-gaze logic.
+        blinkInCurrentSecondRef.current = true;
         return;
       }
 
@@ -845,6 +883,78 @@ export default function SessionPage() {
 
     return () => window.clearInterval(interval);
   }, [isRunning, phaseIndex, currentPhase, script]);
+
+  // ---------------------------------------------------------------------------
+  // Held-gaze tick — runs every 1s, only during gaze phases.
+  // Determines whether this second qualifies as "held gaze" and updates
+  // the streak / longest / total counters. Hidden from the user; surfaces
+  // only in debug panels and the final session record.
+  // ---------------------------------------------------------------------------
+  useEffect(() => {
+    if (!isRunning || !isGazePhase) {
+      // Reset the streak when leaving a gaze phase so each gaze segment is
+      // measured independently. Longest + total persist across the session.
+      currentGazeStreakRef.current = 0;
+      setDebugGazeStreak(0);
+      blinkInCurrentSecondRef.current = false;
+      return;
+    }
+
+    // Lazy-compute iris baseline on first gaze tick if we never set one.
+    if (!irisBaselineRef.current) {
+      const samples = settleIrisSamplesRef.current;
+      if (samples.length >= 5) {
+        const xs = samples.map((s) => s.x).sort((a, b) => a - b);
+        const ys = samples.map((s) => s.y).sort((a, b) => a - b);
+        const mid = Math.floor(samples.length / 2);
+        irisBaselineRef.current = { x: xs[mid], y: ys[mid] };
+      } else {
+        // Fall back to centred assumption when we have too little baseline data.
+        irisBaselineRef.current = { x: 0.5, y: 0.5 };
+      }
+      setDebugIrisBaselineSet(true);
+    }
+
+    const interval = window.setInterval(() => {
+      // Pull current state from refs to avoid stale-closure issues.
+      const facePresent =
+        performance.now() - lastValidEyeAtRef.current < 1500;
+      const eyesOpen = latestEAROpenRef.current > 0.18; // EAR threshold for "open"
+      const noBlinkThisSecond = !blinkInCurrentSecondRef.current;
+      const quality = signalQualityRef.current;
+      const qualityOk = quality !== "poor";
+
+      let irisOk = true; // assume ok if iris unavailable (graceful degradation)
+      const iris = latestIrisRef.current;
+      const baseline = irisBaselineRef.current;
+      if (iris && baseline) {
+        const dx = Math.abs(iris.x - baseline.x);
+        const dy = Math.abs(iris.y - baseline.y);
+        irisOk = dx <= IRIS_TOLERANCE && dy <= IRIS_TOLERANCE;
+      }
+
+      const heldGaze = facePresent && eyesOpen && noBlinkThisSecond && qualityOk && irisOk;
+
+      if (heldGaze) {
+        currentGazeStreakRef.current += 1;
+        totalStillnessRef.current += 1;
+        if (currentGazeStreakRef.current > longestGazeRef.current) {
+          longestGazeRef.current = currentGazeStreakRef.current;
+        }
+      } else {
+        currentGazeStreakRef.current = 0;
+      }
+
+      setDebugGazeStreak(currentGazeStreakRef.current);
+      setDebugLongestGaze(longestGazeRef.current);
+      setDebugTotalStillness(totalStillnessRef.current);
+
+      // Reset for next tick window.
+      blinkInCurrentSecondRef.current = false;
+    }, 1000);
+
+    return () => window.clearInterval(interval);
+  }, [isRunning, isGazePhase]);
 
   useEffect(() => {
     attachStreamToVideo(cameraCheckVideoRef.current, cameraStream);
@@ -995,6 +1105,29 @@ export default function SessionPage() {
           } else {
             lastValidEyeAtRef.current = performance.now();
             processBlinkState(snapshot.eyeState);
+
+            // --- Phase 1 gaze tracking ---
+            // Collect iris samples during settle phase for baseline calibration.
+            if (
+              isRunning &&
+              currentPhase?.visualMode === "settle" &&
+              snapshot.irisAvailable
+            ) {
+              settleIrisSamplesRef.current.push({
+                x: snapshot.irisX,
+                y: snapshot.irisY,
+              });
+              // Cap at a sensible number to keep memory bounded across long settle.
+              if (settleIrisSamplesRef.current.length > 600) {
+                settleIrisSamplesRef.current = settleIrisSamplesRef.current.slice(-600);
+              }
+            }
+
+            // Stash latest iris snapshot for the per-second held-gaze tick.
+            latestIrisRef.current = snapshot.irisAvailable
+              ? { x: snapshot.irisX, y: snapshot.irisY }
+              : null;
+            latestEAROpenRef.current = snapshot.earAvg;
 
             const now = performance.now();
             if (now - lastEyeTrendSampleAtRef.current >= 120) {
@@ -1162,6 +1295,18 @@ export default function SessionPage() {
 
     setSaved(false);
 
+    // Reset all gaze-tracking state at session start.
+    settleIrisSamplesRef.current = [];
+    irisBaselineRef.current = null;
+    blinkInCurrentSecondRef.current = false;
+    currentGazeStreakRef.current = 0;
+    longestGazeRef.current = 0;
+    totalStillnessRef.current = 0;
+    setDebugGazeStreak(0);
+    setDebugLongestGaze(0);
+    setDebugTotalStillness(0);
+    setDebugIrisBaselineSet(false);
+
     if (!cameraStream) {
       await enableCamera();
     }
@@ -1195,6 +1340,8 @@ export default function SessionPage() {
         blinkCount: metrics.blinkCount,
         avgDrift,
         avgRecovery,
+        longestGazeSec: longestGazeRef.current,
+        totalStillnessSec: totalStillnessRef.current,
       };
 
       saveSession(record);           // local cache — instant
@@ -2061,57 +2208,59 @@ export default function SessionPage() {
                   paddingTop: "8px",
                 }}
               >
+                {/* Centered visual + text group */}
                 <div
                   style={{
+                    flex: 1,
                     width: "100%",
                     display: "flex",
                     flexDirection: "column",
                     alignItems: "center",
-                    gap: "8px",
-                    minHeight: isBodyPhase ? "108px" : "78px",
+                    justifyContent: "center",
+                    gap: "20px",
                   }}
                 >
                   {isBodyPhase && (
-                    <>
+                    <div style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: "10px" }}>
                       <div
                         style={{
-                          fontSize: "12px",
-                          letterSpacing: "0.12em",
+                          fontSize: "11px",
+                          letterSpacing: "0.14em",
                           textTransform: "uppercase",
-                          color: "rgba(203, 183, 158, 0.55)",
-                          fontFamily: "inherit",
+                          color: "rgba(203, 183, 158, 0.45)",
+                          fontFamily: '"Playfair Display", Georgia, serif',
                         }}
                       >
                         {bodyCue}
                       </div>
                       <div
                         style={{
-                          fontSize: "26px",
+                          fontSize: "28px",
                           fontFamily: '"Playfair Display", Georgia, serif',
                           fontWeight: 400,
-                          color: "rgba(245, 233, 218, 0.88)",
+                          color: "rgba(245, 233, 218, 0.82)",
                           lineHeight: 1.2,
                         }}
                       >
                         {bodyRegionLabel}
                       </div>
-                    </>
+                    </div>
                   )}
 
                   {!isBodyPhase && primaryInstruction && (
                     <div
                       style={{
-                        fontSize: "20px",
+                        fontSize: "22px",
                         fontFamily: '"Playfair Display", Georgia, serif',
                         fontWeight: 400,
-                        color: "rgba(245, 233, 218, 0.72)",
+                        color: "rgba(245, 233, 218, 0.68)",
                         lineHeight: 1.5,
+                        letterSpacing: "0.01em",
                       }}
                     >
                       {primaryInstruction}
                     </div>
                   )}
-                </div>
 
                 <div
                   style={{
@@ -2122,7 +2271,6 @@ export default function SessionPage() {
                     display: "flex",
                     alignItems: "center",
                     justifyContent: "center",
-                    marginBottom: "2px",
                   }}
                 >
                   {showDiya && (
@@ -2161,6 +2309,7 @@ export default function SessionPage() {
                     />
                   )}
                 </div>
+                </div>{/* end centered group */}
 
                 {isRunning && (
                   <CollapsibleCard
@@ -2356,6 +2505,15 @@ export default function SessionPage() {
                           );
                         });
                       })()}
+                    </div>
+                    {/* Gaze tracking debug stats */}
+                    <div style={{ display: "flex", justifyContent: "space-between", fontSize: "11px", color: "rgba(255,179,71,0.7)", marginTop: "8px", fontFamily: "monospace" }}>
+                      <span>streak: {debugGazeStreak}s</span>
+                      <span>longest: {debugLongestGaze}s</span>
+                      <span>stillness: {debugTotalStillness}s</span>
+                      <span style={{ color: debugIrisBaselineSet ? "rgba(180,220,160,0.7)" : "rgba(255,255,255,0.3)" }}>
+                        baseline: {debugIrisBaselineSet ? "set" : "—"}
+                      </span>
                     </div>
                   </div>
                 )}
@@ -2630,108 +2788,104 @@ sessionComplete ? (
                 paddingTop: "8px",
               }}
             >
+              {/* Centered visual + text group */}
               <div
                 style={{
+                  flex: 1,
                   width: "100%",
                   display: "flex",
                   flexDirection: "column",
                   alignItems: "center",
-                  gap: "8px",
-                  minHeight: isBodyPhase ? "108px" : "78px",
+                  justifyContent: "center",
+                  gap: "20px",
                 }}
               >
                 {isBodyPhase && (
-                  <>
+                  <div style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: "10px" }}>
                     <div
                       style={{
-                        fontSize: "12px",
-                        letterSpacing: "0.12em",
+                        fontSize: "11px",
+                        letterSpacing: "0.14em",
                         textTransform: "uppercase",
-                        color: "rgba(203, 183, 158, 0.55)",
-                        fontFamily: "inherit",
+                        color: "rgba(203, 183, 158, 0.45)",
+                        fontFamily: '"Playfair Display", Georgia, serif',
                       }}
                     >
                       {bodyCue}
                     </div>
                     <div
                       style={{
-                        fontSize: "26px",
+                        fontSize: "28px",
                         fontFamily: '"Playfair Display", Georgia, serif',
                         fontWeight: 400,
-                        color: "rgba(245, 233, 218, 0.88)",
+                        color: "rgba(245, 233, 218, 0.82)",
                         lineHeight: 1.2,
                       }}
                     >
                       {bodyRegionLabel}
                     </div>
-                  </>
+                  </div>
                 )}
 
                 {!isBodyPhase && primaryInstruction && (
                   <div
                     style={{
-                      fontSize: "20px",
+                      fontSize: "22px",
                       fontFamily: '"Playfair Display", Georgia, serif',
                       fontWeight: 400,
-                      color: "rgba(245, 233, 218, 0.72)",
+                      color: "rgba(245, 233, 218, 0.68)",
                       lineHeight: 1.5,
+                      letterSpacing: "0.01em",
                     }}
                   >
                     {primaryInstruction}
                   </div>
                 )}
-              </div>
 
-              <div
-                style={{
-                  position: "relative",
-                  width: "100%",
-                  maxWidth: "760px",
-                  minHeight: isSettlePhase ? "120px" : "360px",
-                  display: "flex",
-                  alignItems: "center",
-                  justifyContent: "center",
-                  marginBottom: "2px",
-                }}
-              >
+                <div
+                  style={{
+                    position: "relative",
+                    width: "100%",
+                    maxWidth: "760px",
+                    minHeight: isSettlePhase ? "120px" : "360px",
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                  }}
+                >
+                  {showDiya && (
+                    <div style={{ transition: "opacity 0.5s ease" }}>
+                      <video
+                        src="/diya-session.mp4"
+                        autoPlay
+                        loop
+                        muted
+                        playsInline
+                        style={{
+                          width: "clamp(220px, 36vw, 380px)",
+                          mixBlendMode: "screen",
+                          pointerEvents: "none",
+                          display: "block",
+                        }}
+                      />
+                    </div>
+                  )}
 
-
-                {showDiya && (
-                  <div
-                    style={{
-                      transition: "opacity 0.5s ease",
-                    }}
-                  >
-                    <video
-                      src="/diya-session.mp4"
-                      autoPlay
-                      loop
-                      muted
-                      playsInline
-                      style={{
-                        width: "clamp(220px, 36vw, 380px)",
-                        mixBlendMode: "screen",
-                        pointerEvents: "none",
-                        display: "block",
-                      }}
+                  {isBodyPhase && currentPhase?.bodyRegion && (
+                    <BodyGuideOverlay
+                      activeRegion={currentPhase.bodyRegion}
+                      phaseSecondsLeft={phaseSecondsLeft}
                     />
-                  </div>
-                )}
+                  )}
 
-                {isBodyPhase && currentPhase?.bodyRegion && (
-                  <BodyGuideOverlay
-                    activeRegion={currentPhase.bodyRegion}
-                    phaseSecondsLeft={phaseSecondsLeft}
-                  />
-                )}
-
-                {isBreathPhase && currentPhase?.breathAction && (
-                  <BreathGuide
-                    action={currentPhase.breathAction}
-                    durationSec={currentPhase.durationSec}
-                  />
-                )}
-              </div>
+                  {isBreathPhase && currentPhase?.breathAction && (
+                    <BreathGuide
+                      action={currentPhase.breathAction}
+                      durationSec={currentPhase.durationSec}
+                    />
+                  )}
+                </div>
+              </div>{/* end centered group */}
 
               {isRunning && (
                 <div
@@ -2939,6 +3093,15 @@ sessionComplete ? (
                         );
                       });
                     })()}
+                  </div>
+                  {/* Gaze tracking debug stats */}
+                  <div style={{ display: "flex", justifyContent: "space-between", fontSize: "11px", color: "rgba(255,179,71,0.7)", marginTop: "8px", fontFamily: "monospace" }}>
+                    <span>streak: {debugGazeStreak}s</span>
+                    <span>longest: {debugLongestGaze}s</span>
+                    <span>stillness: {debugTotalStillness}s</span>
+                    <span style={{ color: debugIrisBaselineSet ? "rgba(180,220,160,0.7)" : "rgba(255,255,255,0.3)" }}>
+                      baseline: {debugIrisBaselineSet ? "set" : "—"}
+                    </span>
                   </div>
                 </div>
               )}
