@@ -31,13 +31,19 @@ create table if not exists public.sessions (
 
   -- Phase 1 gaze metrics (nullable for back-compat with older rows)
   longest_gaze_sec     integer,
-  total_stillness_sec  integer
+  total_stillness_sec  integer,
+
+  -- Phase 2 — user feedback note + milestones unlocked this session
+  note                 text,
+  new_milestones       text[]
 );
 
 -- Backfill columns for existing deployments. Safe to re-run.
 alter table public.sessions
   add column if not exists longest_gaze_sec integer,
-  add column if not exists total_stillness_sec integer;
+  add column if not exists total_stillness_sec integer,
+  add column if not exists note text,
+  add column if not exists new_milestones text[];
 
 -- Index for fast per-user history queries
 create index if not exists sessions_user_id_created_at

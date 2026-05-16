@@ -22,6 +22,10 @@ export type SessionRecord = {
   longestGazeSec?: number;
   // Sum of all held-gaze seconds across all gaze segments this session.
   totalStillnessSec?: number;
+  // Optional free-form note from the user, treated as developer feedback.
+  note?: string;
+  // IDs of milestones that became newly satisfied in this session.
+  newMilestones?: string[];
 };
 
 export type LocalProfile = {
@@ -293,6 +297,8 @@ export async function saveSessionRemote(record: SessionRecord): Promise<void> {
     avg_recovery: record.avgRecovery ?? null,
     longest_gaze_sec: record.longestGazeSec ?? null,
     total_stillness_sec: record.totalStillnessSec ?? null,
+    note: record.note ?? null,
+    new_milestones: record.newMilestones ?? null,
   });
 
   if (error) {
@@ -332,6 +338,8 @@ export async function loadHistoryRemote(): Promise<SessionRecord[]> {
     avgRecovery: row.avg_recovery ?? undefined,
     longestGazeSec: row.longest_gaze_sec ?? undefined,
     totalStillnessSec: row.total_stillness_sec ?? undefined,
+    note: row.note ?? undefined,
+    newMilestones: row.new_milestones ?? undefined,
   }));
 }
 
