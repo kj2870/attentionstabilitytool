@@ -2758,114 +2758,149 @@ sessionComplete ? (
           <div
             style={{
               width: "100%",
-              maxWidth: "560px",
-              padding: "60px 28px 40px",
+              maxWidth: "440px",
+              padding: "80px 24px 60px",
               margin: "0 auto",
               textAlign: "center",
               display: "flex",
               flexDirection: "column",
               alignItems: "center",
-              gap: "44px",
+              gap: "56px",
+              // Consistent type system across the whole screen.
+              fontFamily: '"DM Sans", system-ui, sans-serif',
+              color: "rgba(245, 233, 218, 0.85)",
             }}
           >
-            {/* Hero: longest gaze this session */}
-            <div style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: "10px" }}>
+            {/* Hero — the only serif moment on the screen */}
+            <div style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: "14px" }}>
               <div
                 style={{
-                  fontSize: "13px",
-                  letterSpacing: "0.12em",
+                  fontSize: "11px",
+                  letterSpacing: "0.22em",
                   textTransform: "uppercase",
-                  color: "rgba(203, 183, 158, 0.55)",
-                  fontFamily: '"Playfair Display", Georgia, serif',
+                  color: "rgba(245, 233, 218, 0.4)",
                 }}
               >
                 Longest gaze
               </div>
               <div
                 style={{
-                  fontSize: "clamp(64px, 12vw, 96px)",
+                  fontSize: "clamp(72px, 14vw, 108px)",
                   fontFamily: '"Playfair Display", Georgia, serif',
                   fontWeight: 400,
-                  color: "rgba(245, 233, 218, 0.92)",
+                  color: "rgba(245, 233, 218, 0.95)",
                   lineHeight: 1,
+                  letterSpacing: "-0.01em",
                 }}
               >
                 {longestGazeRef.current}s
               </div>
+              <div
+                style={{
+                  fontSize: "13px",
+                  color: "rgba(245, 233, 218, 0.45)",
+                  marginTop: "6px",
+                }}
+              >
+                {(() => {
+                  const allHistory = [...loadHistory()];
+                  const sessionN = allHistory.length + 1;
+                  const totalMin = Math.round(
+                    (allHistory.reduce((s, r) => s + (r.totalStillnessSec ?? 0), 0) + totalStillnessRef.current) / 60
+                  );
+                  const bestEver = Math.max(
+                    longestGazeRef.current,
+                    ...allHistory.map((r) => r.longestGazeSec ?? 0)
+                  );
+                  return `Session ${sessionN}  ·  ${totalMin}m total  ·  ${bestEver}s best`;
+                })()}
+              </div>
             </div>
 
-            {/* Lifetime line */}
-            <div
-              style={{
-                fontSize: "14px",
-                color: "rgba(203, 183, 158, 0.6)",
-                fontFamily: '"Playfair Display", Georgia, serif',
-              }}
-            >
-              {(() => {
-                const allHistory = [...loadHistory()];
-                const sessionN = allHistory.length + 1;
-                const totalMin = Math.round(
-                  (allHistory.reduce((s, r) => s + (r.totalStillnessSec ?? 0), 0) + totalStillnessRef.current) / 60
-                );
-                const bestEver = Math.max(
-                  longestGazeRef.current,
-                  ...allHistory.map((r) => r.longestGazeSec ?? 0)
-                );
-                return `Session ${sessionN} · ${totalMin}m total · ${bestEver}s best`;
-              })()}
-            </div>
-
-            {/* Newly unlocked milestones */}
+            {/* Milestone — single quiet line, no heading-of-a-heading */}
             {pendingMilestones.length > 0 && (
-              <div style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: "8px" }}>
+              <div style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: "6px" }}>
                 {pendingMilestones.map((id) => (
-                  <div key={id} style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: "4px" }}>
-                    <div style={{ fontSize: "12px", letterSpacing: "0.14em", textTransform: "uppercase", color: "rgba(255, 179, 71, 0.75)" }}>
-                      ★ New milestone
-                    </div>
-                    <div style={{ fontSize: "18px", fontFamily: '"Playfair Display", Georgia, serif', color: "rgba(245, 233, 218, 0.85)" }}>
-                      {milestoneLabel(id)}
-                    </div>
+                  <div
+                    key={id}
+                    style={{
+                      fontSize: "13px",
+                      color: "rgba(255, 179, 71, 0.85)",
+                      letterSpacing: "0.02em",
+                    }}
+                  >
+                    ★  {milestoneLabel(id)}
                   </div>
                 ))}
               </div>
             )}
 
-            {/* Feedback note */}
-            <div style={{ width: "100%", display: "flex", flexDirection: "column", alignItems: "center", gap: "10px" }}>
-              <div style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: "4px" }}>
-                <div style={{ fontSize: "13px", letterSpacing: "0.06em", color: "rgba(245, 233, 218, 0.7)", fontFamily: '"Playfair Display", Georgia, serif' }}>
-                  Feedback (optional)
-                </div>
-                <div style={{ fontSize: "12px", color: "rgba(203, 183, 158, 0.5)" }}>
-                  Sent to the developer to improve the app.
-                </div>
+            {/* Feedback — looks like a writing surface, not a box */}
+            <div style={{ width: "100%", display: "flex", flexDirection: "column", alignItems: "stretch", gap: "12px" }}>
+              <div
+                style={{
+                  fontSize: "11px",
+                  letterSpacing: "0.22em",
+                  textTransform: "uppercase",
+                  color: "rgba(245, 233, 218, 0.4)",
+                  textAlign: "center",
+                }}
+              >
+                Feedback
               </div>
               <textarea
                 value={note}
                 onChange={(e) => setNote(e.target.value)}
-                rows={4}
+                rows={3}
+                placeholder="Optional. Read by the developer to improve the app."
                 style={{
                   width: "100%",
-                  padding: "14px 16px",
-                  borderRadius: "14px",
-                  border: "1px solid rgba(255,255,255,0.10)",
-                  background: "rgba(255,255,255,0.03)",
-                  color: "#F5E9DA",
-                  fontSize: "15px",
-                  lineHeight: 1.55,
+                  padding: "12px 0",
+                  border: "none",
+                  borderBottom: "1px solid rgba(245, 233, 218, 0.12)",
+                  background: "transparent",
+                  color: "rgba(245, 233, 218, 0.9)",
+                  fontSize: "14px",
+                  lineHeight: 1.6,
                   fontFamily: "inherit",
-                  resize: "vertical",
+                  resize: "none",
                   outline: "none",
+                  textAlign: "center",
                 }}
-                onFocus={(e) => (e.currentTarget.style.borderColor = "rgba(255,179,71,0.35)")}
-                onBlur={(e) => (e.currentTarget.style.borderColor = "rgba(255,255,255,0.10)")}
+                onFocus={(e) => (e.currentTarget.style.borderBottomColor = "rgba(255,179,71,0.4)")}
+                onBlur={(e) => (e.currentTarget.style.borderBottomColor = "rgba(245, 233, 218, 0.12)")}
               />
             </div>
 
-            <button className="primary-button" onClick={handleSaveSession} disabled={saved}>
-              {saved ? "Saved" : "Save and finish"}
+            <button
+              onClick={handleSaveSession}
+              disabled={saved}
+              style={{
+                background: "transparent",
+                border: "1px solid rgba(255, 179, 71, 0.35)",
+                color: "rgba(255, 179, 71, 0.9)",
+                padding: "12px 32px",
+                borderRadius: "999px",
+                fontSize: "12px",
+                letterSpacing: "0.22em",
+                textTransform: "uppercase",
+                fontFamily: "inherit",
+                cursor: saved ? "default" : "pointer",
+                opacity: saved ? 0.5 : 1,
+                transition: "background 0.2s, border-color 0.2s",
+              }}
+              onMouseEnter={(e) => {
+                if (!saved) {
+                  e.currentTarget.style.background = "rgba(255, 179, 71, 0.08)";
+                  e.currentTarget.style.borderColor = "rgba(255, 179, 71, 0.6)";
+                }
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.background = "transparent";
+                e.currentTarget.style.borderColor = "rgba(255, 179, 71, 0.35)";
+              }}
+            >
+              {saved ? "Saved" : "Finish"}
             </button>
           </div>
           )
