@@ -2452,6 +2452,12 @@ export default function SessionPage() {
                           mixBlendMode: "screen",
                           pointerEvents: "none",
                           display: "block",
+                          // Feather edges with a radial mask so the video bleeds
+                          // into the background instead of looking like a rectangle.
+                          WebkitMaskImage:
+                            "radial-gradient(ellipse 70% 80% at center 55%, #000 35%, rgba(0,0,0,0.85) 55%, rgba(0,0,0,0.4) 75%, transparent 95%)",
+                          maskImage:
+                            "radial-gradient(ellipse 70% 80% at center 55%, #000 35%, rgba(0,0,0,0.85) 55%, rgba(0,0,0,0.4) 75%, transparent 95%)",
                         }}
                       />
                     </div>
@@ -3103,6 +3109,10 @@ sessionComplete ? (
                           mixBlendMode: "screen",
                           pointerEvents: "none",
                           display: "block",
+                          WebkitMaskImage:
+                            "radial-gradient(ellipse 70% 80% at center 55%, #000 35%, rgba(0,0,0,0.85) 55%, rgba(0,0,0,0.4) 75%, transparent 95%)",
+                          maskImage:
+                            "radial-gradient(ellipse 70% 80% at center 55%, #000 35%, rgba(0,0,0,0.85) 55%, rgba(0,0,0,0.4) 75%, transparent 95%)",
                         }}
                       />
                     </div>
