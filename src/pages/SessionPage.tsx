@@ -2417,12 +2417,16 @@ export default function SessionPage() {
                   {!isBodyPhase && primaryInstruction && (
                     <div
                       style={{
-                        fontSize: "22px",
+                        fontSize: isIntegratePhase ? "clamp(40px, 6vw, 56px)" : "22px",
                         fontFamily: '"Playfair Display", Georgia, serif',
                         fontWeight: 400,
-                        color: "rgba(245, 233, 218, 0.68)",
-                        lineHeight: 1.5,
+                        fontStyle: isIntegratePhase ? "italic" : "normal",
+                        color: "rgba(245, 233, 218, 0.78)",
+                        lineHeight: isIntegratePhase ? 1.1 : 1.5,
                         letterSpacing: "0.01em",
+                        maxWidth: isIntegratePhase ? undefined : "32ch",
+                        textAlign: "center",
+                        transition: "font-size 0.6s ease, opacity 0.6s ease",
                       }}
                     >
                       {primaryInstruction}
