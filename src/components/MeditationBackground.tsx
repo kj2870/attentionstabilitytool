@@ -3,10 +3,11 @@ type MeditationBackgroundProps = {
 };
 
 export default function MeditationBackground({ children }: MeditationBackgroundProps) {
+  // Warm dark palette that matches the diya video's amber-on-black tonality.
+  // Avoids cool blue/purple notes that made the diya feel like a separate block.
   const palette = {
-    sky: "linear-gradient(180deg, #10131d 0%, #181624 35%, #241c21 65%, #0E0E10 100%)",
-    glow: "rgba(255, 150, 70, 0.08)",
-    accent: "rgba(255, 180, 110, 0.05)",
+    sky: "linear-gradient(180deg, #0a0805 0%, #15100a 40%, #1a120a 70%, #0a0805 100%)",
+    glow: "rgba(255, 150, 70, 0.10)",
   };
 
   return (
@@ -18,66 +19,37 @@ export default function MeditationBackground({ children }: MeditationBackgroundP
         background: palette.sky,
       }}
     >
-      {/* soft halo behind diya */}
+      {/* soft halo behind diya — pulled slightly lower to sit behind the flame */}
       <div
         style={{
           position: "absolute",
           inset: 0,
-          background: `radial-gradient(circle at center 46%, ${palette.glow} 0%, transparent 30%)`,
+          background: `radial-gradient(ellipse 60% 45% at center 48%, ${palette.glow} 0%, transparent 65%)`,
           pointerEvents: "none",
         }}
       />
 
-      {/* vignette */}
+      {/* vignette — corners gently darker to focus attention centre-screen */}
       <div
         style={{
           position: "absolute",
           inset: 0,
           background:
-            "radial-gradient(circle at center, transparent 0%, transparent 35%, rgba(0,0,0,0.28) 68%, rgba(0,0,0,0.58) 100%)",
+            "radial-gradient(circle at center, transparent 0%, transparent 40%, rgba(0,0,0,0.32) 75%, rgba(0,0,0,0.62) 100%)",
           pointerEvents: "none",
         }}
       />
 
-      {/* simple temple/floor suggestion */}
+      {/* Soft floor gradient — no border line, just a gentle warmth from below */}
       <div
         style={{
           position: "absolute",
           left: 0,
           right: 0,
           bottom: 0,
-          height: "28%",
+          height: "32%",
           background:
-            "linear-gradient(180deg, rgba(0,0,0,0.0) 0%, rgba(20,14,10,0.35) 10%, rgba(24,18,14,0.65) 100%)",
-          borderTop: `1px solid ${palette.accent}`,
-          pointerEvents: "none",
-        }}
-      />
-
-      {/* pillar suggestions */}
-      <div
-        style={{
-          position: "absolute",
-          left: "8%",
-          top: 0,
-          bottom: 0,
-          width: "34px",
-          background:
-            "linear-gradient(180deg, rgba(255,255,255,0.04) 0%, rgba(255,255,255,0.01) 100%)",
-          opacity: 0.35,
-          pointerEvents: "none",
-        }}
-      />
-      <div
-        style={{
-          position: "absolute",
-          right: "8%",
-          top: 0,
-          bottom: 0,
-          width: "34px",
-          background:
-            "linear-gradient(180deg, rgba(255,255,255,0.04) 0%, rgba(255,255,255,0.01) 100%)",
-          opacity: 0.35,
+            "linear-gradient(180deg, rgba(0,0,0,0) 0%, rgba(30,18,8,0.28) 40%, rgba(20,12,6,0.55) 100%)",
           pointerEvents: "none",
         }}
       />
