@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import MeditationBackground from "../components/MeditationBackground";
 import BodyGuideOverlay from "../components/BodyGuideOverlay";
 import BreathGuide from "../components/BreathGuide";
+import SettleHalo from "../components/SettleHalo";
 import type { TrackingMetrics } from "../lib/trackingEngine";
 import {
   createSessionScript,
@@ -407,8 +408,8 @@ function CollapsibleCard({ title, open, onToggle, children }: CollapsibleCardPro
         maxWidth: "760px",
         padding: "12px 14px",
         textAlign: "left",
-        background: "rgba(255,255,255,0.028)",
-        border: "1px solid rgba(255,255,255,0.12)",
+        background: "rgba(255, 179, 71, 0.02)",
+        border: "1px solid rgba(255, 179, 71, 0.06)",
       }}
     >
       <button
@@ -1600,8 +1601,12 @@ export default function SessionPage() {
 
   const primaryInstruction = sessionComplete
     ? ""
-    : isBodyPhase || isBreathPhase || isGazePhase || isEyesClosedPhase || isIntegratePhase
+    : isBodyPhase || isGazePhase || isEyesClosedPhase
     ? ""
+    : isBreathPhase
+    ? (currentPhase?.breathAction === "inhale" ? "Inhale" : "Exhale")
+    : isIntegratePhase
+    ? "Rest"
     : currentPhase?.instruction ?? "";
 
   // Interpretable stability label from recent attention variation.
@@ -2293,7 +2298,7 @@ export default function SessionPage() {
                 </div>
               )}
 
-              {(researchStep === "session" || cameraStream || cameraState === "requesting") && (
+              {((!isRunning && (cameraStream || cameraState === "requesting")) || (isRunning && isDebugMode)) && (
                 <div
                   style={{
                     position: "fixed",
@@ -2412,12 +2417,16 @@ export default function SessionPage() {
                   {!isBodyPhase && primaryInstruction && (
                     <div
                       style={{
-                        fontSize: "22px",
+                        fontSize: isIntegratePhase ? "clamp(40px, 6vw, 56px)" : "22px",
                         fontFamily: '"Playfair Display", Georgia, serif',
                         fontWeight: 400,
-                        color: "rgba(245, 233, 218, 0.68)",
-                        lineHeight: 1.5,
+                        fontStyle: isIntegratePhase ? "italic" : "normal",
+                        color: "rgba(245, 233, 218, 0.78)",
+                        lineHeight: isIntegratePhase ? 1.1 : 1.5,
                         letterSpacing: "0.01em",
+                        maxWidth: isIntegratePhase ? undefined : "32ch",
+                        textAlign: "center",
+                        transition: "font-size 0.6s ease, opacity 0.6s ease",
                       }}
                     >
                       {primaryInstruction}
@@ -2476,10 +2485,12 @@ export default function SessionPage() {
                       durationSec={currentPhase.durationSec}
                     />
                   )}
+
+                  {(isSettlePhase || isIntegratePhase) && <SettleHalo />}
                 </div>
                 </div>{/* end centered group */}
 
-                {isRunning && (
+                {isRunning && isDebugMode && (
                   <CollapsibleCard
                     title="Live Signals"
                     open={panelsOpen.liveSignals}
@@ -2534,6 +2545,7 @@ export default function SessionPage() {
                   </CollapsibleCard>
                 )}
 
+                {isDebugMode && (
                 <CollapsibleCard
                   title="Trend Graphs"
                   open={panelsOpen.graphs}
@@ -2592,6 +2604,7 @@ export default function SessionPage() {
                     />
                   </div>
                 </CollapsibleCard>
+                )}
 
                 {!isRunning && (
                   <div style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: "14px" }}>
@@ -2658,11 +2671,10 @@ export default function SessionPage() {
                 <div
                   style={{
                     width: "100%",
-                    height: "8px",
+                    height: "4px",
                     borderRadius: "999px",
-                    background: "rgba(255,255,255,0.12)",
-                    overflow: "hidden",
-                    boxShadow: "inset 0 1px 2px rgba(0,0,0,0.24)",
+                    background: "rgba(255,255,255,0.04)",
+                    overflow: "visible",
                   }}
                 >
                   <div
@@ -2671,8 +2683,9 @@ export default function SessionPage() {
                       height: "100%",
                       borderRadius: "inherit",
                       background:
-                        "linear-gradient(90deg, rgba(240,168,86,0.96), rgba(255,226,183,0.92))",
+                        "linear-gradient(90deg, rgba(240,168,86,0.92), rgba(255,226,183,0.88))",
                       transition: isRunning ? "width 1s linear" : "width 0.35s ease",
+                      boxShadow: "0 0 12px rgba(255,179,71,0.45)",
                     }}
                   />
                 </div>
@@ -2953,7 +2966,7 @@ sessionComplete ? (
                 </div>
               </div>
             )}
-            {(isRunning || cameraStream || cameraState === "requesting") && (
+            {((!isRunning && (cameraStream || cameraState === "requesting")) || (isRunning && isDebugMode)) && (
               <div
                 style={{
                   position: "fixed",
@@ -3131,6 +3144,8 @@ sessionComplete ? (
                       durationSec={currentPhase.durationSec}
                     />
                   )}
+
+                  {(isSettlePhase || isIntegratePhase) && <SettleHalo />}
                 </div>
               </div>{/* end centered group */}
 

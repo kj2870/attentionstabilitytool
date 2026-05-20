@@ -20,53 +20,21 @@ export default function BreathGuide({ action, durationSec }: BreathGuideProps) {
         pointerEvents: "none",
       }}
     >
+      {/* Breath orb only — the "Inhale"/"Exhale" label is rendered by SessionPage
+          in the same top text slot used by all other phases (consistent layout). */}
       <div
         style={{
-          position: "absolute",
-          inset: 0,
-          background: "rgba(0,0,0,0.28)",
+          width: "260px",
+          height: "260px",
+          borderRadius: "50%",
+          background: isInhale
+            ? "radial-gradient(circle, rgba(255,200,130,0.42) 0%, rgba(255,170,90,0.22) 30%, rgba(220,130,60,0.10) 55%, rgba(180,100,40,0.04) 75%, transparent 95%)"
+            : "radial-gradient(circle, rgba(255,180,110,0.28) 0%, rgba(220,140,70,0.14) 35%, rgba(180,100,40,0.06) 60%, transparent 90%)",
+          transform: isInhale ? "scale(1.18)" : "scale(0.82)",
+          transition: `transform ${durationSec}s ease-in-out, background 1.2s ease`,
+          filter: "blur(2px)",
         }}
       />
-
-      <div
-        style={{
-          position: "relative",
-          zIndex: 2,
-          display: "flex",
-          flexDirection: "column",
-          alignItems: "center",
-          gap: "18px",
-        }}
-      >
-        <div
-          style={{
-            width: "190px",
-            height: "190px",
-            borderRadius: "50%",
-            border: isInhale
-              ? "2px solid rgba(232, 122, 95, 0.45)"
-              : "2px solid rgba(110, 160, 205, 0.42)",
-            background: isInhale
-              ? "radial-gradient(circle, rgba(232,122,95,0.24) 0%, rgba(232,122,95,0.08) 48%, transparent 74%)"
-              : "radial-gradient(circle, rgba(110,160,205,0.2) 0%, rgba(110,160,205,0.06) 48%, transparent 74%)",
-            transform: isInhale ? "scale(1.16)" : "scale(0.8)",
-            transition: `transform ${durationSec}s linear`,
-            boxShadow: isInhale
-              ? "0 0 58px rgba(232,122,95,0.14)"
-              : "0 0 58px rgba(110,160,205,0.13)",
-          }}
-        />
-
-        <div
-          style={{
-            fontSize: "28px",
-            color: "#F5E9DA",
-            minHeight: "34px",
-          }}
-        >
-          {isInhale ? "Inhale" : "Exhale"}
-        </div>
-      </div>
     </div>
   );
 }
