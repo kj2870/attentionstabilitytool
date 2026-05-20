@@ -83,16 +83,16 @@ export default function HomePage() {
         }}
       >
         {/* Diya + wordmark — tight unit */}
-        <div style={{ marginBottom: "6px", display: "flex", justifyContent: "center" }}>
-          <div style={{ transform: "translateX(-8px)" }}>
+        <div style={{ marginBottom: "-8px", display: "flex", justifyContent: "center" }}>
+          <div style={{ transform: "translateX(-8px) scale(1.25)", transformOrigin: "center bottom" }}>
             <Diya />
           </div>
         </div>
 
         <h1
           style={{
-            fontSize: "clamp(48px, 7vw, 72px)",
-            marginBottom: "10px",
+            fontSize: "clamp(40px, 5.6vw, 60px)",
+            marginBottom: "12px",
             fontWeight: 400,
             lineHeight: 1.1,
             letterSpacing: "0.01em",
@@ -105,10 +105,10 @@ export default function HomePage() {
         <p
           style={{
             maxWidth: "36ch",
-            fontSize: "clamp(15px, 1.8vw, 18px)",
+            fontSize: "clamp(16px, 1.9vw, 19px)",
             lineHeight: 1.55,
-            color: "rgba(217, 203, 184, 0.62)",
-            marginBottom: "24px",
+            color: "rgba(217, 203, 184, 0.68)",
+            marginBottom: "28px",
           }}
         >
           A daily ritual to train attention and calm the mind.
