@@ -1,4 +1,4 @@
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { RESEARCH_MODE } from "../lib/presentationMode";
 import { getMandalaDay, loadHistory, type SessionRecord } from "../lib/storage";
 
@@ -121,12 +121,12 @@ function SessionDetail({ session, dayNumber }: { session: SessionRecord; dayNumb
   return (
     <div
       style={{
-        marginTop: "32px",
+        marginTop: "24px",
         textAlign: "center",
         display: "flex",
         flexDirection: "column",
         alignItems: "center",
-        gap: "16px",
+        gap: "10px",
         animation: "fadeIn 0.35s ease",
       }}
     >
@@ -143,35 +143,28 @@ function SessionDetail({ session, dayNumber }: { session: SessionRecord; dayNumb
 
       <div
         style={{
-          fontSize: "clamp(56px, 10vw, 80px)",
-          fontFamily: '"Playfair Display", Georgia, serif',
-          fontWeight: 400,
-          color: "rgba(245, 233, 218, 0.95)",
-          lineHeight: 1,
-          letterSpacing: "-0.01em",
+          fontSize: "14px",
+          color: "rgba(245, 233, 218, 0.78)",
+          lineHeight: 1.7,
         }}
       >
-        {session.longestGazeSec ?? 0}s
+        Longest gaze: {session.longestGazeSec ?? 0} sec
+        {session.totalStillnessSec !== undefined && (
+          <>
+            <span style={{ color: "rgba(245, 233, 218, 0.25)", margin: "0 10px" }}>·</span>
+            Stillness: {formatStillness(session.totalStillnessSec)}
+          </>
+        )}
       </div>
-
-      <div style={{ fontSize: "11px", letterSpacing: "0.22em", textTransform: "uppercase", color: "rgba(245, 233, 218, 0.4)" }}>
-        Longest gaze
-      </div>
-
-      {session.totalStillnessSec !== undefined && (
-        <div style={{ fontSize: "13px", color: "rgba(245, 233, 218, 0.55)", marginTop: "4px" }}>
-          {formatStillness(session.totalStillnessSec)} of stillness
-        </div>
-      )}
 
       {session.note && (
         <div
           style={{
-            marginTop: "16px",
+            marginTop: "4px",
             maxWidth: "440px",
-            fontSize: "14px",
+            fontSize: "13px",
             lineHeight: 1.6,
-            color: "rgba(245, 233, 218, 0.65)",
+            color: "rgba(245, 233, 218, 0.55)",
             fontStyle: "italic",
             padding: "0 16px",
           }}
@@ -203,7 +196,7 @@ function MandalaRing({
       style={{
         position: "relative",
         width: "100%",
-        maxWidth: "360px",
+        maxWidth: "min(320px, 55vh)",
         margin: "0 auto",
         aspectRatio: "1 / 1",
       }}
@@ -313,6 +306,14 @@ export default function HistoryPage() {
   const daySessions = useMemo(() => buildDaySessions(history), [history]);
   const [selectedDay, setSelectedDay] = useState<number | null>(null);
 
+  // Lock body scroll so the whole page stays within a single viewport.
+  useEffect(() => {
+    document.body.style.overflow = "hidden";
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, []);
+
   if (RESEARCH_MODE) {
     return (
       <div style={{ padding: "80px 24px 100px", maxWidth: "900px", margin: "0 auto", textAlign: "center" }}>
@@ -327,10 +328,15 @@ export default function HistoryPage() {
   return (
     <div
       style={{
-        padding: "60px 24px 120px",
+        padding: "32px 24px",
         maxWidth: "640px",
         margin: "0 auto",
         fontFamily: '"DM Sans", system-ui, sans-serif',
+        height: "calc(100vh - 70px)",
+        display: "flex",
+        flexDirection: "column",
+        justifyContent: "center",
+        overflow: "hidden",
       }}
     >
       <style>{`

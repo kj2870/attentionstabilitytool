@@ -14,7 +14,20 @@
       "PowerShell(head -5)",
       "WebFetch(domain:noocap.notion.site)",
       "Bash(git add *)",
-      "Bash(git commit -m ' *)"
+      "Bash(git commit -m ' *)",
+      "Bash(git push *)",
+      "Bash(npm run *)",
+      "Bash(graphify update *)",
+      "Bash(npx graphify *)",
+      "Bash(where graphify *)",
+      "Bash(ls \"C:\\\\Users\\\\kj287\\\\AppData\\\\Roaming\\\\npm\" | grep graphify; ls \"C:\\\\Users\\\\kj287\\\\AppData\\\\Local\\\\Programs\" | grep -i graphify 2>/dev/null)",
+      "Bash(\"C:\\\\Users\\\\kj287\\\\AppData\\\\Roaming\\\\Python\\\\Python314\\\\Scripts\\\\graphify.exe\" update *)",
+      "Bash(git commit *)",
+      "Bash(cp \"C:\\\\Users\\\\kj287\\\\Documents\\\\01_Projects\\\\focusflow\\\\public\\\\Session Diya Animation.mp4\" \"C:\\\\Users\\\\kj287\\\\Documents\\\\01_Projects\\\\focusflow\\\\.claude\\\\worktrees\\\\zen-kalam-eba609\\\\public\\\\Session Diya Animation.mp4\")",
+      "mcp__plugin_bio-research_consensus__search",
+      "Bash(ls \"C:\\\\Users\\\\kj287\\\\Downloads\" | grep -i \"body\\\\|figure\")",
+      "Bash(npm install *)",
+      "Bash(node scripts/generate-icons.mjs)"
     ]
   }
 }
