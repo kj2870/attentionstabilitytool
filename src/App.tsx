@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { Navigate, Route, Routes, useLocation } from "react-router-dom";
 import type { User } from "@supabase/supabase-js";
 import Layout from "./components/Layout";
+import InstallPrompt from "./components/InstallPrompt";
 import HomePage from "./pages/HomePage";
 import HistoryPage from "./pages/HistoryPage";
 import PrivacyPage from "./pages/PrivacyPage";
@@ -107,5 +108,10 @@ export default function App() {
   const onboardingComplete = hasCompletedOnboarding();
   const isAuthenticated = !!user && !!activeProfile && onboardingComplete;
 
-  return isAuthenticated ? <AuthedRoutes /> : <UnauthRoutes />;
+  return (
+    <>
+      {isAuthenticated ? <AuthedRoutes /> : <UnauthRoutes />}
+      <InstallPrompt />
+    </>
+  );
 }
