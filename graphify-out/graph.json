@@ -171,7 +171,7 @@
       "source_file": "src/components/BodyGuideOverlay.tsx",
       "source_location": "L1",
       "id": "src_components_bodyguideoverlay_tsx",
-      "community": 3,
+      "community": 2,
       "norm_label": "bodyguideoverlay.tsx"
     },
     {
@@ -180,25 +180,25 @@
       "source_file": "src/components/BodyGuideOverlay.tsx",
       "source_location": "L3",
       "id": "components_bodyguideoverlay_bodyguideoverlayprops",
-      "community": 3,
+      "community": 2,
       "norm_label": "bodyguideoverlayprops"
     },
     {
-      "label": "REGION_POSITIONS",
+      "label": "REGION_BOUNDS",
       "file_type": "code",
       "source_file": "src/components/BodyGuideOverlay.tsx",
-      "source_location": "L14",
-      "id": "components_bodyguideoverlay_region_positions",
-      "community": 3,
-      "norm_label": "region_positions"
+      "source_location": "L25",
+      "id": "components_bodyguideoverlay_region_bounds",
+      "community": 2,
+      "norm_label": "region_bounds"
     },
     {
       "label": "BodyGuideOverlay()",
       "file_type": "code",
       "source_file": "src/components/BodyGuideOverlay.tsx",
-      "source_location": "L59",
+      "source_location": "L36",
       "id": "components_bodyguideoverlay_bodyguideoverlay",
-      "community": 3,
+      "community": 2,
       "norm_label": "bodyguideoverlay()"
     },
     {
@@ -207,7 +207,7 @@
       "source_file": "src/components/BreathGuide.tsx",
       "source_location": "L1",
       "id": "src_components_breathguide_tsx",
-      "community": 3,
+      "community": 2,
       "norm_label": "breathguide.tsx"
     },
     {
@@ -216,7 +216,7 @@
       "source_file": "src/components/BreathGuide.tsx",
       "source_location": "L3",
       "id": "components_breathguide_breathguideprops",
-      "community": 3,
+      "community": 2,
       "norm_label": "breathguideprops"
     },
     {
@@ -225,7 +225,7 @@
       "source_file": "src/components/BreathGuide.tsx",
       "source_location": "L8",
       "id": "components_breathguide_breathguide",
-      "community": 3,
+      "community": 2,
       "norm_label": "breathguide()"
     },
     {
@@ -261,7 +261,7 @@
       "source_file": "src/components/Diya.tsx",
       "source_location": "L1",
       "id": "src_components_diya_tsx",
-      "community": 2,
+      "community": 3,
       "norm_label": "diya.tsx"
     },
     {
@@ -270,7 +270,7 @@
       "source_file": "src/components/Diya.tsx",
       "source_location": "L3",
       "id": "components_diya_diyaprops",
-      "community": 2,
+      "community": 3,
       "norm_label": "diyaprops"
     },
     {
@@ -279,7 +279,7 @@
       "source_file": "src/components/Diya.tsx",
       "source_location": "L7",
       "id": "components_diya_diya",
-      "community": 2,
+      "community": 3,
       "norm_label": "diya()"
     },
     {
@@ -288,7 +288,7 @@
       "source_file": "src/components/Flame.tsx",
       "source_location": "L1",
       "id": "src_components_flame_tsx",
-      "community": 2,
+      "community": 3,
       "norm_label": "flame.tsx"
     },
     {
@@ -297,7 +297,7 @@
       "source_file": "src/components/Flame.tsx",
       "source_location": "L1",
       "id": "components_flame_flameprops",
-      "community": 2,
+      "community": 3,
       "norm_label": "flameprops"
     },
     {
@@ -306,7 +306,7 @@
       "source_file": "src/components/Flame.tsx",
       "source_location": "L5",
       "id": "components_flame_flame",
-      "community": 2,
+      "community": 3,
       "norm_label": "flame()"
     },
     {
@@ -369,7 +369,7 @@
       "source_file": "src/components/Layout.tsx",
       "source_location": "L1",
       "id": "src_components_layout_tsx",
-      "community": 2,
+      "community": 3,
       "norm_label": "layout.tsx"
     },
     {
@@ -378,7 +378,7 @@
       "source_file": "src/components/Layout.tsx",
       "source_location": "L5",
       "id": "components_layout_layoutprops",
-      "community": 2,
+      "community": 3,
       "norm_label": "layoutprops"
     },
     {
@@ -387,7 +387,7 @@
       "source_file": "src/components/Layout.tsx",
       "source_location": "L9",
       "id": "components_layout_layout",
-      "community": 2,
+      "community": 3,
       "norm_label": "layout()"
     },
     {
@@ -396,7 +396,7 @@
       "source_file": "src/components/MeditationBackground.tsx",
       "source_location": "L1",
       "id": "src_components_meditationbackground_tsx",
-      "community": 2,
+      "community": 3,
       "norm_label": "meditationbackground.tsx"
     },
     {
@@ -405,7 +405,7 @@
       "source_file": "src/components/MeditationBackground.tsx",
       "source_location": "L1",
       "id": "components_meditationbackground_meditationbackgroundprops",
-      "community": 2,
+      "community": 3,
       "norm_label": "meditationbackgroundprops"
     },
     {
@@ -414,7 +414,7 @@
       "source_file": "src/components/MeditationBackground.tsx",
       "source_location": "L5",
       "id": "components_meditationbackground_meditationbackground",
-      "community": 2,
+      "community": 3,
       "norm_label": "meditationbackground()"
     },
     {
@@ -522,7 +522,7 @@
       "source_file": "src/lib/auth.ts",
       "source_location": "L8",
       "id": "lib_auth_signinwithgoogle",
-      "community": 2,
+      "community": 3,
       "norm_label": "signinwithgoogle()"
     },
     {
@@ -810,7 +810,7 @@
       "source_file": "src/lib/presentationMode.ts",
       "source_location": "L1",
       "id": "src_lib_presentationmode_ts",
-      "community": 2,
+      "community": 3,
       "norm_label": "presentationmode.ts"
     },
     {
@@ -819,7 +819,7 @@
       "source_file": "src/lib/presentationMode.ts",
       "source_location": "L21",
       "id": "lib_presentationmode_appmode",
-      "community": 2,
+      "community": 3,
       "norm_label": "appmode"
     },
     {
@@ -828,7 +828,7 @@
       "source_file": "src/lib/presentationMode.ts",
       "source_location": "L23",
       "id": "lib_presentationmode_resolvemode",
-      "community": 2,
+      "community": 3,
       "norm_label": "resolvemode()"
     },
     {
@@ -837,7 +837,7 @@
       "source_file": "src/lib/presentationMode.ts",
       "source_location": "L62",
       "id": "lib_presentationmode_mode",
-      "community": 2,
+      "community": 3,
       "norm_label": "_mode"
     },
     {
@@ -891,7 +891,7 @@
       "source_file": "src/lib/sessionAudio.ts",
       "source_location": "L1",
       "id": "src_lib_sessionaudio_ts",
-      "community": 3,
+      "community": 2,
       "norm_label": "sessionaudio.ts"
     },
     {
@@ -1026,7 +1026,7 @@
       "source_file": "src/lib/sessionScript.ts",
       "source_location": "L1",
       "id": "src_lib_sessionscript_ts",
-      "community": 3,
+      "community": 2,
       "norm_label": "sessionscript.ts"
     },
     {
@@ -1035,7 +1035,7 @@
       "source_file": "src/lib/sessionScript.ts",
       "source_location": "L1",
       "id": "lib_sessionscript_bodyregion",
-      "community": 3,
+      "community": 2,
       "norm_label": "bodyregion"
     },
     {
@@ -1044,7 +1044,7 @@
       "source_file": "src/lib/sessionScript.ts",
       "source_location": "L11",
       "id": "lib_sessionscript_breathaction",
-      "community": 3,
+      "community": 2,
       "norm_label": "breathaction"
     },
     {
@@ -1053,7 +1053,7 @@
       "source_file": "src/lib/sessionScript.ts",
       "source_location": "L13",
       "id": "lib_sessionscript_visualmode",
-      "community": 3,
+      "community": 2,
       "norm_label": "visualmode"
     },
     {
@@ -1062,7 +1062,7 @@
       "source_file": "src/lib/sessionScript.ts",
       "source_location": "L21",
       "id": "lib_sessionscript_sessionphase",
-      "community": 3,
+      "community": 2,
       "norm_label": "sessionphase"
     },
     {
@@ -1071,7 +1071,7 @@
       "source_file": "src/lib/sessionScript.ts",
       "source_location": "L32",
       "id": "lib_sessionscript_body_sequence",
-      "community": 3,
+      "community": 2,
       "norm_label": "body_sequence"
     },
     {
@@ -1080,7 +1080,7 @@
       "source_file": "src/lib/sessionScript.ts",
       "source_location": "L43",
       "id": "lib_sessionscript_createsessionscript",
-      "community": 3,
+      "community": 2,
       "norm_label": "createsessionscript()"
     },
     {
@@ -1089,7 +1089,7 @@
       "source_file": "src/lib/sessionScript.ts",
       "source_location": "L131",
       "id": "lib_sessionscript_getscripttotalduration",
-      "community": 3,
+      "community": 2,
       "norm_label": "getscripttotalduration()"
     },
     {
@@ -1098,7 +1098,7 @@
       "source_file": "src/lib/sessionSettings.ts",
       "source_location": "L1",
       "id": "src_lib_sessionsettings_ts",
-      "community": 3,
+      "community": 2,
       "norm_label": "sessionsettings.ts"
     },
     {
@@ -1107,7 +1107,7 @@
       "source_file": "src/lib/sessionSettings.ts",
       "source_location": "L1",
       "id": "lib_sessionsettings_sessionsettings",
-      "community": 3,
+      "community": 2,
       "norm_label": "sessionsettings"
     },
     {
@@ -1116,7 +1116,7 @@
       "source_file": "src/lib/sessionSettings.ts",
       "source_location": "L7",
       "id": "lib_sessionsettings_defaultsessionsettings",
-      "community": 3,
+      "community": 2,
       "norm_label": "defaultsessionsettings"
     },
     {
@@ -1611,7 +1611,7 @@
       "source_file": "src/pages/LoginPage.tsx",
       "source_location": "L1",
       "id": "src_pages_loginpage_tsx",
-      "community": 2,
+      "community": 3,
       "norm_label": "loginpage.tsx"
     },
     {
@@ -1620,7 +1620,7 @@
       "source_file": "src/pages/LoginPage.tsx",
       "source_location": "L6",
       "id": "pages_loginpage_loginpage",
-      "community": 2,
+      "community": 3,
       "norm_label": "loginpage()"
     },
     {
@@ -1629,7 +1629,7 @@
       "source_file": "src/pages/OnboardingPage.tsx",
       "source_location": "L1",
       "id": "src_pages_onboardingpage_tsx",
-      "community": 2,
+      "community": 3,
       "norm_label": "onboardingpage.tsx"
     },
     {
@@ -1638,7 +1638,7 @@
       "source_file": "src/pages/OnboardingPage.tsx",
       "source_location": "L7",
       "id": "pages_onboardingpage_onboardingpage",
-      "community": 2,
+      "community": 3,
       "norm_label": "onboardingpage()"
     },
     {
@@ -2479,6 +2479,15 @@
       "norm_label": "code:mermaid (flowchart lr)"
     },
     {
+      "label": "REGION_POSITIONS",
+      "file_type": "code",
+      "source_file": "src/components/BodyGuideOverlay.tsx",
+      "source_location": "L14",
+      "community": 2,
+      "norm_label": "region_positions",
+      "id": "components_bodyguideoverlay_region_positions"
+    },
+    {
       "label": "avg()",
       "file_type": "code",
       "source_file": "src/pages/HistoryPage.tsx",
@@ -2510,7 +2519,7 @@
       "file_type": "code",
       "source_file": "src/components/BodyGuideOverlay.tsx",
       "source_location": "L8",
-      "community": 3,
+      "community": 2,
       "norm_label": "cuestate",
       "id": "components_bodyguideoverlay_cuestate"
     },
@@ -2519,7 +2528,7 @@
       "file_type": "code",
       "source_file": "src/components/BodyGuideOverlay.tsx",
       "source_location": "L12",
-      "community": 3,
+      "community": 2,
       "norm_label": "getcuestate()",
       "id": "components_bodyguideoverlay_getcuestate"
     },
@@ -2528,7 +2537,7 @@
       "file_type": "code",
       "source_file": "src/components/BodyGuideOverlay.tsx",
       "source_location": "L16",
-      "community": 3,
+      "community": 2,
       "norm_label": "partfill()",
       "id": "components_bodyguideoverlay_partfill"
     },
@@ -2537,7 +2546,7 @@
       "file_type": "code",
       "source_file": "src/components/BodyGuideOverlay.tsx",
       "source_location": "L23",
-      "community": 3,
+      "community": 2,
       "norm_label": "partstroke()",
       "id": "components_bodyguideoverlay_partstroke"
     },
@@ -3428,7 +3437,7 @@
       "file_type": "code",
       "source_file": "src/lib/auth.ts",
       "source_location": "L8",
-      "community": 2,
+      "community": 3,
       "norm_label": "signup()",
       "id": "lib_auth_signup"
     },
@@ -3437,7 +3446,7 @@
       "file_type": "code",
       "source_file": "src/lib/auth.ts",
       "source_location": "L37",
-      "community": 2,
+      "community": 3,
       "norm_label": "signin()",
       "id": "lib_auth_signin"
     },
@@ -3446,7 +3455,7 @@
       "file_type": "code",
       "source_file": "src/pages/LoginPage.tsx",
       "source_location": "L7",
-      "community": 2,
+      "community": 3,
       "norm_label": "inputstyle",
       "id": "pages_loginpage_inputstyle"
     }
@@ -3839,11 +3848,11 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "src/components/BodyGuideOverlay.tsx",
-      "source_location": "L14",
+      "source_location": "L25",
       "weight": 1.0,
       "confidence_score": 1.0,
       "source": "src_components_bodyguideoverlay_tsx",
-      "target": "components_bodyguideoverlay_region_positions"
+      "target": "components_bodyguideoverlay_region_bounds"
     },
     {
       "relation": "contains",
@@ -3865,6 +3874,16 @@
       "confidence_score": 1.0,
       "source": "src_pages_sessionpage_tsx",
       "target": "src_components_bodyguideoverlay_tsx"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/BodyGuideOverlay.tsx",
+      "source_location": "L14",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "src_components_bodyguideoverlay_tsx",
+      "target": "components_bodyguideoverlay_region_positions"
     },
     {
       "relation": "contains",
@@ -9022,5 +9041,5 @@
     }
   ],
   "hyperedges": [],
-  "built_at_commit": "17b4f019fcf99ad5c25385fd85bfcdc7c01b77d7"
+  "built_at_commit": "76085035e471f507b71e66f1db5c27f7ee3655c7"
 }

@@ -220,3 +220,32 @@ input:focus {
     justify-content: center;
   }
 }
+
+/* Home page diya scaling — bigger on desktop, smaller on phones so the
+   full vertical stack (diya + wordmark + tagline + week + button) fits
+   within a single mobile viewport without scrolling. */
+.home-diya-scaler {
+  transform: translateX(-8px) scale(1.25);
+  transform-origin: center bottom;
+}
+@media (max-height: 740px) {
+  .home-diya-scaler { transform: translateX(-8px) scale(1.05); }
+}
+@media (max-height: 640px) {
+  .home-diya-scaler { transform: translateX(-8px) scale(0.85); }
+}
+
+/* Narrower phones — tighten header nav so it doesn't overflow. */
+@media (max-width: 480px) {
+  header .page-shell {
+    padding: 14px 16px !important;
+  }
+  header nav {
+    gap: 14px !important;
+    font-size: 14px !important;
+  }
+  header nav a {
+    /* Ensure tap target is still 44px tall even with smaller font. */
+    padding: 6px 0;
+  }
+}

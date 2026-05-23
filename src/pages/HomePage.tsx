@@ -24,7 +24,7 @@ export default function HomePage() {
         <div
           className="page-shell"
           style={{
-            minHeight: "100vh",
+            minHeight: "100dvh",
             display: "flex",
             flexDirection: "column",
             justifyContent: "center",
@@ -72,7 +72,7 @@ export default function HomePage() {
       <div
         className="page-shell"
         style={{
-          height: "100vh",
+          height: "100dvh",
           overflow: "hidden",
           display: "flex",
           flexDirection: "column",
@@ -82,9 +82,9 @@ export default function HomePage() {
           padding: "16px 24px",
         }}
       >
-        {/* Diya + wordmark — tight unit */}
+        {/* Diya + wordmark — tight unit. Diya scales down on shorter screens. */}
         <div style={{ marginBottom: "-8px", display: "flex", justifyContent: "center" }}>
-          <div style={{ transform: "translateX(-8px) scale(1.25)", transformOrigin: "center bottom" }}>
+          <div className="home-diya-scaler">
             <Diya />
           </div>
         </div>
