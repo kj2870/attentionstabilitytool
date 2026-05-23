@@ -22,7 +22,7 @@ export default function Layout({ children }: LayoutProps) {
   return (
     <div
       style={{
-        minHeight: "100vh",
+        minHeight: "100dvh",
         background: "#0E0E10",
         color: "#F5E9DA",
       }}

@@ -2152,7 +2152,7 @@ export default function SessionPage() {
       <div
         className="page-shell mobile-stack"
         style={{
-          minHeight: "100vh",
+          minHeight: "100dvh",
           display: "flex",
           flexDirection: "column",
           justifyContent: sessionComplete ? "flex-start" : "center",
@@ -2302,9 +2302,9 @@ export default function SessionPage() {
                 <div
                   style={{
                     position: "fixed",
-                    top: "18px",
-                    right: "18px",
-                    width: "clamp(150px, 26vw, 220px)",
+                    top: "calc(18px + env(safe-area-inset-top))",
+                    right: "calc(18px + env(safe-area-inset-right))",
+                    width: "clamp(120px, 26vw, 220px)",
                     borderRadius: "16px",
                     overflow: "hidden",
                     background: "rgba(0,0,0,0.28)",
@@ -2438,7 +2438,7 @@ export default function SessionPage() {
                     position: "relative",
                     width: "100%",
                     maxWidth: "760px",
-                    minHeight: isSettlePhase ? "120px" : "360px",
+                    minHeight: isSettlePhase ? "clamp(80px, 16vh, 120px)" : "clamp(260px, 42vh, 360px)",
                     display: "flex",
                     alignItems: "center",
                     justifyContent: "center",
@@ -3138,7 +3138,7 @@ sessionComplete ? (
                     position: "relative",
                     width: "100%",
                     maxWidth: "760px",
-                    minHeight: isSettlePhase ? "120px" : "360px",
+                    minHeight: isSettlePhase ? "clamp(80px, 16vh, 120px)" : "clamp(260px, 42vh, 360px)",
                     display: "flex",
                     alignItems: "center",
                     justifyContent: "center",

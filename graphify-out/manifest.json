@@ -16,8 +16,8 @@
     "hash": "d9e6e53c349c8776bb74e6f6757d912f"
   },
   "C:\\Users\\kj287\\Documents\\01_Projects\\focusflow\\.claude\\worktrees\\zen-kalam-eba609\\src\\App.tsx": {
-    "mtime": 1779501823.7801335,
-    "hash": "78d1e5840269e68a83c838b441d010a3"
+    "mtime": 1779503053.644462,
+    "hash": "571f5efa92e8bf95ded7326461a2f08c"
   },
   "C:\\Users\\kj287\\Documents\\01_Projects\\focusflow\\.claude\\worktrees\\zen-kalam-eba609\\src\\main.tsx": {
     "mtime": 1778293347.336235,
@@ -28,8 +28,8 @@
     "hash": "3584933d8f7309198b5ced73efe9c814"
   },
   "C:\\Users\\kj287\\Documents\\01_Projects\\focusflow\\.claude\\worktrees\\zen-kalam-eba609\\src\\components\\BodyGuideOverlay.tsx": {
-    "mtime": 1778958062.075067,
-    "hash": "2bb346d86157a6cf7aa525c92d1ecd70"
+    "mtime": 1779502318.6836417,
+    "hash": "823d21db613b9fd5d5b3757bf6c1c010"
   },
   "C:\\Users\\kj287\\Documents\\01_Projects\\focusflow\\.claude\\worktrees\\zen-kalam-eba609\\src\\components\\BreathGuide.tsx": {
     "mtime": 1779313635.526366,
@@ -52,12 +52,12 @@
     "hash": "d1abd40d7dba8c476c1b77d042ad6280"
   },
   "C:\\Users\\kj287\\Documents\\01_Projects\\focusflow\\.claude\\worktrees\\zen-kalam-eba609\\src\\components\\Layout.tsx": {
-    "mtime": 1778513825.3595579,
-    "hash": "e4e6342540e54158b40b65c9864af9b4"
+    "mtime": 1779503053.6596744,
+    "hash": "53f4124fdaf1e3195c56e4fe0af95cec"
   },
   "C:\\Users\\kj287\\Documents\\01_Projects\\focusflow\\.claude\\worktrees\\zen-kalam-eba609\\src\\components\\MeditationBackground.tsx": {
-    "mtime": 1779312258.8170466,
-    "hash": "6f7ea775bff347f1047f451e51d59e04"
+    "mtime": 1779503053.6771364,
+    "hash": "2baa7c9ec3dee8a744c3b79d45181347"
   },
   "C:\\Users\\kj287\\Documents\\01_Projects\\focusflow\\.claude\\worktrees\\zen-kalam-eba609\\src\\components\\SessionEndModal.tsx": {
     "mtime": 1778293347.246044,
@@ -128,16 +128,16 @@
     "hash": "dd90bdf9049ec871a87eb81354c45b54"
   },
   "C:\\Users\\kj287\\Documents\\01_Projects\\focusflow\\.claude\\worktrees\\zen-kalam-eba609\\src\\pages\\HomePage.tsx": {
-    "mtime": 1779314050.0001285,
-    "hash": "0e313a5dc302dfb70b45e776da9bafd6"
+    "mtime": 1779503101.2431314,
+    "hash": "31f4ac56b2f2052262080f1830daaf89"
   },
   "C:\\Users\\kj287\\Documents\\01_Projects\\focusflow\\.claude\\worktrees\\zen-kalam-eba609\\src\\pages\\LoginPage.tsx": {
-    "mtime": 1778864701.7072604,
-    "hash": "b5befcd05823d27570e2478509b9dc19"
+    "mtime": 1779503053.7026844,
+    "hash": "31d881556e258b6371ca89043557f280"
   },
   "C:\\Users\\kj287\\Documents\\01_Projects\\focusflow\\.claude\\worktrees\\zen-kalam-eba609\\src\\pages\\OnboardingPage.tsx": {
-    "mtime": 1778864701.7193067,
-    "hash": "eb1d30e74fcd07cf1c541b3b9548492e"
+    "mtime": 1779503053.7151732,
+    "hash": "d9d5f29423d852ea336e12b2f7bb3e42"
   },
   "C:\\Users\\kj287\\Documents\\01_Projects\\focusflow\\.claude\\worktrees\\zen-kalam-eba609\\src\\pages\\PhilosophyPage.tsx": {
     "mtime": 1778885737.5491438,
@@ -156,8 +156,8 @@
     "hash": "d39a5c8e418e807402472510e8a39fc8"
   },
   "C:\\Users\\kj287\\Documents\\01_Projects\\focusflow\\.claude\\worktrees\\zen-kalam-eba609\\src\\pages\\SessionPage.tsx": {
-    "mtime": 1779313949.612781,
-    "hash": "babd5ad03a1063421d491cb31544c4a0"
+    "mtime": 1779503153.299621,
+    "hash": "bf1b526e90f32fa823c039a8e0e9a64a"
   },
   "C:\\Users\\kj287\\Documents\\01_Projects\\focusflow\\.claude\\worktrees\\zen-kalam-eba609\\algorithm-overview.md": {
     "mtime": 1778293345.9503107,
@@ -202,10 +202,6 @@
   "C:\\Users\\kj287\\Documents\\01_Projects\\focusflow\\.claude\\worktrees\\zen-kalam-eba609\\public\\icon-maskable.png": {
     "mtime": 1779501640.306,
     "hash": "03fc86162207a231425c3f358a0dc2e1"
-  },
-  "C:\\Users\\kj287\\Documents\\01_Projects\\focusflow\\.claude\\worktrees\\zen-kalam-eba609\\public\\vite.svg": {
-    "mtime": 1778293345.9756935,
-    "hash": "8e3a10e157f75ada21ab742c022d5430"
   },
   "C:\\Users\\kj287\\Documents\\01_Projects\\focusflow\\.claude\\worktrees\\zen-kalam-eba609\\src\\assets\\react.svg": {
     "mtime": 1778293345.9928265,

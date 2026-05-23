@@ -27,7 +27,7 @@ export default function OnboardingPage() {
       <div
         className="page-shell"
         style={{
-          minHeight: "100vh",
+          minHeight: "100dvh",
           display: "flex",
           justifyContent: "center",
           alignItems: "center",

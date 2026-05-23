@@ -14,7 +14,7 @@ export default function MeditationBackground({ children }: MeditationBackgroundP
     <div
       style={{
         position: "relative",
-        minHeight: "100vh",
+        minHeight: "100dvh",
         overflow: "hidden",
         background: palette.sky,
       }}
