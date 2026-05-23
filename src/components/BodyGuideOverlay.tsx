@@ -9,52 +9,29 @@ type BodyGuideOverlayProps = {
 const PHASE_TOTAL = 10;
 const PHASE_HALF = 5;
 
-// SVG viewBox is 240 wide × 420 tall. These coordinates locate each region on the figure.
-// y-positions are tuned to the silhouette path below.
-const REGION_POSITIONS: Record<BodyRegion, { cx: number; cy: number; r: number }> = {
-  face:          { cx: 120, cy: 48,  r: 36 },
-  neck:          { cx: 120, cy: 92,  r: 28 },
-  backShoulders: { cx: 120, cy: 130, r: 56 },
-  armsFingers:   { cx: 120, cy: 175, r: 80 },
-  pelvis:        { cx: 120, cy: 215, r: 52 },
-  thighs:        { cx: 120, cy: 270, r: 48 },
-  calves:        { cx: 120, cy: 340, r: 44 },
-  feet:          { cx: 120, cy: 400, r: 50 },
-};
+// Terracotta palette adapted for the app's warm dark background.
+// Layered tones create paper-cut depth without competing with the diya colours.
+const COLOR_BACK = "rgba(180, 130, 90, 0.42)";   // arms + legs (back layer)
+const COLOR_MID = "rgba(170, 110, 70, 0.78)";    // torso + neck (mid layer)
+const COLOR_FRONT = "rgba(140, 80, 50, 0.92)";   // head (front layer)
+const COLOR_SHADOW = "rgba(80, 40, 20, 0.5)";    // foot shadow
 
-// Smooth, contiguous humanoid silhouette path designed to match the mockup.
-// Head → neck → shoulders → torso narrowing at waist → legs together → ground.
-const FIGURE_PATH = `
-  M 120 18
-  C 138 18, 152 32, 152 52
-  C 152 70, 142 82, 132 87
-  C 138 92, 144 96, 148 102
-  C 156 110, 168 120, 178 132
-  C 188 144, 192 156, 192 170
-  C 192 188, 184 198, 174 204
-  C 168 212, 162 220, 158 230
-  L 158 250
-  C 158 264, 154 280, 152 296
-  L 150 326
-  C 148 340, 146 352, 144 366
-  C 142 380, 140 392, 138 402
-  C 137 410, 134 414, 130 416
-  L 110 416
-  C 106 414, 103 410, 102 402
-  C 100 392, 98 380, 96 366
-  C 94 352, 92 340, 90 326
-  L 88 296
-  C 86 280, 82 264, 82 250
-  L 82 230
-  C 78 220, 72 212, 66 204
-  C 56 198, 48 188, 48 170
-  C 48 156, 52 144, 62 132
-  C 72 120, 84 110, 92 102
-  C 96 96, 102 92, 108 87
-  C 98 82, 88 70, 88 52
-  C 88 32, 102 18, 120 18
-  Z
-`;
+// Active region uses a warm amber that pops against the terracotta base.
+const ACTIVE_FILL = "#ffb347";
+const ACTIVE_GLOW = "#ffd27d";
+
+// All body part bounds for the active-region glow overlay (viewBox 300×400).
+// Used to position the soft halo behind the highlighted part.
+const REGION_BOUNDS: Record<BodyRegion, { x: number; y: number; w: number; h: number }> = {
+  face:          { x: 116, y: 26,  w: 68,  h: 68 },
+  neck:          { x: 138, y: 86,  w: 24,  h: 22 },
+  backShoulders: { x: 104, y: 102, w: 92,  h: 60 },
+  armsFingers:   { x: 86,  y: 116, w: 128, h: 146 },
+  pelvis:        { x: 108, y: 180, w: 84,  h: 70 },
+  thighs:        { x: 116, y: 244, w: 68,  h: 70 },
+  calves:        { x: 116, y: 314, w: 68,  h: 70 },
+  feet:          { x: 110, y: 376, w: 80,  h: 20 },
+};
 
 export default function BodyGuideOverlay({
   activeRegion,
@@ -64,15 +41,19 @@ export default function BodyGuideOverlay({
   const elapsedInHalf = isClench
     ? PHASE_TOTAL - phaseSecondsLeft
     : PHASE_HALF - phaseSecondsLeft;
-  // Progress 0..1 across each half — used for glow intensity envelope.
   const halfProgress = Math.max(0, Math.min(1, elapsedInHalf / PHASE_HALF));
 
-  // Clench: glow builds up. Release: glow softens. Eased for organic feel.
+  // Glow builds during clench, softens during release — same envelope as the diya feel.
   const intensity = isClench
-    ? 0.55 + halfProgress * 0.45 // 0.55 → 1.0
-    : 1.0 - halfProgress * 0.7;  // 1.0 → 0.3
+    ? 0.55 + halfProgress * 0.45
+    : 1.0 - halfProgress * 0.7;
 
-  const pos = REGION_POSITIONS[activeRegion];
+  const isActive = (r: BodyRegion) => activeRegion === r;
+  const bounds = REGION_BOUNDS[activeRegion];
+
+  // Helper: returns the fill for a body part — terracotta when inactive,
+  // amber when active. Used inline in the SVG below.
+  const partFill = (r: BodyRegion, base: string) => (isActive(r) ? ACTIVE_FILL : base);
 
   return (
     <div
@@ -88,84 +69,167 @@ export default function BodyGuideOverlay({
       <div
         style={{
           width: "clamp(220px, 32vw, 300px)",
-          aspectRatio: "240 / 440",
+          aspectRatio: "300 / 400",
           position: "relative",
         }}
       >
         <svg
-          viewBox="0 0 240 440"
+          viewBox="0 0 300 400"
           width="100%"
           height="100%"
           style={{ display: "block", overflow: "visible" }}
         >
           <defs>
-            {/* Soft humanoid silhouette gradient — faded so it bleeds into the background. */}
-            <radialGradient id="figureGradient" cx="50%" cy="48%" r="62%">
-              <stop offset="0%" stopColor="rgba(120, 102, 84, 0.42)" />
-              <stop offset="55%" stopColor="rgba(80, 68, 56, 0.32)" />
-              <stop offset="100%" stopColor="rgba(40, 32, 24, 0)" />
-            </radialGradient>
-
-            {/* Warm amber glow gradient for the active region. */}
-            <radialGradient id="regionGlow" cx="50%" cy="50%" r="50%">
-              <stop offset="0%" stopColor="rgba(255, 210, 140, 0.95)" />
-              <stop offset="35%" stopColor="rgba(255, 179, 71, 0.65)" />
-              <stop offset="70%" stopColor="rgba(220, 130, 60, 0.22)" />
-              <stop offset="100%" stopColor="rgba(180, 90, 40, 0)" />
-            </radialGradient>
-
-            {/* Heavy Gaussian blur so the glow bleeds into the silhouette. */}
-            <filter id="softBloom" x="-50%" y="-50%" width="200%" height="200%">
-              <feGaussianBlur stdDeviation="14" />
+            {/* Subtle paper-shadow filter — keeps the layered depth feel of the original. */}
+            <filter id="paperShadow" x="-20%" y="-20%" width="140%" height="140%">
+              <feGaussianBlur in="SourceAlpha" stdDeviation="1.2" />
+              <feOffset dx="2" dy="3" result="off" />
+              <feComponentTransfer>
+                <feFuncA type="linear" slope="0.35" />
+              </feComponentTransfer>
+              <feMerge>
+                <feMergeNode />
+                <feMergeNode in="SourceGraphic" />
+              </feMerge>
             </filter>
 
-            {/* Even softer outer halo. */}
-            <filter id="outerHalo" x="-100%" y="-100%" width="300%" height="300%">
-              <feGaussianBlur stdDeviation="28" />
+            {/* Strong outer glow used behind the active body part. */}
+            <filter id="activeGlow" x="-100%" y="-100%" width="300%" height="300%">
+              <feGaussianBlur stdDeviation="18" />
             </filter>
 
-            {/* Clip glow to silhouette so light only appears within the body. */}
-            <clipPath id="silhouetteClip">
-              <path d={FIGURE_PATH} />
-            </clipPath>
+            {/* Tighter inner glow on the active part itself. */}
+            <filter id="activeBloom" x="-50%" y="-50%" width="200%" height="200%">
+              <feGaussianBlur stdDeviation="3" />
+              <feMerge>
+                <feMergeNode />
+                <feMergeNode in="SourceGraphic" />
+              </feMerge>
+            </filter>
+
+            <radialGradient id="haloGradient" cx="50%" cy="50%" r="50%">
+              <stop offset="0%" stopColor={ACTIVE_GLOW} stopOpacity="0.85" />
+              <stop offset="40%" stopColor={ACTIVE_FILL} stopOpacity="0.55" />
+              <stop offset="100%" stopColor={ACTIVE_FILL} stopOpacity="0" />
+            </radialGradient>
           </defs>
 
-          {/* Outer halo — soft warm light spreading beyond the body, blending with background. */}
-          <g style={{ opacity: intensity * 0.6, transition: "opacity 1.2s ease" }}>
-            <circle
-              cx={pos.cx}
-              cy={pos.cy}
-              r={pos.r * 2.2}
-              fill="url(#regionGlow)"
-              filter="url(#outerHalo)"
-              style={{ transition: "cx 1.4s ease, cy 1.4s ease, r 1.4s ease" }}
+          {/* Outer halo positioned behind the active region — bleeds light into the background. */}
+          <g style={{ opacity: intensity * 0.7, transition: "opacity 0.8s ease" }}>
+            <ellipse
+              cx={bounds.x + bounds.w / 2}
+              cy={bounds.y + bounds.h / 2}
+              rx={bounds.w * 0.9}
+              ry={bounds.h * 0.9}
+              fill="url(#haloGradient)"
+              filter="url(#activeGlow)"
+              style={{ transition: "cx 1.0s ease, cy 1.0s ease, rx 1.0s ease, ry 1.0s ease" }}
             />
           </g>
 
-          {/* Base silhouette — soft, fades into dark. */}
-          <path d={FIGURE_PATH} fill="url(#figureGradient)" />
-
-          {/* Glow clipped to the body — the active region lights up from inside. */}
-          <g clipPath="url(#silhouetteClip)" style={{ opacity: intensity, transition: "opacity 1.2s ease" }}>
-            <circle
-              cx={pos.cx}
-              cy={pos.cy}
-              r={pos.r * 1.4}
-              fill="url(#regionGlow)"
-              filter="url(#softBloom)"
-              style={{ transition: "cx 1.4s ease, cy 1.4s ease, r 1.4s ease" }}
+          {/* Back layer: arms (left + right) */}
+          <g filter="url(#paperShadow)">
+            <rect
+              x="86" y="116" width="28" height="146" rx="14"
+              fill={partFill("armsFingers", COLOR_BACK)}
+              filter={isActive("armsFingers") ? "url(#activeBloom)" : undefined}
+              style={{ transition: "fill 0.6s ease" }}
+            />
+            <rect
+              x="186" y="116" width="28" height="146" rx="14"
+              fill={partFill("armsFingers", COLOR_BACK)}
+              filter={isActive("armsFingers") ? "url(#activeBloom)" : undefined}
+              style={{ transition: "fill 0.6s ease" }}
             />
           </g>
 
-          {/* Bright core for the active region. */}
-          <g style={{ opacity: intensity * 0.85, transition: "opacity 1.2s ease" }}>
+          {/* Back layer: legs — split into thighs (top) and calves (bottom) for region targeting */}
+          <g filter="url(#paperShadow)">
+            {/* Left thigh */}
+            <rect
+              x="116" y="244" width="32" height="70" rx="14"
+              fill={partFill("thighs", COLOR_BACK)}
+              filter={isActive("thighs") ? "url(#activeBloom)" : undefined}
+              style={{ transition: "fill 0.6s ease" }}
+            />
+            {/* Right thigh */}
+            <rect
+              x="152" y="244" width="32" height="70" rx="14"
+              fill={partFill("thighs", COLOR_BACK)}
+              filter={isActive("thighs") ? "url(#activeBloom)" : undefined}
+              style={{ transition: "fill 0.6s ease" }}
+            />
+            {/* Left calf */}
+            <rect
+              x="116" y="314" width="32" height="70" rx="14"
+              fill={partFill("calves", COLOR_BACK)}
+              filter={isActive("calves") ? "url(#activeBloom)" : undefined}
+              style={{ transition: "fill 0.6s ease" }}
+            />
+            {/* Right calf */}
+            <rect
+              x="152" y="314" width="32" height="70" rx="14"
+              fill={partFill("calves", COLOR_BACK)}
+              filter={isActive("calves") ? "url(#activeBloom)" : undefined}
+              style={{ transition: "fill 0.6s ease" }}
+            />
+          </g>
+
+          {/* Mid layer: neck */}
+          <g filter="url(#paperShadow)">
+            <rect
+              x="138" y="86" width="24" height="22" rx="10"
+              fill={partFill("neck", COLOR_MID)}
+              filter={isActive("neck") ? "url(#activeBloom)" : undefined}
+              style={{ transition: "fill 0.6s ease" }}
+            />
+          </g>
+
+          {/* Mid layer: torso — split visually via an upper-shoulders rect overlay on top */}
+          <g filter="url(#paperShadow)">
+            {/* Full torso path acts as the pelvis/base */}
+            <path
+              d="M104 118 Q104 104 120 102 L180 102 Q196 104 196 118 L192 232 Q192 248 176 250 L124 250 Q108 248 108 232 Z"
+              fill={isActive("pelvis") || isActive("backShoulders") ? ACTIVE_FILL : COLOR_MID}
+              filter={isActive("pelvis") || isActive("backShoulders") ? "url(#activeBloom)" : undefined}
+              style={{ transition: "fill 0.6s ease" }}
+            />
+            {/* Shoulders overlay — only fully opaque when backShoulders is active,
+                otherwise blends with the torso for the original silhouette feel */}
+            {isActive("backShoulders") && (
+              <rect
+                x="104" y="102" width="92" height="60" rx="14"
+                fill={ACTIVE_GLOW}
+                opacity={0.4}
+                filter="url(#activeBloom)"
+                style={{ transition: "opacity 0.6s ease" }}
+              />
+            )}
+          </g>
+
+          {/* Front layer: head */}
+          <g filter="url(#paperShadow)">
             <circle
-              cx={pos.cx}
-              cy={pos.cy}
-              r={pos.r * 0.55}
-              fill="url(#regionGlow)"
-              filter="url(#softBloom)"
-              style={{ transition: "cx 1.4s ease, cy 1.4s ease, r 1.4s ease" }}
+              cx="150" cy="60" r="34"
+              fill={partFill("face", COLOR_FRONT)}
+              filter={isActive("face") ? "url(#activeBloom)" : undefined}
+              style={{ transition: "fill 0.6s ease" }}
+            />
+          </g>
+
+          {/* Foot shadow ellipses — also serve as the "feet" target */}
+          <g opacity="0.7">
+            <ellipse
+              cx="132" cy="386" rx="22" ry="6"
+              fill={isActive("feet") ? ACTIVE_FILL : COLOR_SHADOW}
+              filter={isActive("feet") ? "url(#activeBloom)" : undefined}
+              style={{ transition: "fill 0.6s ease" }}
+            />
+            <ellipse
+              cx="168" cy="386" rx="22" ry="6"
+              fill={isActive("feet") ? ACTIVE_FILL : COLOR_SHADOW}
+              filter={isActive("feet") ? "url(#activeBloom)" : undefined}
+              style={{ transition: "fill 0.6s ease" }}
             />
           </g>
         </svg>
