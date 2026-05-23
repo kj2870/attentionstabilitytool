@@ -1,7 +1,7 @@
 # Graph Report - zen-kalam-eba609  (2026-05-23)
 
 ## Corpus Check
-- 45 files · ~29,009 words
+- 45 files · ~28,184 words
 - Verdict: corpus is large enough that graph structure adds value.
 
 ## Summary
@@ -10,7 +10,7 @@
 - Token cost: 0 input · 0 output
 
 ## Graph Freshness
-- Built from commit: `76085035`
+- Built from commit: `2c6a9211`
 - Run `git rev-parse HEAD` and compare to check if the graph is stale.
 - Run `graphify update .` after code changes (no API cost).
 
@@ -138,15 +138,15 @@ Nodes (4): Agent Routing, /doc-agent, graphify, /lint-agent
 
 ### Community 23 - "Community 23"
 Cohesion: 0.67
-Nodes (3): disableCamera(), handleResetResearchFlow(), stopCameraStream()
+Nodes (3): isPlausibleEyeOpenness(), processBlinkState, tick()
 
 ### Community 24 - "Community 24"
 Cohesion: 0.67
-Nodes (3): enableCamera(), handleContinueFromSetup(), handleStart()
+Nodes (3): disableCamera(), handleResetResearchFlow(), stopCameraStream()
 
 ### Community 25 - "Community 25"
 Cohesion: 0.67
-Nodes (3): isPlausibleEyeOpenness(), processBlinkState, tick()
+Nodes (3): enableCamera(), handleContinueFromSetup(), handleStart()
 
 ## Knowledge Gaps
 - **162 isolated node(s):** `__dirname`, `root`, `svgPath`, `svgBuffer`, `outputs` (+157 more)

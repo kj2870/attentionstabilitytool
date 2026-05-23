@@ -1750,19 +1750,10 @@
       "norm_label": "avg()"
     },
     {
-      "label": "avgDiff()",
-      "file_type": "code",
-      "source_file": "src/pages/SessionPage.tsx",
-      "source_location": "L55",
-      "id": "pages_sessionpage_avgdiff",
-      "community": 0,
-      "norm_label": "avgdiff()"
-    },
-    {
       "label": "clamp()",
       "file_type": "code",
       "source_file": "src/pages/SessionPage.tsx",
-      "source_location": "L65",
+      "source_location": "L55",
       "id": "pages_sessionpage_clamp",
       "community": 0,
       "norm_label": "clamp()"
@@ -1771,7 +1762,7 @@
       "label": "standardDeviation()",
       "file_type": "code",
       "source_file": "src/pages/SessionPage.tsx",
-      "source_location": "L69",
+      "source_location": "L59",
       "id": "pages_sessionpage_standarddeviation",
       "community": 9,
       "norm_label": "standarddeviation()"
@@ -1780,7 +1771,7 @@
       "label": "formatSecondsCompact()",
       "file_type": "code",
       "source_file": "src/pages/SessionPage.tsx",
-      "source_location": "L76",
+      "source_location": "L66",
       "id": "pages_sessionpage_formatsecondscompact",
       "community": 0,
       "norm_label": "formatsecondscompact()"
@@ -1789,7 +1780,7 @@
       "label": "formatTimestampForKey()",
       "file_type": "code",
       "source_file": "src/pages/SessionPage.tsx",
-      "source_location": "L82",
+      "source_location": "L72",
       "id": "pages_sessionpage_formattimestampforkey",
       "community": 9,
       "norm_label": "formattimestampforkey()"
@@ -1798,7 +1789,7 @@
       "label": "csvEscape()",
       "file_type": "code",
       "source_file": "src/pages/SessionPage.tsx",
-      "source_location": "L86",
+      "source_location": "L76",
       "id": "pages_sessionpage_csvescape",
       "community": 0,
       "norm_label": "csvescape()"
@@ -1807,7 +1798,7 @@
       "label": "buildPilotCsvRow()",
       "file_type": "code",
       "source_file": "src/pages/SessionPage.tsx",
-      "source_location": "L94",
+      "source_location": "L84",
       "id": "pages_sessionpage_buildpilotcsvrow",
       "community": 9,
       "norm_label": "buildpilotcsvrow()"
@@ -1816,7 +1807,7 @@
       "label": "appendCsvWithHeader()",
       "file_type": "code",
       "source_file": "src/pages/SessionPage.tsx",
-      "source_location": "L143",
+      "source_location": "L133",
       "id": "pages_sessionpage_appendcsvwithheader",
       "community": 9,
       "norm_label": "appendcsvwithheader()"
@@ -1825,7 +1816,7 @@
       "label": "readResearchUserId()",
       "file_type": "code",
       "source_file": "src/pages/SessionPage.tsx",
-      "source_location": "L150",
+      "source_location": "L140",
       "id": "pages_sessionpage_readresearchuserid",
       "community": 9,
       "norm_label": "readresearchuserid()"
@@ -1834,7 +1825,7 @@
       "label": "downloadTextFile()",
       "file_type": "code",
       "source_file": "src/pages/SessionPage.tsx",
-      "source_location": "L161",
+      "source_location": "L151",
       "id": "pages_sessionpage_downloadtextfile",
       "community": 9,
       "norm_label": "downloadtextfile()"
@@ -1843,7 +1834,7 @@
       "label": "attachStreamToVideo()",
       "file_type": "code",
       "source_file": "src/pages/SessionPage.tsx",
-      "source_location": "L170",
+      "source_location": "L160",
       "id": "pages_sessionpage_attachstreamtovideo",
       "community": 0,
       "norm_label": "attachstreamtovideo()"
@@ -1852,7 +1843,7 @@
       "label": "getBodyCue()",
       "file_type": "code",
       "source_file": "src/pages/SessionPage.tsx",
-      "source_location": "L191",
+      "source_location": "L181",
       "id": "pages_sessionpage_getbodycue",
       "community": 15,
       "norm_label": "getbodycue()"
@@ -1861,7 +1852,7 @@
       "label": "CameraState",
       "file_type": "code",
       "source_file": "src/pages/SessionPage.tsx",
-      "source_location": "L195",
+      "source_location": "L185",
       "id": "pages_sessionpage_camerastate",
       "community": 0,
       "norm_label": "camerastate"
@@ -1870,7 +1861,7 @@
       "label": "SparklineProps",
       "file_type": "code",
       "source_file": "src/pages/SessionPage.tsx",
-      "source_location": "L197",
+      "source_location": "L187",
       "id": "pages_sessionpage_sparklineprops",
       "community": 0,
       "norm_label": "sparklineprops"
@@ -1879,7 +1870,7 @@
       "label": "TrendCardProps",
       "file_type": "code",
       "source_file": "src/pages/SessionPage.tsx",
-      "source_location": "L205",
+      "source_location": "L195",
       "id": "pages_sessionpage_trendcardprops",
       "community": 0,
       "norm_label": "trendcardprops"
@@ -1888,7 +1879,7 @@
       "label": "SignalQuality",
       "file_type": "code",
       "source_file": "src/pages/SessionPage.tsx",
-      "source_location": "L215",
+      "source_location": "L205",
       "id": "pages_sessionpage_signalquality",
       "community": 0,
       "norm_label": "signalquality"
@@ -1897,7 +1888,7 @@
       "label": "ResearchStep",
       "file_type": "code",
       "source_file": "src/pages/SessionPage.tsx",
-      "source_location": "L216",
+      "source_location": "L206",
       "id": "pages_sessionpage_researchstep",
       "community": 0,
       "norm_label": "researchstep"
@@ -1906,7 +1897,7 @@
       "label": "PanelState",
       "file_type": "code",
       "source_file": "src/pages/SessionPage.tsx",
-      "source_location": "L218",
+      "source_location": "L208",
       "id": "pages_sessionpage_panelstate",
       "community": 0,
       "norm_label": "panelstate"
@@ -1915,7 +1906,7 @@
       "label": "PilotSurveyState",
       "file_type": "code",
       "source_file": "src/pages/SessionPage.tsx",
-      "source_location": "L225",
+      "source_location": "L215",
       "id": "pages_sessionpage_pilotsurveystate",
       "community": 0,
       "norm_label": "pilotsurveystate"
@@ -1924,7 +1915,7 @@
       "label": "PilotSummaryRecord",
       "file_type": "code",
       "source_file": "src/pages/SessionPage.tsx",
-      "source_location": "L233",
+      "source_location": "L223",
       "id": "pages_sessionpage_pilotsummaryrecord",
       "community": 0,
       "norm_label": "pilotsummaryrecord"
@@ -1933,7 +1924,7 @@
       "label": "CollapsibleCardProps",
       "file_type": "code",
       "source_file": "src/pages/SessionPage.tsx",
-      "source_location": "L254",
+      "source_location": "L244",
       "id": "pages_sessionpage_collapsiblecardprops",
       "community": 0,
       "norm_label": "collapsiblecardprops"
@@ -1942,7 +1933,7 @@
       "label": "QualityWindowSnapshot",
       "file_type": "code",
       "source_file": "src/pages/SessionPage.tsx",
-      "source_location": "L261",
+      "source_location": "L251",
       "id": "pages_sessionpage_qualitywindowsnapshot",
       "community": 0,
       "norm_label": "qualitywindowsnapshot"
@@ -1951,16 +1942,16 @@
       "label": "isPlausibleEyeOpenness()",
       "file_type": "code",
       "source_file": "src/pages/SessionPage.tsx",
-      "source_location": "L269",
+      "source_location": "L259",
       "id": "pages_sessionpage_isplausibleeyeopenness",
-      "community": 25,
+      "community": 23,
       "norm_label": "isplausibleeyeopenness()"
     },
     {
       "label": "deriveSignalQuality()",
       "file_type": "code",
       "source_file": "src/pages/SessionPage.tsx",
-      "source_location": "L274",
+      "source_location": "L264",
       "id": "pages_sessionpage_derivesignalquality",
       "community": 0,
       "norm_label": "derivesignalquality()"
@@ -1969,7 +1960,7 @@
       "label": "Sparkline()",
       "file_type": "code",
       "source_file": "src/pages/SessionPage.tsx",
-      "source_location": "L282",
+      "source_location": "L272",
       "id": "pages_sessionpage_sparkline",
       "community": 0,
       "norm_label": "sparkline()"
@@ -1978,7 +1969,7 @@
       "label": "TrendCard()",
       "file_type": "code",
       "source_file": "src/pages/SessionPage.tsx",
-      "source_location": "L333",
+      "source_location": "L323",
       "id": "pages_sessionpage_trendcard",
       "community": 0,
       "norm_label": "trendcard()"
@@ -1987,7 +1978,7 @@
       "label": "CollapsibleCard()",
       "file_type": "code",
       "source_file": "src/pages/SessionPage.tsx",
-      "source_location": "L402",
+      "source_location": "L392",
       "id": "pages_sessionpage_collapsiblecard",
       "community": 0,
       "norm_label": "collapsiblecard()"
@@ -1996,7 +1987,7 @@
       "label": "SessionPage()",
       "file_type": "code",
       "source_file": "src/pages/SessionPage.tsx",
-      "source_location": "L453",
+      "source_location": "L443",
       "id": "pages_sessionpage_sessionpage",
       "community": 15,
       "norm_label": "sessionpage()"
@@ -2477,6 +2468,15 @@
       "id": "zen_kalam_eba609_system_diagrams_codeblock_4",
       "community": 12,
       "norm_label": "code:mermaid (flowchart lr)"
+    },
+    {
+      "label": "avgDiff()",
+      "file_type": "code",
+      "source_file": "src/pages/SessionPage.tsx",
+      "source_location": "L55",
+      "community": 0,
+      "norm_label": "avgdiff()",
+      "id": "pages_sessionpage_avgdiff"
     },
     {
       "label": "REGION_POSITIONS",
@@ -3140,7 +3140,7 @@
       "file_type": "code",
       "source_file": "src/pages/SessionPage.tsx",
       "source_location": "L659",
-      "community": 23,
+      "community": 24,
       "norm_label": "stopcamerastream()",
       "id": "pages_sessionpage_stopcamerastream"
     },
@@ -3149,7 +3149,7 @@
       "file_type": "code",
       "source_file": "src/pages/SessionPage.tsx",
       "source_location": "L664",
-      "community": 23,
+      "community": 24,
       "norm_label": "disablecamera()",
       "id": "pages_sessionpage_disablecamera"
     },
@@ -3158,7 +3158,7 @@
       "file_type": "code",
       "source_file": "src/pages/SessionPage.tsx",
       "source_location": "L700",
-      "community": 24,
+      "community": 25,
       "norm_label": "enablecamera()",
       "id": "pages_sessionpage_enablecamera"
     },
@@ -3167,7 +3167,7 @@
       "file_type": "code",
       "source_file": "src/pages/SessionPage.tsx",
       "source_location": "L743",
-      "community": 25,
+      "community": 23,
       "norm_label": "processblinkstate",
       "id": "pages_sessionpage_processblinkstate"
     },
@@ -3203,7 +3203,7 @@
       "file_type": "code",
       "source_file": "src/pages/SessionPage.tsx",
       "source_location": "L930",
-      "community": 25,
+      "community": 23,
       "norm_label": "tick()",
       "id": "pages_sessionpage_tick"
     },
@@ -3221,7 +3221,7 @@
       "file_type": "code",
       "source_file": "src/pages/SessionPage.tsx",
       "source_location": "L1152",
-      "community": 24,
+      "community": 25,
       "norm_label": "handlecontinuefromsetup()",
       "id": "pages_sessionpage_handlecontinuefromsetup"
     },
@@ -3230,7 +3230,7 @@
       "file_type": "code",
       "source_file": "src/pages/SessionPage.tsx",
       "source_location": "L1160",
-      "community": 24,
+      "community": 25,
       "norm_label": "handlestart()",
       "id": "pages_sessionpage_handlestart"
     },
@@ -3257,7 +3257,7 @@
       "file_type": "code",
       "source_file": "src/pages/SessionPage.tsx",
       "source_location": "L1261",
-      "community": 23,
+      "community": 24,
       "norm_label": "handleresetresearchflow()",
       "id": "pages_sessionpage_handleresetresearchflow"
     },
@@ -7124,16 +7124,6 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "src/pages/SessionPage.tsx",
-      "source_location": "L56",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "src_pages_sessionpage_tsx",
-      "target": "pages_sessionpage_avgdiff"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "src/pages/SessionPage.tsx",
       "source_location": "L66",
       "weight": 1.0,
       "confidence_score": 1.0,
@@ -7399,6 +7389,16 @@
       "confidence_score": 1.0,
       "source": "src_pages_sessionpage_tsx",
       "target": "pages_sessionpage_sessionpage"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/pages/SessionPage.tsx",
+      "source_location": "L56",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "src_pages_sessionpage_tsx",
+      "target": "pages_sessionpage_avgdiff"
     },
     {
       "relation": "contains",
@@ -9041,5 +9041,5 @@
     }
   ],
   "hyperedges": [],
-  "built_at_commit": "76085035e471f507b71e66f1db5c27f7ee3655c7"
+  "built_at_commit": "2c6a92114e41173857278d7096ebcfe30a64d082"
 }
