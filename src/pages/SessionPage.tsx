@@ -2134,56 +2134,13 @@ export default function SessionPage() {
                     flexDirection: "column",
                     alignItems: "center",
                     justifyContent: "center",
-                    gap: "20px",
+                    gap: "12px",
                   }}
                 >
-                  {!isBodyPhase && primaryInstruction && (
-                    <div
-                      style={{
-                        fontSize: isIntegratePhase ? "clamp(40px, 6vw, 56px)" : "22px",
-                        fontFamily: '"Playfair Display", Georgia, serif',
-                        fontWeight: 400,
-                        fontStyle: isIntegratePhase ? "italic" : "normal",
-                        color: "rgba(245, 233, 218, 0.78)",
-                        lineHeight: isIntegratePhase ? 1.1 : 1.5,
-                        letterSpacing: "0.01em",
-                        maxWidth: isIntegratePhase ? undefined : "32ch",
-                        textAlign: "center",
-                        transition: "font-size 0.6s ease, opacity 0.6s ease",
-                      }}
-                    >
-                      {primaryInstruction}
-                    </div>
-                  )}
-
-                <div
-                  style={{
-                    position: "relative",
-                    width: "100%",
-                    maxWidth: "760px",
-                    minHeight: isSettlePhase ? "clamp(80px, 16vh, 120px)" : "clamp(260px, 42vh, 360px)",
-                    display: "flex",
-                    alignItems: "center",
-                    justifyContent: "center",
-                  }}
-                >
-                  {/* Body cue (CLENCH/RELEASE + region name) pinned inside the container
-                      above the figure — no longer a flex sibling so it can't overlap the SVG. */}
+                  {/* Body cue: proper flex sibling ABOVE the figure container so
+                      it can never overlap the SVG regardless of viewport size. */}
                   {isBodyPhase && (
-                    <div
-                      style={{
-                        position: "absolute",
-                        top: 0,
-                        left: 0,
-                        right: 0,
-                        display: "flex",
-                        flexDirection: "column",
-                        alignItems: "center",
-                        gap: "6px",
-                        pointerEvents: "none",
-                        zIndex: 2,
-                      }}
-                    >
+                    <div style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: "5px" }}>
                       <div
                         style={{
                           fontSize: "11px",
@@ -2209,48 +2166,75 @@ export default function SessionPage() {
                     </div>
                   )}
 
-                  {showDiya && (
+                  {!isBodyPhase && primaryInstruction && (
                     <div
                       style={{
-                        transition: "opacity 0.5s ease",
+                        fontSize: isIntegratePhase ? "clamp(40px, 6vw, 56px)" : "22px",
+                        fontFamily: '"Playfair Display", Georgia, serif',
+                        fontWeight: 400,
+                        fontStyle: isIntegratePhase ? "italic" : "normal",
+                        color: "rgba(245, 233, 218, 0.78)",
+                        lineHeight: isIntegratePhase ? 1.1 : 1.5,
+                        letterSpacing: "0.01em",
+                        maxWidth: isIntegratePhase ? undefined : "32ch",
+                        textAlign: "center",
+                        transition: "font-size 0.6s ease, opacity 0.6s ease",
                       }}
                     >
-                      <video
-                        src="/diya-session.mp4"
-                        autoPlay
-                        loop
-                        muted
-                        playsInline
-                        style={{
-                          width: "clamp(190px, 30vw, 320px)",
-                          mixBlendMode: "screen",
-                          pointerEvents: "none",
-                          display: "block",
-                          WebkitMaskImage:
-                            "radial-gradient(ellipse 55% 68% at center 52%, rgba(0,0,0,1) 0%, rgba(0,0,0,0.92) 28%, rgba(0,0,0,0.72) 48%, rgba(0,0,0,0.35) 66%, transparent 86%)",
-                          maskImage:
-                            "radial-gradient(ellipse 55% 68% at center 52%, rgba(0,0,0,1) 0%, rgba(0,0,0,0.92) 28%, rgba(0,0,0,0.72) 48%, rgba(0,0,0,0.35) 66%, transparent 86%)",
-                        }}
-                      />
+                      {primaryInstruction}
                     </div>
                   )}
 
-                  {isBodyPhase && currentPhase?.bodyRegion && (
-                    <BodyGuideOverlay
-                      activeRegion={currentPhase.bodyRegion}
-                      phaseSecondsLeft={phaseSecondsLeft}
-                    />
-                  )}
+                  {/* Visual container — no text lives inside here */}
+                  <div
+                    style={{
+                      position: "relative",
+                      width: "100%",
+                      maxWidth: "760px",
+                      minHeight: isSettlePhase ? "clamp(80px, 16vh, 120px)" : "clamp(240px, 38vh, 340px)",
+                      display: "flex",
+                      alignItems: "center",
+                      justifyContent: "center",
+                    }}
+                  >
+                    {showDiya && (
+                      <div style={{ transition: "opacity 0.5s ease" }}>
+                        <video
+                          src="/diya-session.mp4"
+                          autoPlay
+                          loop
+                          muted
+                          playsInline
+                          style={{
+                            width: "clamp(190px, 30vw, 320px)",
+                            mixBlendMode: "screen",
+                            pointerEvents: "none",
+                            display: "block",
+                            WebkitMaskImage:
+                              "radial-gradient(ellipse 55% 68% at center 52%, rgba(0,0,0,1) 0%, rgba(0,0,0,0.92) 28%, rgba(0,0,0,0.72) 48%, rgba(0,0,0,0.35) 66%, transparent 86%)",
+                            maskImage:
+                              "radial-gradient(ellipse 55% 68% at center 52%, rgba(0,0,0,1) 0%, rgba(0,0,0,0.92) 28%, rgba(0,0,0,0.72) 48%, rgba(0,0,0,0.35) 66%, transparent 86%)",
+                          }}
+                        />
+                      </div>
+                    )}
 
-                  {isBreathPhase && currentPhase?.breathAction && (
-                    <BreathGuide
-                      action={currentPhase.breathAction}
-                      durationSec={currentPhase.durationSec}
-                    />
-                  )}
+                    {isBodyPhase && currentPhase?.bodyRegion && (
+                      <BodyGuideOverlay
+                        activeRegion={currentPhase.bodyRegion}
+                        phaseSecondsLeft={phaseSecondsLeft}
+                      />
+                    )}
 
-                  {(isSettlePhase || isIntegratePhase) && <SettleHalo />}
-                </div>
+                    {isBreathPhase && currentPhase?.breathAction && (
+                      <BreathGuide
+                        action={currentPhase.breathAction}
+                        durationSec={currentPhase.durationSec}
+                      />
+                    )}
+
+                    {(isSettlePhase || isIntegratePhase) && <SettleHalo />}
+                  </div>
                 </div>{/* end centered group */}
 
                 {isDebugMode && (
@@ -2704,6 +2688,39 @@ sessionComplete ? (
                   gap: "20px",
                 }}
               >
+                {isBodyPhase && (
+                  <div
+                    style={{
+                      display: "flex",
+                      flexDirection: "column",
+                      alignItems: "center",
+                      gap: "5px",
+                    }}
+                  >
+                    <div
+                      style={{
+                        fontSize: "11px",
+                        letterSpacing: "0.14em",
+                        textTransform: "uppercase",
+                        color: "rgba(203, 183, 158, 0.45)",
+                      }}
+                    >
+                      {bodyCue}
+                    </div>
+                    <div
+                      style={{
+                        fontSize: "26px",
+                        fontFamily: '"Playfair Display", Georgia, serif',
+                        fontWeight: 400,
+                        color: "rgba(245, 233, 218, 0.82)",
+                        lineHeight: 1.2,
+                      }}
+                    >
+                      {bodyRegionLabel}
+                    </div>
+                  </div>
+                )}
+
                 {!isBodyPhase && primaryInstruction && (
                   <div
                     style={{
@@ -2730,46 +2747,6 @@ sessionComplete ? (
                     justifyContent: "center",
                   }}
                 >
-                  {isBodyPhase && (
-                    <div
-                      style={{
-                        position: "absolute",
-                        top: 0,
-                        left: 0,
-                        right: 0,
-                        display: "flex",
-                        flexDirection: "column",
-                        alignItems: "center",
-                        gap: "6px",
-                        pointerEvents: "none",
-                        zIndex: 2,
-                      }}
-                    >
-                      <div
-                        style={{
-                          fontSize: "11px",
-                          letterSpacing: "0.14em",
-                          textTransform: "uppercase",
-                          color: "rgba(203, 183, 158, 0.45)",
-                          fontFamily: '"Playfair Display", Georgia, serif',
-                        }}
-                      >
-                        {bodyCue}
-                      </div>
-                      <div
-                        style={{
-                          fontSize: "26px",
-                          fontFamily: '"Playfair Display", Georgia, serif',
-                          fontWeight: 400,
-                          color: "rgba(245, 233, 218, 0.82)",
-                          lineHeight: 1.2,
-                        }}
-                      >
-                        {bodyRegionLabel}
-                      </div>
-                    </div>
-                  )}
-
                   {showDiya && (
                     <div style={{ transition: "opacity 0.5s ease" }}>
                       <video
