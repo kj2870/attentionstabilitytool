@@ -1,4 +1,4 @@
-﻿import { Fragment, useCallback, useEffect, useMemo, useRef, useState, type ReactNode } from "react";
+﻿import { useCallback, useEffect, useMemo, useRef, useState, type ReactNode } from "react";
 import { useNavigate } from "react-router-dom";
 import MeditationBackground from "../components/MeditationBackground";
 import BodyGuideOverlay from "../components/BodyGuideOverlay";
@@ -63,12 +63,6 @@ function standardDeviation(values: number[]) {
   return Math.sqrt(variance);
 }
 
-function formatSecondsCompact(totalSeconds: number) {
-  if (totalSeconds < 60) return `${totalSeconds}s`;
-  const minutes = Math.floor(totalSeconds / 60);
-  const seconds = totalSeconds % 60;
-  return seconds === 0 ? `${minutes}m` : `${minutes}m ${seconds}s`;
-}
 function formatTimestampForKey(date: Date) {
   return date.toISOString().replace(/[:.]/g, "-");
 }
@@ -623,79 +617,6 @@ export default function SessionPage() {
 
   const currentPhase: SessionPhase | undefined = script[phaseIndex];
 
-  const protocolReference = useMemo(() => {
-    const settleSeconds = script
-      .filter((phase) => phase.visualMode === "settle")
-      .reduce((sum, phase) => sum + phase.durationSec, 0);
-
-    const bodySeconds = script
-      .filter((phase) => phase.visualMode === "body")
-      .reduce((sum, phase) => sum + phase.durationSec, 0);
-
-    const breathSeconds = script
-      .filter((phase) => phase.visualMode === "breath")
-      .reduce((sum, phase) => sum + phase.durationSec, 0);
-
-    const gazePhases = script.filter((phase) => phase.visualMode === "gaze");
-    const eyesClosedPhases = script.filter((phase) => phase.visualMode === "eyesClosed");
-
-    const gazeSeconds = gazePhases.reduce((sum, phase) => sum + phase.durationSec, 0);
-    const eyesClosedSeconds = eyesClosedPhases.reduce((sum, phase) => sum + phase.durationSec, 0);
-
-    const integrateSeconds = script
-      .filter((phase) => phase.visualMode === "integrate")
-      .reduce((sum, phase) => sum + phase.durationSec, 0);
-
-    return [
-      {
-        label: "Settle",
-        detail: "posture + stillness",
-        duration: `${formatSecondsCompact(settleSeconds)}`,
-      },
-      {
-        label: "Tense + release",
-        detail: "whole-body sequence",
-        duration: `${formatSecondsCompact(bodySeconds)}`,
-      },
-      {
-        label: "Regulate",
-        detail: "10 slow breaths",
-        duration: `${formatSecondsCompact(breathSeconds)}`,
-      },
-      {
-        label: "Focus",
-        detail: `${gazePhases.length} gaze rounds`,
-        duration: `${formatSecondsCompact(gazeSeconds)}`,
-      },
-      {
-        label: "Eyes closed",
-        detail: `${eyesClosedPhases.length} recovery rounds`,
-        duration: `${formatSecondsCompact(eyesClosedSeconds)}`,
-      },
-      {
-        label: "Integrate",
-        detail: "open awareness",
-        duration: `${formatSecondsCompact(integrateSeconds)}`,
-      },
-      {
-        label: "Total",
-        detail: "full protocol",
-        duration: `${formatSecondsCompact(totalDuration)}`,
-      },
-    ];
-  }, [script, totalDuration]);
-
-  const measurementReference = useMemo(
-    () => [
-      "Attention estimate (0–100): recent attentional engagement from blink rate, closure burden, openness stability, long closures, and signal coverage.",
-      "Blink rate: quick blink events per minute from a rolling short window.",
-      "Closure burden: percent of recent valid eye samples spent near-closed.",
-      "Long closures: eye closures >500 ms in the last 30s, tracked separately from normal blinks.",
-      "Valid signal coverage: percent of recent eye samples judged usable.",
-      "Signal quality: whether current face/eye tracking is good, fair, or poor.",
-    ],
-    []
-  );
   const totalSecondsLeft = useMemo(() => {
     const remainingAfterCurrent = script
       .slice(phaseIndex + 1)
@@ -2680,101 +2601,6 @@ sessionComplete ? (
           )
         ) : (
           <>
-            {isRunning && (
-              <div
-                style={{
-                  position: "fixed",
-                  top: "18px",
-                  left: "18px",
-                  width: "clamp(240px, 28vw, 320px)",
-                  display: "flex",
-                  flexDirection: "column",
-                  gap: "10px",
-                  zIndex: 35,
-                }}
-              >
-                <div
-                  style={{
-                    borderRadius: "16px",
-                    background: "rgba(0,0,0,0.30)",
-                    border: "1px solid rgba(255,255,255,0.12)",
-                    boxShadow: "0 10px 30px rgba(0,0,0,0.22)",
-                    backdropFilter: "blur(8px)",
-                    padding: "12px 14px",
-                  }}
-                >
-                  <div
-                    style={{
-                      fontSize: "13px",
-                      color: "#F5E9DA",
-                      marginBottom: "8px",
-                    }}
-                  >
-                    Measurement reference
-                  </div>
-
-                  <div
-                    style={{
-                      display: "flex",
-                      flexDirection: "column",
-                      gap: "6px",
-                      fontSize: "11px",
-                      lineHeight: 1.45,
-                      color: "#d9cbb8",
-                    }}
-                  >
-                    {measurementReference.map((item) => (
-                      <div key={item}>{item}</div>
-                    ))}
-                  </div>
-                </div>
-
-                <div
-                  style={{
-                    borderRadius: "16px",
-                    background: "rgba(0,0,0,0.30)",
-                    border: "1px solid rgba(255,255,255,0.12)",
-                    boxShadow: "0 10px 30px rgba(0,0,0,0.22)",
-                    backdropFilter: "blur(8px)",
-                    padding: "12px 14px",
-                  }}
-                >
-                  <div
-                    style={{
-                      fontSize: "13px",
-                      color: "#F5E9DA",
-                      marginBottom: "8px",
-                    }}
-                  >
-                    Protocol reference
-                  </div>
-
-                  <div
-                    style={{
-                      display: "grid",
-                      gridTemplateColumns: "1fr auto",
-                      gap: "6px 10px",
-                      fontSize: "11px",
-                      lineHeight: 1.45,
-                      color: "#d9cbb8",
-                    }}
-                  >
-                    {protocolReference.map((item) => (
-                      <Fragment key={item.label}>
-                        <div>
-                          {item.label}
-                          <span style={{ color: "rgba(245,233,218,0.56)" }}>
-                            {" "}
-                            • {item.detail}
-                          </span>
-                        </div>
-                        <div>{item.duration}</div>
-                      </Fragment>
-                    ))}
-                  </div>
-                </div>
-              </div>
-            )}
             {((!isRunning && (cameraStream || cameraState === "requesting")) || (isRunning && isDebugMode)) && (
               <div
                 style={{
