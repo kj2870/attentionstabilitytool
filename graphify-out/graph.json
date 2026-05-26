@@ -277,7 +277,7 @@
       "label": "BreathGuideProps",
       "file_type": "code",
       "source_file": "src/components/BreathGuide.tsx",
-      "source_location": "L3",
+      "source_location": "L4",
       "id": "components_breathguide_breathguideprops",
       "community": 2,
       "norm_label": "breathguideprops"
@@ -286,7 +286,7 @@
       "label": "BreathGuide()",
       "file_type": "code",
       "source_file": "src/components/BreathGuide.tsx",
-      "source_location": "L8",
+      "source_location": "L9",
       "id": "components_breathguide_breathguide",
       "community": 2,
       "norm_label": "breathguide()"
@@ -2052,7 +2052,7 @@
       "source_file": "src/pages/SessionPage.tsx",
       "source_location": "L253",
       "id": "pages_sessionpage_isplausibleeyeopenness",
-      "community": 28,
+      "community": 27,
       "norm_label": "isplausibleeyeopenness()"
     },
     {
@@ -3482,7 +3482,7 @@
       "file_type": "code",
       "source_file": "src/pages/SessionPage.tsx",
       "source_location": "L659",
-      "community": 27,
+      "community": 26,
       "norm_label": "stopcamerastream()",
       "id": "pages_sessionpage_stopcamerastream"
     },
@@ -3491,7 +3491,7 @@
       "file_type": "code",
       "source_file": "src/pages/SessionPage.tsx",
       "source_location": "L664",
-      "community": 27,
+      "community": 26,
       "norm_label": "disablecamera()",
       "id": "pages_sessionpage_disablecamera"
     },
@@ -3500,7 +3500,7 @@
       "file_type": "code",
       "source_file": "src/pages/SessionPage.tsx",
       "source_location": "L700",
-      "community": 26,
+      "community": 28,
       "norm_label": "enablecamera()",
       "id": "pages_sessionpage_enablecamera"
     },
@@ -3509,7 +3509,7 @@
       "file_type": "code",
       "source_file": "src/pages/SessionPage.tsx",
       "source_location": "L743",
-      "community": 28,
+      "community": 27,
       "norm_label": "processblinkstate",
       "id": "pages_sessionpage_processblinkstate"
     },
@@ -3545,7 +3545,7 @@
       "file_type": "code",
       "source_file": "src/pages/SessionPage.tsx",
       "source_location": "L930",
-      "community": 28,
+      "community": 27,
       "norm_label": "tick()",
       "id": "pages_sessionpage_tick"
     },
@@ -3563,7 +3563,7 @@
       "file_type": "code",
       "source_file": "src/pages/SessionPage.tsx",
       "source_location": "L1152",
-      "community": 26,
+      "community": 28,
       "norm_label": "handlecontinuefromsetup()",
       "id": "pages_sessionpage_handlecontinuefromsetup"
     },
@@ -3572,7 +3572,7 @@
       "file_type": "code",
       "source_file": "src/pages/SessionPage.tsx",
       "source_location": "L1160",
-      "community": 26,
+      "community": 28,
       "norm_label": "handlestart()",
       "id": "pages_sessionpage_handlestart"
     },
@@ -3599,7 +3599,7 @@
       "file_type": "code",
       "source_file": "src/pages/SessionPage.tsx",
       "source_location": "L1261",
-      "community": 27,
+      "community": 26,
       "norm_label": "handleresetresearchflow()",
       "id": "pages_sessionpage_handleresetresearchflow"
     },
@@ -3957,9 +3957,9 @@
       "source_file": "src/App.tsx",
       "source_location": "L11",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "src_app_tsx",
-      "target": "src_pages_aboutpage_tsx",
-      "confidence_score": 1.0
+      "target": "src_pages_aboutpage_tsx"
     },
     {
       "relation": "imports_from",
@@ -4295,9 +4295,9 @@
       "source_file": "src/components/BottomTabBar.tsx",
       "source_location": "L3",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "src_components_bottomtabbar_tsx",
-      "target": "components_bottomtabbar_tab",
-      "confidence_score": 1.0
+      "target": "components_bottomtabbar_tab"
     },
     {
       "relation": "contains",
@@ -4305,9 +4305,9 @@
       "source_file": "src/components/BottomTabBar.tsx",
       "source_location": "L12",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "src_components_bottomtabbar_tsx",
-      "target": "components_bottomtabbar_homeicon",
-      "confidence_score": 1.0
+      "target": "components_bottomtabbar_homeicon"
     },
     {
       "relation": "contains",
@@ -4315,9 +4315,9 @@
       "source_file": "src/components/BottomTabBar.tsx",
       "source_location": "L26",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "src_components_bottomtabbar_tsx",
-      "target": "components_bottomtabbar_historyicon",
-      "confidence_score": 1.0
+      "target": "components_bottomtabbar_historyicon"
     },
     {
       "relation": "contains",
@@ -4325,9 +4325,9 @@
       "source_file": "src/components/BottomTabBar.tsx",
       "source_location": "L48",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "src_components_bottomtabbar_tsx",
-      "target": "components_bottomtabbar_abouticon",
-      "confidence_score": 1.0
+      "target": "components_bottomtabbar_abouticon"
     },
     {
       "relation": "contains",
@@ -4335,9 +4335,9 @@
       "source_file": "src/components/BottomTabBar.tsx",
       "source_location": "L62",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "src_components_bottomtabbar_tsx",
-      "target": "components_bottomtabbar_tabs",
-      "confidence_score": 1.0
+      "target": "components_bottomtabbar_tabs"
     },
     {
       "relation": "contains",
@@ -4345,9 +4345,9 @@
       "source_file": "src/components/BottomTabBar.tsx",
       "source_location": "L85",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "src_components_bottomtabbar_tsx",
-      "target": "components_bottomtabbar_bottomtabbar",
-      "confidence_score": 1.0
+      "target": "components_bottomtabbar_bottomtabbar"
     },
     {
       "relation": "imports_from",
@@ -4356,9 +4356,9 @@
       "source_file": "src/components/Layout.tsx",
       "source_location": "L4",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "src_components_layout_tsx",
-      "target": "src_components_bottomtabbar_tsx",
-      "confidence_score": 1.0
+      "target": "src_components_bottomtabbar_tsx"
     },
     {
       "relation": "imports_from",
@@ -4419,9 +4419,9 @@
       "source_file": ".claude/worktrees/zen-kalam-eba609/src/components/CameraPreview.tsx",
       "source_location": "L3",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "c_users_kj287_documents_01_projects_focusflow_claude_worktrees_zen_kalam_eba609_src_components_camerapreview_tsx",
-      "target": "components_camerapreview_camerapreviewprops",
-      "confidence_score": 1.0
+      "target": "components_camerapreview_camerapreviewprops"
     },
     {
       "relation": "contains",
@@ -4429,9 +4429,9 @@
       "source_file": ".claude/worktrees/zen-kalam-eba609/src/components/CameraPreview.tsx",
       "source_location": "L8",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "c_users_kj287_documents_01_projects_focusflow_claude_worktrees_zen_kalam_eba609_src_components_camerapreview_tsx",
-      "target": "components_camerapreview_camerapreview",
-      "confidence_score": 1.0
+      "target": "components_camerapreview_camerapreview"
     },
     {
       "relation": "contains",
@@ -4460,9 +4460,9 @@
       "source_file": ".claude/worktrees/zen-kalam-eba609/src/components/Diya.tsx",
       "source_location": "L1",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "c_users_kj287_documents_01_projects_focusflow_claude_worktrees_zen_kalam_eba609_src_components_diya_tsx",
-      "target": "c_users_kj287_documents_01_projects_focusflow_claude_worktrees_zen_kalam_eba609_src_components_flame_tsx",
-      "confidence_score": 1.0
+      "target": "c_users_kj287_documents_01_projects_focusflow_claude_worktrees_zen_kalam_eba609_src_components_flame_tsx"
     },
     {
       "relation": "contains",
@@ -4470,9 +4470,9 @@
       "source_file": ".claude/worktrees/zen-kalam-eba609/src/components/Diya.tsx",
       "source_location": "L3",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "c_users_kj287_documents_01_projects_focusflow_claude_worktrees_zen_kalam_eba609_src_components_diya_tsx",
-      "target": "components_diya_diyaprops",
-      "confidence_score": 1.0
+      "target": "components_diya_diyaprops"
     },
     {
       "relation": "contains",
@@ -4480,9 +4480,9 @@
       "source_file": ".claude/worktrees/zen-kalam-eba609/src/components/Diya.tsx",
       "source_location": "L7",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "c_users_kj287_documents_01_projects_focusflow_claude_worktrees_zen_kalam_eba609_src_components_diya_tsx",
-      "target": "components_diya_diya",
-      "confidence_score": 1.0
+      "target": "components_diya_diya"
     },
     {
       "relation": "contains",
@@ -4510,9 +4510,9 @@
       "source_file": ".claude/worktrees/zen-kalam-eba609/src/components/Flame.tsx",
       "source_location": "L1",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "c_users_kj287_documents_01_projects_focusflow_claude_worktrees_zen_kalam_eba609_src_components_flame_tsx",
-      "target": "components_flame_flameprops",
-      "confidence_score": 1.0
+      "target": "components_flame_flameprops"
     },
     {
       "relation": "contains",
@@ -4520,9 +4520,9 @@
       "source_file": ".claude/worktrees/zen-kalam-eba609/src/components/Flame.tsx",
       "source_location": "L5",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "c_users_kj287_documents_01_projects_focusflow_claude_worktrees_zen_kalam_eba609_src_components_flame_tsx",
-      "target": "components_flame_flame",
-      "confidence_score": 1.0
+      "target": "components_flame_flame"
     },
     {
       "relation": "contains",
@@ -4706,9 +4706,9 @@
       "source_file": ".claude/worktrees/zen-kalam-eba609/src/components/SessionEndModal.tsx",
       "source_location": "L1",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "c_users_kj287_documents_01_projects_focusflow_claude_worktrees_zen_kalam_eba609_src_components_sessionendmodal_tsx",
-      "target": "components_sessionendmodal_sessionprogressprops",
-      "confidence_score": 1.0
+      "target": "components_sessionendmodal_sessionprogressprops"
     },
     {
       "relation": "contains",
@@ -4716,9 +4716,9 @@
       "source_file": ".claude/worktrees/zen-kalam-eba609/src/components/SessionEndModal.tsx",
       "source_location": "L5",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "c_users_kj287_documents_01_projects_focusflow_claude_worktrees_zen_kalam_eba609_src_components_sessionendmodal_tsx",
-      "target": "components_sessionendmodal_yogiicon",
-      "confidence_score": 1.0
+      "target": "components_sessionendmodal_yogiicon"
     },
     {
       "relation": "contains",
@@ -4726,9 +4726,9 @@
       "source_file": ".claude/worktrees/zen-kalam-eba609/src/components/SessionEndModal.tsx",
       "source_location": "L37",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "c_users_kj287_documents_01_projects_focusflow_claude_worktrees_zen_kalam_eba609_src_components_sessionendmodal_tsx",
-      "target": "components_sessionendmodal_sessionprogress",
-      "confidence_score": 1.0
+      "target": "components_sessionendmodal_sessionprogress"
     },
     {
       "relation": "contains",
@@ -4766,9 +4766,9 @@
       "source_file": ".claude/worktrees/zen-kalam-eba609/src/components/SessionProgress.tsx",
       "source_location": "L1",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "c_users_kj287_documents_01_projects_focusflow_claude_worktrees_zen_kalam_eba609_src_components_sessionprogress_tsx",
-      "target": "components_sessionprogress_sessionprogressprops",
-      "confidence_score": 1.0
+      "target": "components_sessionprogress_sessionprogressprops"
     },
     {
       "relation": "contains",
@@ -4776,9 +4776,9 @@
       "source_file": ".claude/worktrees/zen-kalam-eba609/src/components/SessionProgress.tsx",
       "source_location": "L5",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "c_users_kj287_documents_01_projects_focusflow_claude_worktrees_zen_kalam_eba609_src_components_sessionprogress_tsx",
-      "target": "components_sessionprogress_yogiicon",
-      "confidence_score": 1.0
+      "target": "components_sessionprogress_yogiicon"
     },
     {
       "relation": "contains",
@@ -4786,9 +4786,9 @@
       "source_file": ".claude/worktrees/zen-kalam-eba609/src/components/SessionProgress.tsx",
       "source_location": "L42",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "c_users_kj287_documents_01_projects_focusflow_claude_worktrees_zen_kalam_eba609_src_components_sessionprogress_tsx",
-      "target": "components_sessionprogress_sessionprogress",
-      "confidence_score": 1.0
+      "target": "components_sessionprogress_sessionprogress"
     },
     {
       "relation": "contains",
@@ -4848,9 +4848,9 @@
       "source_file": ".claude/worktrees/zen-kalam-eba609/src/lib/auth.ts",
       "source_location": "L2",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "c_users_kj287_documents_01_projects_focusflow_claude_worktrees_zen_kalam_eba609_src_lib_auth_ts",
-      "target": "lib_supabase_supabase",
-      "confidence_score": 1.0
+      "target": "lib_supabase_supabase"
     },
     {
       "relation": "imports_from",
@@ -4859,9 +4859,9 @@
       "source_file": ".claude/worktrees/zen-kalam-eba609/src/lib/auth.ts",
       "source_location": "L3",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "c_users_kj287_documents_01_projects_focusflow_claude_worktrees_zen_kalam_eba609_src_lib_auth_ts",
-      "target": "c_users_kj287_documents_01_projects_focusflow_claude_worktrees_zen_kalam_eba609_src_lib_storage_ts",
-      "confidence_score": 1.0
+      "target": "c_users_kj287_documents_01_projects_focusflow_claude_worktrees_zen_kalam_eba609_src_lib_storage_ts"
     },
     {
       "relation": "imports",
@@ -4870,9 +4870,9 @@
       "source_file": ".claude/worktrees/zen-kalam-eba609/src/lib/auth.ts",
       "source_location": "L3",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "c_users_kj287_documents_01_projects_focusflow_claude_worktrees_zen_kalam_eba609_src_lib_auth_ts",
-      "target": "lib_storage_createprofile",
-      "confidence_score": 1.0
+      "target": "lib_storage_createprofile"
     },
     {
       "relation": "imports",
@@ -4881,9 +4881,9 @@
       "source_file": ".claude/worktrees/zen-kalam-eba609/src/lib/auth.ts",
       "source_location": "L3",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "c_users_kj287_documents_01_projects_focusflow_claude_worktrees_zen_kalam_eba609_src_lib_auth_ts",
-      "target": "lib_storage_clearactiveprofile",
-      "confidence_score": 1.0
+      "target": "lib_storage_clearactiveprofile"
     },
     {
       "relation": "imports",
@@ -4892,9 +4892,9 @@
       "source_file": ".claude/worktrees/zen-kalam-eba609/src/lib/auth.ts",
       "source_location": "L3",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "c_users_kj287_documents_01_projects_focusflow_claude_worktrees_zen_kalam_eba609_src_lib_auth_ts",
-      "target": "lib_storage_getactiveprofile",
-      "confidence_score": 1.0
+      "target": "lib_storage_getactiveprofile"
     },
     {
       "relation": "imports",
@@ -4903,9 +4903,9 @@
       "source_file": ".claude/worktrees/zen-kalam-eba609/src/lib/auth.ts",
       "source_location": "L3",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "c_users_kj287_documents_01_projects_focusflow_claude_worktrees_zen_kalam_eba609_src_lib_auth_ts",
-      "target": "lib_storage_mergeremotehistory",
-      "confidence_score": 1.0
+      "target": "lib_storage_mergeremotehistory"
     },
     {
       "relation": "contains",
@@ -4913,9 +4913,9 @@
       "source_file": ".claude/worktrees/zen-kalam-eba609/src/lib/auth.ts",
       "source_location": "L8",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "c_users_kj287_documents_01_projects_focusflow_claude_worktrees_zen_kalam_eba609_src_lib_auth_ts",
-      "target": "lib_auth_signinwithgoogle",
-      "confidence_score": 1.0
+      "target": "lib_auth_signinwithgoogle"
     },
     {
       "relation": "contains",
@@ -4923,9 +4923,9 @@
       "source_file": ".claude/worktrees/zen-kalam-eba609/src/lib/auth.ts",
       "source_location": "L21",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "c_users_kj287_documents_01_projects_focusflow_claude_worktrees_zen_kalam_eba609_src_lib_auth_ts",
-      "target": "lib_auth_signout",
-      "confidence_score": 1.0
+      "target": "lib_auth_signout"
     },
     {
       "relation": "contains",
@@ -4933,9 +4933,9 @@
       "source_file": ".claude/worktrees/zen-kalam-eba609/src/lib/auth.ts",
       "source_location": "L32",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "c_users_kj287_documents_01_projects_focusflow_claude_worktrees_zen_kalam_eba609_src_lib_auth_ts",
-      "target": "lib_auth_synclocalprofilefromuser",
-      "confidence_score": 1.0
+      "target": "lib_auth_synclocalprofilefromuser"
     },
     {
       "relation": "imports",
@@ -5061,9 +5061,9 @@
       "source_file": ".claude/worktrees/zen-kalam-eba609/src/lib/faceDetection.ts",
       "source_location": "L3",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "c_users_kj287_documents_01_projects_focusflow_claude_worktrees_zen_kalam_eba609_src_lib_facedetection_ts",
-      "target": "lib_facedetection_facedetectionsnapshot",
-      "confidence_score": 1.0
+      "target": "lib_facedetection_facedetectionsnapshot"
     },
     {
       "relation": "contains",
@@ -5071,9 +5071,9 @@
       "source_file": ".claude/worktrees/zen-kalam-eba609/src/lib/faceDetection.ts",
       "source_location": "L10",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "c_users_kj287_documents_01_projects_focusflow_claude_worktrees_zen_kalam_eba609_src_lib_facedetection_ts",
-      "target": "lib_facedetection_sessionfacedetector",
-      "confidence_score": 1.0
+      "target": "lib_facedetection_sessionfacedetector"
     },
     {
       "relation": "imports",
@@ -5580,9 +5580,9 @@
       "source_file": ".claude/worktrees/zen-kalam-eba609/src/lib/quotes.ts",
       "source_location": "L1",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "c_users_kj287_documents_01_projects_focusflow_claude_worktrees_zen_kalam_eba609_src_lib_quotes_ts",
-      "target": "lib_quotes_beginnerquotes",
-      "confidence_score": 1.0
+      "target": "lib_quotes_beginnerquotes"
     },
     {
       "relation": "contains",
@@ -5590,9 +5590,9 @@
       "source_file": ".claude/worktrees/zen-kalam-eba609/src/lib/quotes.ts",
       "source_location": "L7",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "c_users_kj287_documents_01_projects_focusflow_claude_worktrees_zen_kalam_eba609_src_lib_quotes_ts",
-      "target": "lib_quotes_midquotes",
-      "confidence_score": 1.0
+      "target": "lib_quotes_midquotes"
     },
     {
       "relation": "contains",
@@ -5600,9 +5600,9 @@
       "source_file": ".claude/worktrees/zen-kalam-eba609/src/lib/quotes.ts",
       "source_location": "L13",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "c_users_kj287_documents_01_projects_focusflow_claude_worktrees_zen_kalam_eba609_src_lib_quotes_ts",
-      "target": "lib_quotes_deepquotes",
-      "confidence_score": 1.0
+      "target": "lib_quotes_deepquotes"
     },
     {
       "relation": "contains",
@@ -5610,9 +5610,9 @@
       "source_file": ".claude/worktrees/zen-kalam-eba609/src/lib/quotes.ts",
       "source_location": "L19",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "c_users_kj287_documents_01_projects_focusflow_claude_worktrees_zen_kalam_eba609_src_lib_quotes_ts",
-      "target": "lib_quotes_getquoteforstreak",
-      "confidence_score": 1.0
+      "target": "lib_quotes_getquoteforstreak"
     },
     {
       "relation": "contains",
@@ -5683,9 +5683,9 @@
       "source_file": ".claude/worktrees/zen-kalam-eba609/src/lib/sessionAudio.ts",
       "source_location": "L3",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "c_users_kj287_documents_01_projects_focusflow_claude_worktrees_zen_kalam_eba609_src_lib_sessionaudio_ts",
-      "target": "c_users_kj287_documents_01_projects_focusflow_claude_worktrees_zen_kalam_eba609_src_lib_sessionscript_ts",
-      "confidence_score": 1.0
+      "target": "c_users_kj287_documents_01_projects_focusflow_claude_worktrees_zen_kalam_eba609_src_lib_sessionscript_ts"
     },
     {
       "relation": "imports",
@@ -5694,9 +5694,9 @@
       "source_file": ".claude/worktrees/zen-kalam-eba609/src/lib/sessionAudio.ts",
       "source_location": "L3",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "c_users_kj287_documents_01_projects_focusflow_claude_worktrees_zen_kalam_eba609_src_lib_sessionaudio_ts",
-      "target": "lib_sessionscript_sessionphase",
-      "confidence_score": 1.0
+      "target": "lib_sessionscript_sessionphase"
     },
     {
       "relation": "imports_from",
@@ -5705,9 +5705,9 @@
       "source_file": ".claude/worktrees/zen-kalam-eba609/src/lib/sessionAudio.ts",
       "source_location": "L4",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "c_users_kj287_documents_01_projects_focusflow_claude_worktrees_zen_kalam_eba609_src_lib_sessionaudio_ts",
-      "target": "c_users_kj287_documents_01_projects_focusflow_claude_worktrees_zen_kalam_eba609_src_lib_sessionsettings_ts",
-      "confidence_score": 1.0
+      "target": "c_users_kj287_documents_01_projects_focusflow_claude_worktrees_zen_kalam_eba609_src_lib_sessionsettings_ts"
     },
     {
       "relation": "imports",
@@ -5716,9 +5716,9 @@
       "source_file": ".claude/worktrees/zen-kalam-eba609/src/lib/sessionAudio.ts",
       "source_location": "L4",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "c_users_kj287_documents_01_projects_focusflow_claude_worktrees_zen_kalam_eba609_src_lib_sessionaudio_ts",
-      "target": "lib_sessionsettings_sessionsettings",
-      "confidence_score": 1.0
+      "target": "lib_sessionsettings_sessionsettings"
     },
     {
       "relation": "contains",
@@ -5726,9 +5726,9 @@
       "source_file": ".claude/worktrees/zen-kalam-eba609/src/lib/sessionAudio.ts",
       "source_location": "L6",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "c_users_kj287_documents_01_projects_focusflow_claude_worktrees_zen_kalam_eba609_src_lib_sessionaudio_ts",
-      "target": "lib_sessionaudio_sessionaudiocontroller",
-      "confidence_score": 1.0
+      "target": "lib_sessionaudio_sessionaudiocontroller"
     },
     {
       "relation": "method",
@@ -6030,9 +6030,9 @@
       "source_file": ".claude/worktrees/zen-kalam-eba609/src/lib/sessionScript.ts",
       "source_location": "L1",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "c_users_kj287_documents_01_projects_focusflow_claude_worktrees_zen_kalam_eba609_src_lib_sessionscript_ts",
-      "target": "lib_sessionscript_bodyregion",
-      "confidence_score": 1.0
+      "target": "lib_sessionscript_bodyregion"
     },
     {
       "relation": "contains",
@@ -6040,9 +6040,9 @@
       "source_file": ".claude/worktrees/zen-kalam-eba609/src/lib/sessionScript.ts",
       "source_location": "L11",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "c_users_kj287_documents_01_projects_focusflow_claude_worktrees_zen_kalam_eba609_src_lib_sessionscript_ts",
-      "target": "lib_sessionscript_breathaction",
-      "confidence_score": 1.0
+      "target": "lib_sessionscript_breathaction"
     },
     {
       "relation": "contains",
@@ -6050,9 +6050,9 @@
       "source_file": ".claude/worktrees/zen-kalam-eba609/src/lib/sessionScript.ts",
       "source_location": "L13",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "c_users_kj287_documents_01_projects_focusflow_claude_worktrees_zen_kalam_eba609_src_lib_sessionscript_ts",
-      "target": "lib_sessionscript_visualmode",
-      "confidence_score": 1.0
+      "target": "lib_sessionscript_visualmode"
     },
     {
       "relation": "contains",
@@ -6060,9 +6060,9 @@
       "source_file": ".claude/worktrees/zen-kalam-eba609/src/lib/sessionScript.ts",
       "source_location": "L21",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "c_users_kj287_documents_01_projects_focusflow_claude_worktrees_zen_kalam_eba609_src_lib_sessionscript_ts",
-      "target": "lib_sessionscript_sessionphase",
-      "confidence_score": 1.0
+      "target": "lib_sessionscript_sessionphase"
     },
     {
       "relation": "contains",
@@ -6070,9 +6070,9 @@
       "source_file": ".claude/worktrees/zen-kalam-eba609/src/lib/sessionScript.ts",
       "source_location": "L32",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "c_users_kj287_documents_01_projects_focusflow_claude_worktrees_zen_kalam_eba609_src_lib_sessionscript_ts",
-      "target": "lib_sessionscript_body_sequence",
-      "confidence_score": 1.0
+      "target": "lib_sessionscript_body_sequence"
     },
     {
       "relation": "contains",
@@ -6080,9 +6080,9 @@
       "source_file": ".claude/worktrees/zen-kalam-eba609/src/lib/sessionScript.ts",
       "source_location": "L43",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "c_users_kj287_documents_01_projects_focusflow_claude_worktrees_zen_kalam_eba609_src_lib_sessionscript_ts",
-      "target": "lib_sessionscript_createsessionscript",
-      "confidence_score": 1.0
+      "target": "lib_sessionscript_createsessionscript"
     },
     {
       "relation": "contains",
@@ -6090,9 +6090,9 @@
       "source_file": ".claude/worktrees/zen-kalam-eba609/src/lib/sessionScript.ts",
       "source_location": "L131",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "c_users_kj287_documents_01_projects_focusflow_claude_worktrees_zen_kalam_eba609_src_lib_sessionscript_ts",
-      "target": "lib_sessionscript_getscripttotalduration",
-      "confidence_score": 1.0
+      "target": "lib_sessionscript_getscripttotalduration"
     },
     {
       "relation": "imports",
@@ -6225,9 +6225,9 @@
       "source_file": ".claude/worktrees/zen-kalam-eba609/src/lib/sessionSettings.ts",
       "source_location": "L1",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "c_users_kj287_documents_01_projects_focusflow_claude_worktrees_zen_kalam_eba609_src_lib_sessionsettings_ts",
-      "target": "lib_sessionsettings_sessionsettings",
-      "confidence_score": 1.0
+      "target": "lib_sessionsettings_sessionsettings"
     },
     {
       "relation": "contains",
@@ -6235,9 +6235,9 @@
       "source_file": ".claude/worktrees/zen-kalam-eba609/src/lib/sessionSettings.ts",
       "source_location": "L7",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "c_users_kj287_documents_01_projects_focusflow_claude_worktrees_zen_kalam_eba609_src_lib_sessionsettings_ts",
-      "target": "lib_sessionsettings_defaultsessionsettings",
-      "confidence_score": 1.0
+      "target": "lib_sessionsettings_defaultsessionsettings"
     },
     {
       "relation": "imports",
@@ -6299,9 +6299,9 @@
       "source_file": ".claude/worktrees/zen-kalam-eba609/src/lib/simulatedTracking.ts",
       "source_location": "L1",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "c_users_kj287_documents_01_projects_focusflow_claude_worktrees_zen_kalam_eba609_src_lib_simulatedtracking_ts",
-      "target": "c_users_kj287_documents_01_projects_focusflow_claude_worktrees_zen_kalam_eba609_src_lib_trackingengine_ts",
-      "confidence_score": 1.0
+      "target": "c_users_kj287_documents_01_projects_focusflow_claude_worktrees_zen_kalam_eba609_src_lib_trackingengine_ts"
     },
     {
       "relation": "imports",
@@ -6310,9 +6310,9 @@
       "source_file": ".claude/worktrees/zen-kalam-eba609/src/lib/simulatedTracking.ts",
       "source_location": "L1",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "c_users_kj287_documents_01_projects_focusflow_claude_worktrees_zen_kalam_eba609_src_lib_simulatedtracking_ts",
-      "target": "lib_trackingengine_trackingengine",
-      "confidence_score": 1.0
+      "target": "lib_trackingengine_trackingengine"
     },
     {
       "relation": "imports",
@@ -6321,9 +6321,9 @@
       "source_file": ".claude/worktrees/zen-kalam-eba609/src/lib/simulatedTracking.ts",
       "source_location": "L1",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "c_users_kj287_documents_01_projects_focusflow_claude_worktrees_zen_kalam_eba609_src_lib_simulatedtracking_ts",
-      "target": "lib_trackingengine_trackinglistener",
-      "confidence_score": 1.0
+      "target": "lib_trackingengine_trackinglistener"
     },
     {
       "relation": "contains",
@@ -6331,9 +6331,9 @@
       "source_file": ".claude/worktrees/zen-kalam-eba609/src/lib/simulatedTracking.ts",
       "source_location": "L3",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "c_users_kj287_documents_01_projects_focusflow_claude_worktrees_zen_kalam_eba609_src_lib_simulatedtracking_ts",
-      "target": "lib_simulatedtracking_clamp",
-      "confidence_score": 1.0
+      "target": "lib_simulatedtracking_clamp"
     },
     {
       "relation": "contains",
@@ -6341,9 +6341,9 @@
       "source_file": ".claude/worktrees/zen-kalam-eba609/src/lib/simulatedTracking.ts",
       "source_location": "L7",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "c_users_kj287_documents_01_projects_focusflow_claude_worktrees_zen_kalam_eba609_src_lib_simulatedtracking_ts",
-      "target": "lib_simulatedtracking_simulatedtrackingengine",
-      "confidence_score": 1.0
+      "target": "lib_simulatedtracking_simulatedtrackingengine"
     },
     {
       "relation": "contains",
@@ -6413,9 +6413,9 @@
       "source_file": ".claude/worktrees/zen-kalam-eba609/src/lib/storage.ts",
       "source_location": "L1",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "c_users_kj287_documents_01_projects_focusflow_claude_worktrees_zen_kalam_eba609_src_lib_storage_ts",
-      "target": "lib_supabase_supabase",
-      "confidence_score": 1.0
+      "target": "lib_supabase_supabase"
     },
     {
       "relation": "contains",
@@ -6423,9 +6423,9 @@
       "source_file": ".claude/worktrees/zen-kalam-eba609/src/lib/storage.ts",
       "source_location": "L3",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "c_users_kj287_documents_01_projects_focusflow_claude_worktrees_zen_kalam_eba609_src_lib_storage_ts",
-      "target": "lib_storage_routineselection",
-      "confidence_score": 1.0
+      "target": "lib_storage_routineselection"
     },
     {
       "relation": "contains",
@@ -6433,9 +6433,9 @@
       "source_file": ".claude/worktrees/zen-kalam-eba609/src/lib/storage.ts",
       "source_location": "L7",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "c_users_kj287_documents_01_projects_focusflow_claude_worktrees_zen_kalam_eba609_src_lib_storage_ts",
-      "target": "lib_storage_sessionfeeling",
-      "confidence_score": 1.0
+      "target": "lib_storage_sessionfeeling"
     },
     {
       "relation": "contains",
@@ -6443,9 +6443,9 @@
       "source_file": ".claude/worktrees/zen-kalam-eba609/src/lib/storage.ts",
       "source_location": "L9",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "c_users_kj287_documents_01_projects_focusflow_claude_worktrees_zen_kalam_eba609_src_lib_storage_ts",
-      "target": "lib_storage_sessionrecord",
-      "confidence_score": 1.0
+      "target": "lib_storage_sessionrecord"
     },
     {
       "relation": "contains",
@@ -6453,9 +6453,9 @@
       "source_file": ".claude/worktrees/zen-kalam-eba609/src/lib/storage.ts",
       "source_location": "L31",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "c_users_kj287_documents_01_projects_focusflow_claude_worktrees_zen_kalam_eba609_src_lib_storage_ts",
-      "target": "lib_storage_localprofile",
-      "confidence_score": 1.0
+      "target": "lib_storage_localprofile"
     },
     {
       "relation": "contains",
@@ -6463,9 +6463,9 @@
       "source_file": ".claude/worktrees/zen-kalam-eba609/src/lib/storage.ts",
       "source_location": "L44",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "c_users_kj287_documents_01_projects_focusflow_claude_worktrees_zen_kalam_eba609_src_lib_storage_ts",
-      "target": "lib_storage_safeparse",
-      "confidence_score": 1.0
+      "target": "lib_storage_safeparse"
     },
     {
       "relation": "contains",
@@ -6473,9 +6473,9 @@
       "source_file": ".claude/worktrees/zen-kalam-eba609/src/lib/storage.ts",
       "source_location": "L54",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "c_users_kj287_documents_01_projects_focusflow_claude_worktrees_zen_kalam_eba609_src_lib_storage_ts",
-      "target": "lib_storage_loadprofiles",
-      "confidence_score": 1.0
+      "target": "lib_storage_loadprofiles"
     },
     {
       "relation": "contains",
@@ -6483,9 +6483,9 @@
       "source_file": ".claude/worktrees/zen-kalam-eba609/src/lib/storage.ts",
       "source_location": "L58",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "c_users_kj287_documents_01_projects_focusflow_claude_worktrees_zen_kalam_eba609_src_lib_storage_ts",
-      "target": "lib_storage_saveprofiles",
-      "confidence_score": 1.0
+      "target": "lib_storage_saveprofiles"
     },
     {
       "relation": "contains",
@@ -6493,9 +6493,9 @@
       "source_file": ".claude/worktrees/zen-kalam-eba609/src/lib/storage.ts",
       "source_location": "L62",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "c_users_kj287_documents_01_projects_focusflow_claude_worktrees_zen_kalam_eba609_src_lib_storage_ts",
-      "target": "lib_storage_createprofile",
-      "confidence_score": 1.0
+      "target": "lib_storage_createprofile"
     },
     {
       "relation": "contains",
@@ -6503,9 +6503,9 @@
       "source_file": ".claude/worktrees/zen-kalam-eba609/src/lib/storage.ts",
       "source_location": "L85",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "c_users_kj287_documents_01_projects_focusflow_claude_worktrees_zen_kalam_eba609_src_lib_storage_ts",
-      "target": "lib_storage_getactiveprofileid",
-      "confidence_score": 1.0
+      "target": "lib_storage_getactiveprofileid"
     },
     {
       "relation": "contains",
@@ -6513,9 +6513,9 @@
       "source_file": ".claude/worktrees/zen-kalam-eba609/src/lib/storage.ts",
       "source_location": "L89",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "c_users_kj287_documents_01_projects_focusflow_claude_worktrees_zen_kalam_eba609_src_lib_storage_ts",
-      "target": "lib_storage_setactiveprofileid",
-      "confidence_score": 1.0
+      "target": "lib_storage_setactiveprofileid"
     },
     {
       "relation": "contains",
@@ -6523,9 +6523,9 @@
       "source_file": ".claude/worktrees/zen-kalam-eba609/src/lib/storage.ts",
       "source_location": "L93",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "c_users_kj287_documents_01_projects_focusflow_claude_worktrees_zen_kalam_eba609_src_lib_storage_ts",
-      "target": "lib_storage_clearactiveprofile",
-      "confidence_score": 1.0
+      "target": "lib_storage_clearactiveprofile"
     },
     {
       "relation": "contains",
@@ -6533,9 +6533,9 @@
       "source_file": ".claude/worktrees/zen-kalam-eba609/src/lib/storage.ts",
       "source_location": "L97",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "c_users_kj287_documents_01_projects_focusflow_claude_worktrees_zen_kalam_eba609_src_lib_storage_ts",
-      "target": "lib_storage_getactiveprofile",
-      "confidence_score": 1.0
+      "target": "lib_storage_getactiveprofile"
     },
     {
       "relation": "contains",
@@ -6543,9 +6543,9 @@
       "source_file": ".claude/worktrees/zen-kalam-eba609/src/lib/storage.ts",
       "source_location": "L105",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "c_users_kj287_documents_01_projects_focusflow_claude_worktrees_zen_kalam_eba609_src_lib_storage_ts",
-      "target": "lib_storage_updateactiveprofile",
-      "confidence_score": 1.0
+      "target": "lib_storage_updateactiveprofile"
     },
     {
       "relation": "contains",
@@ -6553,9 +6553,9 @@
       "source_file": ".claude/worktrees/zen-kalam-eba609/src/lib/storage.ts",
       "source_location": "L120",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "c_users_kj287_documents_01_projects_focusflow_claude_worktrees_zen_kalam_eba609_src_lib_storage_ts",
-      "target": "lib_storage_hascompletedonboarding",
-      "confidence_score": 1.0
+      "target": "lib_storage_hascompletedonboarding"
     },
     {
       "relation": "contains",
@@ -6563,9 +6563,9 @@
       "source_file": ".claude/worktrees/zen-kalam-eba609/src/lib/storage.ts",
       "source_location": "L125",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "c_users_kj287_documents_01_projects_focusflow_claude_worktrees_zen_kalam_eba609_src_lib_storage_ts",
-      "target": "lib_storage_loadhistory",
-      "confidence_score": 1.0
+      "target": "lib_storage_loadhistory"
     },
     {
       "relation": "contains",
@@ -6573,9 +6573,9 @@
       "source_file": ".claude/worktrees/zen-kalam-eba609/src/lib/storage.ts",
       "source_location": "L129",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "c_users_kj287_documents_01_projects_focusflow_claude_worktrees_zen_kalam_eba609_src_lib_storage_ts",
-      "target": "lib_storage_savesession",
-      "confidence_score": 1.0
+      "target": "lib_storage_savesession"
     },
     {
       "relation": "contains",
@@ -6583,9 +6583,9 @@
       "source_file": ".claude/worktrees/zen-kalam-eba609/src/lib/storage.ts",
       "source_location": "L136",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "c_users_kj287_documents_01_projects_focusflow_claude_worktrees_zen_kalam_eba609_src_lib_storage_ts",
-      "target": "lib_storage_clearhistory",
-      "confidence_score": 1.0
+      "target": "lib_storage_clearhistory"
     },
     {
       "relation": "contains",
@@ -6593,9 +6593,9 @@
       "source_file": ".claude/worktrees/zen-kalam-eba609/src/lib/storage.ts",
       "source_location": "L143",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "c_users_kj287_documents_01_projects_focusflow_claude_worktrees_zen_kalam_eba609_src_lib_storage_ts",
-      "target": "lib_storage_saveroutineselection",
-      "confidence_score": 1.0
+      "target": "lib_storage_saveroutineselection"
     },
     {
       "relation": "contains",
@@ -6603,9 +6603,9 @@
       "source_file": ".claude/worktrees/zen-kalam-eba609/src/lib/storage.ts",
       "source_location": "L150",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "c_users_kj287_documents_01_projects_focusflow_claude_worktrees_zen_kalam_eba609_src_lib_storage_ts",
-      "target": "lib_storage_loadroutineselection",
-      "confidence_score": 1.0
+      "target": "lib_storage_loadroutineselection"
     },
     {
       "relation": "contains",
@@ -6613,9 +6613,9 @@
       "source_file": ".claude/worktrees/zen-kalam-eba609/src/lib/storage.ts",
       "source_location": "L154",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "c_users_kj287_documents_01_projects_focusflow_claude_worktrees_zen_kalam_eba609_src_lib_storage_ts",
-      "target": "lib_storage_tolocaldatekey",
-      "confidence_score": 1.0
+      "target": "lib_storage_tolocaldatekey"
     },
     {
       "relation": "contains",
@@ -6623,9 +6623,9 @@
       "source_file": ".claude/worktrees/zen-kalam-eba609/src/lib/storage.ts",
       "source_location": "L162",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "c_users_kj287_documents_01_projects_focusflow_claude_worktrees_zen_kalam_eba609_src_lib_storage_ts",
-      "target": "lib_storage_shiftdatekey",
-      "confidence_score": 1.0
+      "target": "lib_storage_shiftdatekey"
     },
     {
       "relation": "contains",
@@ -6633,9 +6633,9 @@
       "source_file": ".claude/worktrees/zen-kalam-eba609/src/lib/storage.ts",
       "source_location": "L171",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "c_users_kj287_documents_01_projects_focusflow_claude_worktrees_zen_kalam_eba609_src_lib_storage_ts",
-      "target": "lib_storage_getcurrentstreak",
-      "confidence_score": 1.0
+      "target": "lib_storage_getcurrentstreak"
     },
     {
       "relation": "contains",
@@ -6643,9 +6643,9 @@
       "source_file": ".claude/worktrees/zen-kalam-eba609/src/lib/storage.ts",
       "source_location": "L211",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "c_users_kj287_documents_01_projects_focusflow_claude_worktrees_zen_kalam_eba609_src_lib_storage_ts",
-      "target": "lib_storage_getflexiblestreak",
-      "confidence_score": 1.0
+      "target": "lib_storage_getflexiblestreak"
     },
     {
       "relation": "contains",
@@ -6653,9 +6653,9 @@
       "source_file": ".claude/worktrees/zen-kalam-eba609/src/lib/storage.ts",
       "source_location": "L255",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "c_users_kj287_documents_01_projects_focusflow_claude_worktrees_zen_kalam_eba609_src_lib_storage_ts",
-      "target": "lib_storage_getweeklycompletion",
-      "confidence_score": 1.0
+      "target": "lib_storage_getweeklycompletion"
     },
     {
       "relation": "contains",
@@ -6663,9 +6663,9 @@
       "source_file": ".claude/worktrees/zen-kalam-eba609/src/lib/storage.ts",
       "source_location": "L280",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "c_users_kj287_documents_01_projects_focusflow_claude_worktrees_zen_kalam_eba609_src_lib_storage_ts",
-      "target": "lib_storage_savesessionremote",
-      "confidence_score": 1.0
+      "target": "lib_storage_savesessionremote"
     },
     {
       "relation": "contains",
@@ -6673,9 +6673,9 @@
       "source_file": ".claude/worktrees/zen-kalam-eba609/src/lib/storage.ts",
       "source_location": "L312",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "c_users_kj287_documents_01_projects_focusflow_claude_worktrees_zen_kalam_eba609_src_lib_storage_ts",
-      "target": "lib_storage_loadhistoryremote",
-      "confidence_score": 1.0
+      "target": "lib_storage_loadhistoryremote"
     },
     {
       "relation": "contains",
@@ -6683,9 +6683,9 @@
       "source_file": ".claude/worktrees/zen-kalam-eba609/src/lib/storage.ts",
       "source_location": "L350",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "c_users_kj287_documents_01_projects_focusflow_claude_worktrees_zen_kalam_eba609_src_lib_storage_ts",
-      "target": "lib_storage_mergeremotehistory",
-      "confidence_score": 1.0
+      "target": "lib_storage_mergeremotehistory"
     },
     {
       "relation": "contains",
@@ -6693,9 +6693,9 @@
       "source_file": ".claude/worktrees/zen-kalam-eba609/src/lib/storage.ts",
       "source_location": "L368",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "c_users_kj287_documents_01_projects_focusflow_claude_worktrees_zen_kalam_eba609_src_lib_storage_ts",
-      "target": "lib_storage_getmandaladay",
-      "confidence_score": 1.0
+      "target": "lib_storage_getmandaladay"
     },
     {
       "relation": "contains",
@@ -6735,9 +6735,9 @@
       "source_file": "src/lib/useHistory.ts",
       "source_location": "L13",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "src_lib_usehistory_ts",
-      "target": "lib_storage_sessionrecord",
-      "confidence_score": 1.0
+      "target": "lib_storage_sessionrecord"
     },
     {
       "relation": "imports",
@@ -6831,9 +6831,9 @@
       "source_file": "src/lib/useHistory.ts",
       "source_location": "L13",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "src_lib_usehistory_ts",
-      "target": "lib_storage_loadprofiles",
-      "confidence_score": 1.0
+      "target": "lib_storage_loadprofiles"
     },
     {
       "relation": "contains",
@@ -6874,9 +6874,9 @@
       "source_file": "src/lib/useHistory.ts",
       "source_location": "L13",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "src_lib_usehistory_ts",
-      "target": "lib_storage_saveprofiles",
-      "confidence_score": 1.0
+      "target": "lib_storage_saveprofiles"
     },
     {
       "relation": "contains",
@@ -6960,9 +6960,9 @@
       "source_file": "src/lib/useHistory.ts",
       "source_location": "L13",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "src_lib_usehistory_ts",
-      "target": "lib_storage_getactiveprofileid",
-      "confidence_score": 1.0
+      "target": "lib_storage_getactiveprofileid"
     },
     {
       "relation": "contains",
@@ -7163,9 +7163,9 @@
       "source_file": "src/lib/useHistory.ts",
       "source_location": "L13",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "src_lib_usehistory_ts",
-      "target": "lib_storage_loadhistory",
-      "confidence_score": 1.0
+      "target": "lib_storage_loadhistory"
     },
     {
       "relation": "imports",
@@ -7559,9 +7559,9 @@
       "source_file": "src/lib/useHistory.ts",
       "source_location": "L13",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "src_lib_usehistory_ts",
-      "target": "lib_storage_loadhistoryremote",
-      "confidence_score": 1.0
+      "target": "lib_storage_loadhistoryremote"
     },
     {
       "relation": "contains",
@@ -7708,9 +7708,9 @@
       "source_file": ".claude/worktrees/zen-kalam-eba609/src/lib/trackingEngine.ts",
       "source_location": "L1",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "c_users_kj287_documents_01_projects_focusflow_claude_worktrees_zen_kalam_eba609_src_lib_trackingengine_ts",
-      "target": "lib_trackingengine_trackingmetrics",
-      "confidence_score": 1.0
+      "target": "lib_trackingengine_trackingmetrics"
     },
     {
       "relation": "contains",
@@ -7718,9 +7718,9 @@
       "source_file": ".claude/worktrees/zen-kalam-eba609/src/lib/trackingEngine.ts",
       "source_location": "L9",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "c_users_kj287_documents_01_projects_focusflow_claude_worktrees_zen_kalam_eba609_src_lib_trackingengine_ts",
-      "target": "lib_trackingengine_trackinglistener",
-      "confidence_score": 1.0
+      "target": "lib_trackingengine_trackinglistener"
     },
     {
       "relation": "contains",
@@ -7728,9 +7728,9 @@
       "source_file": ".claude/worktrees/zen-kalam-eba609/src/lib/trackingEngine.ts",
       "source_location": "L11",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "c_users_kj287_documents_01_projects_focusflow_claude_worktrees_zen_kalam_eba609_src_lib_trackingengine_ts",
-      "target": "lib_trackingengine_trackingengine",
-      "confidence_score": 1.0
+      "target": "lib_trackingengine_trackingengine"
     },
     {
       "relation": "imports",
@@ -7802,9 +7802,9 @@
       "source_file": "src/lib/useHistory.ts",
       "source_location": "L13",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "src_lib_usehistory_ts",
-      "target": "src_lib_storage_ts",
-      "confidence_score": 1.0
+      "target": "src_lib_storage_ts"
     },
     {
       "relation": "contains",
@@ -7812,9 +7812,9 @@
       "source_file": "src/lib/useHistory.ts",
       "source_location": "L22",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "src_lib_usehistory_ts",
-      "target": "lib_usehistory_usehistoryresult",
-      "confidence_score": 1.0
+      "target": "lib_usehistory_usehistoryresult"
     },
     {
       "relation": "contains",
@@ -7822,9 +7822,9 @@
       "source_file": "src/lib/useHistory.ts",
       "source_location": "L29",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "src_lib_usehistory_ts",
-      "target": "lib_usehistory_usehistory",
-      "confidence_score": 1.0
+      "target": "lib_usehistory_usehistory"
     },
     {
       "relation": "contains",
@@ -7832,9 +7832,9 @@
       "source_file": "src/pages/AboutPage.tsx",
       "source_location": "L5",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "src_pages_aboutpage_tsx",
-      "target": "pages_aboutpage_sections",
-      "confidence_score": 1.0
+      "target": "pages_aboutpage_sections"
     },
     {
       "relation": "contains",
@@ -7842,9 +7842,9 @@
       "source_file": "src/pages/AboutPage.tsx",
       "source_location": "L23",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "src_pages_aboutpage_tsx",
-      "target": "pages_aboutpage_aboutpage",
-      "confidence_score": 1.0
+      "target": "pages_aboutpage_aboutpage"
     },
     {
       "relation": "imports_from",
@@ -9748,9 +9748,9 @@
       "source_file": ".claude/worktrees/zen-kalam-eba609/algorithm-overview.md",
       "source_location": "L1",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "c_users_kj287_documents_01_projects_focusflow_claude_worktrees_zen_kalam_eba609_algorithm_overview_md",
-      "target": "zen_kalam_eba609_algorithm_overview_algorithm_overview",
-      "confidence_score": 1.0
+      "target": "zen_kalam_eba609_algorithm_overview_algorithm_overview"
     },
     {
       "relation": "contains",
@@ -9888,9 +9888,9 @@
       "source_file": ".claude/worktrees/zen-kalam-eba609/CLAUDE.md",
       "source_location": "L1",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "c_users_kj287_documents_01_projects_focusflow_claude_worktrees_zen_kalam_eba609_claude_md",
-      "target": "zen_kalam_eba609_claude_agent_routing",
-      "confidence_score": 1.0
+      "target": "zen_kalam_eba609_claude_agent_routing"
     },
     {
       "relation": "contains",
@@ -9898,9 +9898,9 @@
       "source_file": ".claude/worktrees/zen-kalam-eba609/CLAUDE.md",
       "source_location": "L34",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "c_users_kj287_documents_01_projects_focusflow_claude_worktrees_zen_kalam_eba609_claude_md",
-      "target": "zen_kalam_eba609_claude_graphify",
-      "confidence_score": 1.0
+      "target": "zen_kalam_eba609_claude_graphify"
     },
     {
       "relation": "contains",
@@ -9948,9 +9948,9 @@
       "source_file": ".claude/worktrees/zen-kalam-eba609/protocol-and-questions.md",
       "source_location": "L1",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "c_users_kj287_documents_01_projects_focusflow_claude_worktrees_zen_kalam_eba609_protocol_and_questions_md",
-      "target": "zen_kalam_eba609_protocol_and_questions_protocol_and_open_questions",
-      "confidence_score": 1.0
+      "target": "zen_kalam_eba609_protocol_and_questions_protocol_and_open_questions"
     },
     {
       "relation": "contains",
@@ -10108,9 +10108,9 @@
       "source_file": "README.md",
       "source_location": "L1",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "readme_md",
-      "target": "focusflow_readme_focusflow",
-      "confidence_score": 1.0
+      "target": "focusflow_readme_focusflow"
     },
     {
       "relation": "contains",
@@ -10128,9 +10128,9 @@
       "source_file": "README.md",
       "source_location": "L11",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "focusflow_readme_focusflow",
-      "target": "focusflow_readme_current_wiring",
-      "confidence_score": 1.0
+      "target": "focusflow_readme_current_wiring"
     },
     {
       "relation": "contains",
@@ -10138,9 +10138,9 @@
       "source_file": "README.md",
       "source_location": "L19",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "focusflow_readme_focusflow",
-      "target": "focusflow_readme_research_docs",
-      "confidence_score": 1.0
+      "target": "focusflow_readme_research_docs"
     },
     {
       "relation": "contains",
@@ -10148,9 +10148,9 @@
       "source_file": "README.md",
       "source_location": "L25",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "focusflow_readme_focusflow",
-      "target": "focusflow_readme_local_setup",
-      "confidence_score": 1.0
+      "target": "focusflow_readme_local_setup"
     },
     {
       "relation": "contains",
@@ -10158,9 +10158,9 @@
       "source_file": "README.md",
       "source_location": "L33",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "focusflow_readme_focusflow",
-      "target": "focusflow_readme_supabase_setup",
-      "confidence_score": 1.0
+      "target": "focusflow_readme_supabase_setup"
     },
     {
       "relation": "contains",
@@ -10168,9 +10168,9 @@
       "source_file": "README.md",
       "source_location": "L42",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "focusflow_readme_focusflow",
-      "target": "focusflow_readme_github_and_sharing",
-      "confidence_score": 1.0
+      "target": "focusflow_readme_github_and_sharing"
     },
     {
       "relation": "contains",
@@ -10178,9 +10178,9 @@
       "source_file": "README.md",
       "source_location": "L50",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "focusflow_readme_focusflow",
-      "target": "focusflow_readme_commands",
-      "confidence_score": 1.0
+      "target": "focusflow_readme_commands"
     },
     {
       "relation": "contains",
@@ -10188,9 +10188,9 @@
       "source_file": ".claude/worktrees/zen-kalam-eba609/system-diagrams.md",
       "source_location": "L1",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "c_users_kj287_documents_01_projects_focusflow_claude_worktrees_zen_kalam_eba609_system_diagrams_md",
-      "target": "zen_kalam_eba609_system_diagrams_system_diagrams",
-      "confidence_score": 1.0
+      "target": "zen_kalam_eba609_system_diagrams_system_diagrams"
     },
     {
       "relation": "contains",
@@ -10507,5 +10507,5 @@
     }
   ],
   "hyperedges": [],
-  "built_at_commit": "80e31adb414cbc199e1912b1d79dfc3f344fc716"
+  "built_at_commit": "5403d6d162894a44b02ac21c8241b0f1798fbd8b"
 }

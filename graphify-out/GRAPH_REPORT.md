@@ -1,7 +1,7 @@
 # Graph Report - focusflow  (2026-05-26)
 
 ## Corpus Check
-- 49 files · ~28,838 words
+- 49 files · ~28,945 words
 - Verdict: corpus is large enough that graph structure adds value.
 
 ## Summary
@@ -10,7 +10,7 @@
 - Token cost: 0 input · 0 output
 
 ## Graph Freshness
-- Built from commit: `80e31adb`
+- Built from commit: `5403d6d1`
 - Run `git rev-parse HEAD` and compare to check if the graph is stale.
 - Run `graphify update .` after code changes (no API cost).
 
@@ -153,15 +153,15 @@ Nodes (3): SessionProgress(), SessionProgressProps, YogiIcon()
 
 ### Community 26 - "Community 26"
 Cohesion: 0.67
-Nodes (3): enableCamera(), handleContinueFromSetup(), handleStart()
+Nodes (3): disableCamera(), handleResetResearchFlow(), stopCameraStream()
 
 ### Community 27 - "Community 27"
 Cohesion: 0.67
-Nodes (3): disableCamera(), handleResetResearchFlow(), stopCameraStream()
+Nodes (3): isPlausibleEyeOpenness(), processBlinkState, tick()
 
 ### Community 28 - "Community 28"
 Cohesion: 0.67
-Nodes (3): isPlausibleEyeOpenness(), processBlinkState, tick()
+Nodes (3): enableCamera(), handleContinueFromSetup(), handleStart()
 
 ## Knowledge Gaps
 - **159 isolated node(s):** `__dirname`, `root`, `svgPath`, `svgBuffer`, `outputs` (+154 more)
