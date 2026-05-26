@@ -2466,48 +2466,61 @@ sessionComplete ? (
           <div
             style={{
               width: "100%",
-              maxWidth: "440px",
-              padding: "80px 24px 60px",
+              maxWidth: "400px",
+              padding: "56px 28px 48px",
               margin: "0 auto",
               textAlign: "center",
               display: "flex",
               flexDirection: "column",
               alignItems: "center",
-              gap: "56px",
-              // Consistent type system across the whole screen.
+              gap: "36px",
               fontFamily: '"DM Sans", system-ui, sans-serif',
               color: "rgba(245, 233, 218, 0.85)",
             }}
           >
-            {/* Hero — the only serif moment on the screen */}
-            <div style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: "14px" }}>
+            {/* Hero stat */}
+            <div style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: "10px" }}>
               <div
                 style={{
                   fontSize: "11px",
-                  letterSpacing: "0.22em",
+                  letterSpacing: "0.2em",
                   textTransform: "uppercase",
-                  color: "rgba(245, 233, 218, 0.4)",
+                  color: "rgba(245, 233, 218, 0.38)",
                 }}
               >
                 Longest gaze
               </div>
-              <div
-                style={{
-                  fontSize: "clamp(72px, 14vw, 108px)",
-                  fontFamily: '"Playfair Display", Georgia, serif',
-                  fontWeight: 400,
-                  color: "rgba(245, 233, 218, 0.95)",
-                  lineHeight: 1,
-                  letterSpacing: "-0.01em",
-                }}
-              >
-                {longestGazeRef.current}s
+              {/* Number and unit on one line, modest size so digits stay legible */}
+              <div style={{ display: "flex", alignItems: "baseline", gap: "6px" }}>
+                <div
+                  style={{
+                    fontSize: "clamp(52px, 11vw, 80px)",
+                    fontFamily: '"Playfair Display", Georgia, serif',
+                    fontWeight: 400,
+                    color: "rgba(245, 233, 218, 0.95)",
+                    lineHeight: 1,
+                    letterSpacing: "-0.02em",
+                  }}
+                >
+                  {longestGazeRef.current}
+                </div>
+                <div
+                  style={{
+                    fontSize: "22px",
+                    fontFamily: '"DM Sans", system-ui, sans-serif',
+                    fontWeight: 300,
+                    color: "rgba(245, 233, 218, 0.45)",
+                    lineHeight: 1,
+                  }}
+                >
+                  sec
+                </div>
               </div>
               <div
                 style={{
                   fontSize: "13px",
-                  color: "rgba(245, 233, 218, 0.45)",
-                  marginTop: "6px",
+                  color: "rgba(245, 233, 218, 0.38)",
+                  letterSpacing: "0.01em",
                 }}
               >
                 {(() => {
@@ -2520,12 +2533,12 @@ sessionComplete ? (
                     longestGazeRef.current,
                     ...allHistory.map((r) => r.longestGazeSec ?? 0)
                   );
-                  return `Session ${sessionN}  ·  ${totalMin}m total  ·  ${bestEver}s best`;
+                  return `Session ${sessionN} · ${totalMin}m total · ${bestEver}s best`;
                 })()}
               </div>
             </div>
 
-            {/* Milestone — single quiet line, no heading-of-a-heading */}
+            {/* Milestones */}
             {pendingMilestones.length > 0 && (
               <div style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: "6px" }}>
                 {pendingMilestones.map((id) => (
@@ -2533,79 +2546,66 @@ sessionComplete ? (
                     key={id}
                     style={{
                       fontSize: "13px",
-                      color: "rgba(255, 179, 71, 0.85)",
+                      color: "rgba(255, 179, 71, 0.82)",
                       letterSpacing: "0.02em",
                     }}
                   >
-                    ★  {milestoneLabel(id)}
+                    ★ {milestoneLabel(id)}
                   </div>
                 ))}
               </div>
             )}
 
-            {/* Feedback — looks like a writing surface, not a box */}
-            <div style={{ width: "100%", display: "flex", flexDirection: "column", alignItems: "stretch", gap: "12px" }}>
-              <div
-                style={{
-                  fontSize: "11px",
-                  letterSpacing: "0.22em",
-                  textTransform: "uppercase",
-                  color: "rgba(245, 233, 218, 0.4)",
-                  textAlign: "center",
-                }}
-              >
-                Feedback
-              </div>
-              <textarea
-                value={note}
-                onChange={(e) => setNote(e.target.value)}
-                rows={3}
-                placeholder="Optional. Read by the developer to improve the app."
-                style={{
-                  width: "100%",
-                  padding: "12px 0",
-                  border: "none",
-                  borderBottom: "1px solid rgba(245, 233, 218, 0.12)",
-                  background: "transparent",
-                  color: "rgba(245, 233, 218, 0.9)",
-                  fontSize: "14px",
-                  lineHeight: 1.6,
-                  fontFamily: "inherit",
-                  resize: "none",
-                  outline: "none",
-                  textAlign: "center",
-                }}
-                onFocus={(e) => (e.currentTarget.style.borderBottomColor = "rgba(255,179,71,0.4)")}
-                onBlur={(e) => (e.currentTarget.style.borderBottomColor = "rgba(245, 233, 218, 0.12)")}
-              />
-            </div>
+            {/* Feedback — no heading, textarea speaks for itself */}
+            <textarea
+              value={note}
+              onChange={(e) => setNote(e.target.value)}
+              rows={3}
+              placeholder="Notes or feedback (optional)"
+              style={{
+                width: "100%",
+                padding: "10px 0",
+                border: "none",
+                borderBottom: "1px solid rgba(245, 233, 218, 0.10)",
+                background: "transparent",
+                color: "rgba(245, 233, 218, 0.88)",
+                fontSize: "14px",
+                lineHeight: 1.65,
+                fontFamily: "inherit",
+                resize: "none",
+                outline: "none",
+                textAlign: "center",
+              }}
+              onFocus={(e) => (e.currentTarget.style.borderBottomColor = "rgba(255,179,71,0.35)")}
+              onBlur={(e) => (e.currentTarget.style.borderBottomColor = "rgba(245, 233, 218, 0.10)")}
+            />
 
             <button
               onClick={handleSaveSession}
               disabled={saved}
               style={{
                 background: "transparent",
-                border: "1px solid rgba(255, 179, 71, 0.35)",
-                color: "rgba(255, 179, 71, 0.9)",
-                padding: "12px 32px",
+                border: "1px solid rgba(255, 179, 71, 0.32)",
+                color: "rgba(255, 179, 71, 0.88)",
+                padding: "11px 36px",
                 borderRadius: "999px",
                 fontSize: "12px",
-                letterSpacing: "0.22em",
+                letterSpacing: "0.2em",
                 textTransform: "uppercase",
                 fontFamily: "inherit",
                 cursor: saved ? "default" : "pointer",
-                opacity: saved ? 0.5 : 1,
+                opacity: saved ? 0.45 : 1,
                 transition: "background 0.2s, border-color 0.2s",
               }}
               onMouseEnter={(e) => {
                 if (!saved) {
-                  e.currentTarget.style.background = "rgba(255, 179, 71, 0.08)";
-                  e.currentTarget.style.borderColor = "rgba(255, 179, 71, 0.6)";
+                  e.currentTarget.style.background = "rgba(255, 179, 71, 0.07)";
+                  e.currentTarget.style.borderColor = "rgba(255, 179, 71, 0.55)";
                 }
               }}
               onMouseLeave={(e) => {
                 e.currentTarget.style.background = "transparent";
-                e.currentTarget.style.borderColor = "rgba(255, 179, 71, 0.35)";
+                e.currentTarget.style.borderColor = "rgba(255, 179, 71, 0.32)";
               }}
             >
               {saved ? "Saved" : "Finish"}
