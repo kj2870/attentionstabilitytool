@@ -8,6 +8,7 @@ import HistoryPage from "./pages/HistoryPage";
 import PrivacyPage from "./pages/PrivacyPage";
 import SciencePage from "./pages/SciencePage";
 import PhilosophyPage from "./pages/PhilosophyPage";
+import AboutPage from "./pages/AboutPage";
 import SessionPage from "./pages/SessionPage";
 import OnboardingPage from "./pages/OnboardingPage";
 import LoginPage from "./pages/LoginPage";
@@ -48,6 +49,7 @@ function AuthedRoutes() {
         <Route path="/science" element={<SciencePage />} />
         <Route path="/philosophy" element={<PhilosophyPage />} />
         <Route path="/privacy" element={<PrivacyPage />} />
+        <Route path="/about" element={<AboutPage />} />
         <Route path="/onboarding" element={<Navigate to="/" replace />} />
         <Route path="/login" element={<Navigate to="/" replace />} />
         <Route path="*" element={<Navigate to="/" replace />} />

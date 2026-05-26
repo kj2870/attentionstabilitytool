@@ -52,16 +52,6 @@ function avg(values: number[]) {
   return values.reduce((sum, value) => sum + value, 0) / values.length;
 }
 
-function avgDiff(values: number[]) {
-  if (values.length < 2) return 0;
-
-  let total = 0;
-  for (let index = 1; index < values.length; index += 1) {
-    total += values[index] - values[index - 1];
-  }
-
-  return total / (values.length - 1);
-}
 function clamp(value: number, min: number, max: number) {
   return Math.min(max, Math.max(min, value));
 }
@@ -1609,28 +1599,6 @@ export default function SessionPage() {
     ? "Rest"
     : currentPhase?.instruction ?? "";
 
-  // Interpretable stability label from recent attention variation.
-  const signalStability = useMemo(() => {
-    if (attentionHistory.length < 4) return "moderate";
-
-    let totalChange = 0;
-    for (let i = 1; i < attentionHistory.length; i += 1) {
-      totalChange += Math.abs(attentionHistory[i] - attentionHistory[i - 1]);
-    }
-
-    const meanChange = totalChange / (attentionHistory.length - 1);
-
-    if (meanChange < 1.6) return "stable";
-    if (meanChange < 4.2) return "moderate";
-    return "variable";
-  }, [attentionHistory]);
-
-  // Live blink rate estimate based on elapsed session time.
-  const blinkRatePerMinute = useMemo(() => {
-    const minutes = Math.max(elapsedSeconds, 1) / 60;
-    return blinkCountLive / minutes;
-  }, [blinkCountLive, elapsedSeconds]);
-
   const liveBlinkRatePerMinute = useMemo(() => {
     if (blinkRateHistory.length === 0) return 0;
     return blinkRateHistory[blinkRateHistory.length - 1];
@@ -1640,16 +1608,6 @@ export default function SessionPage() {
     if (closureBurdenHistory.length === 0) return 0;
     return closureBurdenHistory[closureBurdenHistory.length - 1];
   }, [closureBurdenHistory]);
-
-  const avgClosureDurationMs = useMemo(() => {
-    if (closureDurationsRef.current.length === 0) return 0;
-    return avg(closureDurationsRef.current);
-  }, [blinkCountLive, closureBurdenHistory]);
-
-  const avgInterBlinkIntervalSec = useMemo(() => {
-    if (blinkEventTimesRef.current.length < 2) return 0;
-    return avgDiff(blinkEventTimesRef.current) / 1000;
-  }, [blinkCountLive]);
 
   const recentLongClosures = useMemo(() => {
     const now = performance.now();
@@ -1701,10 +1659,6 @@ export default function SessionPage() {
 
   const liveEyeOpenness = eyeSnapshot?.facePresent ? eyeSnapshot.eyeOpenAvg : null;
 
-  const attentionDisplayLabel =
-    signalQuality === "poor"
-      ? `${attentionScore} (low confidence)`
-      : `${attentionScore}`;
   const renderSetupSafetyCard = () => (
     <div
       className="glass-card"
@@ -2172,131 +2126,6 @@ export default function SessionPage() {
             renderResearchSummaryCard()
           ) : (
             <>
-              {researchStep === "session" && (
-                <div
-                  style={{
-                    position: "fixed",
-                    top: "18px",
-                    left: "18px",
-                    width: "clamp(240px, 28vw, 320px)",
-                    display: "flex",
-                    flexDirection: "column",
-                    gap: "10px",
-                    zIndex: 35,
-                  }}
-                >
-                  <div
-                    style={{
-                      borderRadius: "16px",
-                      background: "rgba(0,0,0,0.30)",
-                      border: "1px solid rgba(255,255,255,0.12)",
-                      boxShadow: "0 10px 30px rgba(0,0,0,0.22)",
-                      backdropFilter: "blur(8px)",
-                      padding: "12px 14px",
-                    }}
-                  >
-                    <button
-                      type="button"
-                      onClick={() => togglePanel("measurement")}
-                      style={{
-                        width: "100%",
-                        display: "flex",
-                        justifyContent: "space-between",
-                        alignItems: "center",
-                        background: "transparent",
-                        border: "none",
-                        color: "#F5E9DA",
-                        padding: 0,
-                        cursor: "pointer",
-                        fontSize: "13px",
-                      }}
-                    >
-                      <span>Measurement Reference</span>
-                      <span style={{ color: "rgba(245,233,218,0.68)", fontSize: "11px" }}>
-                        {panelsOpen.measurement ? "Hide" : "Show"}
-                      </span>
-                    </button>
-
-                    {panelsOpen.measurement && (
-                      <div
-                        style={{
-                          display: "flex",
-                          flexDirection: "column",
-                          gap: "6px",
-                          fontSize: "11px",
-                          lineHeight: 1.45,
-                          color: "#d9cbb8",
-                          marginTop: "8px",
-                        }}
-                      >
-                        {measurementReference.map((item) => (
-                          <div key={item}>{item}</div>
-                        ))}
-                      </div>
-                    )}
-                  </div>
-
-                  <div
-                    style={{
-                      borderRadius: "16px",
-                      background: "rgba(0,0,0,0.30)",
-                      border: "1px solid rgba(255,255,255,0.12)",
-                      boxShadow: "0 10px 30px rgba(0,0,0,0.22)",
-                      backdropFilter: "blur(8px)",
-                      padding: "12px 14px",
-                    }}
-                  >
-                    <button
-                      type="button"
-                      onClick={() => togglePanel("protocol")}
-                      style={{
-                        width: "100%",
-                        display: "flex",
-                        justifyContent: "space-between",
-                        alignItems: "center",
-                        background: "transparent",
-                        border: "none",
-                        color: "#F5E9DA",
-                        padding: 0,
-                        cursor: "pointer",
-                        fontSize: "13px",
-                      }}
-                    >
-                      <span>Protocol Reference</span>
-                      <span style={{ color: "rgba(245,233,218,0.68)", fontSize: "11px" }}>
-                        {panelsOpen.protocol ? "Hide" : "Show"}
-                      </span>
-                    </button>
-
-                    {panelsOpen.protocol && (
-                      <div
-                        style={{
-                          display: "grid",
-                          gridTemplateColumns: "1fr auto",
-                          gap: "6px 10px",
-                          fontSize: "11px",
-                          lineHeight: 1.45,
-                          color: "#d9cbb8",
-                          marginTop: "8px",
-                        }}
-                      >
-                        {protocolReference.map((item) => (
-                          <Fragment key={item.label}>
-                            <div>
-                              {item.label}
-                              <span style={{ color: "rgba(245,233,218,0.56)" }}>
-                                {" "}
-                                • {item.detail}
-                              </span>
-                            </div>
-                            <div>{item.duration}</div>
-                          </Fragment>
-                        ))}
-                      </div>
-                    )}
-                  </div>
-                </div>
-              )}
 
               {((!isRunning && (cameraStream || cameraState === "requesting")) || (isRunning && isDebugMode)) && (
                 <div
@@ -2489,61 +2318,6 @@ export default function SessionPage() {
                   {(isSettlePhase || isIntegratePhase) && <SettleHalo />}
                 </div>
                 </div>{/* end centered group */}
-
-                {isRunning && isDebugMode && (
-                  <CollapsibleCard
-                    title="Live Signals"
-                    open={panelsOpen.liveSignals}
-                    onToggle={() => togglePanel("liveSignals")}
-                  >
-                    <div
-                      style={{
-                        display: "grid",
-                        gridTemplateColumns: "repeat(auto-fit, minmax(170px, 1fr))",
-                        gap: "8px",
-                        marginBottom: "12px",
-                        fontSize: "13px",
-                        color: "#d7c7b3",
-                      }}
-                    >
-                      <div style={{ opacity: signalQuality === "poor" ? 0.72 : 1 }}>
-                        Attention estimate (0–100): {attentionDisplayLabel}
-                      </div>
-                      <div>Raw estimate: {Math.round(rawAttentionEstimate)}</div>
-                      <div>
-                        Eye openness: {liveEyeOpenness !== null ? liveEyeOpenness.toFixed(4) : "—"}
-                      </div>
-                      <div>Blinks: {blinkCountLive}</div>
-                      <div>Live blink rate: {liveBlinkRatePerMinute.toFixed(1)} / min</div>
-                      <div>Session blink rate: {blinkRatePerMinute.toFixed(1)} / min</div>
-                      <div>Closure burden: {closureBurdenPercent.toFixed(1)}%</div>
-                      <div>Openness variability: {eyeOpennessStd.toFixed(4)}</div>
-                      <div>
-                        Avg closure:{" "}
-                        {avgClosureDurationMs > 0 ? `${Math.round(avgClosureDurationMs)} ms` : "—"}
-                      </div>
-                      <div>
-                        Inter-blink interval:{" "}
-                        {avgInterBlinkIntervalSec > 0
-                          ? `${avgInterBlinkIntervalSec.toFixed(1)} s`
-                          : "—"}
-                      </div>
-                      <div>Long closures (30s): {recentLongClosures}</div>
-                      <div>Valid signal coverage: {validSignalCoveragePercent.toFixed(0)}%</div>
-                      <div>Face status: {faceStatus}</div>
-                      <div>Eye status: {eyeStatus}</div>
-                      <div>Signal stability: {signalStability}</div>
-                      <div>
-                        Signal quality:{" "}
-                        {signalQuality === "good"
-                          ? "Good"
-                          : signalQuality === "fair"
-                          ? "Fair"
-                          : "Poor"}
-                      </div>
-                    </div>
-                  </CollapsibleCard>
-                )}
 
                 {isDebugMode && (
                 <CollapsibleCard
@@ -3183,132 +2957,6 @@ sessionComplete ? (
                   {(isSettlePhase || isIntegratePhase) && <SettleHalo />}
                 </div>
               </div>{/* end centered group */}
-
-              {isRunning && (
-                <div
-                  className="glass-card"
-                  style={{
-                    width: "100%",
-                    maxWidth: "760px",
-                    padding: "16px 16px 14px",
-                    textAlign: "left",
-                    background: "rgba(255,255,255,0.028)",
-                    border: "1px solid rgba(255,255,255,0.12)",
-                  }}
-                >
-                  <div style={{ fontSize: "16px", color: "#d9cbb8", marginBottom: "10px" }}>
-                    Live Signals
-                  </div>
-
-                  <div
-                    style={{
-                      display: "grid",
-                      gridTemplateColumns: "repeat(auto-fit, minmax(170px, 1fr))",
-                      gap: "8px",
-                      marginBottom: "12px",
-                      fontSize: "13px",
-                      color: "#d7c7b3",
-                    }}
-                  >
-                    <div
-                      style={{
-                        opacity: signalQuality === "poor" ? 0.72 : 1,
-                      }}
-                    >
-                      Attention estimate (0–100): {attentionDisplayLabel}
-                    </div>
-                    <div>
-                      Raw estimate: {Math.round(rawAttentionEstimate)}
-                    </div>
-                    <div>
-                      Eye openness: {liveEyeOpenness !== null ? liveEyeOpenness.toFixed(4) : "—"}
-                    </div>
-                    <div>Blinks: {blinkCountLive}</div>
-                    <div>Live blink rate: {liveBlinkRatePerMinute.toFixed(1)} / min</div>
-                    <div>Session blink rate: {blinkRatePerMinute.toFixed(1)} / min</div>
-                    <div>Closure burden: {closureBurdenPercent.toFixed(1)}%</div>
-                    <div>
-                      Openness variability: {eyeOpennessStd.toFixed(4)}
-                    </div>
-                    <div>
-                      Avg closure:{" "}
-                      {avgClosureDurationMs > 0 ? `${Math.round(avgClosureDurationMs)} ms` : "—"}
-                    </div>
-                    <div>
-                      Inter-blink interval:{" "}
-                      {avgInterBlinkIntervalSec > 0
-                        ? `${avgInterBlinkIntervalSec.toFixed(1)} s`
-                        : "—"}
-                    </div>
-                    <div>Long closures (30s): {recentLongClosures}</div>
-                    <div>Valid signal coverage: {validSignalCoveragePercent.toFixed(0)}%</div>
-                    <div>Face status: {faceStatus}</div>
-                    <div>Eye status: {eyeStatus}</div>
-                    <div>Signal stability: {signalStability}</div>
-                    <div>
-                      Signal quality:{" "}
-                      {signalQuality === "good"
-                        ? "Good"
-                        : signalQuality === "fair"
-                        ? "Fair"
-                        : "Poor"}
-                    </div>
-                  </div>
-
-                  <div
-                    style={{
-                      display: "grid",
-                      gridTemplateColumns: "repeat(auto-fit, minmax(220px, 1fr))",
-                      gap: "10px",
-                    }}
-                  >
-                    <TrendCard
-                      title="Eye openness trend"
-                      values={eyeOpennessHistory}
-                      currentLabel={
-                        liveEyeOpenness !== null ? liveEyeOpenness.toFixed(4) : "Current: —"
-                      }
-                      minLabel="0.000"
-                      maxLabel="0.035"
-                      minValue={0}
-                      maxValue={0.035}
-                    />
-
-                    <TrendCard
-                      title="Attention estimate trend"
-                      values={attentionHistory}
-                      currentLabel={`Current: ${attentionScore}`}
-                      minLabel="0"
-                      maxLabel="100"
-                      minValue={0}
-                      maxValue={100}
-                      stroke="rgba(186, 216, 238, 0.9)"
-                    />
-
-                    <TrendCard
-                      title="Blink rate trend"
-                      values={blinkRateHistory}
-                      currentLabel={`Current: ${liveBlinkRatePerMinute.toFixed(1)} / min`}
-                      minLabel="0"
-                      maxLabel="30"
-                      minValue={0}
-                      maxValue={30}
-                      stroke="rgba(244, 196, 135, 0.92)"
-                    />
-
-                    <TrendCard
-                      title="Closure burden trend"
-                      values={closureBurdenHistory}
-                      currentLabel={`Current: ${closureBurdenPercent.toFixed(1)}%`}
-                      minLabel="0%"
-                      maxLabel="100%"
-                      minValue={0}
-                      maxValue={100}
-                      stroke="rgba(198, 214, 173, 0.92)"
-                    />
-                  </div>
-                </div>
-              )}
 
               {!isRunning && (
                 <div style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: "14px" }}>

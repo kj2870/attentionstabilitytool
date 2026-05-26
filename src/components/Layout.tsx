@@ -1,6 +1,7 @@
 import type { ReactNode } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { RESEARCH_MODE } from "../lib/presentationMode";
+import BottomTabBar from "./BottomTabBar";
 
 type LayoutProps = {
   children: ReactNode;
@@ -91,6 +92,9 @@ export default function Layout({ children }: LayoutProps) {
       )}
 
       <main>{children}</main>
+
+      {/* Mobile-only bottom tab navigation — hidden on desktop via CSS */}
+      {!isSessionRoute && <BottomTabBar />}
     </div>
   );
 }

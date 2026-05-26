@@ -235,6 +235,29 @@ input:focus {
   .home-diya-scaler { transform: translateX(-8px) scale(0.85); }
 }
 
+/* ── Mobile / Desktop nav toggle ───────────────────────────────────────────
+   On mobile (≤ 700px): hide the top nav header, show the bottom tab bar.
+   On desktop (> 700px): show the top nav header, hide the bottom tab bar.    */
+@media (max-width: 700px) {
+  header {
+    display: none !important;
+  }
+}
+
+@media (min-width: 701px) {
+  .bottom-tab-bar {
+    display: none !important;
+  }
+}
+
+/* Prevent page content from being hidden under the bottom tab bar on mobile.
+   56px icon row + safe area handled inside the bar itself. */
+@media (max-width: 700px) {
+  main {
+    padding-bottom: calc(72px + env(safe-area-inset-bottom));
+  }
+}
+
 /* Narrower phones — tighten header nav so it doesn't overflow. */
 @media (max-width: 480px) {
   header .page-shell {
