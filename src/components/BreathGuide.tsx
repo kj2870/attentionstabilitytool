@@ -6,11 +6,15 @@ type BreathGuideProps = {
   durationSec: number;
 };
 
+// Natural breath easing — sine-like, no sharp midpoint.
+const BREATH_EASING = "cubic-bezier(0.37, 0, 0.63, 1)";
+
 export default function BreathGuide({ action, durationSec }: BreathGuideProps) {
-  // Start at a small scale on mount so the first inhale visibly expands from small.
-  // After the first frame fires we flip to the real target scale, letting the CSS
-  // transition carry it smoothly. On every subsequent action flip (inhale ↔ exhale)
-  // the transition runs at the full breath duration.
+  // Start small on the very first mount so the opening inhale visibly grows
+  // from a tiny seed. After the first frame we flip to the real target scale
+  // and the CSS transition carries it. Because this component stays mounted
+  // across all breath phases (inhale ↔ exhale phases share visualMode=breath),
+  // the action prop simply re-targets the transform — no remount, no jump.
   const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
@@ -19,7 +23,9 @@ export default function BreathGuide({ action, durationSec }: BreathGuideProps) {
   }, []);
 
   const isInhale = action === "inhale";
-  const targetScale = !mounted ? 0.48 : isInhale ? 1.18 : 0.72;
+  // Tighter range so the shift between inhale and exhale feels gentle rather
+  // than dramatic, and the perceived "shade" of the gradient stays uniform.
+  const targetScale = !mounted ? 0.42 : isInhale ? 1.12 : 0.7;
 
   return (
     <div
@@ -27,24 +33,35 @@ export default function BreathGuide({ action, durationSec }: BreathGuideProps) {
         position: "absolute",
         inset: 0,
         display: "flex",
-        flexDirection: "column",
         alignItems: "center",
         justifyContent: "center",
         pointerEvents: "none",
       }}
     >
-      {/* Single consistent gradient — only scale changes so the colour never shifts
-          abruptly between inhale and exhale. The transition runs at the full breath
-          duration so expansion/contraction is perfectly in sync with the cue. */}
+      {/* Steady ambient halo — does NOT scale. Provides constant background
+          warmth so the moving disc never looks like it changes brightness. */}
       <div
         style={{
-          width: "260px",
-          height: "260px",
+          position: "absolute",
+          width: "320px",
+          height: "320px",
           borderRadius: "50%",
           background:
-            "radial-gradient(circle, rgba(255,195,120,0.38) 0%, rgba(240,155,75,0.20) 35%, rgba(200,115,50,0.08) 60%, transparent 90%)",
+            "radial-gradient(circle, rgba(255,180,100,0.10) 0%, rgba(220,140,70,0.05) 45%, transparent 75%)",
+          filter: "blur(8px)",
+        }}
+      />
+      {/* The breathing disc — single uniform gradient. Only scale animates,
+          so colour and density stay perceptually constant. */}
+      <div
+        style={{
+          width: "240px",
+          height: "240px",
+          borderRadius: "50%",
+          background:
+            "radial-gradient(circle, rgba(255,195,120,0.42) 0%, rgba(240,155,75,0.28) 40%, rgba(200,115,50,0.10) 65%, transparent 88%)",
           transform: `scale(${targetScale})`,
-          transition: `transform ${durationSec}s ease-in-out`,
+          transition: `transform ${durationSec}s ${BREATH_EASING}`,
           filter: "blur(2px)",
         }}
       />
