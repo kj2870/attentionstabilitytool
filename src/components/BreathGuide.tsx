@@ -1,3 +1,4 @@
+import { useEffect, useState } from "react";
 import type { BreathAction } from "../lib/sessionScript";
 
 type BreathGuideProps = {
@@ -6,7 +7,19 @@ type BreathGuideProps = {
 };
 
 export default function BreathGuide({ action, durationSec }: BreathGuideProps) {
+  // Start at a small scale on mount so the first inhale visibly expands from small.
+  // After the first frame fires we flip to the real target scale, letting the CSS
+  // transition carry it smoothly. On every subsequent action flip (inhale ↔ exhale)
+  // the transition runs at the full breath duration.
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    const id = requestAnimationFrame(() => setMounted(true));
+    return () => cancelAnimationFrame(id);
+  }, []);
+
   const isInhale = action === "inhale";
+  const targetScale = !mounted ? 0.48 : isInhale ? 1.18 : 0.72;
 
   return (
     <div
@@ -20,18 +33,18 @@ export default function BreathGuide({ action, durationSec }: BreathGuideProps) {
         pointerEvents: "none",
       }}
     >
-      {/* Breath orb only — the "Inhale"/"Exhale" label is rendered by SessionPage
-          in the same top text slot used by all other phases (consistent layout). */}
+      {/* Single consistent gradient — only scale changes so the colour never shifts
+          abruptly between inhale and exhale. The transition runs at the full breath
+          duration so expansion/contraction is perfectly in sync with the cue. */}
       <div
         style={{
           width: "260px",
           height: "260px",
           borderRadius: "50%",
-          background: isInhale
-            ? "radial-gradient(circle, rgba(255,200,130,0.42) 0%, rgba(255,170,90,0.22) 30%, rgba(220,130,60,0.10) 55%, rgba(180,100,40,0.04) 75%, transparent 95%)"
-            : "radial-gradient(circle, rgba(255,180,110,0.28) 0%, rgba(220,140,70,0.14) 35%, rgba(180,100,40,0.06) 60%, transparent 90%)",
-          transform: isInhale ? "scale(1.18)" : "scale(0.82)",
-          transition: `transform ${durationSec}s ease-in-out, background 1.2s ease`,
+          background:
+            "radial-gradient(circle, rgba(255,195,120,0.38) 0%, rgba(240,155,75,0.20) 35%, rgba(200,115,50,0.08) 60%, transparent 90%)",
+          transform: `scale(${targetScale})`,
+          transition: `transform ${durationSec}s ease-in-out`,
           filter: "blur(2px)",
         }}
       />

@@ -2137,33 +2137,6 @@ export default function SessionPage() {
                     gap: "20px",
                   }}
                 >
-                  {isBodyPhase && (
-                    <div style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: "10px" }}>
-                      <div
-                        style={{
-                          fontSize: "11px",
-                          letterSpacing: "0.14em",
-                          textTransform: "uppercase",
-                          color: "rgba(203, 183, 158, 0.45)",
-                          fontFamily: '"Playfair Display", Georgia, serif',
-                        }}
-                      >
-                        {bodyCue}
-                      </div>
-                      <div
-                        style={{
-                          fontSize: "28px",
-                          fontFamily: '"Playfair Display", Georgia, serif',
-                          fontWeight: 400,
-                          color: "rgba(245, 233, 218, 0.82)",
-                          lineHeight: 1.2,
-                        }}
-                      >
-                        {bodyRegionLabel}
-                      </div>
-                    </div>
-                  )}
-
                   {!isBodyPhase && primaryInstruction && (
                     <div
                       style={{
@@ -2194,6 +2167,48 @@ export default function SessionPage() {
                     justifyContent: "center",
                   }}
                 >
+                  {/* Body cue (CLENCH/RELEASE + region name) pinned inside the container
+                      above the figure — no longer a flex sibling so it can't overlap the SVG. */}
+                  {isBodyPhase && (
+                    <div
+                      style={{
+                        position: "absolute",
+                        top: 0,
+                        left: 0,
+                        right: 0,
+                        display: "flex",
+                        flexDirection: "column",
+                        alignItems: "center",
+                        gap: "6px",
+                        pointerEvents: "none",
+                        zIndex: 2,
+                      }}
+                    >
+                      <div
+                        style={{
+                          fontSize: "11px",
+                          letterSpacing: "0.14em",
+                          textTransform: "uppercase",
+                          color: "rgba(203, 183, 158, 0.45)",
+                          fontFamily: '"Playfair Display", Georgia, serif',
+                        }}
+                      >
+                        {bodyCue}
+                      </div>
+                      <div
+                        style={{
+                          fontSize: "26px",
+                          fontFamily: '"Playfair Display", Georgia, serif',
+                          fontWeight: 400,
+                          color: "rgba(245, 233, 218, 0.82)",
+                          lineHeight: 1.2,
+                        }}
+                      >
+                        {bodyRegionLabel}
+                      </div>
+                    </div>
+                  )}
+
                   {showDiya && (
                     <div
                       style={{
@@ -2207,16 +2222,14 @@ export default function SessionPage() {
                         muted
                         playsInline
                         style={{
-                          width: "clamp(220px, 36vw, 380px)",
+                          width: "clamp(190px, 30vw, 320px)",
                           mixBlendMode: "screen",
                           pointerEvents: "none",
                           display: "block",
-                          // Feather edges with a radial mask so the video bleeds
-                          // into the background instead of looking like a rectangle.
                           WebkitMaskImage:
-                            "radial-gradient(ellipse 70% 80% at center 55%, #000 35%, rgba(0,0,0,0.85) 55%, rgba(0,0,0,0.4) 75%, transparent 95%)",
+                            "radial-gradient(ellipse 55% 68% at center 52%, rgba(0,0,0,1) 0%, rgba(0,0,0,0.92) 28%, rgba(0,0,0,0.72) 48%, rgba(0,0,0,0.35) 66%, transparent 86%)",
                           maskImage:
-                            "radial-gradient(ellipse 70% 80% at center 55%, #000 35%, rgba(0,0,0,0.85) 55%, rgba(0,0,0,0.4) 75%, transparent 95%)",
+                            "radial-gradient(ellipse 55% 68% at center 52%, rgba(0,0,0,1) 0%, rgba(0,0,0,0.92) 28%, rgba(0,0,0,0.72) 48%, rgba(0,0,0,0.35) 66%, transparent 86%)",
                         }}
                       />
                     </div>
@@ -2691,33 +2704,6 @@ sessionComplete ? (
                   gap: "20px",
                 }}
               >
-                {isBodyPhase && (
-                  <div style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: "10px" }}>
-                    <div
-                      style={{
-                        fontSize: "11px",
-                        letterSpacing: "0.14em",
-                        textTransform: "uppercase",
-                        color: "rgba(203, 183, 158, 0.45)",
-                        fontFamily: '"Playfair Display", Georgia, serif',
-                      }}
-                    >
-                      {bodyCue}
-                    </div>
-                    <div
-                      style={{
-                        fontSize: "28px",
-                        fontFamily: '"Playfair Display", Georgia, serif',
-                        fontWeight: 400,
-                        color: "rgba(245, 233, 218, 0.82)",
-                        lineHeight: 1.2,
-                      }}
-                    >
-                      {bodyRegionLabel}
-                    </div>
-                  </div>
-                )}
-
                 {!isBodyPhase && primaryInstruction && (
                   <div
                     style={{
@@ -2744,6 +2730,46 @@ sessionComplete ? (
                     justifyContent: "center",
                   }}
                 >
+                  {isBodyPhase && (
+                    <div
+                      style={{
+                        position: "absolute",
+                        top: 0,
+                        left: 0,
+                        right: 0,
+                        display: "flex",
+                        flexDirection: "column",
+                        alignItems: "center",
+                        gap: "6px",
+                        pointerEvents: "none",
+                        zIndex: 2,
+                      }}
+                    >
+                      <div
+                        style={{
+                          fontSize: "11px",
+                          letterSpacing: "0.14em",
+                          textTransform: "uppercase",
+                          color: "rgba(203, 183, 158, 0.45)",
+                          fontFamily: '"Playfair Display", Georgia, serif',
+                        }}
+                      >
+                        {bodyCue}
+                      </div>
+                      <div
+                        style={{
+                          fontSize: "26px",
+                          fontFamily: '"Playfair Display", Georgia, serif',
+                          fontWeight: 400,
+                          color: "rgba(245, 233, 218, 0.82)",
+                          lineHeight: 1.2,
+                        }}
+                      >
+                        {bodyRegionLabel}
+                      </div>
+                    </div>
+                  )}
+
                   {showDiya && (
                     <div style={{ transition: "opacity 0.5s ease" }}>
                       <video
@@ -2753,14 +2779,14 @@ sessionComplete ? (
                         muted
                         playsInline
                         style={{
-                          width: "clamp(220px, 36vw, 380px)",
+                          width: "clamp(190px, 30vw, 320px)",
                           mixBlendMode: "screen",
                           pointerEvents: "none",
                           display: "block",
                           WebkitMaskImage:
-                            "radial-gradient(ellipse 70% 80% at center 55%, #000 35%, rgba(0,0,0,0.85) 55%, rgba(0,0,0,0.4) 75%, transparent 95%)",
+                            "radial-gradient(ellipse 55% 68% at center 52%, rgba(0,0,0,1) 0%, rgba(0,0,0,0.92) 28%, rgba(0,0,0,0.72) 48%, rgba(0,0,0,0.35) 66%, transparent 86%)",
                           maskImage:
-                            "radial-gradient(ellipse 70% 80% at center 55%, #000 35%, rgba(0,0,0,0.85) 55%, rgba(0,0,0,0.4) 75%, transparent 95%)",
+                            "radial-gradient(ellipse 55% 68% at center 52%, rgba(0,0,0,1) 0%, rgba(0,0,0,0.92) 28%, rgba(0,0,0,0.72) 48%, rgba(0,0,0,0.35) 66%, transparent 86%)",
                         }}
                       />
                     </div>
