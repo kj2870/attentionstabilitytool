@@ -2032,7 +2032,7 @@ export default function SessionPage() {
           position: "fixed",
           inset: 0,
           background: "#000",
-          opacity: showDiya ? 1 : 0,
+          opacity: showDiya || isEyesClosedPhase ? 1 : 0,
           transition: "opacity 1.2s ease-in-out",
           pointerEvents: "none",
           zIndex: 0,
@@ -2223,11 +2223,12 @@ export default function SessionPage() {
                       overflow: isBodyPhase ? "hidden" : "visible",
                     }}
                   >
-                    {showDiya && (
+                    {(showDiya || isEyesClosedPhase) && (
                       <div
                         style={{
                           mixBlendMode: "screen",
-                          transition: "opacity 0.5s ease",
+                          opacity: showDiya ? 1 : 0,
+                          transition: "opacity 0.6s ease",
                           lineHeight: 0,
                         }}
                       >
