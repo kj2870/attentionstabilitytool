@@ -4,6 +4,7 @@ import MeditationBackground from "../components/MeditationBackground";
 import BodyGuideOverlay from "../components/BodyGuideOverlay";
 import BreathGuide from "../components/BreathGuide";
 import SettleHalo from "../components/SettleHalo";
+import BrushstrokeEyes from "../components/BrushstrokeEyes";
 import type { TrackingMetrics } from "../lib/trackingEngine";
 import {
   createSessionScript,
@@ -2239,6 +2240,8 @@ export default function SessionPage() {
                     )}
 
                     {(isSettlePhase || isIntegratePhase) && <SettleHalo />}
+
+                    {isEyesClosedPhase && <BrushstrokeEyes />}
                   </div>
                 </div>{/* end centered group */}
 
@@ -2794,6 +2797,8 @@ sessionComplete ? (
                   )}
 
                   {(isSettlePhase || isIntegratePhase) && <SettleHalo />}
+
+                  {isEyesClosedPhase && <BrushstrokeEyes />}
                 </div>
               </div>{/* end centered group */}
 
