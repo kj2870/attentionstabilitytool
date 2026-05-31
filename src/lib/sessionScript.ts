@@ -30,14 +30,14 @@ export type SessionPhase = {
 };
 
 const BODY_SEQUENCE: Array<{ region: BodyRegion; instruction: string }> = [
-  { region: "feet", instruction: "Feet" },
-  { region: "calves", instruction: "Calves" },
-  { region: "thighs", instruction: "Thighs" },
-  { region: "pelvis", instruction: "Pelvis + abs" },
-  { region: "backShoulders", instruction: "Back + shoulders" },
-  { region: "armsFingers", instruction: "Arms" },
-  { region: "neck", instruction: "Neck" },
-  { region: "face", instruction: "Face" },
+  { region: "feet", instruction: "feet" },
+  { region: "calves", instruction: "calves" },
+  { region: "thighs", instruction: "thighs" },
+  { region: "pelvis", instruction: "pelvis and abs" },
+  { region: "backShoulders", instruction: "back and shoulders" },
+  { region: "armsFingers", instruction: "arms" },
+  { region: "neck", instruction: "neck" },
+  { region: "face", instruction: "face" },
 ];
 
 export function createSessionScript(): SessionPhase[] {
