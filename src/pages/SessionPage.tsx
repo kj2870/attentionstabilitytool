@@ -2776,9 +2776,9 @@ sessionComplete ? (
                           pointerEvents: "none",
                           display: "block",
                           WebkitMaskImage:
-                            "radial-gradient(ellipse 60% 72% at center 44%, rgba(0,0,0,1) 0%, rgba(0,0,0,0.9) 30%, rgba(0,0,0,0.6) 52%, rgba(0,0,0,0.28) 72%, rgba(0,0,0,0.08) 88%, transparent 100%)",
+                            "radial-gradient(ellipse 84% 88% at center 48%, rgba(0,0,0,1) 0%, rgba(0,0,0,1) 58%, rgba(0,0,0,0.72) 76%, rgba(0,0,0,0.28) 90%, transparent 100%)",
                           maskImage:
-                            "radial-gradient(ellipse 60% 72% at center 44%, rgba(0,0,0,1) 0%, rgba(0,0,0,0.9) 30%, rgba(0,0,0,0.6) 52%, rgba(0,0,0,0.28) 72%, rgba(0,0,0,0.08) 88%, transparent 100%)",
+                            "radial-gradient(ellipse 84% 88% at center 48%, rgba(0,0,0,1) 0%, rgba(0,0,0,1) 58%, rgba(0,0,0,0.72) 76%, rgba(0,0,0,0.28) 90%, transparent 100%)",
                         }}
                       />
                     </div>
