@@ -2217,14 +2217,17 @@ export default function SessionPage() {
                           muted
                           playsInline
                           style={{
-                            width: "clamp(190px, 30vw, 320px)",
+                            width: "clamp(220px, 34vw, 320px)",
                             mixBlendMode: "screen",
                             pointerEvents: "none",
                             display: "block",
+                            // Contrast pushes the video's warm-dark background toward
+                            // pure black so screen-blend makes it fully invisible.
+                            filter: "brightness(0.88) contrast(1.55)",
                             WebkitMaskImage:
-                              "radial-gradient(ellipse 55% 68% at center 52%, rgba(0,0,0,1) 0%, rgba(0,0,0,0.92) 28%, rgba(0,0,0,0.72) 48%, rgba(0,0,0,0.35) 66%, transparent 86%)",
+                              "radial-gradient(ellipse 90% 93% at center 47%, rgba(0,0,0,1) 0%, rgba(0,0,0,1) 40%, rgba(0,0,0,0.85) 55%, rgba(0,0,0,0.55) 70%, rgba(0,0,0,0.20) 84%, rgba(0,0,0,0.04) 93%, transparent 100%)",
                             maskImage:
-                              "radial-gradient(ellipse 55% 68% at center 52%, rgba(0,0,0,1) 0%, rgba(0,0,0,0.92) 28%, rgba(0,0,0,0.72) 48%, rgba(0,0,0,0.35) 66%, transparent 86%)",
+                              "radial-gradient(ellipse 90% 93% at center 47%, rgba(0,0,0,1) 0%, rgba(0,0,0,1) 40%, rgba(0,0,0,0.85) 55%, rgba(0,0,0,0.55) 70%, rgba(0,0,0,0.20) 84%, rgba(0,0,0,0.04) 93%, transparent 100%)",
                           }}
                         />
                       </div>
@@ -2765,7 +2768,7 @@ sessionComplete ? (
                     display: "flex",
                     alignItems: "center",
                     justifyContent: "center",
-                    overflow: isBodyPhase ? "hidden" : "visible",
+                    overflow: isBodyPhase ? "hidden" : "visible",  // body phase only — others fade/blend freely
                   }}
                 >
                   {showDiya && (
@@ -2777,14 +2780,15 @@ sessionComplete ? (
                         muted
                         playsInline
                         style={{
-                          width: "clamp(170px, 26vw, 280px)",
+                          width: "clamp(220px, 34vw, 320px)",
                           mixBlendMode: "screen",
                           pointerEvents: "none",
                           display: "block",
+                          filter: "brightness(0.88) contrast(1.55)",
                           WebkitMaskImage:
-                            "radial-gradient(ellipse 84% 88% at center 48%, rgba(0,0,0,1) 0%, rgba(0,0,0,1) 58%, rgba(0,0,0,0.72) 76%, rgba(0,0,0,0.28) 90%, transparent 100%)",
+                            "radial-gradient(ellipse 90% 93% at center 47%, rgba(0,0,0,1) 0%, rgba(0,0,0,1) 40%, rgba(0,0,0,0.85) 55%, rgba(0,0,0,0.55) 70%, rgba(0,0,0,0.20) 84%, rgba(0,0,0,0.04) 93%, transparent 100%)",
                           maskImage:
-                            "radial-gradient(ellipse 84% 88% at center 48%, rgba(0,0,0,1) 0%, rgba(0,0,0,1) 58%, rgba(0,0,0,0.72) 76%, rgba(0,0,0,0.28) 90%, transparent 100%)",
+                            "radial-gradient(ellipse 90% 93% at center 47%, rgba(0,0,0,1) 0%, rgba(0,0,0,1) 40%, rgba(0,0,0,0.85) 55%, rgba(0,0,0,0.55) 70%, rgba(0,0,0,0.20) 84%, rgba(0,0,0,0.04) 93%, transparent 100%)",
                         }}
                       />
                     </div>
