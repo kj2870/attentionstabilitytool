@@ -2205,7 +2205,7 @@ export default function SessionPage() {
                       display: "flex",
                       alignItems: "center",
                       justifyContent: "center",
-                      overflow: isBodyPhase ? "hidden" : "visible",
+                      overflow: isEyesClosedPhase ? "visible" : "hidden",
                     }}
                   >
                     {showDiya && (
