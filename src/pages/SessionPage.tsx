@@ -2238,7 +2238,7 @@ export default function SessionPage() {
                             position: "absolute",
                             inset: 0,
                             background:
-                              "radial-gradient(ellipse 82% 86% at center 46%, transparent 0%, transparent 50%, rgba(0,0,0,0.5) 66%, rgba(0,0,0,0.85) 78%, rgba(0,0,0,0.96) 88%, black 96%)",
+                              "radial-gradient(ellipse 76% 80% at center 46%, transparent 0%, transparent 42%, rgba(0,0,0,0.5) 56%, rgba(0,0,0,0.85) 68%, rgba(0,0,0,0.97) 78%, black 86%)",
                             pointerEvents: "none",
                           }}
                         />
@@ -2810,7 +2810,7 @@ sessionComplete ? (
                           position: "absolute",
                           inset: 0,
                           background:
-                            "radial-gradient(ellipse 82% 86% at center 46%, transparent 0%, transparent 50%, rgba(0,0,0,0.5) 66%, rgba(0,0,0,0.85) 78%, rgba(0,0,0,0.96) 88%, black 96%)",
+                            "radial-gradient(ellipse 76% 80% at center 46%, transparent 0%, transparent 42%, rgba(0,0,0,0.5) 56%, rgba(0,0,0,0.85) 68%, rgba(0,0,0,0.97) 78%, black 86%)",
                           pointerEvents: "none",
                         }}
                       />
