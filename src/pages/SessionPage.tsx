@@ -2780,7 +2780,7 @@ sessionComplete ? (
                     display: "flex",
                     alignItems: "center",
                     justifyContent: "center",
-                    overflow: isEyesClosedPhase ? "visible" : "hidden",
+                    overflow: isBodyPhase ? "hidden" : "visible",
                   }}
                 >
                   {showDiya && (
