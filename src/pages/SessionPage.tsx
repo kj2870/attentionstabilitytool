@@ -2191,10 +2191,15 @@ export default function SessionPage() {
                       position: "relative",
                       width: "100%",
                       maxWidth: "760px",
-                      minHeight: isSettlePhase ? "clamp(80px, 16vh, 120px)" : "clamp(240px, 38vh, 340px)",
+                      minHeight: isSettlePhase
+                        ? "clamp(80px, 16vh, 120px)"
+                        : isBodyPhase
+                        ? "clamp(360px, 56vh, 460px)"
+                        : "clamp(240px, 38vh, 340px)",
                       display: "flex",
                       alignItems: "center",
                       justifyContent: "center",
+                      overflow: "hidden",
                     }}
                   >
                     {showDiya && (
@@ -2741,10 +2746,15 @@ sessionComplete ? (
                     position: "relative",
                     width: "100%",
                     maxWidth: "760px",
-                    minHeight: isSettlePhase ? "clamp(80px, 16vh, 120px)" : "clamp(260px, 42vh, 360px)",
+                    minHeight: isSettlePhase
+                      ? "clamp(80px, 16vh, 120px)"
+                      : isBodyPhase
+                      ? "clamp(360px, 56vh, 460px)"
+                      : "clamp(260px, 42vh, 360px)",
                     display: "flex",
                     alignItems: "center",
                     justifyContent: "center",
+                    overflow: "hidden",
                   }}
                 >
                   {showDiya && (
