@@ -2135,7 +2135,7 @@ export default function SessionPage() {
                     flexDirection: "column",
                     alignItems: "center",
                     justifyContent: isBodyPhase || isSettlePhase || isIntegratePhase ? "flex-start" : "center",
-                    paddingTop: isBodyPhase ? "clamp(12px, 2vh, 28px)" : isSettlePhase || isIntegratePhase ? "clamp(28px, 6vh, 60px)" : 0,
+                    paddingTop: isBodyPhase ? "clamp(12px, 2vh, 28px)" : isSettlePhase || isIntegratePhase ? "clamp(36px, 8vh, 72px)" : 0,
                     gap: "12px",
                   }}
                 >
@@ -2205,7 +2205,7 @@ export default function SessionPage() {
                       display: "flex",
                       alignItems: "center",
                       justifyContent: "center",
-                      overflow: isEyesClosedPhase ? "visible" : "hidden",
+                      overflow: isBodyPhase ? "hidden" : "visible",
                     }}
                   >
                     {showDiya && (
