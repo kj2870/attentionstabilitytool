@@ -2196,7 +2196,7 @@ export default function SessionPage() {
                       width: "100%",
                       maxWidth: "760px",
                       minHeight: isSettlePhase
-                        ? "clamp(80px, 16vh, 120px)"
+                        ? "clamp(180px, 30vh, 260px)"
                         : isBodyPhase
                         ? "clamp(360px, 56vh, 460px)"
                         : isEyesClosedPhase
@@ -2759,7 +2759,7 @@ sessionComplete ? (
                     width: "100%",
                     maxWidth: "760px",
                     minHeight: isSettlePhase
-                      ? "clamp(80px, 16vh, 120px)"
+                      ? "clamp(180px, 30vh, 260px)"
                       : isBodyPhase
                       ? "clamp(360px, 56vh, 460px)"
                       : isEyesClosedPhase
@@ -2768,7 +2768,7 @@ sessionComplete ? (
                     display: "flex",
                     alignItems: "center",
                     justifyContent: "center",
-                    overflow: isBodyPhase ? "hidden" : "visible",  // body phase only — others fade/blend freely
+                    overflow: isEyesClosedPhase ? "visible" : "hidden",
                   }}
                 >
                   {showDiya && (

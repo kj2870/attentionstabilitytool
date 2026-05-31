@@ -60,7 +60,7 @@ export function createSessionScript(): SessionPhase[] {
       id: "settle-3",
       label: "Settle",
       durationSec: 10,
-      instruction: "Anchor awareness in the present moment.",
+      instruction: "Anchor awareness in the present moment",
       visualMode: "settle",
     },
   ];
