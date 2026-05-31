@@ -2209,7 +2209,14 @@ export default function SessionPage() {
                     }}
                   >
                     {showDiya && (
-                      <div style={{ transition: "opacity 0.5s ease" }}>
+                      <div
+                        style={{
+                          position: "relative",
+                          mixBlendMode: "screen",
+                          transition: "opacity 0.5s ease",
+                          lineHeight: 0,
+                        }}
+                      >
                         <video
                           src="/diya-session.mp4"
                           autoPlay
@@ -2217,17 +2224,22 @@ export default function SessionPage() {
                           muted
                           playsInline
                           style={{
-                            width: "clamp(220px, 34vw, 320px)",
-                            mixBlendMode: "screen",
+                            width: "clamp(240px, 38vw, 360px)",
+                            filter: "brightness(0.88) contrast(1.6)",
                             pointerEvents: "none",
                             display: "block",
-                            // Contrast pushes the video's warm-dark background toward
-                            // pure black so screen-blend makes it fully invisible.
-                            filter: "brightness(0.88) contrast(1.55)",
-                            WebkitMaskImage:
-                              "radial-gradient(ellipse 90% 93% at center 47%, rgba(0,0,0,1) 0%, rgba(0,0,0,1) 40%, rgba(0,0,0,0.85) 55%, rgba(0,0,0,0.55) 70%, rgba(0,0,0,0.20) 84%, rgba(0,0,0,0.04) 93%, transparent 100%)",
-                            maskImage:
-                              "radial-gradient(ellipse 90% 93% at center 47%, rgba(0,0,0,1) 0%, rgba(0,0,0,1) 40%, rgba(0,0,0,0.85) 55%, rgba(0,0,0,0.55) 70%, rgba(0,0,0,0.20) 84%, rgba(0,0,0,0.04) 93%, transparent 100%)",
+                          }}
+                        />
+                        {/* Black vignette overlay: screen-blend makes black = invisible,
+                            so the black edges vanish against ANY background. No colour
+                            matching needed. The diya centre stays transparent (untouched). */}
+                        <div
+                          style={{
+                            position: "absolute",
+                            inset: 0,
+                            background:
+                              "radial-gradient(ellipse 82% 86% at center 46%, transparent 0%, transparent 50%, rgba(0,0,0,0.5) 66%, rgba(0,0,0,0.85) 78%, rgba(0,0,0,0.96) 88%, black 96%)",
+                            pointerEvents: "none",
                           }}
                         />
                       </div>
@@ -2772,7 +2784,14 @@ sessionComplete ? (
                   }}
                 >
                   {showDiya && (
-                    <div style={{ transition: "opacity 0.5s ease" }}>
+                    <div
+                      style={{
+                        position: "relative",
+                        mixBlendMode: "screen",
+                        transition: "opacity 0.5s ease",
+                        lineHeight: 0,
+                      }}
+                    >
                       <video
                         src="/diya-session.mp4"
                         autoPlay
@@ -2780,15 +2799,19 @@ sessionComplete ? (
                         muted
                         playsInline
                         style={{
-                          width: "clamp(220px, 34vw, 320px)",
-                          mixBlendMode: "screen",
+                          width: "clamp(240px, 38vw, 360px)",
+                          filter: "brightness(0.88) contrast(1.6)",
                           pointerEvents: "none",
                           display: "block",
-                          filter: "brightness(0.88) contrast(1.55)",
-                          WebkitMaskImage:
-                            "radial-gradient(ellipse 90% 93% at center 47%, rgba(0,0,0,1) 0%, rgba(0,0,0,1) 40%, rgba(0,0,0,0.85) 55%, rgba(0,0,0,0.55) 70%, rgba(0,0,0,0.20) 84%, rgba(0,0,0,0.04) 93%, transparent 100%)",
-                          maskImage:
-                            "radial-gradient(ellipse 90% 93% at center 47%, rgba(0,0,0,1) 0%, rgba(0,0,0,1) 40%, rgba(0,0,0,0.85) 55%, rgba(0,0,0,0.55) 70%, rgba(0,0,0,0.20) 84%, rgba(0,0,0,0.04) 93%, transparent 100%)",
+                        }}
+                      />
+                      <div
+                        style={{
+                          position: "absolute",
+                          inset: 0,
+                          background:
+                            "radial-gradient(ellipse 82% 86% at center 46%, transparent 0%, transparent 50%, rgba(0,0,0,0.5) 66%, rgba(0,0,0,0.85) 78%, rgba(0,0,0,0.96) 88%, black 96%)",
+                          pointerEvents: "none",
                         }}
                       />
                     </div>
