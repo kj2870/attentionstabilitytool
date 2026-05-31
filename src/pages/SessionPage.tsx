@@ -2134,7 +2134,8 @@ export default function SessionPage() {
                     display: "flex",
                     flexDirection: "column",
                     alignItems: "center",
-                    justifyContent: "center",
+                    justifyContent: isBodyPhase ? "flex-start" : "center",
+                    paddingTop: isBodyPhase ? "clamp(12px, 2vh, 28px)" : 0,
                     gap: "12px",
                   }}
                 >
@@ -2692,7 +2693,8 @@ sessionComplete ? (
                   display: "flex",
                   flexDirection: "column",
                   alignItems: "center",
-                  justifyContent: "center",
+                  justifyContent: isBodyPhase ? "flex-start" : "center",
+                  paddingTop: isBodyPhase ? "clamp(12px, 2vh, 28px)" : 0,
                   gap: "20px",
                 }}
               >
