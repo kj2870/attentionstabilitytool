@@ -2025,6 +2025,19 @@ export default function SessionPage() {
 
   return (
     <MeditationBackground >
+      {/* Black backdrop for gaze phase — makes screen-blend on the diya
+          video work perfectly (screen with black = pass-through). */}
+      <div
+        style={{
+          position: "fixed",
+          inset: 0,
+          background: "#000",
+          opacity: showDiya ? 1 : 0,
+          transition: "opacity 1.2s ease-in-out",
+          pointerEvents: "none",
+          zIndex: 0,
+        }}
+      />
       <div
         className="page-shell mobile-stack"
         style={{
@@ -2035,6 +2048,8 @@ export default function SessionPage() {
           alignItems: "center",
           padding: "20px 20px 32px",
           margin: "0 auto",
+          position: "relative",
+          zIndex: 1,
         }}
       >
         {RESEARCH_MODE ? (
@@ -2211,7 +2226,6 @@ export default function SessionPage() {
                     {showDiya && (
                       <div
                         style={{
-                          position: "relative",
                           mixBlendMode: "screen",
                           transition: "opacity 0.5s ease",
                           lineHeight: 0,
@@ -2225,21 +2239,8 @@ export default function SessionPage() {
                           playsInline
                           style={{
                             width: "clamp(240px, 38vw, 360px)",
-                            filter: "brightness(0.88) contrast(1.6)",
                             pointerEvents: "none",
                             display: "block",
-                          }}
-                        />
-                        {/* Black vignette overlay: screen-blend makes black = invisible,
-                            so the black edges vanish against ANY background. No colour
-                            matching needed. The diya centre stays transparent (untouched). */}
-                        <div
-                          style={{
-                            position: "absolute",
-                            inset: 0,
-                            background:
-                              "radial-gradient(ellipse 76% 80% at center 46%, transparent 0%, transparent 42%, rgba(0,0,0,0.5) 56%, rgba(0,0,0,0.85) 68%, rgba(0,0,0,0.97) 78%, black 86%)",
-                            pointerEvents: "none",
                           }}
                         />
                       </div>
