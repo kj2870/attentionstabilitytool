@@ -4,14 +4,8 @@ import { useEffect, useState } from "react";
  * BrushstrokeEyes — two brush-stroke closed eyes with a warm bloom behind.
  * Used between trataka gaze rounds (eyes-closed recovery phases).
  * Fades in on mount and breathes gently in sync with the recovery rest.
- *
- * The bloom is a single non-scaling radial gradient that holds steady
- * brightness while the eyes themselves drift through a subtle scale loop,
- * so the composition reads as a calm afterglow rather than animation.
  */
 export default function BrushstrokeEyes() {
-  // Drive an opacity fade-in on first frame so this composes smoothly with
-  // whatever was on screen during the preceding gaze round.
   const [visible, setVisible] = useState(false);
   useEffect(() => {
     const id = requestAnimationFrame(() => setVisible(true));
@@ -19,10 +13,12 @@ export default function BrushstrokeEyes() {
   }, []);
 
   return (
+    // Flow element — not absolutely positioned — so it contributes height
+    // to the visual container and doesn't collapse to zero.
     <div
       style={{
-        position: "absolute",
-        inset: 0,
+        width: "100%",
+        height: "clamp(260px, 42vh, 360px)",
         display: "flex",
         alignItems: "center",
         justifyContent: "center",
@@ -31,25 +27,25 @@ export default function BrushstrokeEyes() {
         transition: "opacity 1.4s ease-in-out",
       }}
     >
-      {/* Stage — square box that scales with viewport. */}
+      {/* Stage — square, scales with the shorter viewport dimension. */}
       <div
         style={{
           position: "relative",
-          width: "min(46vh, 78vw)",
-          aspectRatio: "1 / 1",
+          width: "min(220px, 58vw)",
+          height: "min(220px, 58vw)",
           display: "flex",
           alignItems: "center",
           justifyContent: "center",
         }}
       >
-        {/* Warm bloom behind the eyes. Non-scaling so brightness stays calm. */}
+        {/* Warm non-scaling bloom behind the eyes. */}
         <div
           style={{
             position: "absolute",
             left: "50%",
             top: "50%",
-            width: "120%",
-            height: "70%",
+            width: "140%",
+            height: "80%",
             transform: "translate(-50%, -50%)",
             borderRadius: "50%",
             background:
@@ -59,13 +55,13 @@ export default function BrushstrokeEyes() {
           }}
         />
 
-        {/* The two brush-stroke eyes, drawn as one SVG. */}
+        {/* The two brush-stroke closed eyes as a single SVG. */}
         <svg
           viewBox="0 0 200 120"
           style={{
             position: "relative",
-            width: "62%",
-            filter: "drop-shadow(0 0 10px rgba(255,180,100,0.4))",
+            width: "72%",
+            filter: "drop-shadow(0 0 12px rgba(255,180,100,0.45))",
             animation: "brushEyes 9s ease-in-out infinite",
           }}
         >
@@ -82,8 +78,6 @@ export default function BrushstrokeEyes() {
         </svg>
       </div>
 
-      {/* Keyframes scoped via a one-off <style> tag — keeps the component
-          self-contained without adding rules to the global stylesheet. */}
       <style>{`
         @keyframes brushBloom {
           0%, 100% { opacity: 0.82; }
@@ -94,7 +88,7 @@ export default function BrushstrokeEyes() {
           50%      { opacity: 1;    transform: scale(1.025); }
         }
         @media (prefers-reduced-motion: reduce) {
-          svg[viewBox="0 0 200 120"] { animation: none !important; }
+          .brushstroke-eyes { animation: none !important; }
         }
       `}</style>
     </div>

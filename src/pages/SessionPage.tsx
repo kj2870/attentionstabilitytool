@@ -2187,7 +2187,9 @@ export default function SessionPage() {
                     </div>
                   )}
 
-                  {/* Visual container — no text lives inside here */}
+                  {/* Visual container — no text lives inside here.
+                      overflow:hidden only on body phase to contain the SVG figure.
+                      Eyes-closed phase: BrushstrokeEyes is a flow element with own height. */}
                   <div
                     style={{
                       position: "relative",
@@ -2197,11 +2199,13 @@ export default function SessionPage() {
                         ? "clamp(80px, 16vh, 120px)"
                         : isBodyPhase
                         ? "clamp(360px, 56vh, 460px)"
+                        : isEyesClosedPhase
+                        ? 0
                         : "clamp(240px, 38vh, 340px)",
                       display: "flex",
                       alignItems: "center",
                       justifyContent: "center",
-                      overflow: "hidden",
+                      overflow: isBodyPhase ? "hidden" : "visible",
                     }}
                   >
                     {showDiya && (
@@ -2755,11 +2759,13 @@ sessionComplete ? (
                       ? "clamp(80px, 16vh, 120px)"
                       : isBodyPhase
                       ? "clamp(360px, 56vh, 460px)"
+                      : isEyesClosedPhase
+                      ? 0
                       : "clamp(260px, 42vh, 360px)",
                     display: "flex",
                     alignItems: "center",
                     justifyContent: "center",
-                    overflow: "hidden",
+                    overflow: isBodyPhase ? "hidden" : "visible",
                   }}
                 >
                   {showDiya && (
