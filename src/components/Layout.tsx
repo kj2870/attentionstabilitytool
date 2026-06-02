@@ -47,7 +47,7 @@ export default function Layout({ children }: LayoutProps) {
             }}
           >
             {/* Left nav */}
-            <nav style={{ display: "flex", gap: "22px", fontSize: "15px" }}>
+            <nav style={{ display: "flex", gap: "26px", fontSize: "14px", textTransform: "lowercase", letterSpacing: "0.08em" }}>
               {navLeft.map((item) => {
                 const active = location.pathname === item.to;
                 return (
@@ -67,7 +67,7 @@ export default function Layout({ children }: LayoutProps) {
             </nav>
 
             {/* Right nav */}
-            <nav style={{ display: "flex", gap: "22px", fontSize: "15px" }}>
+            <nav style={{ display: "flex", gap: "26px", fontSize: "14px", textTransform: "lowercase", letterSpacing: "0.08em" }}>
               {navRight.map((item) => {
                 const active = location.pathname === item.to;
                 return (
