@@ -1741,10 +1741,11 @@ export default function SessionPage() {
                         fontSize: "11px",
                         letterSpacing: "0.14em",
                         textTransform: "uppercase",
-                        color: "rgba(203, 183, 158, 0.45)",
+                        color: "rgba(203, 183, 158, 0.55)",
                         fontFamily: '"Playfair Display", Georgia, serif',
                         opacity: bodyCueOpacity,
                         transition: "opacity 0.45s ease",
+                        animation: "bodyCueBeat 5s ease-in-out infinite",
                       }}
                     >
                       {shownBodyCue}
@@ -1765,20 +1766,50 @@ export default function SessionPage() {
                   </div>
                 </FadeWrapper>
 
+                {/* Phase label — tiny tracked caps, orients the user in the arc.
+                    Hidden during body (cue text already conveys it), gaze, and
+                    eyes-closed (trataka stays visually silent). */}
+                <FadeWrapper
+                  active={
+                    !isBodyPhase &&
+                    !isGazePhase &&
+                    !isEyesClosedPhase &&
+                    !!currentPhase?.label &&
+                    !sessionComplete
+                  }
+                >
+                  <div
+                    style={{
+                      fontSize: "10px",
+                      letterSpacing: "0.28em",
+                      textTransform: "uppercase",
+                      color: "rgba(203, 183, 158, 0.42)",
+                      fontFamily: '"Playfair Display", Georgia, serif',
+                      marginBottom: "10px",
+                    }}
+                  >
+                    {currentPhase?.label}
+                  </div>
+                </FadeWrapper>
+
                 <FadeWrapper active={!isBodyPhase && !!primaryInstruction}>
                   <div
                     style={{
-                      fontSize: isIntegratePhase ? "clamp(40px, 6vw, 56px)" : "22px",
+                      fontSize: isIntegratePhase
+                        ? "clamp(40px, 6vw, 56px)"
+                        : isBreathPhase
+                        ? "clamp(26px, 3vw, 34px)"
+                        : "22px",
                       fontFamily: '"Playfair Display", Georgia, serif',
-                      fontWeight: 400,
+                      fontWeight: isBreathPhase ? 300 : 400,
                       fontStyle: isIntegratePhase ? "italic" : "normal",
                       color: "rgba(245, 233, 218, 0.78)",
                       lineHeight: isIntegratePhase ? 1.1 : 1.5,
-                      letterSpacing: "0.01em",
+                      letterSpacing: isBreathPhase ? "0.05em" : "0.01em",
                       maxWidth: isIntegratePhase ? undefined : "32ch",
                       textAlign: "center",
                       transition: "font-size 0.6s ease",
-                      marginBottom: isBreathPhase ? "clamp(24px, 6vh, 56px)" : undefined,
+                      marginBottom: isBreathPhase ? "clamp(28px, 7vh, 64px)" : undefined,
                     }}
                   >
                     {primaryInstruction}
@@ -1816,6 +1847,24 @@ export default function SessionPage() {
                         lineHeight: 0,
                       }}
                     >
+                      {/* Slow drifting warmth — keeps long gaze holds feeling alive
+                          without competing with the flame. Sits behind the video. */}
+                      <div
+                        aria-hidden
+                        style={{
+                          position: "absolute",
+                          left: "50%",
+                          top: "50%",
+                          width: "180%",
+                          height: "180%",
+                          borderRadius: "50%",
+                          background:
+                            "radial-gradient(circle, rgba(255,170,80,0.35) 0%, rgba(220,120,50,0.12) 35%, transparent 65%)",
+                          filter: "blur(40px)",
+                          pointerEvents: "none",
+                          animation: "gazeAmbientDrift 22s ease-in-out infinite",
+                        }}
+                      />
                       <video
                         src="/diya-session.mp4"
                         autoPlay
@@ -1859,7 +1908,11 @@ export default function SessionPage() {
                     <SettleHalo />
                   </FadeWrapper>
 
-                  <FadeWrapper active={isEyesClosedPhase || isIntegratePhase} style={ABSOLUTE_CENTER_LAYER}>
+                  <FadeWrapper
+                    active={isEyesClosedPhase || isIntegratePhase}
+                    durationMs={1500}
+                    style={ABSOLUTE_CENTER_LAYER}
+                  >
                     <BrushstrokeEyes />
                   </FadeWrapper>
                 </div>
@@ -1991,11 +2044,10 @@ export default function SessionPage() {
               <div
                 style={{
                   width: "100%",
-                  height: "8px",
+                  height: "2px",
                   borderRadius: "999px",
-                  background: "rgba(255,255,255,0.12)",
+                  background: "rgba(255,255,255,0.06)",
                   overflow: "hidden",
-                  boxShadow: "inset 0 1px 2px rgba(0,0,0,0.24)",
                 }}
               >
                 <div
@@ -2004,9 +2056,9 @@ export default function SessionPage() {
                     height: "100%",
                     borderRadius: "inherit",
                     background:
-                      "linear-gradient(90deg, rgba(240,168,86,0.96), rgba(255,226,183,0.92))",
+                      "linear-gradient(90deg, rgba(240,168,86,0.85), rgba(255,226,183,0.85))",
                     transition: isRunning ? "width 1s linear" : "width 0.35s ease",
-                    boxShadow: "0 0 12px rgba(255,179,71,0.45)",
+                    boxShadow: "0 0 8px rgba(255,179,71,0.35)",
                   }}
                 />
               </div>

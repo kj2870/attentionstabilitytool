@@ -51,17 +51,19 @@ export default function BreathGuide({ action, durationSec }: BreathGuideProps) {
           filter: "blur(8px)",
         }}
       />
-      {/* The breathing disc — single uniform gradient. Only scale animates,
-          so colour and density stay perceptually constant. */}
+      {/* The breathing disc — gradient shifts subtly between a brighter amber
+          on inhale and a deeper ember on exhale. Scale + colour animate together
+          on the same easing so the breath feels like one continuous gesture. */}
       <div
         style={{
           width: "240px",
           height: "240px",
           borderRadius: "50%",
-          background:
-            "radial-gradient(circle, rgba(255,195,120,0.42) 0%, rgba(240,155,75,0.28) 40%, rgba(200,115,50,0.10) 65%, transparent 88%)",
+          background: isInhale
+            ? "radial-gradient(circle, rgba(255,210,140,0.48) 0%, rgba(245,170,90,0.30) 40%, rgba(210,125,55,0.10) 65%, transparent 88%)"
+            : "radial-gradient(circle, rgba(230,165,95,0.40) 0%, rgba(200,115,55,0.26) 40%, rgba(150,75,30,0.10) 65%, transparent 88%)",
           transform: `scale(${targetScale})`,
-          transition: `transform ${durationSec}s ${BREATH_EASING}`,
+          transition: `transform ${durationSec}s ${BREATH_EASING}, background ${durationSec}s ${BREATH_EASING}`,
           filter: "blur(2px)",
         }}
       />
