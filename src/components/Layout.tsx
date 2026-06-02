@@ -34,9 +34,7 @@ export default function Layout({ children }: LayoutProps) {
             position: "sticky",
             top: 0,
             zIndex: 20,
-            backdropFilter: "blur(10px)",
-            background: "rgba(14,14,16,0.55)",
-            borderBottom: "1px solid rgba(255,179,71,0.08)",
+            background: "transparent",
           }}
         >
           <div
