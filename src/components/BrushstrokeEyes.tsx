@@ -18,7 +18,8 @@ export default function BrushstrokeEyes() {
     <div
       style={{
         width: "100%",
-        height: "clamp(260px, 42vh, 360px)",
+        height: "100%",
+        minHeight: "clamp(220px, 36vh, 320px)",
         display: "flex",
         alignItems: "center",
         justifyContent: "center",
