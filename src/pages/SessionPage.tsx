@@ -474,7 +474,7 @@ export default function SessionPage() {
   );
   const [sessionComplete, setSessionComplete] = useState(false);
   const [saved, setSaved] = useState(false);
-  const [feeling, setFeeling] = useState<SessionFeeling>("");
+  const [feeling] = useState<SessionFeeling>("");
   // Free-form feedback note shown on summary screen (1000 char limit removed per user).
   const [note, setNote] = useState("");
   // Milestone IDs newly unlocked this session — computed when sessionComplete fires.
