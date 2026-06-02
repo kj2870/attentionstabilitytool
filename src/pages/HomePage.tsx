@@ -3,18 +3,11 @@ import { Link } from "react-router-dom";
 import Diya from "../components/Diya";
 import MeditationBackground from "../components/MeditationBackground";
 import { RESEARCH_MODE } from "../lib/presentationMode";
-import {
-  getFlexibleStreak,
-  getMandalaDay,
-  getWeeklyCompletion,
-  loadHistory,
-} from "../lib/storage";
+import { getWeeklyCompletion, loadHistory } from "../lib/storage";
 
 export default function HomePage() {
   const history = loadHistory();
   const weekly = getWeeklyCompletion(history);
-  const flexibleStreak = getFlexibleStreak(history);
-  const mandalaDay = getMandalaDay(history);
 
   const days = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"];
 
@@ -51,14 +44,6 @@ export default function HomePage() {
       </MeditationBackground>
     );
   }
-
-  // Streak display — hide until day 2, show "day 1" on first day
-  const streakLabel =
-    flexibleStreak === 0
-      ? null
-      : flexibleStreak === 1
-      ? "day 1"
-      : `${flexibleStreak} day streak`;
 
   useEffect(() => {
     document.body.style.overflow = "hidden";
@@ -114,59 +99,31 @@ export default function HomePage() {
           A daily ritual to train attention and calm the mind.
         </p>
 
-        {/* Weekly card */}
+        {/* Weekly diya row — borderless, seamless on the dark backdrop. */}
         <div
           style={{
             width: "100%",
             maxWidth: "420px",
-            padding: "16px 20px",
-            marginBottom: "20px",
-            border: "1px solid rgba(255,255,255,0.06)",
-            borderRadius: "28px",
-            background: "rgba(255,255,255,0.025)",
+            marginBottom: "28px",
+            display: "grid",
+            gridTemplateColumns: "repeat(7, 1fr)",
+            gap: "6px",
           }}
         >
-          <div
-            style={{
-              display: "grid",
-              gridTemplateColumns: "repeat(7, 1fr)",
-              gap: "6px",
-              marginBottom: "14px",
-            }}
-          >
-            {days.map((day, index) => (
-              <div key={day} style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: "8px" }}>
-                <div style={{ fontSize: "11px", color: "rgba(191,174,151,0.55)", letterSpacing: "0.02em" }}>
-                  {day.charAt(0)}
-                </div>
-                <div style={{ opacity: weekly[index] ? 0.9 : 0.15 }}>
-                  <svg width="16" height="20" viewBox="0 0 80 100" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M40 5 C52 25 60 42 50 65 C45 80 35 80 30 65 C20 42 28 25 40 5Z" fill="#ffb347" />
-                    <path d="M40 22 C47 38 48 52 43 62 C40 68 36 68 33 62 C28 52 33 38 40 22Z" fill="#ffd27d" />
-                    <ellipse cx="40" cy="60" rx="6" ry="9" fill="white" opacity="0.9" />
-                  </svg>
-                </div>
+          {days.map((day, index) => (
+            <div key={day} style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: "8px" }}>
+              <div style={{ fontSize: "11px", color: "rgba(191,174,151,0.55)", letterSpacing: "0.02em" }}>
+                {day.charAt(0)}
               </div>
-            ))}
-          </div>
-
-          <div
-            style={{
-              display: "flex",
-              justifyContent: "center",
-              gap: "20px",
-              color: "rgba(203,187,167,0.7)",
-              fontSize: "13px",
-            }}
-          >
-            {streakLabel && (
-              <>
-                <span>{streakLabel}</span>
-                <span style={{ opacity: 0.3 }}>·</span>
-              </>
-            )}
-            <span>{mandalaDay}/48</span>
-          </div>
+              <div style={{ opacity: weekly[index] ? 0.9 : 0.15 }}>
+                <svg width="16" height="20" viewBox="0 0 80 100" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M40 5 C52 25 60 42 50 65 C45 80 35 80 30 65 C20 42 28 25 40 5Z" fill="#ffb347" />
+                  <path d="M40 22 C47 38 48 52 43 62 C40 68 36 68 33 62 C28 52 33 38 40 22Z" fill="#ffd27d" />
+                  <ellipse cx="40" cy="60" rx="6" ry="9" fill="white" opacity="0.9" />
+                </svg>
+              </div>
+            </div>
+          ))}
         </div>
 
         {/* CTA */}

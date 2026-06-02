@@ -1,4 +1,4 @@
-﻿import { useCallback, useEffect, useMemo, useRef, useState, type ReactNode } from "react";
+﻿import { useCallback, useEffect, useMemo, useRef, useState, type CSSProperties, type ReactNode } from "react";
 import { useNavigate } from "react-router-dom";
 import MeditationBackground from "../components/MeditationBackground";
 import BodyGuideOverlay from "../components/BodyGuideOverlay";
@@ -62,14 +62,26 @@ function standardDeviation(values: number[]) {
   return Math.sqrt(variance);
 }
 
+// Shared style: stack a visual layer absolutely at the center of its parent so
+// cross-fading siblings never push each other off-axis.
+const ABSOLUTE_CENTER_LAYER: CSSProperties = {
+  position: "absolute",
+  inset: 0,
+  display: "flex",
+  alignItems: "center",
+  justifyContent: "center",
+};
+
 // Keeps children mounted while fading out; fades in on activate — true cross-fade.
 function FadeWrapper({
   active,
   durationMs = 900,
+  style,
   children,
 }: {
   active: boolean;
   durationMs?: number;
+  style?: CSSProperties;
   children: ReactNode;
 }) {
   const [mounted, setMounted] = useState(active);
@@ -90,7 +102,7 @@ function FadeWrapper({
 
   if (!mounted) return null;
   return (
-    <div style={{ opacity, transition: `opacity ${durationMs}ms ease-in-out` }}>
+    <div style={{ ...style, opacity, transition: `opacity ${durationMs}ms ease-in-out` }}>
       {children}
     </div>
   );
@@ -544,6 +556,10 @@ export default function SessionPage() {
   const isEyesClosedPhase = currentPhase?.visualMode === "eyesClosed";
   const isIntegratePhase = currentPhase?.visualMode === "integrate";
   const showDiya = isGazePhase;
+  // Pre-darken backdrop during the final breath phase so the diya appears on a
+  // fully-black field without the rectangular flash from a still-fading backdrop.
+  const isLastBreathPhase = currentPhase?.id === "breath-10-out";
+  const wantsBlackBackdrop = showDiya || isEyesClosedPhase || isLastBreathPhase || isIntegratePhase;
 
   // Stops all media tracks safely when camera is disconnected/unmounted.
   const stopCameraStream = (stream: MediaStream | null) => {
@@ -1455,8 +1471,8 @@ export default function SessionPage() {
           position: "fixed",
           inset: 0,
           background: "#000",
-          opacity: showDiya || isEyesClosedPhase ? 1 : 0,
-          transition: "opacity 1.2s ease-in-out",
+          opacity: wantsBlackBackdrop ? 1 : 0,
+          transition: "opacity 1.4s ease-in-out",
           pointerEvents: "none",
           zIndex: 0,
         }}
@@ -1762,15 +1778,15 @@ export default function SessionPage() {
                       maxWidth: isIntegratePhase ? undefined : "32ch",
                       textAlign: "center",
                       transition: "font-size 0.6s ease",
+                      marginBottom: isBreathPhase ? "clamp(24px, 6vh, 56px)" : undefined,
                     }}
                   >
                     {primaryInstruction}
                   </div>
                 </FadeWrapper>
 
-                {/* Visual container — no text lives inside here.
-                    overflow:hidden only on body phase to contain the SVG figure.
-                    Eyes-closed phase: BrushstrokeEyes is a flow element with own height. */}
+                {/* Visual container — all layers stack absolutely at center via FadeWrappers
+                    so cross-fades never push elements off-axis or overlap horizontally. */}
                 <div
                   style={{
                     position: "relative",
@@ -1780,16 +1796,17 @@ export default function SessionPage() {
                       ? "clamp(180px, 30vh, 260px)"
                       : isBodyPhase
                       ? "clamp(360px, 56vh, 460px)"
-                      : isEyesClosedPhase
-                      ? 0
-                      : "clamp(240px, 38vh, 340px)",
+                      : "clamp(260px, 42vh, 360px)",
                     display: "flex",
                     alignItems: "center",
                     justifyContent: "center",
-                    overflow: isBodyPhase ? "hidden" : "visible",
                   }}
                 >
-                  <FadeWrapper active={showDiya || isEyesClosedPhase}>
+                  <FadeWrapper
+                    active={showDiya || isEyesClosedPhase}
+                    durationMs={700}
+                    style={ABSOLUTE_CENTER_LAYER}
+                  >
                     <div
                       style={{
                         position: "relative",
@@ -1812,37 +1829,37 @@ export default function SessionPage() {
                           display: "block",
                         }}
                       />
-                      <div
-                        style={{
-                          position: "absolute",
-                          inset: 0,
-                          background:
-                            "radial-gradient(ellipse 76% 80% at center 46%, transparent 0%, transparent 42%, rgba(0,0,0,0.5) 56%, rgba(0,0,0,0.85) 68%, rgba(0,0,0,0.97) 78%, black 86%)",
-                          pointerEvents: "none",
-                        }}
-                      />
                     </div>
                   </FadeWrapper>
 
-                  <FadeWrapper active={isBodyPhase}>
+                  <FadeWrapper
+                    active={isBodyPhase}
+                    style={{
+                      ...ABSOLUTE_CENTER_LAYER,
+                      WebkitMaskImage:
+                        "linear-gradient(to bottom, transparent 0%, black 10%, black 90%, transparent 100%)",
+                      maskImage:
+                        "linear-gradient(to bottom, transparent 0%, black 10%, black 90%, transparent 100%)",
+                    }}
+                  >
                     <BodyGuideOverlay
                       activeRegion={currentPhase?.bodyRegion ?? "feet"}
                       phaseSecondsLeft={phaseSecondsLeft}
                     />
                   </FadeWrapper>
 
-                  <FadeWrapper active={isBreathPhase}>
+                  <FadeWrapper active={isBreathPhase} style={ABSOLUTE_CENTER_LAYER}>
                     <BreathGuide
                       action={currentPhase?.breathAction ?? "exhale"}
                       durationSec={currentPhase?.durationSec ?? 8}
                     />
                   </FadeWrapper>
 
-                  <FadeWrapper active={isSettlePhase || isIntegratePhase}>
+                  <FadeWrapper active={isSettlePhase || isIntegratePhase} style={ABSOLUTE_CENTER_LAYER}>
                     <SettleHalo />
                   </FadeWrapper>
 
-                  <FadeWrapper active={isEyesClosedPhase}>
+                  <FadeWrapper active={isEyesClosedPhase || isIntegratePhase} style={ABSOLUTE_CENTER_LAYER}>
                     <BrushstrokeEyes />
                   </FadeWrapper>
                 </div>
