@@ -486,7 +486,6 @@ export default function SessionPage() {
   );
   const [sessionComplete, setSessionComplete] = useState(false);
   const [saved, setSaved] = useState(false);
-  const [feeling] = useState<SessionFeeling>("");
   // Free-form feedback note shown on summary screen (1000 char limit removed per user).
   const [note, setNote] = useState("");
   // Milestone IDs newly unlocked this session — computed when sessionComplete fires.
@@ -736,7 +735,7 @@ export default function SessionPage() {
       durationMin: Number((totalDuration / 60).toFixed(1)),
       timeOfDay: routine.timeOfDay,
       attentionScore,
-      feeling,
+      feeling: "" as SessionFeeling,
       grade: "B" as const,
       longestGazeSec: longestGazeRef.current,
       totalStillnessSec: totalStillnessRef.current,
@@ -1301,7 +1300,7 @@ export default function SessionPage() {
       durationMin: Number((totalDuration / 60).toFixed(1)),
       timeOfDay: routine.timeOfDay,
       attentionScore,
-      feeling,
+      feeling: "" as SessionFeeling,
       grade: (attentionScore >= 85 ? "A" : attentionScore >= 72 ? "B" : "C") as "A" | "B" | "C",
       blinkCount: metrics.blinkCount,
       avgDrift,
@@ -1334,12 +1333,10 @@ export default function SessionPage() {
 
   const primaryInstruction = sessionComplete
     ? ""
-    : isBodyPhase || isGazePhase || isEyesClosedPhase
+    : isBodyPhase || isGazePhase || isEyesClosedPhase || isIntegratePhase
     ? ""
     : isBreathPhase
     ? (currentPhase?.breathAction === "inhale" ? "Inhale" : "Exhale")
-    : isIntegratePhase
-    ? "Rest"
     : currentPhase?.instruction ?? "";
 
   // Longer cross-fade on the body cue so CLENCH<->RELEASE feels deliberate.
@@ -1813,18 +1810,13 @@ export default function SessionPage() {
                 <FadeWrapper active={!isBodyPhase && !!primaryInstruction}>
                   <div
                     style={{
-                      fontSize: isIntegratePhase
-                        ? "clamp(40px, 6vw, 56px)"
-                        : isBreathPhase
-                        ? "clamp(26px, 3vw, 34px)"
-                        : "22px",
+                      fontSize: isBreathPhase ? "clamp(26px, 3vw, 34px)" : "22px",
                       fontFamily: '"Playfair Display", Georgia, serif',
                       fontWeight: isBreathPhase ? 300 : 400,
-                      fontStyle: isIntegratePhase ? "italic" : "normal",
                       color: "rgba(245, 233, 218, 0.78)",
-                      lineHeight: isIntegratePhase ? 1.1 : 1.5,
+                      lineHeight: 1.5,
                       letterSpacing: isBreathPhase ? "0.05em" : "0.01em",
-                      maxWidth: isIntegratePhase ? undefined : "32ch",
+                      maxWidth: "32ch",
                       textAlign: "center",
                       opacity: primaryInstructionOpacity,
                       transition: "font-size 0.6s ease, opacity 0.45s ease",
@@ -1842,11 +1834,11 @@ export default function SessionPage() {
                     position: "relative",
                     width: "100%",
                     maxWidth: "760px",
+                    // One stable minHeight across all non-settle phases so the
+                    // container doesn't resize during cross-fades.
                     minHeight: isSettlePhase
                       ? "clamp(180px, 30vh, 260px)"
-                      : isBodyPhase
-                      ? "clamp(360px, 56vh, 460px)"
-                      : "clamp(260px, 42vh, 360px)",
+                      : "clamp(360px, 56vh, 460px)",
                     display: "flex",
                     alignItems: "center",
                     justifyContent: "center",
