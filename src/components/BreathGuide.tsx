@@ -51,22 +51,43 @@ export default function BreathGuide({ action, durationSec }: BreathGuideProps) {
           filter: "blur(8px)",
         }}
       />
-      {/* The breathing disc — gradient shifts subtly between a brighter amber
-          on inhale and a deeper ember on exhale. Scale + colour animate together
-          on the same easing so the breath feels like one continuous gesture. */}
+      {/* The breathing disc. Two stacked orbs (amber inhale, ember exhale) share
+          the scale transform; opacity cross-fades between them on the same easing.
+          Opacity interpolates cleanly in every browser, unlike radial-gradient
+          strings — so the colour shift is now smooth instead of snapping. */}
       <div
         style={{
+          position: "relative",
           width: "240px",
           height: "240px",
-          borderRadius: "50%",
-          background: isInhale
-            ? "radial-gradient(circle, rgba(255,210,140,0.48) 0%, rgba(245,170,90,0.30) 40%, rgba(210,125,55,0.10) 65%, transparent 88%)"
-            : "radial-gradient(circle, rgba(230,165,95,0.40) 0%, rgba(200,115,55,0.26) 40%, rgba(150,75,30,0.10) 65%, transparent 88%)",
           transform: `scale(${targetScale})`,
-          transition: `transform ${durationSec}s ${BREATH_EASING}, background ${durationSec}s ${BREATH_EASING}`,
+          transition: `transform ${durationSec}s ${BREATH_EASING}`,
           filter: "blur(2px)",
         }}
-      />
+      >
+        <div
+          style={{
+            position: "absolute",
+            inset: 0,
+            borderRadius: "50%",
+            background:
+              "radial-gradient(circle, rgba(255,210,140,0.48) 0%, rgba(245,170,90,0.30) 40%, rgba(210,125,55,0.10) 65%, transparent 88%)",
+            opacity: isInhale ? 1 : 0,
+            transition: `opacity ${durationSec}s ${BREATH_EASING}`,
+          }}
+        />
+        <div
+          style={{
+            position: "absolute",
+            inset: 0,
+            borderRadius: "50%",
+            background:
+              "radial-gradient(circle, rgba(230,165,95,0.40) 0%, rgba(200,115,55,0.26) 40%, rgba(150,75,30,0.10) 65%, transparent 88%)",
+            opacity: isInhale ? 0 : 1,
+            transition: `opacity ${durationSec}s ${BREATH_EASING}`,
+          }}
+        />
+      </div>
     </div>
   );
 }

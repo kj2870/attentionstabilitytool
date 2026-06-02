@@ -1342,8 +1342,13 @@ export default function SessionPage() {
     ? "Rest"
     : currentPhase?.instruction ?? "";
 
-  const { displayed: shownBodyCue, opacity: bodyCueOpacity } = useCrossFadeText(bodyCue);
+  // Longer cross-fade on the body cue so CLENCH<->RELEASE feels deliberate.
+  const { displayed: shownBodyCue, opacity: bodyCueOpacity } = useCrossFadeText(bodyCue, 700);
   const { displayed: shownBodyRegionLabel, opacity: bodyRegionLabelOpacity } = useCrossFadeText(bodyRegionLabel);
+  // Smoothly swap Inhale<->Exhale (FadeWrapper alone stays active across breath
+  // phases so the text would otherwise hard-cut).
+  const { displayed: shownPrimaryInstruction, opacity: primaryInstructionOpacity } =
+    useCrossFadeText(primaryInstruction, 450);
 
   const liveBlinkRatePerMinute = useMemo(() => {
     if (blinkRateHistory.length === 0) return 0;
@@ -1755,8 +1760,7 @@ export default function SessionPage() {
                         fontWeight: 400,
                         lineHeight: 1.1,
                         opacity: bodyCueOpacity,
-                        transition: "opacity 0.45s ease",
-                        animation: "bodyCueBeat 5s ease-in-out infinite",
+                        transition: "opacity 0.7s ease",
                       }}
                     >
                       {shownBodyCue}
@@ -1822,11 +1826,12 @@ export default function SessionPage() {
                       letterSpacing: isBreathPhase ? "0.05em" : "0.01em",
                       maxWidth: isIntegratePhase ? undefined : "32ch",
                       textAlign: "center",
-                      transition: "font-size 0.6s ease",
+                      opacity: primaryInstructionOpacity,
+                      transition: "font-size 0.6s ease, opacity 0.45s ease",
                       marginBottom: isBreathPhase ? "clamp(28px, 7vh, 64px)" : undefined,
                     }}
                   >
-                    {primaryInstruction}
+                    {shownPrimaryInstruction}
                   </div>
                 </FadeWrapper>
 
