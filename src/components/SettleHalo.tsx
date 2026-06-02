@@ -16,8 +16,27 @@ export default function SettleHalo() {
         pointerEvents: "none",
       }}
     >
+      {/* Outer halo — larger, dimmer, slower rhythm, slightly offset. */}
       <div
         style={{
+          position: "absolute",
+          left: "calc(50% + 14px)",
+          top: "calc(50% - 10px)",
+          width: "300px",
+          height: "300px",
+          marginLeft: "-150px",
+          marginTop: "-150px",
+          borderRadius: "50%",
+          background:
+            "radial-gradient(circle, rgba(255,170,90,0.10) 0%, rgba(210,130,60,0.05) 40%, transparent 75%)",
+          filter: "blur(8px)",
+          animation: "settleBreathOuter 9s ease-in-out infinite",
+        }}
+      />
+      {/* Inner halo — primary, brighter, faster rhythm. */}
+      <div
+        style={{
+          position: "relative",
           width: "240px",
           height: "240px",
           borderRadius: "50%",
@@ -31,6 +50,10 @@ export default function SettleHalo() {
         @keyframes settleBreath {
           0%, 100% { transform: scale(0.92); opacity: 0.7; }
           50%      { transform: scale(1.08); opacity: 1.0; }
+        }
+        @keyframes settleBreathOuter {
+          0%, 100% { transform: scale(0.96); opacity: 0.55; }
+          50%      { transform: scale(1.12); opacity: 0.9; }
         }
       `}</style>
     </div>
