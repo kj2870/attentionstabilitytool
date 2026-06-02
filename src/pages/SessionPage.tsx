@@ -38,8 +38,8 @@ const BODY_REGION_LABELS: Record<BodyRegion, string> = {
   feet: "Feet",
   calves: "Calves",
   thighs: "Thighs",
-  pelvis: "Pelvis + abs",
-  backShoulders: "Back + shoulders",
+  pelvis: "Pelvis and abs",
+  backShoulders: "Back and shoulders",
   armsFingers: "Arms",
   neck: "Neck",
   face: "Face",
@@ -1342,8 +1342,13 @@ export default function SessionPage() {
     ? "Rest"
     : currentPhase?.instruction ?? "";
 
-  const { displayed: shownBodyCue, opacity: bodyCueOpacity } = useCrossFadeText(bodyCue);
+  // Longer cross-fade on the body cue so CLENCH<->RELEASE feels deliberate.
+  const { displayed: shownBodyCue, opacity: bodyCueOpacity } = useCrossFadeText(bodyCue, 700);
   const { displayed: shownBodyRegionLabel, opacity: bodyRegionLabelOpacity } = useCrossFadeText(bodyRegionLabel);
+  // Smoothly swap Inhale<->Exhale (FadeWrapper alone stays active across breath
+  // phases so the text would otherwise hard-cut).
+  const { displayed: shownPrimaryInstruction, opacity: primaryInstructionOpacity } =
+    useCrossFadeText(primaryInstruction, 450);
 
   const liveBlinkRatePerMinute = useMemo(() => {
     if (blinkRateHistory.length === 0) return 0;
@@ -1735,27 +1740,40 @@ export default function SessionPage() {
                 {/* Body cue: proper flex sibling ABOVE the figure container so
                     it can never overlap the SVG regardless of viewport size. */}
                 <FadeWrapper active={isBodyPhase}>
-                  <div style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: "5px" }}>
+                  <div
+                    style={{
+                      display: "flex",
+                      flexDirection: "column",
+                      alignItems: "center",
+                      gap: "6px",
+                      marginBottom: "clamp(28px, 6vh, 56px)",
+                    }}
+                  >
+                    {/* Primary cue — CLENCH / RELEASE is the action focus. */}
                     <div
                       style={{
-                        fontSize: "11px",
-                        letterSpacing: "0.14em",
+                        fontSize: "clamp(34px, 4.4vw, 46px)",
+                        letterSpacing: "0.18em",
                         textTransform: "uppercase",
-                        color: "rgba(203, 183, 158, 0.55)",
+                        color: "rgba(245, 233, 218, 0.88)",
                         fontFamily: '"Playfair Display", Georgia, serif',
+                        fontWeight: 400,
+                        lineHeight: 1.1,
                         opacity: bodyCueOpacity,
-                        transition: "opacity 0.45s ease",
-                        animation: "bodyCueBeat 5s ease-in-out infinite",
+                        transition: "opacity 0.7s ease",
                       }}
                     >
                       {shownBodyCue}
                     </div>
+                    {/* Secondary cue — which body region. */}
                     <div
                       style={{
-                        fontSize: "26px",
+                        fontSize: "15px",
+                        letterSpacing: "0.04em",
                         fontFamily: '"Playfair Display", Georgia, serif',
                         fontWeight: 400,
-                        color: "rgba(245, 233, 218, 0.82)",
+                        fontStyle: "italic",
+                        color: "rgba(203, 183, 158, 0.65)",
                         lineHeight: 1.2,
                         opacity: bodyRegionLabelOpacity,
                         transition: "opacity 0.45s ease",
@@ -1808,11 +1826,12 @@ export default function SessionPage() {
                       letterSpacing: isBreathPhase ? "0.05em" : "0.01em",
                       maxWidth: isIntegratePhase ? undefined : "32ch",
                       textAlign: "center",
-                      transition: "font-size 0.6s ease",
+                      opacity: primaryInstructionOpacity,
+                      transition: "font-size 0.6s ease, opacity 0.45s ease",
                       marginBottom: isBreathPhase ? "clamp(28px, 7vh, 64px)" : undefined,
                     }}
                   >
-                    {primaryInstruction}
+                    {shownPrimaryInstruction}
                   </div>
                 </FadeWrapper>
 
