@@ -33,8 +33,6 @@ import {
   SessionFaceLandmarker,
   type EyeMetricsSnapshot,
 } from "../lib/faceLandmarks";
-import { RESEARCH_MODE } from "../lib/presentationMode";
-
 // Maps body-region IDs from the session script to user-facing labels.
 const BODY_REGION_LABELS: Record<BodyRegion, string> = {
   feet: "Feet",
@@ -64,94 +62,59 @@ function standardDeviation(values: number[]) {
   return Math.sqrt(variance);
 }
 
-function formatTimestampForKey(date: Date) {
-  return date.toISOString().replace(/[:.]/g, "-");
+// Keeps children mounted while fading out; fades in on activate — true cross-fade.
+function FadeWrapper({
+  active,
+  durationMs = 900,
+  children,
+}: {
+  active: boolean;
+  durationMs?: number;
+  children: ReactNode;
+}) {
+  const [mounted, setMounted] = useState(active);
+  const [opacity, setOpacity] = useState(active ? 1 : 0);
+  const timerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+
+  useEffect(() => {
+    if (timerRef.current !== null) clearTimeout(timerRef.current);
+    if (active) {
+      setMounted(true);
+      const rId = requestAnimationFrame(() => setOpacity(1));
+      return () => cancelAnimationFrame(rId);
+    } else {
+      setOpacity(0);
+      timerRef.current = setTimeout(() => setMounted(false), durationMs);
+    }
+  }, [active, durationMs]);
+
+  if (!mounted) return null;
+  return (
+    <div style={{ opacity, transition: `opacity ${durationMs}ms ease-in-out` }}>
+      {children}
+    </div>
+  );
 }
 
-function csvEscape(value: string | number) {
-  const stringValue = String(value);
-  if (/[",\n]/.test(stringValue)) {
-    return `"${stringValue.replace(/"/g, '""')}"`;
-  }
-  return stringValue;
+// Sequential text cross-fade: fades opacity to 0, swaps content, fades back to 1.
+function useCrossFadeText(text: string, halfDurationMs = 450) {
+  const [displayed, setDisplayed] = useState(text);
+  const [opacity, setOpacity] = useState(1);
+  const timerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+
+  useEffect(() => {
+    if (text === displayed) return;
+    if (timerRef.current !== null) clearTimeout(timerRef.current);
+    setOpacity(0);
+    timerRef.current = setTimeout(() => {
+      setDisplayed(text);
+      setOpacity(1);
+    }, halfDurationMs);
+  }, [text]);
+
+  return { displayed, opacity };
 }
 
-function buildPilotCsvRow(record: PilotSummaryRecord) {
-  const headers = [
-    "session_id",
-    "user_id",
-    "timestamp_iso",
-    "timestamp_label",
-    "protocol_version",
-    "total_duration_sec",
-    "attention_estimate_final",
-    "attention_estimate_avg",
-    "blink_rate_avg",
-    "closure_burden_avg",
-    "valid_signal_coverage_avg",
-    "long_closures_total",
-    "signal_quality_end",
-    "focus_rating",
-    "calm_rating",
-    "eye_strain_rating",
-    "difficulty_rating",
-    "notes",
-  ];
-
-  const values = [
-    record.sessionId,
-    record.userId,
-    record.timestampIso,
-    record.timestampLabel,
-    record.protocolVersion,
-    record.totalDurationSec,
-    record.attentionEstimateFinal,
-    record.attentionEstimateAvg,
-    record.blinkRateAvg,
-    record.closureBurdenAvg,
-    record.validSignalCoverageAvg,
-    record.longClosuresTotal,
-    record.signalQualityEnd,
-    record.focusRating,
-    record.calmRating,
-    record.eyeStrainRating,
-    record.difficultyRating,
-    record.notes,
-  ];
-
-  return {
-    header: headers.join(","),
-    row: values.map(csvEscape).join(","),
-  };
-}
-
-function appendCsvWithHeader(existingCsv: string, header: string, row: string) {
-  if (!existingCsv.trim()) {
-    return `${header}\n${row}`;
-  }
-  return `${existingCsv}\n${row}`;
-}
-
-function readResearchUserId() {
-  const candidates = [
-    localStorage.getItem("focusflow_user_id"),
-    localStorage.getItem("focusflowUserId"),
-    localStorage.getItem("userId"),
-    localStorage.getItem("participantId"),
-  ].filter(Boolean) as string[];
-
-  return candidates[0] ?? "research-user";
-}
-
-function downloadTextFile(filename: string, content: string, mimeType: string) {
-  const blob = new Blob([content], { type: mimeType });
-  const url = URL.createObjectURL(blob);
-  const anchor = document.createElement("a");
-  anchor.href = url;
-  anchor.download = filename;
-  anchor.click();
-  URL.revokeObjectURL(url);
-}
 function attachStreamToVideo(
   video: HTMLVideoElement | null,
   stream: MediaStream | null
@@ -198,42 +161,9 @@ type TrendCardProps = {
   stroke?: string;
 };
 type SignalQuality = "good" | "fair" | "poor";
-type ResearchStep = "setup" | "camera" | "session" | "survey" | "summary";
 
 type PanelState = {
-  measurement: boolean;
-  protocol: boolean;
-  liveSignals: boolean;
   graphs: boolean;
-};
-
-type PilotSurveyState = {
-  focus: number;
-  calm: number;
-  eyeStrain: number;
-  difficulty: number;
-  notes: string;
-};
-
-type PilotSummaryRecord = {
-  sessionId: string;
-  userId: string;
-  timestampIso: string;
-  timestampLabel: string;
-  protocolVersion: string;
-  totalDurationSec: number;
-  attentionEstimateFinal: number;
-  attentionEstimateAvg: number;
-  blinkRateAvg: number;
-  closureBurdenAvg: number;
-  validSignalCoverageAvg: number;
-  longClosuresTotal: number;
-  signalQualityEnd: SignalQuality;
-  focusRating: number;
-  calmRating: number;
-  eyeStrainRating: number;
-  difficultyRating: number;
-  notes: string;
 };
 
 type CollapsibleCardProps = {
@@ -445,7 +375,6 @@ export default function SessionPage() {
   const faceDetectorRef = useRef(new SessionFaceDetector());
   const faceLandmarkerRef = useRef(new SessionFaceLandmarker());
   const previousPhaseIdRef = useRef<string | undefined>(script[0]?.id);
-  const cameraCheckVideoRef = useRef<HTMLVideoElement | null>(null);
   const sessionVideoRef = useRef<HTMLVideoElement | null>(null);
 
   const [cameraState, setCameraState] = useState<CameraState>("idle");
@@ -475,30 +404,9 @@ export default function SessionPage() {
   const lastValidEyeAtRef = useRef<number>(0);
   const recentEyeValidityRef = useRef<boolean[]>([]);
   const lastValidAttentionScoreRef = useRef<number>(84);
-  const [researchStep, setResearchStep] = useState<ResearchStep>("setup");
-  const [setupConfirmed, setSetupConfirmed] = useState(false);
-  const [safetyConfirmed, setSafetyConfirmed] = useState(false);
   const [panelsOpen, setPanelsOpen] = useState<PanelState>({
-    measurement: true,
-    protocol: true,
-    liveSignals: false,
     graphs: false,
   });
-  const [survey, setSurvey] = useState<PilotSurveyState>({
-    focus: 5,
-    calm: 5,
-    eyeStrain: 1,
-    difficulty: 5,
-    notes: "",
-  });
-  const [latestPilotRecord, setLatestPilotRecord] = useState<PilotSummaryRecord | null>(null);
-  const [latestPilotStorageKey, setLatestPilotStorageKey] = useState("");
-  const sessionAttentionSamplesRef = useRef<number[]>([]);
-  const sessionBlinkRateSamplesRef = useRef<number[]>([]);
-  const sessionClosureBurdenSamplesRef = useRef<number[]>([]);
-  const sessionSignalCoverageSamplesRef = useRef<number[]>([]);
-  const sessionSignalQualitySamplesRef = useRef<SignalQuality[]>([]);
-
   // --- Phase 1 gaze tracking infrastructure ---
   // Iris position samples collected during settle phase, used to compute baseline.
   const settleIrisSamplesRef = useRef<{ x: number; y: number }[]>([]);
@@ -663,11 +571,6 @@ export default function SessionPage() {
     closureDurationsRef.current = [];
     longClosureTimesRef.current = [];
     closureSampleStatesRef.current = [];
-    sessionAttentionSamplesRef.current = [];
-    sessionBlinkRateSamplesRef.current = [];
-    sessionClosureBurdenSamplesRef.current = [];
-    sessionSignalCoverageSamplesRef.current = [];
-    sessionSignalQualitySamplesRef.current = [];
     setBlinkCountLive(0);
     setEyeOpennessHistory([]);
     setAttentionHistory([]);
@@ -806,11 +709,6 @@ export default function SessionPage() {
   useEffect(() => {
     if (!sessionComplete) return;
     disableCamera();
-
-    if (RESEARCH_MODE) {
-      setResearchStep("survey");
-      return;
-    }
 
     // Compute newly-unlocked milestones for the summary screen.
     // We construct a provisional record with the session's gaze metrics
@@ -980,14 +878,12 @@ export default function SessionPage() {
   }, [isRunning, isGazePhase]);
 
   useEffect(() => {
-    attachStreamToVideo(cameraCheckVideoRef.current, cameraStream);
     attachStreamToVideo(sessionVideoRef.current, cameraStream);
 
     return () => {
-      attachStreamToVideo(cameraCheckVideoRef.current, null);
       attachStreamToVideo(sessionVideoRef.current, null);
     };
-  }, [cameraStream, researchStep]);
+  }, [cameraStream]);
 
   useEffect(() => {
     return () => {
@@ -1063,7 +959,7 @@ export default function SessionPage() {
     const tick = () => {
       if (cancelled) return;
 
-      const activeVideo = sessionVideoRef.current ?? cameraCheckVideoRef.current;
+      const activeVideo = sessionVideoRef.current;
 
       if (activeVideo) {
         const snapshot = faceDetectorRef.current.detect(activeVideo);
@@ -1105,7 +1001,7 @@ export default function SessionPage() {
     const tick = () => {
       if (cancelled) return;
 
-      const activeVideo = sessionVideoRef.current ?? cameraCheckVideoRef.current;
+      const activeVideo = sessionVideoRef.current;
 
       if (activeVideo) {
         const snapshot = faceLandmarkerRef.current.detect(activeVideo);
@@ -1342,14 +1238,6 @@ export default function SessionPage() {
   }, []);
 
 
-  const handleContinueFromSetup = async () => {
-    if (!setupConfirmed || !safetyConfirmed) return;
-    if (!cameraStream) {
-      await enableCamera();
-    }
-    setResearchStep("camera");
-  };
-
   const handleStart = async () => {
     if (sessionComplete) return;
 
@@ -1383,16 +1271,6 @@ export default function SessionPage() {
       await enableCamera();
     }
 
-    if (RESEARCH_MODE) {
-      setResearchStep("session");
-      setPanelsOpen({
-        measurement: false,
-        protocol: false,
-        liveSignals: false,
-        graphs: false,
-      });
-    }
-
     setIsRunning(true);
     await audioRef.current.playSoftTransitionCue(settings);
   };
@@ -1400,102 +1278,29 @@ export default function SessionPage() {
   const handleSaveSession = () => {
     if (saved) return;
 
-    if (!RESEARCH_MODE) {
-      const trimmedNote = note.trim();
-      const record = {
-        id: crypto.randomUUID(),
-        date: new Date().toISOString(),
-        durationMin: Number((totalDuration / 60).toFixed(1)),
-        timeOfDay: routine.timeOfDay,
-        attentionScore,
-        feeling,
-        grade: (attentionScore >= 85 ? "A" : attentionScore >= 72 ? "B" : "C") as "A" | "B" | "C",
-        blinkCount: metrics.blinkCount,
-        avgDrift,
-        avgRecovery,
-        longestGazeSec: longestGazeRef.current,
-        totalStillnessSec: totalStillnessRef.current,
-        note: trimmedNote.length > 0 ? trimmedNote : undefined,
-        newMilestones: pendingMilestones.length > 0 ? pendingMilestones : undefined,
-      };
-
-      saveSession(record);           // local cache — instant
-      void saveSessionRemote(record); // Supabase — fire and forget
-
-      setSaved(true);
-      navigate("/");
-      return;
-    }
-
-    const timestamp = new Date();
-    const userId = readResearchUserId();
-    const sessionId = `${userId}_${formatTimestampForKey(timestamp)}`;
-
-    const qualitySamples = sessionSignalQualitySamplesRef.current;
-    const qualityEnd =
-      qualitySamples.length > 0 ? qualitySamples[qualitySamples.length - 1] : signalQuality;
-
-    const record: PilotSummaryRecord = {
-      sessionId,
-      userId,
-      timestampIso: timestamp.toISOString(),
-      timestampLabel: timestamp.toLocaleString(),
-      protocolVersion: "research-v1",
-      totalDurationSec: totalDuration,
-      attentionEstimateFinal: attentionScore,
-      attentionEstimateAvg: Number(avg(sessionAttentionSamplesRef.current).toFixed(1)),
-      blinkRateAvg: Number(avg(sessionBlinkRateSamplesRef.current).toFixed(1)),
-      closureBurdenAvg: Number(avg(sessionClosureBurdenSamplesRef.current).toFixed(1)),
-      validSignalCoverageAvg: Number(avg(sessionSignalCoverageSamplesRef.current).toFixed(1)),
-      longClosuresTotal: longClosureTimesRef.current.length,
-      signalQualityEnd: qualityEnd,
-      focusRating: survey.focus,
-      calmRating: survey.calm,
-      eyeStrainRating: survey.eyeStrain,
-      difficultyRating: survey.difficulty,
-      notes: survey.notes,
+    const trimmedNote = note.trim();
+    const record = {
+      id: crypto.randomUUID(),
+      date: new Date().toISOString(),
+      durationMin: Number((totalDuration / 60).toFixed(1)),
+      timeOfDay: routine.timeOfDay,
+      attentionScore,
+      feeling,
+      grade: (attentionScore >= 85 ? "A" : attentionScore >= 72 ? "B" : "C") as "A" | "B" | "C",
+      blinkCount: metrics.blinkCount,
+      avgDrift,
+      avgRecovery,
+      longestGazeSec: longestGazeRef.current,
+      totalStillnessSec: totalStillnessRef.current,
+      note: trimmedNote.length > 0 ? trimmedNote : undefined,
+      newMilestones: pendingMilestones.length > 0 ? pendingMilestones : undefined,
     };
 
-    const existingCsv = localStorage.getItem("focusflow_research_sessions_csv") ?? "";
-    const csvParts = buildPilotCsvRow(record);
-    const updatedCsv = appendCsvWithHeader(existingCsv, csvParts.header, csvParts.row);
+    saveSession(record);           // local cache — instant
+    void saveSessionRemote(record); // Supabase — fire and forget
 
-    localStorage.setItem("focusflow_research_sessions_csv", updatedCsv);
-    localStorage.setItem("focusflow_research_last_session", JSON.stringify(record));
-
-    setLatestPilotRecord(record);
-    setLatestPilotStorageKey(sessionId);
     setSaved(true);
-    setResearchStep("summary");
-  };
-
-  const handleExportResearchCsv = () => {
-    const userId = readResearchUserId();
-    const csv = localStorage.getItem("focusflow_research_sessions_csv") ?? "";
-    if (!csv.trim()) return;
-    downloadTextFile(
-      `focusflow_research_sessions_${userId}.csv`,
-      csv,
-      "text/csv;charset=utf-8"
-    );
-  };
-
-  const handleResetResearchFlow = () => {
-    setIsRunning(false);
-    setSessionComplete(false);
-    setSaved(false);
-    setPhaseIndex(0);
-    setPhaseSecondsLeft(script[0]?.durationSec ?? 0);
-    setFeeling("");
-    setSurvey({
-      focus: 5,
-      calm: 5,
-      eyeStrain: 1,
-      difficulty: 5,
-      notes: "",
-    });
-    disableCamera();
-    setResearchStep("setup");
+    navigate("/");
   };
 
   const togglePanel = (key: keyof PanelState) => {
@@ -1520,6 +1325,9 @@ export default function SessionPage() {
     : isIntegratePhase
     ? "Rest"
     : currentPhase?.instruction ?? "";
+
+  const { displayed: shownBodyCue, opacity: bodyCueOpacity } = useCrossFadeText(bodyCue);
+  const { displayed: shownBodyRegionLabel, opacity: bodyRegionLabelOpacity } = useCrossFadeText(bodyRegionLabel);
 
   const liveBlinkRatePerMinute = useMemo(() => {
     if (blinkRateHistory.length === 0) return 0;
@@ -1581,368 +1389,6 @@ export default function SessionPage() {
 
   const liveEyeOpenness = eyeSnapshot?.facePresent ? eyeSnapshot.eyeOpenAvg : null;
 
-  const renderSetupSafetyCard = () => (
-    <div
-      className="glass-card"
-      style={{
-        width: "100%",
-        maxWidth: "760px",
-        padding: "24px 24px 28px",
-        textAlign: "left",
-      }}
-    >
-      <h2 style={{ marginTop: 0, marginBottom: "12px", fontWeight: 400 }}>Setup & Safety</h2>
-      <div style={{ color: "#d7c7b3", lineHeight: 1.55, marginBottom: "16px" }}>
-        This version is for pilot testing. Follow setup and safety guidance before continuing.
-      </div>
-
-      <label
-        style={{
-          display: "flex",
-          gap: "10px",
-          alignItems: "flex-start",
-          color: "#F5E9DA",
-          marginBottom: "12px",
-          lineHeight: 1.5,
-        }}
-      >
-        <input
-          type="checkbox"
-          checked={setupConfirmed}
-          onChange={(event) => setSetupConfirmed(event.target.checked)}
-          style={{ marginTop: "3px" }}
-        />
-        <span>
-          I confirm that I am seated about one arm’s length from the screen, the target is
-          roughly at eye level, my face is clearly visible in the camera with decent lighting,
-          and I am not wearing glasses.
-        </span>
-      </label>
-
-      <div style={{ color: "#cbbba7", fontSize: "14px", marginBottom: "14px" }}>
-        Contacts are discouraged during pilot testing because they may affect blinking behavior.
-      </div>
-
-      <div
-        style={{
-          padding: "14px",
-          borderRadius: "14px",
-          background: "rgba(255,255,255,0.03)",
-          border: "1px solid rgba(255,255,255,0.08)",
-          color: "#F5E9DA",
-          lineHeight: 1.55,
-          marginBottom: "14px",
-        }}
-      >
-        <div style={{ marginBottom: "8px", color: "#FFB347" }}>Safety notes</div>
-        <div>• Do not use if you recently had eye surgery.</div>
-        <div>
-          • Do not use if you currently have eye pain, irritation, infection, or another active
-          eye condition.
-        </div>
-        <div>• This practice may feel activating or uncomfortable for some people.</div>
-        <div>
-          • If you have relevant medical or mental health concerns, consult a qualified clinician
-          before use.
-        </div>
-        <div>• Use at your own risk.</div>
-      </div>
-
-      <label
-        style={{
-          display: "flex",
-          gap: "10px",
-          alignItems: "flex-start",
-          color: "#F5E9DA",
-          marginBottom: "12px",
-          lineHeight: 1.5,
-        }}
-      >
-        <input
-          type="checkbox"
-          checked={safetyConfirmed}
-          onChange={(event) => setSafetyConfirmed(event.target.checked)}
-          style={{ marginTop: "3px" }}
-        />
-        <span>
-          I understand the safety notes, privacy note, and that this is an experimental
-          research-mode tool. I will stop the session if I experience eye strain, dizziness,
-          emotional distress, or unusual discomfort.
-        </span>
-      </label>
-
-      <div style={{ color: "#cbbba7", fontSize: "14px", lineHeight: 1.5, marginBottom: "18px" }}>
-        Webcam data is processed locally in the browser. Session metrics are saved locally on
-        this device for research testing. No video is stored or transmitted.
-      </div>
-
-      <button
-        className="primary-button"
-        onClick={handleContinueFromSetup}
-        disabled={!setupConfirmed || !safetyConfirmed}
-      >
-        Continue to Camera Check
-      </button>
-    </div>
-  );
-
-  const renderCameraCheckCard = () => {
-    const eyesTracked =
-      Boolean(eyeSnapshot?.facePresent) &&
-      eyeStatus !== "no landmarks" &&
-      eyeStatus !== "loading" &&
-      eyeStatus !== "error";
-
-    return (
-      <div
-        className="glass-card"
-        style={{
-          width: "100%",
-          maxWidth: "760px",
-          padding: "24px 24px 28px",
-          textAlign: "left",
-        }}
-      >
-        <h2 style={{ marginTop: 0, marginBottom: "12px", fontWeight: 400 }}>Camera Check</h2>
-        <div style={{ color: "#d7c7b3", lineHeight: 1.55, marginBottom: "18px" }}>
-          Center your face, keep the target near eye level, and use soft front lighting.
-        </div>
-
-        <div
-          style={{
-            display: "grid",
-            gridTemplateColumns: "minmax(0, 220px) minmax(0, 1fr)",
-            gap: "16px",
-            alignItems: "start",
-            marginBottom: "18px",
-          }}
-        >
-          <div
-            style={{
-              borderRadius: "16px",
-              overflow: "hidden",
-              background: "rgba(0,0,0,0.28)",
-              border: "1px solid rgba(255,255,255,0.12)",
-            }}
-          >
-            <video
-              ref={cameraCheckVideoRef}
-              autoPlay
-              muted
-              playsInline
-              style={{
-                width: "100%",
-                display: "block",
-                transform: "scaleX(-1)",
-                background: "#111",
-              }}
-            />
-          </div>
-
-          <div
-            style={{
-              borderRadius: "16px",
-              padding: "14px",
-              background: "rgba(255,255,255,0.03)",
-              border: "1px solid rgba(255,255,255,0.08)",
-              color: "#F5E9DA",
-              lineHeight: 1.6,
-            }}
-          >
-            <div>Camera status: {cameraState}</div>
-            <div>Face status: {faceStatus}</div>
-            <div>Eye status: {eyeStatus}</div>
-            <div>
-              Signal quality:{" "}
-              {signalQuality === "good" ? "Good" : signalQuality === "fair" ? "Fair" : "Poor"}
-            </div>
-            <div>Face detected: {faceSnapshot?.facePresent ? "Yes" : "No"}</div>
-            <div>Eyes tracked: {eyesTracked ? "Yes" : "No"}</div>
-            {faceSnapshot?.facePresent && (
-              <div>Face confidence: {Math.round(faceSnapshot.confidence * 100)}%</div>
-            )}
-            {liveEyeOpenness !== null && <div>Eye openness: {liveEyeOpenness.toFixed(4)}</div>}
-            {signalQuality === "poor" && (
-              <div style={{ color: "#FFB347", marginTop: "8px" }}>
-                Tracking is currently weak. Improve lighting or face position before starting.
-              </div>
-            )}
-          </div>
-        </div>
-
-        <div style={{ display: "flex", gap: "10px", flexWrap: "wrap" }}>
-          <button className="secondary-button" onClick={() => setResearchStep("setup")}>
-            Back
-          </button>
-          <button
-            className="primary-button"
-            onClick={handleStart}
-            disabled={
-              cameraState !== "granted" ||
-              !faceSnapshot?.facePresent ||
-              !eyeSnapshot?.facePresent ||
-              signalQuality === "poor"
-            }
-          >
-            Start Session
-          </button>
-        </div>
-      </div>
-    );
-  };
-
-  const renderSurveyCard = () => (
-    <div
-      className="glass-card"
-      style={{
-        width: "100%",
-        maxWidth: "760px",
-        padding: "24px 24px 28px",
-        textAlign: "left",
-      }}
-    >
-      <h2 style={{ marginTop: 0, marginBottom: "18px", fontWeight: 400 }}>
-        Post-Session Survey
-      </h2>
-
-      {(
-        [
-          ["focus", "Focus"],
-          ["calm", "Calm"],
-          ["eyeStrain", "Eye strain"],
-          ["difficulty", "Difficulty"],
-        ] as const
-      ).map(([key, label]) => (
-        <div key={key} style={{ marginBottom: "18px" }}>
-          <div
-            style={{
-              display: "flex",
-              justifyContent: "space-between",
-              marginBottom: "8px",
-              color: "#F5E9DA",
-            }}
-          >
-            <span>{label}</span>
-            <span>{survey[key]}</span>
-          </div>
-          <input
-            type="range"
-            min={1}
-            max={10}
-            step={1}
-            value={survey[key]}
-            onChange={(event) =>
-              setSurvey((prev) => ({
-                ...prev,
-                [key]: Number(event.target.value),
-              }))
-            }
-            style={{ width: "100%" }}
-          />
-        </div>
-      ))}
-
-      <div style={{ marginBottom: "18px" }}>
-        <div style={{ color: "#F5E9DA", marginBottom: "8px" }}>Notes</div>
-        <textarea
-          value={survey.notes}
-          onChange={(event) =>
-            setSurvey((prev) => ({
-              ...prev,
-              notes: event.target.value,
-            }))
-          }
-          rows={4}
-          style={{
-            width: "100%",
-            borderRadius: "12px",
-            border: "1px solid rgba(255,255,255,0.12)",
-            background: "rgba(255,255,255,0.04)",
-            color: "#F5E9DA",
-            padding: "10px 12px",
-            resize: "vertical",
-          }}
-        />
-      </div>
-
-      <button className="primary-button" onClick={handleSaveSession}>
-        Save Summary
-      </button>
-    </div>
-  );
-
-  const renderResearchSummaryCard = () => (
-    <div
-      className="glass-card"
-      style={{
-        width: "100%",
-        maxWidth: "760px",
-        padding: "24px 24px 28px",
-        textAlign: "center",
-      }}
-    >
-      <h2 style={{ marginTop: 0, marginBottom: "18px", fontWeight: 400 }}>Session Summary</h2>
-
-      <div style={{ fontSize: "64px", color: "#FFB347", marginBottom: "8px" }}>
-        {attentionScore}
-      </div>
-
-      <div style={{ color: "#cbbba7", fontSize: "18px", marginBottom: "22px" }}>
-        Attention Estimate
-      </div>
-
-      <div
-        style={{
-          display: "grid",
-          gridTemplateColumns: "repeat(auto-fit, minmax(180px, 1fr))",
-          gap: "10px",
-          textAlign: "left",
-          marginBottom: "18px",
-          color: "#F5E9DA",
-        }}
-      >
-        <div>Average blink rate: {avg(sessionBlinkRateSamplesRef.current).toFixed(1)} / min</div>
-        <div>Average closure burden: {avg(sessionClosureBurdenSamplesRef.current).toFixed(1)}%</div>
-        <div>
-          Valid signal coverage: {avg(sessionSignalCoverageSamplesRef.current).toFixed(1)}%
-        </div>
-        <div>Long closures: {longClosureTimesRef.current.length}</div>
-      </div>
-
-      <div
-        style={{
-          padding: "14px",
-          borderRadius: "14px",
-          background: "rgba(255,255,255,0.03)",
-          border: "1px solid rgba(255,255,255,0.08)",
-          marginBottom: "18px",
-          textAlign: "left",
-          color: "#F5E9DA",
-          lineHeight: 1.6,
-        }}
-      >
-        <div>Focus: {survey.focus}</div>
-        <div>Calm: {survey.calm}</div>
-        <div>Eye strain: {survey.eyeStrain}</div>
-        <div>Difficulty: {survey.difficulty}</div>
-        {survey.notes.trim() && <div>Notes: {survey.notes}</div>}
-        {latestPilotRecord && <div>Saved at: {latestPilotRecord.timestampLabel}</div>}
-        {latestPilotStorageKey && <div>Saved locally as: {latestPilotStorageKey}</div>}
-      </div>
-
-      <div style={{ display: "flex", gap: "10px", flexWrap: "wrap", justifyContent: "center" }}>
-        <button className="secondary-button" onClick={handleExportResearchCsv}>
-          Export CSV
-        </button>
-        <button className="secondary-button" onClick={() => navigate("/")}>
-          Back Home
-        </button>
-        <button className="primary-button" onClick={handleResetResearchFlow}>
-          Run Again
-        </button>
-      </div>
-    </div>
-  );
   // Live heuristic attention estimate during gaze phases.
   useEffect(() => {
     if (!isRunning || !isGazePhase) {
@@ -1955,9 +1401,6 @@ export default function SessionPage() {
       }
 
       if (signalQuality === "poor") {
-        sessionSignalQualitySamplesRef.current.push(signalQuality);
-        sessionSignalQualitySamplesRef.current =
-          sessionSignalQualitySamplesRef.current.slice(-600);
         return;
       }
 
@@ -1972,10 +1415,6 @@ export default function SessionPage() {
           return next.slice(-60);
         });
 
-        sessionAttentionSamplesRef.current.push(nextDisplayed);
-        sessionAttentionSamplesRef.current =
-          sessionAttentionSamplesRef.current.slice(-600);
-
         return nextDisplayed;
       });
 
@@ -1989,22 +1428,6 @@ export default function SessionPage() {
       setAvgRecovery(
         Number((Math.max(0, 100 - validSignalCoveragePercent) / 100).toFixed(2))
       );
-
-      sessionBlinkRateSamplesRef.current.push(liveBlinkRatePerMinute);
-      sessionBlinkRateSamplesRef.current =
-        sessionBlinkRateSamplesRef.current.slice(-600);
-
-      sessionClosureBurdenSamplesRef.current.push(closureBurdenPercent);
-      sessionClosureBurdenSamplesRef.current =
-        sessionClosureBurdenSamplesRef.current.slice(-600);
-
-      sessionSignalCoverageSamplesRef.current.push(validSignalCoveragePercent);
-      sessionSignalCoverageSamplesRef.current =
-        sessionSignalCoverageSamplesRef.current.slice(-600);
-
-      sessionSignalQualitySamplesRef.current.push(signalQuality);
-      sessionSignalQualitySamplesRef.current =
-        sessionSignalQualitySamplesRef.current.slice(-600);
     }, 1000);
 
     return () => {
@@ -2052,431 +1475,7 @@ export default function SessionPage() {
           zIndex: 1,
         }}
       >
-        {RESEARCH_MODE ? (
-          researchStep === "setup" ? (
-            renderSetupSafetyCard()
-          ) : researchStep === "camera" ? (
-            renderCameraCheckCard()
-          ) : researchStep === "survey" ? (
-            renderSurveyCard()
-          ) : researchStep === "summary" ? (
-            renderResearchSummaryCard()
-          ) : (
-            <>
-
-              {((!isRunning && (cameraStream || cameraState === "requesting")) || (isRunning && isDebugMode)) && (
-                <div
-                  style={{
-                    position: "fixed",
-                    top: "calc(18px + env(safe-area-inset-top))",
-                    right: "calc(18px + env(safe-area-inset-right))",
-                    width: "clamp(120px, 26vw, 220px)",
-                    borderRadius: "16px",
-                    overflow: "hidden",
-                    background: "rgba(0,0,0,0.28)",
-                    border: "1px solid rgba(255,255,255,0.12)",
-                    boxShadow: "0 10px 30px rgba(0,0,0,0.28)",
-                    zIndex: 40,
-                    backdropFilter: "blur(8px)",
-                  }}
-                >
-                  <video
-                    ref={sessionVideoRef}
-                    autoPlay
-                    muted
-                    playsInline
-                    style={{
-                      width: "100%",
-                      display: "block",
-                      transform: "scaleX(-1)",
-                      background: "#111",
-                    }}
-                  />
-
-                  <div
-                    style={{
-                      padding: "8px 10px",
-                      fontSize: "12px",
-                      color: "#F5E9DA",
-                      textAlign: "left",
-                      lineHeight: 1.45,
-                    }}
-                  >
-                    <div>
-                      Camera: {cameraState}
-                      {cameraError ? ` - ${cameraError}` : ""}
-                    </div>
-                    <div>Face status: {faceStatus}</div>
-                    {faceSnapshot?.facePresent && (
-                      <div>
-                        Confidence: {Math.round(faceSnapshot.confidence * 100)}%
-                        {faceSnapshot.centered ? " • centered" : " • adjust position"}
-                      </div>
-                    )}
-                    <div>Eye status: {eyeStatus}</div>
-                    {eyeSnapshot?.facePresent && (
-                      <>
-                        <div>
-                          Eye openness: {eyeSnapshot.eyeOpenAvg.toFixed(4)}
-                          {eyeSnapshot.blinkLikely ? " • blink likely" : ""}
-                        </div>
-                        <div>Blinks: {blinkCountLive}</div>
-                      </>
-                    )}
-                  </div>
-                </div>
-              )}
-
-              <div
-                style={{
-                  width: "100%",
-                  maxWidth: "760px",
-                  display: "flex",
-                  flexDirection: "column",
-                  alignItems: "center",
-                  textAlign: "center",
-                  minHeight: "78vh",
-                  justifyContent: "space-between",
-                  gap: "18px",
-                  paddingTop: "8px",
-                }}
-              >
-                {/* Centered visual + text group */}
-                <div
-                  style={{
-                    flex: 1,
-                    width: "100%",
-                    display: "flex",
-                    flexDirection: "column",
-                    alignItems: "center",
-                    justifyContent: isBodyPhase || isSettlePhase || isIntegratePhase ? "flex-start" : "center",
-                    paddingTop: isBodyPhase ? "clamp(12px, 2vh, 28px)" : isSettlePhase || isIntegratePhase ? "clamp(36px, 8vh, 72px)" : 0,
-                    gap: "12px",
-                  }}
-                >
-                  {/* Body cue: proper flex sibling ABOVE the figure container so
-                      it can never overlap the SVG regardless of viewport size. */}
-                  {isBodyPhase && (
-                    <div style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: "5px" }}>
-                      <div
-                        style={{
-                          fontSize: "11px",
-                          letterSpacing: "0.14em",
-                          textTransform: "uppercase",
-                          color: "rgba(203, 183, 158, 0.45)",
-                          fontFamily: '"Playfair Display", Georgia, serif',
-                        }}
-                      >
-                        {bodyCue}
-                      </div>
-                      <div
-                        style={{
-                          fontSize: "26px",
-                          fontFamily: '"Playfair Display", Georgia, serif',
-                          fontWeight: 400,
-                          color: "rgba(245, 233, 218, 0.82)",
-                          lineHeight: 1.2,
-                        }}
-                      >
-                        {bodyRegionLabel}
-                      </div>
-                    </div>
-                  )}
-
-                  {!isBodyPhase && primaryInstruction && (
-                    <div
-                      style={{
-                        fontSize: isIntegratePhase ? "clamp(40px, 6vw, 56px)" : "22px",
-                        fontFamily: '"Playfair Display", Georgia, serif',
-                        fontWeight: 400,
-                        fontStyle: isIntegratePhase ? "italic" : "normal",
-                        color: "rgba(245, 233, 218, 0.78)",
-                        lineHeight: isIntegratePhase ? 1.1 : 1.5,
-                        letterSpacing: "0.01em",
-                        maxWidth: isIntegratePhase ? undefined : "32ch",
-                        textAlign: "center",
-                        transition: "font-size 0.6s ease, opacity 0.6s ease",
-                      }}
-                    >
-                      {primaryInstruction}
-                    </div>
-                  )}
-
-                  {/* Visual container — no text lives inside here.
-                      overflow:hidden only on body phase to contain the SVG figure.
-                      Eyes-closed phase: BrushstrokeEyes is a flow element with own height. */}
-                  <div
-                    style={{
-                      position: "relative",
-                      width: "100%",
-                      maxWidth: "760px",
-                      minHeight: isSettlePhase
-                        ? "clamp(180px, 30vh, 260px)"
-                        : isBodyPhase
-                        ? "clamp(360px, 56vh, 460px)"
-                        : isEyesClosedPhase
-                        ? 0
-                        : "clamp(240px, 38vh, 340px)",
-                      display: "flex",
-                      alignItems: "center",
-                      justifyContent: "center",
-                      overflow: isBodyPhase ? "hidden" : "visible",
-                    }}
-                  >
-                    {(showDiya || isEyesClosedPhase) && (
-                      <div
-                        style={{
-                          mixBlendMode: "screen",
-                          opacity: showDiya ? 1 : 0,
-                          transition: "opacity 0.6s ease",
-                          lineHeight: 0,
-                        }}
-                      >
-                        <video
-                          src="/diya-session.mp4"
-                          autoPlay
-                          loop
-                          muted
-                          playsInline
-                          style={{
-                            width: "clamp(240px, 38vw, 360px)",
-                            pointerEvents: "none",
-                            display: "block",
-                          }}
-                        />
-                      </div>
-                    )}
-
-                    {isBodyPhase && currentPhase?.bodyRegion && (
-                      <BodyGuideOverlay
-                        activeRegion={currentPhase.bodyRegion}
-                        phaseSecondsLeft={phaseSecondsLeft}
-                      />
-                    )}
-
-                    {isBreathPhase && currentPhase?.breathAction && (
-                      <BreathGuide
-                        action={currentPhase.breathAction}
-                        durationSec={currentPhase.durationSec}
-                      />
-                    )}
-
-                    {(isSettlePhase || isIntegratePhase) && <SettleHalo />}
-
-                    {isEyesClosedPhase && <BrushstrokeEyes />}
-                  </div>
-                </div>{/* end centered group */}
-
-                {isDebugMode && (
-                <CollapsibleCard
-                  title="Trend Graphs"
-                  open={panelsOpen.graphs}
-                  onToggle={() => togglePanel("graphs")}
-                >
-                  <div
-                    style={{
-                      display: "grid",
-                      gridTemplateColumns: "repeat(auto-fit, minmax(220px, 1fr))",
-                      gap: "10px",
-                    }}
-                  >
-                    <TrendCard
-                      title="Eye openness trend"
-                      values={eyeOpennessHistory}
-                      currentLabel={
-                        liveEyeOpenness !== null ? `Current: ${liveEyeOpenness.toFixed(4)}` : "Current: —"
-                      }
-                      minLabel="0.000"
-                      maxLabel="0.035"
-                      minValue={0}
-                      maxValue={0.035}
-                    />
-
-                    <TrendCard
-                      title="Attention estimate trend"
-                      values={attentionHistory}
-                      currentLabel={`Current: ${attentionScore}`}
-                      minLabel="0"
-                      maxLabel="100"
-                      minValue={0}
-                      maxValue={100}
-                      stroke="rgba(186, 216, 238, 0.9)"
-                    />
-
-                    <TrendCard
-                      title="Blink rate trend"
-                      values={blinkRateHistory}
-                      currentLabel={`Current: ${liveBlinkRatePerMinute.toFixed(1)} / min`}
-                      minLabel="0"
-                      maxLabel="30"
-                      minValue={0}
-                      maxValue={30}
-                      stroke="rgba(244, 196, 135, 0.92)"
-                    />
-
-                    <TrendCard
-                      title="Closure burden trend"
-                      values={closureBurdenHistory}
-                      currentLabel={`Current: ${closureBurdenPercent.toFixed(1)}%`}
-                      minLabel="0%"
-                      maxLabel="100%"
-                      minValue={0}
-                      maxValue={100}
-                      stroke="rgba(198, 214, 173, 0.92)"
-                    />
-                  </div>
-                </CollapsibleCard>
-                )}
-
-                {!isRunning && (
-                  <div style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: "14px" }}>
-                    {/* Baseline calibration status — gives the user confidence
-                        that face/iris/head tracking is set up before starting. */}
-                    {cameraStream && (
-                      <div
-                        style={{
-                          display: "flex",
-                          alignItems: "center",
-                          gap: "10px",
-                          fontSize: "13px",
-                          fontFamily: '"Playfair Display", Georgia, serif',
-                          color:
-                            baselineStatus === "ready"
-                              ? "rgba(180, 220, 160, 0.85)"
-                              : baselineStatus === "calibrating"
-                              ? "rgba(245, 233, 218, 0.6)"
-                              : "rgba(245, 233, 218, 0.4)",
-                        }}
-                      >
-                        <span style={{ fontSize: "16px" }}>
-                          {baselineStatus === "ready" ? "✓" : baselineStatus === "calibrating" ? "◐" : "○"}
-                        </span>
-                        <span>
-                          {baselineStatus === "ready"
-                            ? "Ready to begin"
-                            : baselineStatus === "calibrating"
-                            ? `Calibrating… ${Math.round((baselineProgress / BASELINE_REQUIRED_FRAMES) * 100)}%`
-                            : "Waiting for face"}
-                        </span>
-                      </div>
-                    )}
-
-                    <div
-                      style={{
-                        display: "flex",
-                        gap: "12px",
-                        flexWrap: "wrap",
-                        justifyContent: "center",
-                      }}
-                    >
-                      <button className="primary-button" onClick={handleStart}>
-                        Start Session
-                      </button>
-
-                      {cameraStream && (
-                        <button className="secondary-button" onClick={disableCamera}>
-                          Disconnect Camera
-                        </button>
-                      )}
-                    </div>
-                  </div>
-                )}
-              </div>
-
-              <div
-                style={{
-                  width: "100%",
-                  maxWidth: "760px",
-                  paddingTop: "10px",
-                }}
-              >
-                <div
-                  style={{
-                    width: "100%",
-                    height: "4px",
-                    borderRadius: "999px",
-                    background: "rgba(255,255,255,0.04)",
-                    overflow: "visible",
-                  }}
-                >
-                  <div
-                    style={{
-                      width: `${Math.max(0.02, overallProgress) * 100}%`,
-                      height: "100%",
-                      borderRadius: "inherit",
-                      background:
-                        "linear-gradient(90deg, rgba(240,168,86,0.92), rgba(255,226,183,0.88))",
-                      transition: isRunning ? "width 1s linear" : "width 0.35s ease",
-                      boxShadow: "0 0 12px rgba(255,179,71,0.45)",
-                    }}
-                  />
-                </div>
-
-                {/* Debug scrubber — only visible at ?debug=true */}
-                {isDebugMode && (
-                  <div style={{ marginTop: "12px" }}>
-                    <div style={{ display: "flex", justifyContent: "space-between", fontSize: "11px", color: "rgba(255,255,255,0.35)", marginBottom: "4px", fontFamily: "monospace" }}>
-                      <span>{Math.floor(elapsedSeconds / 60)}:{String(elapsedSeconds % 60).padStart(2, "0")}</span>
-                      <span style={{ color: "rgba(255,179,71,0.6)" }}>{currentPhase?.visualMode ?? "—"}</span>
-                      <span>{Math.floor(totalDuration / 60)}:{String(totalDuration % 60).padStart(2, "0")}</span>
-                    </div>
-                    <input
-                      type="range"
-                      min={0}
-                      max={totalDuration}
-                      value={elapsedSeconds}
-                      onChange={(e) => scrubToElapsed(Number(e.target.value))}
-                      style={{ width: "100%", accentColor: "#ffb347", cursor: "pointer" }}
-                    />
-                    <div style={{ display: "flex", fontSize: "10px", color: "rgba(255,255,255,0.2)", fontFamily: "monospace", marginTop: "2px", position: "relative", height: "14px" }}>
-                      {(() => {
-                        let acc = 0;
-                        return script.map((phase, i) => {
-                          const left = (acc / totalDuration) * 100;
-                          acc += phase.durationSec;
-                          return (
-                            <span key={i} style={{ position: "absolute", left: `${left}%`, transform: "translateX(-50%)", whiteSpace: "nowrap" }}>
-                              |
-                            </span>
-                          );
-                        });
-                      })()}
-                    </div>
-                    {/* Gaze tracking debug stats */}
-                    <div style={{ display: "flex", justifyContent: "space-between", fontSize: "11px", color: "rgba(255,179,71,0.7)", marginTop: "8px", fontFamily: "monospace" }}>
-                      <span>streak: {debugGazeStreak}s</span>
-                      <span>longest: {debugLongestGaze}s</span>
-                      <span>stillness: {debugTotalStillness}s</span>
-                      <span style={{ color: debugIrisBaselineSet ? "rgba(180,220,160,0.7)" : "rgba(255,255,255,0.3)" }}>
-                        baseline: {debugIrisBaselineSet ? "set" : "—"}
-                      </span>
-                    </div>
-                    <div style={{ display: "flex", justifyContent: "space-between", fontSize: "11px", color: debugIrisOk ? "rgba(180,220,160,0.6)" : "rgba(255,140,140,0.85)", marginTop: "2px", fontFamily: "monospace" }}>
-                      <span>
-                        iris: {debugIrisDrift
-                          ? `dx=${debugIrisDrift.dx >= 0 ? "+" : ""}${debugIrisDrift.dx.toFixed(3)}  dy=${debugIrisDrift.dy >= 0 ? "+" : ""}${debugIrisDrift.dy.toFixed(3)}`
-                          : "—"}
-                      </span>
-                      <span>tol: ±{IRIS_TOLERANCE.toFixed(3)}</span>
-                      <span>{debugIrisOk ? "ok" : "DRIFT"}</span>
-                    </div>
-                    <div style={{ display: "flex", justifyContent: "space-between", fontSize: "11px", color: debugHeadOk ? "rgba(180,220,160,0.6)" : "rgba(255,140,140,0.85)", marginTop: "2px", fontFamily: "monospace" }}>
-                      <span>
-                        head: {debugHeadDrift
-                          ? `yaw=${(debugHeadDrift.dyaw * 180 / Math.PI).toFixed(1)}° pitch=${(debugHeadDrift.dpitch * 180 / Math.PI).toFixed(1)}° roll=${(debugHeadDrift.droll * 180 / Math.PI).toFixed(1)}°`
-                          : "—"}
-                      </span>
-                      <span>tol: ±{(HEAD_TOLERANCE_RAD * 180 / Math.PI).toFixed(1)}°</span>
-                      <span>{debugHeadOk ? "ok" : "ROT"}</span>
-                    </div>
-                  </div>
-                )}
-              </div>
-            </>
-          )
-        ) : (
-sessionComplete ? (
-          RESEARCH_MODE ? renderResearchSummaryCard() : (
+        {sessionComplete ? (
           <div
             style={{
               width: "100%",
@@ -2625,16 +1624,15 @@ sessionComplete ? (
               {saved ? "Saved" : "Finish"}
             </button>
           </div>
-          )
         ) : (
           <>
             {((!isRunning && (cameraStream || cameraState === "requesting")) || (isRunning && isDebugMode)) && (
               <div
                 style={{
                   position: "fixed",
-                  top: "18px",
-                  right: "18px",
-                  width: "clamp(150px, 26vw, 220px)",
+                  top: "calc(18px + env(safe-area-inset-top))",
+                  right: "calc(18px + env(safe-area-inset-right))",
+                  width: "clamp(120px, 26vw, 220px)",
                   borderRadius: "16px",
                   overflow: "hidden",
                   background: "rgba(0,0,0,0.28)",
@@ -2670,17 +1668,16 @@ sessionComplete ? (
                     Camera: {cameraState}
                     {cameraError ? ` - ${cameraError}` : ""}
                   </div>
-                  <div>{RESEARCH_MODE ? "Face status" : "Face"}: {faceStatus}</div>
+                  <div>Face: {faceStatus}</div>
                   {faceSnapshot?.facePresent && (
                     <div>
                       Confidence: {Math.round(faceSnapshot.confidence * 100)}%
                       {faceSnapshot.centered ? " • centered" : " • adjust position"}
                     </div>
                   )}
-                  <div>{RESEARCH_MODE ? "Eye status" : "Eyes"}: {eyeStatus}</div>
+                  <div>Eyes: {eyeStatus}</div>
                   {eyeSnapshot?.facePresent && (
                     <>
-
                       <div>
                         Eye openness: {eyeSnapshot.eyeOpenAvg.toFixed(4)}
                         {eyeSnapshot.blinkLikely ? " • blink likely" : ""}
@@ -2714,29 +1711,27 @@ sessionComplete ? (
                   display: "flex",
                   flexDirection: "column",
                   alignItems: "center",
-                  justifyContent: isBodyPhase ? "flex-start" : "center",
-                  paddingTop: isBodyPhase ? "clamp(12px, 2vh, 28px)" : 0,
-                  gap: "20px",
+                  justifyContent: isBodyPhase || isSettlePhase || isIntegratePhase ? "flex-start" : "center",
+                  paddingTop: isBodyPhase ? "clamp(12px, 2vh, 28px)" : isSettlePhase || isIntegratePhase ? "clamp(36px, 8vh, 72px)" : 0,
+                  gap: "12px",
                 }}
               >
-                {isBodyPhase && (
-                  <div
-                    style={{
-                      display: "flex",
-                      flexDirection: "column",
-                      alignItems: "center",
-                      gap: "5px",
-                    }}
-                  >
+                {/* Body cue: proper flex sibling ABOVE the figure container so
+                    it can never overlap the SVG regardless of viewport size. */}
+                <FadeWrapper active={isBodyPhase}>
+                  <div style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: "5px" }}>
                     <div
                       style={{
                         fontSize: "11px",
                         letterSpacing: "0.14em",
                         textTransform: "uppercase",
                         color: "rgba(203, 183, 158, 0.45)",
+                        fontFamily: '"Playfair Display", Georgia, serif',
+                        opacity: bodyCueOpacity,
+                        transition: "opacity 0.45s ease",
                       }}
                     >
-                      {bodyCue}
+                      {shownBodyCue}
                     </div>
                     <div
                       style={{
@@ -2745,28 +1740,37 @@ sessionComplete ? (
                         fontWeight: 400,
                         color: "rgba(245, 233, 218, 0.82)",
                         lineHeight: 1.2,
+                        opacity: bodyRegionLabelOpacity,
+                        transition: "opacity 0.45s ease",
                       }}
                     >
-                      {bodyRegionLabel}
+                      {shownBodyRegionLabel}
                     </div>
                   </div>
-                )}
+                </FadeWrapper>
 
-                {!isBodyPhase && primaryInstruction && (
+                <FadeWrapper active={!isBodyPhase && !!primaryInstruction}>
                   <div
                     style={{
-                      fontSize: "22px",
+                      fontSize: isIntegratePhase ? "clamp(40px, 6vw, 56px)" : "22px",
                       fontFamily: '"Playfair Display", Georgia, serif',
                       fontWeight: 400,
-                      color: "rgba(245, 233, 218, 0.68)",
-                      lineHeight: 1.5,
+                      fontStyle: isIntegratePhase ? "italic" : "normal",
+                      color: "rgba(245, 233, 218, 0.78)",
+                      lineHeight: isIntegratePhase ? 1.1 : 1.5,
                       letterSpacing: "0.01em",
+                      maxWidth: isIntegratePhase ? undefined : "32ch",
+                      textAlign: "center",
+                      transition: "font-size 0.6s ease",
                     }}
                   >
                     {primaryInstruction}
                   </div>
-                )}
+                </FadeWrapper>
 
+                {/* Visual container — no text lives inside here.
+                    overflow:hidden only on body phase to contain the SVG figure.
+                    Eyes-closed phase: BrushstrokeEyes is a flow element with own height. */}
                 <div
                   style={{
                     position: "relative",
@@ -2778,19 +1782,20 @@ sessionComplete ? (
                       ? "clamp(360px, 56vh, 460px)"
                       : isEyesClosedPhase
                       ? 0
-                      : "clamp(260px, 42vh, 360px)",
+                      : "clamp(240px, 38vh, 340px)",
                     display: "flex",
                     alignItems: "center",
                     justifyContent: "center",
                     overflow: isBodyPhase ? "hidden" : "visible",
                   }}
                 >
-                  {showDiya && (
+                  <FadeWrapper active={showDiya || isEyesClosedPhase}>
                     <div
                       style={{
                         position: "relative",
                         mixBlendMode: "screen",
-                        transition: "opacity 0.5s ease",
+                        opacity: showDiya ? 1 : 0,
+                        transition: "opacity 0.8s ease-in-out",
                         lineHeight: 0,
                       }}
                     >
@@ -2817,30 +1822,97 @@ sessionComplete ? (
                         }}
                       />
                     </div>
-                  )}
+                  </FadeWrapper>
 
-                  {isBodyPhase && currentPhase?.bodyRegion && (
+                  <FadeWrapper active={isBodyPhase}>
                     <BodyGuideOverlay
-                      activeRegion={currentPhase.bodyRegion}
+                      activeRegion={currentPhase?.bodyRegion ?? "feet"}
                       phaseSecondsLeft={phaseSecondsLeft}
                     />
-                  )}
+                  </FadeWrapper>
 
-                  {isBreathPhase && currentPhase?.breathAction && (
+                  <FadeWrapper active={isBreathPhase}>
                     <BreathGuide
-                      action={currentPhase.breathAction}
-                      durationSec={currentPhase.durationSec}
+                      action={currentPhase?.breathAction ?? "exhale"}
+                      durationSec={currentPhase?.durationSec ?? 8}
                     />
-                  )}
+                  </FadeWrapper>
 
-                  {(isSettlePhase || isIntegratePhase) && <SettleHalo />}
+                  <FadeWrapper active={isSettlePhase || isIntegratePhase}>
+                    <SettleHalo />
+                  </FadeWrapper>
 
-                  {isEyesClosedPhase && <BrushstrokeEyes />}
+                  <FadeWrapper active={isEyesClosedPhase}>
+                    <BrushstrokeEyes />
+                  </FadeWrapper>
                 </div>
               </div>{/* end centered group */}
 
+              {isDebugMode && (
+                <CollapsibleCard
+                  title="Trend Graphs"
+                  open={panelsOpen.graphs}
+                  onToggle={() => togglePanel("graphs")}
+                >
+                  <div
+                    style={{
+                      display: "grid",
+                      gridTemplateColumns: "repeat(auto-fit, minmax(220px, 1fr))",
+                      gap: "10px",
+                    }}
+                  >
+                    <TrendCard
+                      title="Eye openness trend"
+                      values={eyeOpennessHistory}
+                      currentLabel={
+                        liveEyeOpenness !== null ? `Current: ${liveEyeOpenness.toFixed(4)}` : "Current: —"
+                      }
+                      minLabel="0.000"
+                      maxLabel="0.035"
+                      minValue={0}
+                      maxValue={0.035}
+                    />
+
+                    <TrendCard
+                      title="Attention estimate trend"
+                      values={attentionHistory}
+                      currentLabel={`Current: ${attentionScore}`}
+                      minLabel="0"
+                      maxLabel="100"
+                      minValue={0}
+                      maxValue={100}
+                      stroke="rgba(186, 216, 238, 0.9)"
+                    />
+
+                    <TrendCard
+                      title="Blink rate trend"
+                      values={blinkRateHistory}
+                      currentLabel={`Current: ${liveBlinkRatePerMinute.toFixed(1)} / min`}
+                      minLabel="0"
+                      maxLabel="30"
+                      minValue={0}
+                      maxValue={30}
+                      stroke="rgba(244, 196, 135, 0.92)"
+                    />
+
+                    <TrendCard
+                      title="Closure burden trend"
+                      values={closureBurdenHistory}
+                      currentLabel={`Current: ${closureBurdenPercent.toFixed(1)}%`}
+                      minLabel="0%"
+                      maxLabel="100%"
+                      minValue={0}
+                      maxValue={100}
+                      stroke="rgba(198, 214, 173, 0.92)"
+                    />
+                  </div>
+                </CollapsibleCard>
+              )}
+
               {!isRunning && (
                 <div style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: "14px" }}>
+                  {/* Baseline calibration status — gives the user confidence
+                      that face/iris/head tracking is set up before starting. */}
                   {cameraStream && (
                     <div
                       style={{
@@ -2917,6 +1989,7 @@ sessionComplete ? (
                     background:
                       "linear-gradient(90deg, rgba(240,168,86,0.96), rgba(255,226,183,0.92))",
                     transition: isRunning ? "width 1s linear" : "width 0.35s ease",
+                    boxShadow: "0 0 12px rgba(255,179,71,0.45)",
                   }}
                 />
               </div>
@@ -2937,14 +2010,14 @@ sessionComplete ? (
                     onChange={(e) => scrubToElapsed(Number(e.target.value))}
                     style={{ width: "100%", accentColor: "#ffb347", cursor: "pointer" }}
                   />
-                  <div style={{ fontSize: "10px", color: "rgba(255,255,255,0.2)", fontFamily: "monospace", marginTop: "2px", position: "relative", height: "14px" }}>
+                  <div style={{ display: "flex", fontSize: "10px", color: "rgba(255,255,255,0.2)", fontFamily: "monospace", marginTop: "2px", position: "relative", height: "14px" }}>
                     {(() => {
                       let acc = 0;
                       return script.map((phase, i) => {
                         const left = (acc / totalDuration) * 100;
                         acc += phase.durationSec;
                         return (
-                          <span key={i} style={{ position: "absolute", left: `${left}%`, transform: "translateX(-50%)" }}>
+                          <span key={i} style={{ position: "absolute", left: `${left}%`, transform: "translateX(-50%)", whiteSpace: "nowrap" }}>
                             |
                           </span>
                         );
@@ -2960,11 +2033,28 @@ sessionComplete ? (
                       baseline: {debugIrisBaselineSet ? "set" : "—"}
                     </span>
                   </div>
+                  <div style={{ display: "flex", justifyContent: "space-between", fontSize: "11px", color: debugIrisOk ? "rgba(180,220,160,0.6)" : "rgba(255,140,140,0.85)", marginTop: "2px", fontFamily: "monospace" }}>
+                    <span>
+                      iris: {debugIrisDrift
+                        ? `dx=${debugIrisDrift.dx >= 0 ? "+" : ""}${debugIrisDrift.dx.toFixed(3)}  dy=${debugIrisDrift.dy >= 0 ? "+" : ""}${debugIrisDrift.dy.toFixed(3)}`
+                        : "—"}
+                    </span>
+                    <span>tol: ±{IRIS_TOLERANCE.toFixed(3)}</span>
+                    <span>{debugIrisOk ? "ok" : "DRIFT"}</span>
+                  </div>
+                  <div style={{ display: "flex", justifyContent: "space-between", fontSize: "11px", color: debugHeadOk ? "rgba(180,220,160,0.6)" : "rgba(255,140,140,0.85)", marginTop: "2px", fontFamily: "monospace" }}>
+                    <span>
+                      head: {debugHeadDrift
+                        ? `yaw=${(debugHeadDrift.dyaw * 180 / Math.PI).toFixed(1)}° pitch=${(debugHeadDrift.dpitch * 180 / Math.PI).toFixed(1)}° roll=${(debugHeadDrift.droll * 180 / Math.PI).toFixed(1)}°`
+                        : "—"}
+                    </span>
+                    <span>tol: ±{(HEAD_TOLERANCE_RAD * 180 / Math.PI).toFixed(1)}°</span>
+                    <span>{debugHeadOk ? "ok" : "ROT"}</span>
+                  </div>
                 </div>
               )}
             </div>
           </>
-        )
         )}
       </div>
     </MeditationBackground>
