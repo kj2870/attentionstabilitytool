@@ -38,8 +38,8 @@ const BODY_REGION_LABELS: Record<BodyRegion, string> = {
   feet: "Feet",
   calves: "Calves",
   thighs: "Thighs",
-  pelvis: "Pelvis + abs",
-  backShoulders: "Back + shoulders",
+  pelvis: "Pelvis and abs",
+  backShoulders: "Back and shoulders",
   armsFingers: "Arms",
   neck: "Neck",
   face: "Face",
@@ -1735,14 +1735,25 @@ export default function SessionPage() {
                 {/* Body cue: proper flex sibling ABOVE the figure container so
                     it can never overlap the SVG regardless of viewport size. */}
                 <FadeWrapper active={isBodyPhase}>
-                  <div style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: "5px" }}>
+                  <div
+                    style={{
+                      display: "flex",
+                      flexDirection: "column",
+                      alignItems: "center",
+                      gap: "6px",
+                      marginBottom: "clamp(28px, 6vh, 56px)",
+                    }}
+                  >
+                    {/* Primary cue — CLENCH / RELEASE is the action focus. */}
                     <div
                       style={{
-                        fontSize: "11px",
-                        letterSpacing: "0.14em",
+                        fontSize: "clamp(34px, 4.4vw, 46px)",
+                        letterSpacing: "0.18em",
                         textTransform: "uppercase",
-                        color: "rgba(203, 183, 158, 0.55)",
+                        color: "rgba(245, 233, 218, 0.88)",
                         fontFamily: '"Playfair Display", Georgia, serif',
+                        fontWeight: 400,
+                        lineHeight: 1.1,
                         opacity: bodyCueOpacity,
                         transition: "opacity 0.45s ease",
                         animation: "bodyCueBeat 5s ease-in-out infinite",
@@ -1750,12 +1761,15 @@ export default function SessionPage() {
                     >
                       {shownBodyCue}
                     </div>
+                    {/* Secondary cue — which body region. */}
                     <div
                       style={{
-                        fontSize: "26px",
+                        fontSize: "15px",
+                        letterSpacing: "0.04em",
                         fontFamily: '"Playfair Display", Georgia, serif',
                         fontWeight: 400,
-                        color: "rgba(245, 233, 218, 0.82)",
+                        fontStyle: "italic",
+                        color: "rgba(203, 183, 158, 0.65)",
                         lineHeight: 1.2,
                         opacity: bodyRegionLabelOpacity,
                         transition: "opacity 0.45s ease",
