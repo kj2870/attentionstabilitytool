@@ -14,7 +14,6 @@ import {
 } from "../lib/sessionScript";
 import {
   loadHistory,
-  loadRoutineSelection,
   saveSession,
   saveSessionRemote,
   type SessionFeeling,
@@ -379,7 +378,6 @@ function CollapsibleCard({ title, open, onToggle, children }: CollapsibleCardPro
 // Coordinates timer phases, audio cues, webcam/vision loops, and summary UI.
 export default function SessionPage() {
   const navigate = useNavigate();
-  const routine = loadRoutineSelection();
   const script = useMemo(() => createSessionScript(), []);
   const totalDuration = useMemo(() => getScriptTotalDuration(script), [script]);
 
@@ -740,7 +738,6 @@ export default function SessionPage() {
       id: "pending",
       date: new Date().toISOString(),
       durationMin: Number((totalDuration / 60).toFixed(1)),
-      timeOfDay: routine.timeOfDay,
       attentionScore,
       feeling: "" as SessionFeeling,
       grade: "B" as const,
@@ -1315,7 +1312,6 @@ export default function SessionPage() {
       id: crypto.randomUUID(),
       date: new Date().toISOString(),
       durationMin: Number((totalDuration / 60).toFixed(1)),
-      timeOfDay: routine.timeOfDay,
       attentionScore,
       feeling: "" as SessionFeeling,
       grade: (attentionScore >= 85 ? "A" : attentionScore >= 72 ? "B" : "C") as "A" | "B" | "C",
