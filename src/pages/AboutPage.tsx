@@ -4,6 +4,11 @@ import { Link } from "react-router-dom";
 // On desktop the same pages are reachable directly from the top nav.
 const SECTIONS = [
   {
+    to: "/instructions",
+    title: "Instructions",
+    description: "What happens in a session, in five lines.",
+  },
+  {
     to: "/philosophy",
     title: "Why focus",
     description: "The practice and what it asks of us.",

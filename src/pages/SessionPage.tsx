@@ -1569,21 +1569,30 @@ export default function SessionPage() {
               <div
                 style={{
                   fontSize: "13px",
-                  color: "rgba(245, 233, 218, 0.38)",
+                  color: "rgba(245, 233, 218, 0.42)",
                   letterSpacing: "0.01em",
                 }}
               >
                 {(() => {
                   const allHistory = [...loadHistory()];
                   const sessionN = allHistory.length + 1;
-                  const totalMin = Math.round(
-                    (allHistory.reduce((s, r) => s + (r.totalStillnessSec ?? 0), 0) + totalStillnessRef.current) / 60
-                  );
                   const bestEver = Math.max(
                     longestGazeRef.current,
                     ...allHistory.map((r) => r.longestGazeSec ?? 0)
                   );
-                  return `Session ${sessionN} · ${totalMin}m total · ${bestEver}s best`;
+                  const blinkPerMin =
+                    gazeSecondsRef.current > 0
+                      ? (blinksDuringGazeRef.current / gazeSecondsRef.current) * 60
+                      : null;
+                  const blinkPart =
+                    blinkPerMin !== null ? `${blinkPerMin.toFixed(1)} blinks/min` : null;
+                  return [
+                    `Session ${sessionN}`,
+                    `${bestEver}s best`,
+                    blinkPart,
+                  ]
+                    .filter(Boolean)
+                    .join(" · ");
                 })()}
               </div>
             </div>
@@ -1611,7 +1620,7 @@ export default function SessionPage() {
               value={note}
               onChange={(e) => setNote(e.target.value)}
               rows={3}
-              placeholder="Notes or feedback (optional)"
+              placeholder="A line about this session, if you want."
               style={{
                 width: "100%",
                 padding: "10px 0",

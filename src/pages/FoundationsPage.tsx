@@ -103,30 +103,8 @@ export default function FoundationsPage() {
 
           <button
             onClick={handleBegin}
-            style={{
-              marginTop: "56px",
-              padding: "14px 36px",
-              borderRadius: "999px",
-              border: "1px solid rgba(255,179,71,0.45)",
-              background: "rgba(255,179,71,0.18)",
-              color: "#ffd9a3",
-              fontSize: "16px",
-              fontWeight: 500,
-              letterSpacing: "0.06em",
-              cursor: "pointer",
-              backdropFilter: "blur(6px)",
-              transition: "background 0.3s ease, box-shadow 0.5s ease, color 0.3s ease",
-            }}
-            onMouseEnter={(e) => {
-              e.currentTarget.style.background = "rgba(255,179,71,0.28)";
-              e.currentTarget.style.boxShadow = "0 0 28px rgba(255,179,71,0.35)";
-              e.currentTarget.style.color = "#ffe6c2";
-            }}
-            onMouseLeave={(e) => {
-              e.currentTarget.style.background = "rgba(255,179,71,0.18)";
-              e.currentTarget.style.boxShadow = "none";
-              e.currentTarget.style.color = "#ffd9a3";
-            }}
+            className="cta-pill"
+            style={{ marginTop: "56px" }}
           >
             Begin practice
           </button>

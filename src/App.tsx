@@ -14,6 +14,7 @@ import OnboardingPage from "./pages/OnboardingPage";
 import LoginPage from "./pages/LoginPage";
 import InstructionsPage from "./pages/InstructionsPage";
 import FoundationsPage from "./pages/FoundationsPage";
+import PublicPageNav from "./components/PublicPageNav";
 import { supabase } from "./lib/supabase";
 import { syncLocalProfileFromUser } from "./lib/auth";
 import { getActiveProfile, hasCompletedOnboarding, hasReadFoundations } from "./lib/storage";
@@ -38,16 +39,25 @@ function UnauthRoutes() {
     return <Navigate to="/onboarding" replace />;
   }
 
+  // Show a minimal back-to-landing link on the long-form content pages, so
+  // a curious pre-auth visitor isn't trapped without a way back.
+  const showBack = ["/instructions", "/philosophy", "/science", "/privacy"].includes(
+    location.pathname
+  );
+
   return (
-    <Routes>
-      <Route path="/onboarding" element={<OnboardingPage />} />
-      <Route path="/login" element={<LoginPage />} />
-      <Route path="/instructions" element={<InstructionsPage />} />
-      <Route path="/philosophy" element={<PhilosophyPage />} />
-      <Route path="/science" element={<SciencePage />} />
-      <Route path="/privacy" element={<PrivacyPage />} />
-      <Route path="*" element={<Navigate to="/onboarding" replace />} />
-    </Routes>
+    <>
+      {showBack && <PublicPageNav />}
+      <Routes>
+        <Route path="/onboarding" element={<OnboardingPage />} />
+        <Route path="/login" element={<LoginPage />} />
+        <Route path="/instructions" element={<InstructionsPage />} />
+        <Route path="/philosophy" element={<PhilosophyPage />} />
+        <Route path="/science" element={<SciencePage />} />
+        <Route path="/privacy" element={<PrivacyPage />} />
+        <Route path="*" element={<Navigate to="/onboarding" replace />} />
+      </Routes>
+    </>
   );
 }
 
