@@ -1,5 +1,8 @@
+import MeditationBackground from "../components/MeditationBackground";
+
 export default function PhilosophyPage() {
   return (
+    <MeditationBackground>
     <div
       style={{
         padding: "60px 24px 100px",
@@ -40,5 +43,6 @@ export default function PhilosophyPage() {
         </p>
       </div>
     </div>
+    </MeditationBackground>
   );
 }

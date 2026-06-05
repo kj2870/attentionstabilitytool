@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { signOut } from "../lib/auth";
+import MeditationBackground from "../components/MeditationBackground";
 
 export default function PrivacyPage() {
   const navigate = useNavigate();
@@ -17,6 +18,7 @@ export default function PrivacyPage() {
   };
 
   return (
+    <MeditationBackground>
     <div
       style={{
         padding: "60px 24px 100px",
@@ -40,7 +42,7 @@ export default function PrivacyPage() {
         </h2>
         <div style={{ display: "flex", flexDirection: "column", gap: "12px", color: "var(--muted)", fontSize: "16px", lineHeight: 1.7 }}>
           <p style={{ margin: 0 }}>Video is processed entirely on your device. Nothing is recorded or uploaded.</p>
-          <p style={{ margin: 0 }}>Session metrics — attention score, duration, and blink count — are saved to your account to track progress over time.</p>
+          <p style={{ margin: 0 }}>Session metrics (longest gaze, blink rate, duration) are saved to your account so you can see your trend over time.</p>
           <p style={{ margin: 0 }}>Your account is secured through Google. We do not store passwords or sell your data.</p>
           <p style={{ margin: 0 }}>To delete your account and all associated data, contact us at privacy@drishti.app.</p>
         </div>
@@ -72,5 +74,6 @@ export default function PrivacyPage() {
         </button>
       </div>
     </div>
+    </MeditationBackground>
   );
 }

@@ -1,5 +1,6 @@
 import { useMemo, useState } from "react";
 import { RESEARCH_MODE } from "../lib/presentationMode";
+import MeditationBackground from "../components/MeditationBackground";
 import { getMandalaDay, loadHistory, type SessionRecord } from "../lib/storage";
 
 // ---------------------------------------------------------------------------
@@ -176,6 +177,7 @@ function GazeSteadinessArc({ samples }: { samples: number[] }) {
         strokeWidth={1.5}
         strokeLinejoin="round"
         strokeLinecap="round"
+        vectorEffect="non-scaling-stroke"
       />
     </svg>
   );
@@ -206,7 +208,7 @@ function TrendLine({
           padding: "20px 0",
         }}
       >
-        no sessions yet
+        your trend will appear here as you practice
       </div>
     );
   }
@@ -218,11 +220,14 @@ function TrendLine({
   const yFor = (v: number) => padY + (1 - (v - min) / range) * (height - padY * 2);
 
   const points = values.map((v, i) => `${padX + i * stepX},${yFor(v)}`).join(" ");
-  const lastX = padX + (values.length - 1) * stepX;
-  const lastY = yFor(values[values.length - 1]);
+  // The current-session dot is rendered as an HTML element absolutely
+  // positioned over the stretched SVG, so it stays a true circle regardless
+  // of the SVG's preserveAspectRatio="none" horizontal stretch.
+  const lastXPercent = ((padX + (values.length - 1) * stepX) / width) * 100;
+  const lastYPercent = (yFor(values[values.length - 1]) / height) * 100;
 
   return (
-    <div>
+    <div style={{ position: "relative" }}>
       <svg
         viewBox={`0 0 ${width} ${height}`}
         preserveAspectRatio="none"
@@ -235,9 +240,23 @@ function TrendLine({
           strokeWidth={1.5}
           strokeLinejoin="round"
           strokeLinecap="round"
+          vectorEffect="non-scaling-stroke"
         />
-        <circle cx={lastX} cy={lastY} r={3} fill="rgba(255, 220, 160, 1)" />
       </svg>
+      <div
+        aria-hidden
+        style={{
+          position: "absolute",
+          left: `calc(${lastXPercent}% - 4px)`,
+          top: `calc(${lastYPercent}% - 4px)`,
+          width: "8px",
+          height: "8px",
+          borderRadius: "50%",
+          background: "rgba(255, 220, 160, 1)",
+          boxShadow: "0 0 10px rgba(255, 200, 130, 0.45)",
+          pointerEvents: "none",
+        }}
+      />
       <div
         style={{
           display: "flex",
@@ -545,6 +564,7 @@ export default function HistoryPage() {
   const selectedSession = selectedDay !== null ? daySessions[selectedDay] : null;
 
   return (
+    <MeditationBackground>
     <div
       style={{
         padding: "40px 24px 80px",
@@ -653,5 +673,6 @@ export default function HistoryPage() {
         </>
       )}
     </div>
+    </MeditationBackground>
   );
 }

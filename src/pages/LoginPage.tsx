@@ -61,19 +61,19 @@ export default function LoginPage() {
           Sign in to continue your practice.
         </p>
 
-        {error && (
-          <div
-            style={{
-              color: "#ff8080",
-              fontSize: "14px",
-              marginBottom: "16px",
-              maxWidth: "32ch",
-              lineHeight: 1.5,
-            }}
-          >
-            {error}
-          </div>
-        )}
+        <div
+          aria-live="polite"
+          style={{
+            minHeight: "20px",
+            marginBottom: "16px",
+            maxWidth: "32ch",
+            color: "#ff8080",
+            fontSize: "14px",
+            lineHeight: 1.5,
+          }}
+        >
+          {error}
+        </div>
 
         <button
           onClick={() => void handleGoogleSignIn()}

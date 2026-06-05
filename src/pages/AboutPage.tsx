@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import MeditationBackground from "../components/MeditationBackground";
 
 // Mobile-only hub page that links to the longer-form content pages.
 // On desktop the same pages are reachable directly from the top nav.
@@ -27,6 +28,7 @@ const SECTIONS = [
 
 export default function AboutPage() {
   return (
+    <MeditationBackground>
     <div
       style={{
         padding: "48px 24px 96px",
@@ -87,5 +89,6 @@ export default function AboutPage() {
         ))}
       </div>
     </div>
+    </MeditationBackground>
   );
 }

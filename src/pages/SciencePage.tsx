@@ -43,8 +43,11 @@ const findings = [
   },
 ];
 
+import MeditationBackground from "../components/MeditationBackground";
+
 export default function SciencePage() {
   return (
+    <MeditationBackground>
     <div
       style={{
         padding: "60px 24px 100px",
@@ -184,5 +187,6 @@ export default function SciencePage() {
         </p>
       </div>
     </div>
+    </MeditationBackground>
   );
 }

@@ -1642,32 +1642,9 @@ export default function SessionPage() {
             <button
               onClick={handleSaveSession}
               disabled={saved}
-              style={{
-                background: "transparent",
-                border: "1px solid rgba(255, 179, 71, 0.32)",
-                color: "rgba(255, 179, 71, 0.88)",
-                padding: "11px 36px",
-                borderRadius: "999px",
-                fontSize: "12px",
-                letterSpacing: "0.2em",
-                textTransform: "uppercase",
-                fontFamily: "inherit",
-                cursor: saved ? "default" : "pointer",
-                opacity: saved ? 0.45 : 1,
-                transition: "background 0.2s, border-color 0.2s",
-              }}
-              onMouseEnter={(e) => {
-                if (!saved) {
-                  e.currentTarget.style.background = "rgba(255, 179, 71, 0.07)";
-                  e.currentTarget.style.borderColor = "rgba(255, 179, 71, 0.55)";
-                }
-              }}
-              onMouseLeave={(e) => {
-                e.currentTarget.style.background = "transparent";
-                e.currentTarget.style.borderColor = "rgba(255, 179, 71, 0.32)";
-              }}
+              className="cta-pill"
             >
-              {saved ? "Saved" : "Finish"}
+              {saved ? "Saved" : "Done"}
             </button>
           </div>
         ) : (
