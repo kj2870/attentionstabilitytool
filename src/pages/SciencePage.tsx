@@ -43,52 +43,63 @@ const findings = [
   },
 ];
 
-import MeditationBackground from "../components/MeditationBackground";
-
 export default function SciencePage() {
   return (
-    <MeditationBackground>
     <div
       style={{
-        padding: "60px 24px 100px",
-        maxWidth: "720px",
+        padding: "64px 24px 100px",
+        maxWidth: "640px",
         margin: "0 auto",
       }}
     >
-      {/* Header */}
-      <div style={{ marginBottom: "48px" }}>
-        <h1
-          style={{
-            fontSize: "clamp(40px, 6vw, 56px)",
-            fontWeight: 400,
-            marginBottom: "20px",
-            lineHeight: 1.08,
-          }}
-        >
-          The research
-        </h1>
-        <p
-          style={{
-            color: "var(--muted)",
-            fontSize: "17px",
-            lineHeight: 1.75,
-            margin: "0 0 12px",
-          }}
-        >
-          Trataka is a traditional yogic practice with a small but growing body
-          of research behind it. Early studies suggest it may support attention
-          and reduce mind-wandering, though the evidence is still emerging and
-          not yet definitive.
-        </p>
+      <div
+        style={{
+          fontSize: "11px",
+          letterSpacing: "0.28em",
+          textTransform: "uppercase",
+          color: "rgba(217, 203, 184, 0.45)",
+          marginBottom: "28px",
+        }}
+      >
+        the research
       </div>
 
+      <h1
+        style={{
+          fontFamily: '"Playfair Display", Georgia, serif',
+          fontSize: "clamp(28px, 4vw, 38px)",
+          fontWeight: 400,
+          color: "rgba(245, 233, 218, 0.92)",
+          marginBottom: "24px",
+          lineHeight: 1.2,
+        }}
+      >
+        What the studies say
+      </h1>
+
+      <p
+        style={{
+          color: "rgba(217, 203, 184, 0.78)",
+          fontSize: "16px",
+          lineHeight: 1.8,
+          margin: "0 0 48px",
+        }}
+      >
+        Trataka is a traditional yogic practice with a small but growing body
+        of research behind it. Early studies suggest it may support attention
+        and reduce mind-wandering, though the evidence is still emerging and
+        not yet definitive.
+      </p>
+
       {/* Findings */}
-      <div style={{ display: "flex", flexDirection: "column", gap: "14px", marginBottom: "48px" }}>
+      <div style={{ display: "flex", flexDirection: "column", gap: "32px", marginBottom: "56px" }}>
         {findings.map((f) => (
           <div
             key={f.claim}
-            className="glass-card"
-            style={{ padding: "26px 28px" }}
+            style={{
+              borderTop: "1px solid rgba(255, 179, 71, 0.08)",
+              paddingTop: "24px",
+            }}
           >
             <div
               style={{
@@ -96,7 +107,7 @@ export default function SciencePage() {
                 fontFamily: '"Playfair Display", Georgia, serif',
                 marginBottom: "12px",
                 lineHeight: 1.35,
-                color: "var(--text)",
+                color: "rgba(245, 233, 218, 0.92)",
               }}
             >
               {f.claim}
@@ -104,7 +115,7 @@ export default function SciencePage() {
 
             <p
               style={{
-                color: "var(--muted)",
+                color: "rgba(217, 203, 184, 0.75)",
                 fontSize: "15px",
                 lineHeight: 1.75,
                 margin: "0 0 14px",
@@ -119,8 +130,7 @@ export default function SciencePage() {
               rel="noopener noreferrer"
               style={{
                 fontSize: "13px",
-                color: "var(--accent)",
-                opacity: 0.7,
+                color: "rgba(255, 179, 71, 0.7)",
                 textDecoration: "none",
                 letterSpacing: "0.01em",
               }}
@@ -132,10 +142,15 @@ export default function SciencePage() {
       </div>
 
       {/* Closing reflection */}
-      <div className="glass-card" style={{ padding: "32px 28px" }}>
+      <div
+        style={{
+          borderTop: "1px solid rgba(255, 179, 71, 0.08)",
+          paddingTop: "32px",
+        }}
+      >
         <p
           style={{
-            color: "var(--muted)",
+            color: "rgba(217, 203, 184, 0.78)",
             fontSize: "16px",
             lineHeight: 1.8,
             margin: "0 0 20px",
@@ -148,7 +163,7 @@ export default function SciencePage() {
 
         <p
           style={{
-            color: "var(--muted)",
+            color: "rgba(217, 203, 184, 0.78)",
             fontSize: "16px",
             lineHeight: 1.8,
             margin: "0 0 20px",
@@ -161,7 +176,7 @@ export default function SciencePage() {
 
         <p
           style={{
-            color: "var(--muted)",
+            color: "rgba(217, 203, 184, 0.78)",
             fontSize: "16px",
             lineHeight: 1.8,
             margin: "0 0 20px",
@@ -174,7 +189,7 @@ export default function SciencePage() {
 
         <p
           style={{
-            color: "var(--muted)",
+            color: "rgba(217, 203, 184, 0.78)",
             fontSize: "16px",
             lineHeight: 1.8,
             margin: 0,
@@ -187,6 +202,5 @@ export default function SciencePage() {
         </p>
       </div>
     </div>
-    </MeditationBackground>
   );
 }

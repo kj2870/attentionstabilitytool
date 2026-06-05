@@ -1,5 +1,3 @@
-import MeditationBackground from "../components/MeditationBackground";
-
 /**
  * Minimal instructions page — five lines, no jargon.
  * The session itself live-guides every step; this is just a primer for
@@ -15,7 +13,6 @@ const STEPS = [
 
 export default function InstructionsPage() {
   return (
-    <MeditationBackground>
       <div
         className="page-shell"
         style={{
@@ -117,6 +114,5 @@ export default function InstructionsPage() {
           </p>
         </div>
       </div>
-    </MeditationBackground>
   );
 }

@@ -1,7 +1,6 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import Diya from "../components/Diya";
-import MeditationBackground from "../components/MeditationBackground";
 import { signInWithGoogle } from "../lib/auth";
 
 /**
@@ -27,7 +26,6 @@ export default function OnboardingPage() {
   };
 
   return (
-    <MeditationBackground>
       <div
         className="page-shell"
         style={{
@@ -40,7 +38,7 @@ export default function OnboardingPage() {
           padding: "32px 24px",
         }}
       >
-        <div style={{ marginBottom: "-4px", transform: "scale(1.1)" }}>
+        <div style={{ marginBottom: "-4px" }}>
           <Diya />
         </div>
 
@@ -133,6 +131,5 @@ export default function OnboardingPage() {
           </Link>
         </div>
       </div>
-    </MeditationBackground>
   );
 }

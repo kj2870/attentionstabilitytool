@@ -4,6 +4,7 @@ import { Link, useLocation, useNavigate } from "react-router-dom";
 import { RESEARCH_MODE } from "../lib/presentationMode";
 import { signOut } from "../lib/auth";
 import BottomTabBar from "./BottomTabBar";
+import MeditationBackground from "./MeditationBackground";
 
 type LayoutProps = {
   children: ReactNode;
@@ -41,10 +42,10 @@ export default function Layout({ children }: LayoutProps) {
   const isSessionRoute = location.pathname === "/session";
 
   return (
+    <MeditationBackground>
     <div
       style={{
         minHeight: "100dvh",
-        background: "#0E0E10",
         color: "#F5E9DA",
       }}
     >
@@ -75,9 +76,13 @@ export default function Layout({ children }: LayoutProps) {
                     key={item.to}
                     to={item.to}
                     style={{
-                      color: active ? "rgba(255,179,71,0.85)" : "rgba(245,233,218,0.5)",
+                      color: active ? "rgba(245,233,218,0.92)" : "rgba(245,233,218,0.5)",
                       textDecoration: "none",
-                      transition: "color 0.18s ease",
+                      borderBottom: active
+                        ? "1px solid rgba(255,179,71,0.55)"
+                        : "1px solid transparent",
+                      paddingBottom: "3px",
+                      transition: "color 0.18s ease, border-color 0.18s ease",
                     }}
                   >
                     {item.label}
@@ -95,9 +100,13 @@ export default function Layout({ children }: LayoutProps) {
                     key={item.to}
                     to={item.to}
                     style={{
-                      color: active ? "rgba(255,179,71,0.85)" : "rgba(245,233,218,0.5)",
+                      color: active ? "rgba(245,233,218,0.92)" : "rgba(245,233,218,0.5)",
                       textDecoration: "none",
-                      transition: "color 0.18s ease",
+                      borderBottom: active
+                        ? "1px solid rgba(255,179,71,0.55)"
+                        : "1px solid transparent",
+                      paddingBottom: "3px",
+                      transition: "color 0.18s ease, border-color 0.18s ease",
                     }}
                   >
                     {item.label}
@@ -139,10 +148,11 @@ export default function Layout({ children }: LayoutProps) {
         </header>
       )}
 
-      <main>{children}</main>
+      <main className="route-fade-in">{children}</main>
 
       {/* Mobile-only bottom tab navigation — hidden on desktop via CSS */}
       {!isSessionRoute && <BottomTabBar />}
     </div>
+    </MeditationBackground>
   );
 }

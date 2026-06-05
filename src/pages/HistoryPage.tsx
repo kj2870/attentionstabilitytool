@@ -1,6 +1,5 @@
 import { useMemo, useState } from "react";
 import { RESEARCH_MODE } from "../lib/presentationMode";
-import MeditationBackground from "../components/MeditationBackground";
 import { getMandalaDay, loadHistory, type SessionRecord } from "../lib/storage";
 
 // ---------------------------------------------------------------------------
@@ -564,7 +563,6 @@ export default function HistoryPage() {
   const selectedSession = selectedDay !== null ? daySessions[selectedDay] : null;
 
   return (
-    <MeditationBackground>
     <div
       style={{
         padding: "40px 24px 80px",
@@ -673,6 +671,5 @@ export default function HistoryPage() {
         </>
       )}
     </div>
-    </MeditationBackground>
   );
 }

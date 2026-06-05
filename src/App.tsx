@@ -15,6 +15,7 @@ import LoginPage from "./pages/LoginPage";
 import InstructionsPage from "./pages/InstructionsPage";
 import FoundationsPage from "./pages/FoundationsPage";
 import PublicPageNav from "./components/PublicPageNav";
+import MeditationBackground from "./components/MeditationBackground";
 import { supabase } from "./lib/supabase";
 import { syncLocalProfileFromUser } from "./lib/auth";
 import { getActiveProfile, hasCompletedOnboarding, hasReadFoundations } from "./lib/storage";
@@ -46,18 +47,20 @@ function UnauthRoutes() {
   );
 
   return (
-    <>
+    <MeditationBackground>
       {showBack && <PublicPageNav />}
-      <Routes>
-        <Route path="/onboarding" element={<OnboardingPage />} />
-        <Route path="/login" element={<LoginPage />} />
-        <Route path="/instructions" element={<InstructionsPage />} />
-        <Route path="/philosophy" element={<PhilosophyPage />} />
-        <Route path="/science" element={<SciencePage />} />
-        <Route path="/privacy" element={<PrivacyPage />} />
-        <Route path="*" element={<Navigate to="/onboarding" replace />} />
-      </Routes>
-    </>
+      <div className="route-fade-in">
+        <Routes>
+          <Route path="/onboarding" element={<OnboardingPage />} />
+          <Route path="/login" element={<LoginPage />} />
+          <Route path="/instructions" element={<InstructionsPage />} />
+          <Route path="/philosophy" element={<PhilosophyPage />} />
+          <Route path="/science" element={<SciencePage />} />
+          <Route path="/privacy" element={<PrivacyPage />} />
+          <Route path="*" element={<Navigate to="/onboarding" replace />} />
+        </Routes>
+      </div>
+    </MeditationBackground>
   );
 }
 
@@ -72,10 +75,14 @@ function FoundationsGate() {
     return <Navigate to="/foundations" replace />;
   }
   return (
-    <Routes>
-      <Route path="/foundations" element={<FoundationsPage />} />
-      <Route path="*" element={<Navigate to="/foundations" replace />} />
-    </Routes>
+    <MeditationBackground>
+      <div className="route-fade-in">
+        <Routes>
+          <Route path="/foundations" element={<FoundationsPage />} />
+          <Route path="*" element={<Navigate to="/foundations" replace />} />
+        </Routes>
+      </div>
+    </MeditationBackground>
   );
 }
 

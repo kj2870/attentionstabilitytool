@@ -1,5 +1,4 @@
 import { useNavigate } from "react-router-dom";
-import MeditationBackground from "../components/MeditationBackground";
 import { markFoundationsRead } from "../lib/storage";
 
 /**
@@ -19,7 +18,6 @@ export default function FoundationsPage() {
   };
 
   return (
-    <MeditationBackground>
       <div
         className="page-shell"
         style={{
@@ -110,6 +108,5 @@ export default function FoundationsPage() {
           </button>
         </div>
       </div>
-    </MeditationBackground>
   );
 }

@@ -1,7 +1,6 @@
 import { useEffect } from "react";
 import { Link } from "react-router-dom";
 import Diya from "../components/Diya";
-import MeditationBackground from "../components/MeditationBackground";
 import { RESEARCH_MODE } from "../lib/presentationMode";
 import { getWeeklyCompletion, loadHistory } from "../lib/storage";
 
@@ -14,7 +13,6 @@ export default function HomePage() {
 
   if (RESEARCH_MODE) {
     return (
-      <MeditationBackground >
         <div
           className="page-shell"
           style={{
@@ -42,7 +40,6 @@ export default function HomePage() {
             </Link>
           </div>
         </div>
-      </MeditationBackground>
     );
   }
 
@@ -54,7 +51,6 @@ export default function HomePage() {
   }, []);
 
   return (
-    <MeditationBackground >
       <div
         className="page-shell"
         style={{
@@ -188,6 +184,5 @@ export default function HomePage() {
           <button className="cta-pill">Begin</button>
         </Link>
       </div>
-    </MeditationBackground>
   );
 }
