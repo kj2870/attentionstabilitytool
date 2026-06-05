@@ -1,16 +1,14 @@
 import { supabase } from "./supabase";
 
-export type RoutineSelection = {
-  timeOfDay: "Morning" | "Midday" | "Night";
-};
-
 export type SessionFeeling = "Calm" | "Neutral" | "Restless" | "";
 
 export type SessionRecord = {
   id: string;
   date: string;
   durationMin: number;
-  timeOfDay: "Morning" | "Midday" | "Night";
+  // timeOfDay is legacy — kept optional so older saved records still load.
+  // Never set by new sessions; never shown in UI.
+  timeOfDay?: "Morning" | "Midday" | "Night";
   attentionScore: number;
   feeling: SessionFeeling;
   grade: "A" | "B" | "C";
@@ -39,8 +37,11 @@ export type LocalProfile = {
   pin: string;
   createdAt: string;
   onboardingComplete: boolean;
+  // First-time gate: false until the user has read the Foundations page.
+  // Optional so older profiles deserialize cleanly; a missing value is
+  // treated as `true` (grandfather) when the profile has history.
+  firstReadComplete?: boolean;
   history: SessionRecord[];
-  routineSelection: RoutineSelection;
 };
 
 const PROFILES_KEY = "drishti_profiles";
@@ -76,8 +77,8 @@ export function createProfile(params: {
     pin: params.pin,
     createdAt: new Date().toISOString(),
     onboardingComplete: true,
+    firstReadComplete: false,
     history: [],
-    routineSelection: { timeOfDay: "Night" },
   };
 
   profiles.push(profile);
@@ -145,15 +146,26 @@ export function clearHistory() {
   }));
 }
 
-export function saveRoutineSelection(selection: RoutineSelection) {
-  updateActiveProfile((profile) => ({
-    ...profile,
-    routineSelection: selection,
-  }));
+/**
+ * True when the active profile has read the Foundations gate, OR is a
+ * grandfathered user (no flag set but has session history). New profiles
+ * created after this feature default to `firstReadComplete: false` and
+ * must read Foundations once.
+ */
+export function hasReadFoundations(): boolean {
+  const profile = getActiveProfile();
+  if (!profile) return false;
+  if (profile.firstReadComplete === true) return true;
+  // Grandfather: any profile with existing sessions skips Foundations.
+  if (profile.firstReadComplete === undefined && profile.history.length > 0) return true;
+  return false;
 }
 
-export function loadRoutineSelection(): RoutineSelection {
-  return getActiveProfile()?.routineSelection ?? { timeOfDay: "Night" };
+export function markFoundationsRead() {
+  updateActiveProfile((profile) => ({
+    ...profile,
+    firstReadComplete: true,
+  }));
 }
 
 function toLocalDateKey(dateString: string) {
@@ -293,7 +305,8 @@ export async function saveSessionRemote(record: SessionRecord): Promise<void> {
     user_id: user.id,
     date: record.date,
     duration_min: record.durationMin,
-    time_of_day: record.timeOfDay,
+    // Legacy column — kept populated for backward DB compatibility. Not used in UI.
+    time_of_day: record.timeOfDay ?? "Night",
     attention_score: record.attentionScore,
     feeling: record.feeling || null,
     grade: record.grade,
@@ -334,7 +347,7 @@ export async function loadHistoryRemote(): Promise<SessionRecord[]> {
     id: row.id as string,
     date: row.date as string,
     durationMin: row.duration_min as number,
-    timeOfDay: row.time_of_day as "Morning" | "Midday" | "Night",
+    timeOfDay: (row.time_of_day ?? undefined) as "Morning" | "Midday" | "Night" | undefined,
     attentionScore: row.attention_score as number,
     feeling: (row.feeling ?? "") as SessionFeeling,
     grade: row.grade as "A" | "B" | "C",

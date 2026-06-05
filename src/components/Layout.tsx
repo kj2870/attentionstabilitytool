@@ -12,7 +12,12 @@ export default function Layout({ children }: LayoutProps) {
 
   const navLeft = RESEARCH_MODE
     ? [{ to: "/", label: "Home" }, { to: "/session", label: "Session" }]
-    : [{ to: "/", label: "Home" }, { to: "/philosophy", label: "Philosophy" }, { to: "/science", label: "Science" }];
+    : [
+        { to: "/", label: "Home" },
+        { to: "/instructions", label: "Instructions" },
+        { to: "/philosophy", label: "Philosophy" },
+        { to: "/science", label: "Science" },
+      ];
 
   const navRight = RESEARCH_MODE
     ? [{ to: "/privacy", label: "Privacy" }]
