@@ -1,5 +1,4 @@
 import { useNavigate } from "react-router-dom";
-import MeditationBackground from "../components/MeditationBackground";
 import { markFoundationsRead } from "../lib/storage";
 
 /**
@@ -19,7 +18,6 @@ export default function FoundationsPage() {
   };
 
   return (
-    <MeditationBackground>
       <div
         className="page-shell"
         style={{
@@ -61,7 +59,7 @@ export default function FoundationsPage() {
               color: "rgba(245, 233, 218, 0.92)",
               lineHeight: 1.25,
               marginBottom: "40px",
-              maxWidth: "22ch",
+              maxWidth: "28ch",
             }}
           >
             Attention is trained, not given.
@@ -110,6 +108,5 @@ export default function FoundationsPage() {
           </button>
         </div>
       </div>
-    </MeditationBackground>
   );
 }

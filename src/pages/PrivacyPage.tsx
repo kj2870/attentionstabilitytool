@@ -19,54 +19,98 @@ export default function PrivacyPage() {
   return (
     <div
       style={{
-        padding: "60px 24px 100px",
-        maxWidth: "600px",
+        padding: "64px 24px 100px",
+        maxWidth: "640px",
         margin: "0 auto",
       }}
     >
+      <div
+        style={{
+          fontSize: "11px",
+          letterSpacing: "0.28em",
+          textTransform: "uppercase",
+          color: "rgba(217, 203, 184, 0.45)",
+          marginBottom: "28px",
+        }}
+      >
+        your data
+      </div>
+
       <h1
         style={{
-          fontSize: "clamp(40px, 6vw, 56px)",
+          fontFamily: '"Playfair Display", Georgia, serif',
+          fontSize: "clamp(28px, 4vw, 38px)",
           fontWeight: 400,
-          marginBottom: "40px",
+          color: "rgba(245, 233, 218, 0.92)",
+          marginBottom: "36px",
+          lineHeight: 1.2,
         }}
       >
         Privacy
       </h1>
 
-      <div className="glass-card" style={{ padding: "28px 30px", marginBottom: "16px" }}>
-        <h2 style={{ fontWeight: 400, fontSize: "18px", marginTop: 0, marginBottom: "16px" }}>
-          Your data
-        </h2>
-        <div style={{ display: "flex", flexDirection: "column", gap: "12px", color: "var(--muted)", fontSize: "16px", lineHeight: 1.7 }}>
-          <p style={{ margin: 0 }}>Video is processed entirely on your device. Nothing is recorded or uploaded.</p>
-          <p style={{ margin: 0 }}>Session metrics — attention score, duration, and blink count — are saved to your account to track progress over time.</p>
-          <p style={{ margin: 0 }}>Your account is secured through Google. We do not store passwords or sell your data.</p>
-          <p style={{ margin: 0 }}>To delete your account and all associated data, contact us at privacy@drishti.app.</p>
-        </div>
+      <div
+        style={{
+          display: "flex",
+          flexDirection: "column",
+          gap: "22px",
+          fontSize: "16px",
+          lineHeight: 1.8,
+          color: "rgba(217, 203, 184, 0.82)",
+          marginBottom: "56px",
+        }}
+      >
+        <p style={{ margin: 0 }}>
+          Video from your camera is processed entirely on your device. Nothing
+          is recorded or uploaded.
+        </p>
+
+        <p style={{ margin: 0 }}>
+          Session metrics (longest gaze, blink rate, duration) are saved to
+          your account so you can see your trend over time. Only you can see
+          them.
+        </p>
+
+        <p style={{ margin: 0 }}>
+          Your password is handled by Google. We do not store it.
+        </p>
       </div>
 
-      <div className="glass-card" style={{ padding: "28px 30px" }}>
-        <h2 style={{ fontWeight: 400, fontSize: "18px", marginTop: 0, marginBottom: "12px" }}>
-          Account
-        </h2>
-        <p style={{ color: "var(--muted)", fontSize: "16px", lineHeight: 1.7, marginBottom: "20px", marginTop: 0 }}>
-          Signing out clears your local session. Your practice history remains saved and will sync when you sign back in.
+      <div
+        style={{
+          borderTop: "1px solid rgba(255, 179, 71, 0.08)",
+          paddingTop: "32px",
+        }}
+      >
+        <div
+          style={{
+            fontSize: "11px",
+            letterSpacing: "0.28em",
+            textTransform: "uppercase",
+            color: "rgba(217, 203, 184, 0.45)",
+            marginBottom: "16px",
+          }}
+        >
+          account
+        </div>
+
+        <p
+          style={{
+            color: "rgba(217, 203, 184, 0.75)",
+            fontSize: "15px",
+            lineHeight: 1.75,
+            marginTop: 0,
+            marginBottom: "24px",
+          }}
+        >
+          Signing out clears your local session. Your practice history stays
+          saved and will sync when you sign back in.
         </p>
+
         <button
           onClick={() => void handleSignOut()}
           disabled={isSigningOut}
-          style={{
-            padding: "12px 28px",
-            borderRadius: "14px",
-            border: "1px solid rgba(255,179,71,0.3)",
-            background: "transparent",
-            color: "#FFB347",
-            fontSize: "16px",
-            cursor: isSigningOut ? "not-allowed" : "pointer",
-            opacity: isSigningOut ? 0.6 : 1,
-            fontFamily: "inherit",
-          }}
+          className="cta-pill"
         >
           {isSigningOut ? "Signing out…" : "Sign out"}
         </button>

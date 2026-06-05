@@ -1,7 +1,6 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import Diya from "../components/Diya";
-import MeditationBackground from "../components/MeditationBackground";
 import { signInWithGoogle } from "../lib/auth";
 
 export default function LoginPage() {
@@ -20,7 +19,6 @@ export default function LoginPage() {
   };
 
   return (
-    <MeditationBackground>
       <div
         className="page-shell"
         style={{
@@ -33,7 +31,7 @@ export default function LoginPage() {
           padding: "32px 24px",
         }}
       >
-        <div style={{ marginBottom: "8px", transform: "scale(0.95)" }}>
+        <div style={{ marginBottom: "8px" }}>
           <Diya />
         </div>
 
@@ -61,19 +59,19 @@ export default function LoginPage() {
           Sign in to continue your practice.
         </p>
 
-        {error && (
-          <div
-            style={{
-              color: "#ff8080",
-              fontSize: "14px",
-              marginBottom: "16px",
-              maxWidth: "32ch",
-              lineHeight: 1.5,
-            }}
-          >
-            {error}
-          </div>
-        )}
+        <div
+          aria-live="polite"
+          style={{
+            minHeight: "20px",
+            marginBottom: "16px",
+            maxWidth: "32ch",
+            color: "#ff8080",
+            fontSize: "14px",
+            lineHeight: 1.5,
+          }}
+        >
+          {error}
+        </div>
 
         <button
           onClick={() => void handleGoogleSignIn()}
@@ -106,6 +104,5 @@ export default function LoginPage() {
           new here
         </Link>
       </div>
-    </MeditationBackground>
   );
 }

@@ -166,6 +166,9 @@ export function markFoundationsRead() {
     ...profile,
     firstReadComplete: true,
   }));
+  // Notify the app shell so it can re-evaluate the foundations gate without a
+  // page reload. App.tsx listens for this event.
+  window.dispatchEvent(new Event("drishti:profile-updated"));
 }
 
 function toLocalDateKey(dateString: string) {

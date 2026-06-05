@@ -1,7 +1,10 @@
 import type { ReactNode } from "react";
-import { Link, useLocation } from "react-router-dom";
+import { useState } from "react";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { RESEARCH_MODE } from "../lib/presentationMode";
+import { signOut } from "../lib/auth";
 import BottomTabBar from "./BottomTabBar";
+import MeditationBackground from "./MeditationBackground";
 
 type LayoutProps = {
   children: ReactNode;
@@ -9,6 +12,19 @@ type LayoutProps = {
 
 export default function Layout({ children }: LayoutProps) {
   const location = useLocation();
+  const navigate = useNavigate();
+  const [signingOut, setSigningOut] = useState(false);
+
+  const handleSignOut = async () => {
+    if (signingOut) return;
+    setSigningOut(true);
+    try {
+      await signOut();
+      navigate("/onboarding", { replace: true });
+    } catch {
+      setSigningOut(false);
+    }
+  };
 
   const navLeft = RESEARCH_MODE
     ? [{ to: "/", label: "Home" }, { to: "/session", label: "Session" }]
@@ -26,10 +42,10 @@ export default function Layout({ children }: LayoutProps) {
   const isSessionRoute = location.pathname === "/session";
 
   return (
+    <MeditationBackground>
     <div
       style={{
         minHeight: "100dvh",
-        background: "#0E0E10",
         color: "#F5E9DA",
       }}
     >
@@ -60,9 +76,13 @@ export default function Layout({ children }: LayoutProps) {
                     key={item.to}
                     to={item.to}
                     style={{
-                      color: active ? "rgba(255,179,71,0.85)" : "rgba(245,233,218,0.5)",
+                      color: active ? "rgba(245,233,218,0.92)" : "rgba(245,233,218,0.5)",
                       textDecoration: "none",
-                      transition: "color 0.18s ease",
+                      borderBottom: active
+                        ? "1px solid rgba(255,179,71,0.55)"
+                        : "1px solid transparent",
+                      paddingBottom: "3px",
+                      transition: "color 0.18s ease, border-color 0.18s ease",
                     }}
                   >
                     {item.label}
@@ -72,7 +92,7 @@ export default function Layout({ children }: LayoutProps) {
             </nav>
 
             {/* Right nav */}
-            <nav style={{ display: "flex", gap: "26px", fontSize: "14px", textTransform: "lowercase", letterSpacing: "0.08em" }}>
+            <nav style={{ display: "flex", gap: "26px", fontSize: "14px", textTransform: "lowercase", letterSpacing: "0.08em", alignItems: "center" }}>
               {navRight.map((item) => {
                 const active = location.pathname === item.to;
                 return (
@@ -80,24 +100,59 @@ export default function Layout({ children }: LayoutProps) {
                     key={item.to}
                     to={item.to}
                     style={{
-                      color: active ? "rgba(255,179,71,0.85)" : "rgba(245,233,218,0.5)",
+                      color: active ? "rgba(245,233,218,0.92)" : "rgba(245,233,218,0.5)",
                       textDecoration: "none",
-                      transition: "color 0.18s ease",
+                      borderBottom: active
+                        ? "1px solid rgba(255,179,71,0.55)"
+                        : "1px solid transparent",
+                      paddingBottom: "3px",
+                      transition: "color 0.18s ease, border-color 0.18s ease",
                     }}
                   >
                     {item.label}
                   </Link>
                 );
               })}
+              {!RESEARCH_MODE && (
+                <button
+                  onClick={() => void handleSignOut()}
+                  disabled={signingOut}
+                  style={{
+                    background: "transparent",
+                    border: "none",
+                    padding: 0,
+                    color: "rgba(245,233,218,0.35)",
+                    fontSize: "14px",
+                    letterSpacing: "0.08em",
+                    textTransform: "lowercase",
+                    fontFamily: "inherit",
+                    cursor: signingOut ? "not-allowed" : "pointer",
+                    transition: "color 0.18s ease",
+                  }}
+                  onMouseEnter={(e) => {
+                    if (!signingOut) {
+                      e.currentTarget.style.color = "rgba(245,233,218,0.65)";
+                      e.currentTarget.style.transform = "none";
+                    }
+                  }}
+                  onMouseLeave={(e) => {
+                    e.currentTarget.style.color = "rgba(245,233,218,0.35)";
+                  }}
+                  aria-label="Sign out"
+                >
+                  {signingOut ? "…" : "sign out"}
+                </button>
+              )}
             </nav>
           </div>
         </header>
       )}
 
-      <main>{children}</main>
+      <main className="route-fade-in">{children}</main>
 
       {/* Mobile-only bottom tab navigation — hidden on desktop via CSS */}
       {!isSessionRoute && <BottomTabBar />}
     </div>
+    </MeditationBackground>
   );
 }

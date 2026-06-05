@@ -15,6 +15,7 @@ import LoginPage from "./pages/LoginPage";
 import InstructionsPage from "./pages/InstructionsPage";
 import FoundationsPage from "./pages/FoundationsPage";
 import PublicPageNav from "./components/PublicPageNav";
+import MeditationBackground from "./components/MeditationBackground";
 import { supabase } from "./lib/supabase";
 import { syncLocalProfileFromUser } from "./lib/auth";
 import { getActiveProfile, hasCompletedOnboarding, hasReadFoundations } from "./lib/storage";
@@ -46,18 +47,20 @@ function UnauthRoutes() {
   );
 
   return (
-    <>
+    <MeditationBackground>
       {showBack && <PublicPageNav />}
-      <Routes>
-        <Route path="/onboarding" element={<OnboardingPage />} />
-        <Route path="/login" element={<LoginPage />} />
-        <Route path="/instructions" element={<InstructionsPage />} />
-        <Route path="/philosophy" element={<PhilosophyPage />} />
-        <Route path="/science" element={<SciencePage />} />
-        <Route path="/privacy" element={<PrivacyPage />} />
-        <Route path="*" element={<Navigate to="/onboarding" replace />} />
-      </Routes>
-    </>
+      <div className="route-fade-in">
+        <Routes>
+          <Route path="/onboarding" element={<OnboardingPage />} />
+          <Route path="/login" element={<LoginPage />} />
+          <Route path="/instructions" element={<InstructionsPage />} />
+          <Route path="/philosophy" element={<PhilosophyPage />} />
+          <Route path="/science" element={<SciencePage />} />
+          <Route path="/privacy" element={<PrivacyPage />} />
+          <Route path="*" element={<Navigate to="/onboarding" replace />} />
+        </Routes>
+      </div>
+    </MeditationBackground>
   );
 }
 
@@ -72,10 +75,14 @@ function FoundationsGate() {
     return <Navigate to="/foundations" replace />;
   }
   return (
-    <Routes>
-      <Route path="/foundations" element={<FoundationsPage />} />
-      <Route path="*" element={<Navigate to="/foundations" replace />} />
-    </Routes>
+    <MeditationBackground>
+      <div className="route-fade-in">
+        <Routes>
+          <Route path="/foundations" element={<FoundationsPage />} />
+          <Route path="*" element={<Navigate to="/foundations" replace />} />
+        </Routes>
+      </div>
+    </MeditationBackground>
   );
 }
 
@@ -109,6 +116,18 @@ function AuthedRoutes() {
 export default function App() {
   const [user, setUser] = useState<User | null>(null);
   const [authReady, setAuthReady] = useState(false);
+  // Bump-counter that forces App to re-derive needsFoundations from
+  // localStorage. markFoundationsRead() dispatches a custom event that
+  // increments this; otherwise React has no way to know the profile JSON
+  // in localStorage changed.
+  const [profileTick, setProfileTick] = useState(0);
+
+  useEffect(() => {
+    const onProfileUpdate = () => setProfileTick((n) => n + 1);
+    window.addEventListener("drishti:profile-updated", onProfileUpdate);
+    return () =>
+      window.removeEventListener("drishti:profile-updated", onProfileUpdate);
+  }, []);
 
   useEffect(() => {
     // Resolve the existing session on first load.
@@ -151,6 +170,9 @@ export default function App() {
     );
   }
 
+  // profileTick is read so React tracks it as a re-render trigger — the
+  // localStorage-backed helpers below don't otherwise create a dep.
+  void profileTick;
   const activeProfile = getActiveProfile();
   const onboardingComplete = hasCompletedOnboarding();
   const isAuthenticated = !!user && !!activeProfile && onboardingComplete;

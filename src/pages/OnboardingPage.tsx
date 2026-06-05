@@ -1,7 +1,6 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import Diya from "../components/Diya";
-import MeditationBackground from "../components/MeditationBackground";
 import { signInWithGoogle } from "../lib/auth";
 
 /**
@@ -27,7 +26,6 @@ export default function OnboardingPage() {
   };
 
   return (
-    <MeditationBackground>
       <div
         className="page-shell"
         style={{
@@ -40,7 +38,7 @@ export default function OnboardingPage() {
           padding: "32px 24px",
         }}
       >
-        <div style={{ marginBottom: "-4px", transform: "scale(1.1)" }}>
+        <div style={{ marginBottom: "-4px" }}>
           <Diya />
         </div>
 
@@ -68,19 +66,20 @@ export default function OnboardingPage() {
           A daily ritual to train attention and calm the mind.
         </p>
 
-        {authError && (
-          <div
-            style={{
-              color: "#ff8080",
-              fontSize: "14px",
-              marginBottom: "16px",
-              maxWidth: "32ch",
-              lineHeight: 1.5,
-            }}
-          >
-            {authError}
-          </div>
-        )}
+        {/* Fixed slot for auth errors so showing one doesn't shove the CTA down. */}
+        <div
+          aria-live="polite"
+          style={{
+            minHeight: "20px",
+            marginBottom: "16px",
+            maxWidth: "32ch",
+            color: "#ff8080",
+            fontSize: "14px",
+            lineHeight: 1.5,
+          }}
+        >
+          {authError}
+        </div>
 
         <button
           onClick={() => void handleGoogleSignIn()}
@@ -132,6 +131,5 @@ export default function OnboardingPage() {
           </Link>
         </div>
       </div>
-    </MeditationBackground>
   );
 }
