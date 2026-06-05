@@ -1788,7 +1788,6 @@ export default function SessionPage() {
                         letterSpacing: "0.04em",
                         fontFamily: '"Playfair Display", Georgia, serif',
                         fontWeight: 400,
-                        fontStyle: "italic",
                         color: "rgba(203, 183, 158, 0.65)",
                         lineHeight: 1.2,
                         opacity: bodyRegionLabelOpacity,

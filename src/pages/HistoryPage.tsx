@@ -357,7 +357,6 @@ function SessionDetail({ session, dayNumber }: { session: SessionRecord; dayNumb
             fontSize: "13px",
             lineHeight: 1.6,
             color: "rgba(245, 233, 218, 0.55)",
-            fontStyle: "italic",
             padding: "0 16px",
           }}
         >
@@ -583,8 +582,7 @@ export default function HistoryPage() {
           <div
             style={{
               fontSize: "15px",
-              fontStyle: "italic",
-              color: "rgba(245, 233, 218, 0.65)",
+              color: "rgba(245, 233, 218, 0.7)",
               lineHeight: 1.6,
               textAlign: "center",
               maxWidth: "44ch",

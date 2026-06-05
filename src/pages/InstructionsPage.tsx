@@ -107,8 +107,7 @@ export default function InstructionsPage() {
             style={{
               marginTop: "44px",
               fontSize: "13px",
-              fontStyle: "italic",
-              color: "rgba(217, 203, 184, 0.5)",
+              color: "rgba(217, 203, 184, 0.55)",
               textAlign: "center",
               maxWidth: "44ch",
               lineHeight: 1.6,

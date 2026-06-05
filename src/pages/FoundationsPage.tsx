@@ -58,46 +58,46 @@ export default function FoundationsPage() {
               fontFamily: '"Playfair Display", Georgia, serif',
               fontSize: "clamp(28px, 4vw, 38px)",
               fontWeight: 400,
-              fontStyle: "italic",
-              color: "rgba(245, 233, 218, 0.9)",
+              color: "rgba(245, 233, 218, 0.92)",
               lineHeight: 1.25,
-              marginBottom: "36px",
-              maxWidth: "26ch",
+              marginBottom: "40px",
+              maxWidth: "22ch",
             }}
           >
-            Attention is the foundation of a clear mind.
+            Attention is trained, not given.
           </h1>
 
           <div
             style={{
               fontSize: "16px",
-              lineHeight: 1.75,
-              color: "rgba(217, 203, 184, 0.78)",
+              lineHeight: 1.8,
+              color: "rgba(217, 203, 184, 0.82)",
               maxWidth: "52ch",
               textAlign: "left",
               display: "flex",
               flexDirection: "column",
-              gap: "20px",
+              gap: "22px",
             }}
           >
             <p style={{ margin: 0 }}>
-              For thousands of years, contemplative traditions have used
-              steady-gaze practices — <em>trataka</em> — to train the mind.
-              Sustained attention on a single point teaches the nervous system
-              to settle, to recover from distraction, and to rest in stillness.
+              Trataka is the practice of resting attention on a single point of
+              light. The flame holds your gaze. When the mind moves, you
+              return. That returning, repeated, is the whole training.
             </p>
 
             <p style={{ margin: 0 }}>
-              Modern research treats attention as a skill, not a trait. Short,
-              consistent training measurably improves focus, emotional
-              regulation, and the ability to return to the present moment after
-              the mind wanders.
+              Attention is a skill, not a fixed trait. Each time you bring
+              focus back, you strengthen the circuits between the prefrontal
+              cortex and the networks that produce mind-wandering. Over weeks,
+              the wandering quiets. Focus steadies. The space between stimulus
+              and reaction widens.
             </p>
 
             <p style={{ margin: 0 }}>
-              Drishti is ten minutes. A body release, slow breath, four rounds
-              of gazing, and a quiet integration. Done daily, the effect
-              compounds. There is no goal beyond the practice itself.
+              Drishti is ten minutes. You will settle the body, slow the
+              breath, gaze at a flame in four rounds, and close in silence.
+              There is nothing to achieve in any one session. The practice
+              changes you only when it is repeated.
             </p>
           </div>
 
