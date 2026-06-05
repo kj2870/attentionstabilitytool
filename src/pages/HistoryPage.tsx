@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from "react";
+import { useMemo, useState } from "react";
 import { RESEARCH_MODE } from "../lib/presentationMode";
 import { getMandalaDay, loadHistory, type SessionRecord } from "../lib/storage";
 
