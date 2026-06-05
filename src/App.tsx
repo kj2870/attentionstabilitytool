@@ -116,6 +116,18 @@ function AuthedRoutes() {
 export default function App() {
   const [user, setUser] = useState<User | null>(null);
   const [authReady, setAuthReady] = useState(false);
+  // Bump-counter that forces App to re-derive needsFoundations from
+  // localStorage. markFoundationsRead() dispatches a custom event that
+  // increments this; otherwise React has no way to know the profile JSON
+  // in localStorage changed.
+  const [profileTick, setProfileTick] = useState(0);
+
+  useEffect(() => {
+    const onProfileUpdate = () => setProfileTick((n) => n + 1);
+    window.addEventListener("drishti:profile-updated", onProfileUpdate);
+    return () =>
+      window.removeEventListener("drishti:profile-updated", onProfileUpdate);
+  }, []);
 
   useEffect(() => {
     // Resolve the existing session on first load.
@@ -158,6 +170,9 @@ export default function App() {
     );
   }
 
+  // profileTick is read so React tracks it as a re-render trigger — the
+  // localStorage-backed helpers below don't otherwise create a dep.
+  void profileTick;
   const activeProfile = getActiveProfile();
   const onboardingComplete = hasCompletedOnboarding();
   const isAuthenticated = !!user && !!activeProfile && onboardingComplete;
