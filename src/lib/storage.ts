@@ -22,6 +22,11 @@ export type SessionRecord = {
   longestGazeSec?: number;
   // Sum of all held-gaze seconds across all gaze segments this session.
   totalStillnessSec?: number;
+  // Blinks per minute averaged over the gaze phases only.
+  blinkRateDuringGaze?: number;
+  // Per-second 0/1 stability samples across all gaze rounds in order. Used to
+  // draw the within-session steadiness arc. ~180 entries (4 rounds × 45s).
+  gazeStabilitySamples?: number[];
   // Optional free-form note from the user, treated as developer feedback.
   note?: string;
   // IDs of milestones that became newly satisfied in this session.

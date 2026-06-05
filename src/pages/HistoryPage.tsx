@@ -39,7 +39,7 @@ function SmallFlame({ size = 16, opacity = 1 }: { size?: number; opacity?: numbe
 }
 
 // ---------------------------------------------------------------------------
-// Mandala Ring — 48-segment clockwise progress circle (clickable segments)
+// Mandala Ring (kept from previous design — gentle 48-day arc)
 // ---------------------------------------------------------------------------
 const N = 48;
 const R_OUT = 230;
@@ -69,10 +69,6 @@ function segmentPath(i: number): string {
   ].join(" ");
 }
 
-// ---------------------------------------------------------------------------
-// Build per-day session map: for each unique date, the "best" session of the day.
-// Returns sessions sorted oldest-first, so segment[i] ↔ daySession[i].
-// ---------------------------------------------------------------------------
 function buildDaySessions(history: SessionRecord[]): SessionRecord[] {
   const byDay = new Map<string, SessionRecord>();
   for (const record of history) {
@@ -89,9 +85,6 @@ function buildDaySessions(history: SessionRecord[]): SessionRecord[] {
     .map(([, record]) => record);
 }
 
-// ---------------------------------------------------------------------------
-// Format helpers for the detail panel
-// ---------------------------------------------------------------------------
 function formatDate(iso: string): string {
   return new Date(iso).toLocaleDateString(undefined, {
     weekday: "short",
@@ -107,26 +100,231 @@ function formatTime(iso: string): string {
   });
 }
 
-function formatStillness(seconds: number): string {
-  const m = Math.floor(seconds / 60);
-  const s = seconds % 60;
-  if (m === 0) return `${s}s`;
-  return `${m}m ${String(s).padStart(2, "0")}s`;
+// ---------------------------------------------------------------------------
+// Within-session gaze steadiness arc
+// Smooths the binary 0/1 stability samples with a small rolling average so the
+// line reads as continuous texture rather than a noisy bit pattern.
+// ---------------------------------------------------------------------------
+function GazeSteadinessArc({ samples }: { samples: number[] }) {
+  const width = 600;
+  const height = 80;
+  const padX = 8;
+  const padY = 6;
+
+  // Rolling 5-second mean — soft enough to feel meditative, fine enough that a
+  // recovery from a drift is still visible.
+  const smoothed = useMemo(() => {
+    if (samples.length === 0) return [] as number[];
+    const window = 5;
+    const out: number[] = [];
+    for (let i = 0; i < samples.length; i += 1) {
+      let sum = 0;
+      let count = 0;
+      for (let j = Math.max(0, i - window + 1); j <= i; j += 1) {
+        sum += samples[j];
+        count += 1;
+      }
+      out.push(sum / count);
+    }
+    return out;
+  }, [samples]);
+
+  if (smoothed.length === 0) {
+    return (
+      <div
+        style={{
+          fontSize: "12px",
+          letterSpacing: "0.04em",
+          color: "rgba(245, 233, 218, 0.35)",
+          textAlign: "center",
+          padding: "20px 0",
+        }}
+      >
+        steadiness will appear here after your next session
+      </div>
+    );
+  }
+
+  const stepX = (width - padX * 2) / Math.max(1, smoothed.length - 1);
+  const yFor = (v: number) => padY + (1 - v) * (height - padY * 2);
+  const points = smoothed.map((v, i) => `${padX + i * stepX},${yFor(v)}`).join(" ");
+
+  return (
+    <svg
+      viewBox={`0 0 ${width} ${height}`}
+      preserveAspectRatio="none"
+      style={{ width: "100%", height: "80px", display: "block" }}
+    >
+      <defs>
+        <linearGradient id="arc-fill" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stopColor="rgba(255,179,71,0.35)" />
+          <stop offset="100%" stopColor="rgba(255,179,71,0)" />
+        </linearGradient>
+      </defs>
+      {/* Soft area under the line */}
+      <polyline
+        points={`${padX},${height - padY} ${points} ${padX + (smoothed.length - 1) * stepX},${
+          height - padY
+        }`}
+        fill="url(#arc-fill)"
+        stroke="none"
+      />
+      <polyline
+        points={points}
+        fill="none"
+        stroke="rgba(255, 200, 130, 0.85)"
+        strokeWidth={1.5}
+        strokeLinejoin="round"
+        strokeLinecap="round"
+      />
+    </svg>
+  );
 }
 
 // ---------------------------------------------------------------------------
-// Detail panel — appears inline when a mandala segment is clicked
+// Trend sparkline — single warm line, no axes, no zones.
+// ---------------------------------------------------------------------------
+function TrendLine({
+  values,
+  unitLabel,
+}: {
+  values: number[];
+  unitLabel: string;
+}) {
+  const width = 600;
+  const height = 70;
+  const padX = 8;
+  const padY = 10;
+
+  if (values.length === 0) {
+    return (
+      <div
+        style={{
+          fontSize: "12px",
+          color: "rgba(245, 233, 218, 0.35)",
+          textAlign: "center",
+          padding: "20px 0",
+        }}
+      >
+        no sessions yet
+      </div>
+    );
+  }
+
+  const min = Math.min(...values);
+  const max = Math.max(...values);
+  const range = max - min || 1;
+  const stepX = (width - padX * 2) / Math.max(1, values.length - 1);
+  const yFor = (v: number) => padY + (1 - (v - min) / range) * (height - padY * 2);
+
+  const points = values.map((v, i) => `${padX + i * stepX},${yFor(v)}`).join(" ");
+  const lastX = padX + (values.length - 1) * stepX;
+  const lastY = yFor(values[values.length - 1]);
+
+  return (
+    <div>
+      <svg
+        viewBox={`0 0 ${width} ${height}`}
+        preserveAspectRatio="none"
+        style={{ width: "100%", height: "70px", display: "block" }}
+      >
+        <polyline
+          points={points}
+          fill="none"
+          stroke="rgba(255, 200, 130, 0.85)"
+          strokeWidth={1.5}
+          strokeLinejoin="round"
+          strokeLinecap="round"
+        />
+        <circle cx={lastX} cy={lastY} r={3} fill="rgba(255, 220, 160, 1)" />
+      </svg>
+      <div
+        style={{
+          display: "flex",
+          justifyContent: "space-between",
+          fontSize: "11px",
+          color: "rgba(245, 233, 218, 0.4)",
+          marginTop: "4px",
+        }}
+      >
+        <span>
+          {min.toFixed(min < 10 ? 1 : 0)} {unitLabel}
+        </span>
+        <span>
+          {max.toFixed(max < 10 ? 1 : 0)} {unitLabel}
+        </span>
+      </div>
+    </div>
+  );
+}
+
+// ---------------------------------------------------------------------------
+// Build a plain-language observation from the history. Factual, no verdict.
+// ---------------------------------------------------------------------------
+function buildObservation(history: SessionRecord[]): string {
+  if (history.length === 0) return "your first session will start the arc";
+  if (history.length < 3) return "a few sessions in — patterns usually emerge by session 6 or 7";
+
+  // Oldest-first
+  const ordered = [...history].sort(
+    (a, b) => new Date(a.date).getTime() - new Date(b.date).getTime()
+  );
+  const baselineCount = Math.min(3, ordered.length);
+  const baseline =
+    ordered.slice(0, baselineCount).reduce((s, r) => s + (r.longestGazeSec ?? 0), 0) /
+    baselineCount;
+  const recentCount = Math.min(7, ordered.length);
+  const recent =
+    ordered.slice(-recentCount).reduce((s, r) => s + (r.longestGazeSec ?? 0), 0) /
+    recentCount;
+
+  if (baseline === 0 && recent === 0)
+    return "we'll have more to say once your sessions include held-gaze segments";
+
+  const delta = baseline === 0 ? 1 : (recent - baseline) / baseline;
+  const fmt = (v: number) => `${v.toFixed(0)}s`;
+
+  if (delta >= 0.15) {
+    return `your longest gaze recently averaged ${fmt(recent)}, up from ${fmt(baseline)} when you started`;
+  }
+  if (delta <= -0.15) {
+    return `your longest gaze has been hovering around ${fmt(recent)} recently`;
+  }
+  return `your longest gaze has been steady around ${fmt(recent)}`;
+}
+
+// ---------------------------------------------------------------------------
+// Section heading — quiet, tracked, lowercase.
+// ---------------------------------------------------------------------------
+function SectionHeading({ label }: { label: string }) {
+  return (
+    <div
+      style={{
+        fontSize: "11px",
+        letterSpacing: "0.22em",
+        textTransform: "uppercase",
+        color: "rgba(245, 233, 218, 0.4)",
+        marginBottom: "10px",
+      }}
+    >
+      {label}
+    </div>
+  );
+}
+
+// ---------------------------------------------------------------------------
+// Detail panel — appears when a mandala segment is clicked
 // ---------------------------------------------------------------------------
 function SessionDetail({ session, dayNumber }: { session: SessionRecord; dayNumber: number }) {
   return (
     <div
       style={{
-        marginTop: "24px",
+        marginTop: "16px",
         textAlign: "center",
         display: "flex",
         flexDirection: "column",
         alignItems: "center",
-        gap: "10px",
+        gap: "8px",
         animation: "fadeIn 0.35s ease",
       }}
     >
@@ -141,18 +339,12 @@ function SessionDetail({ session, dayNumber }: { session: SessionRecord; dayNumb
         Day {dayNumber}  ·  {formatDate(session.date)}  ·  {formatTime(session.date)}
       </div>
 
-      <div
-        style={{
-          fontSize: "14px",
-          color: "rgba(245, 233, 218, 0.78)",
-          lineHeight: 1.7,
-        }}
-      >
-        Longest gaze: {session.longestGazeSec ?? 0} sec
-        {session.totalStillnessSec !== undefined && (
+      <div style={{ fontSize: "13px", color: "rgba(245, 233, 218, 0.75)", lineHeight: 1.7 }}>
+        Longest gaze: {session.longestGazeSec ?? 0}s
+        {session.blinkRateDuringGaze !== undefined && (
           <>
             <span style={{ color: "rgba(245, 233, 218, 0.25)", margin: "0 10px" }}>·</span>
-            Stillness: {formatStillness(session.totalStillnessSec)}
+            Blink rate during gaze: {session.blinkRateDuringGaze.toFixed(1)}/min
           </>
         )}
       </div>
@@ -160,7 +352,7 @@ function SessionDetail({ session, dayNumber }: { session: SessionRecord; dayNumb
       {session.note && (
         <div
           style={{
-            marginTop: "4px",
+            marginTop: "2px",
             maxWidth: "440px",
             fontSize: "13px",
             lineHeight: 1.6,
@@ -196,7 +388,7 @@ function MandalaRing({
       style={{
         position: "relative",
         width: "100%",
-        maxWidth: "min(320px, 55vh)",
+        maxWidth: "min(280px, 60vw)",
         margin: "0 auto",
         aspectRatio: "1 / 1",
       }}
@@ -240,7 +432,6 @@ function MandalaRing({
           );
         })}
 
-        {/* Top tick mark */}
         <line
           x1="0"
           y1={-(R_OUT + 8)}
@@ -251,7 +442,6 @@ function MandalaRing({
           strokeLinecap="round"
         />
 
-        {/* Day counter at center */}
         <text
           x="0"
           y="-10"
@@ -274,7 +464,6 @@ function MandalaRing({
           / 48
         </text>
 
-        {/* Celebration: outer pulse ring at day 48 */}
         {complete && (
           <circle
             cx="0"
@@ -306,13 +495,44 @@ export default function HistoryPage() {
   const daySessions = useMemo(() => buildDaySessions(history), [history]);
   const [selectedDay, setSelectedDay] = useState<number | null>(null);
 
-  // Lock body scroll so the whole page stays within a single viewport.
-  useEffect(() => {
-    document.body.style.overflow = "hidden";
-    return () => {
-      document.body.style.overflow = "";
-    };
-  }, []);
+  // Oldest-first ordered history, used for trend lines.
+  const ordered = useMemo(
+    () =>
+      [...history].sort(
+        (a, b) => new Date(a.date).getTime() - new Date(b.date).getTime()
+      ),
+    [history]
+  );
+
+  // Last session with stability samples (may not be the most recent if older
+  // sessions are pre-schema).
+  const lastWithArc = useMemo(
+    () =>
+      [...ordered]
+        .reverse()
+        .find((r) => r.gazeStabilitySamples && r.gazeStabilitySamples.length > 0) ?? null,
+    [ordered]
+  );
+
+  const longestGazeTrend = useMemo(
+    () =>
+      ordered
+        .map((r) => r.longestGazeSec ?? 0)
+        .filter((v) => v >= 0)
+        .slice(-30),
+    [ordered]
+  );
+
+  const blinkRateTrend = useMemo(
+    () =>
+      ordered
+        .map((r) => r.blinkRateDuringGaze)
+        .filter((v): v is number => typeof v === "number")
+        .slice(-30),
+    [ordered]
+  );
+
+  const observation = useMemo(() => buildObservation(history), [history]);
 
   if (RESEARCH_MODE) {
     return (
@@ -328,15 +548,10 @@ export default function HistoryPage() {
   return (
     <div
       style={{
-        padding: "32px 24px",
+        padding: "40px 24px 80px",
         maxWidth: "640px",
         margin: "0 auto",
         fontFamily: '"DM Sans", system-ui, sans-serif',
-        height: "calc(100vh - 70px)",
-        display: "flex",
-        flexDirection: "column",
-        justifyContent: "center",
-        overflow: "hidden",
       }}
     >
       <style>{`
@@ -364,28 +579,79 @@ export default function HistoryPage() {
         </div>
       ) : (
         <>
-          <MandalaRing
-            history={history}
-            selectedDay={selectedDay}
-            onSelect={(i) => setSelectedDay((prev) => (prev === i ? null : i))}
-          />
+          {/* Observation line — quiet, factual, no verdict. */}
+          <div
+            style={{
+              fontSize: "15px",
+              fontStyle: "italic",
+              color: "rgba(245, 233, 218, 0.65)",
+              lineHeight: 1.6,
+              textAlign: "center",
+              maxWidth: "44ch",
+              margin: "0 auto 44px",
+              fontFamily: '"Playfair Display", Georgia, serif',
+            }}
+          >
+            {observation}
+          </div>
 
-          {selectedSession ? (
-            <SessionDetail session={selectedSession} dayNumber={selectedDay! + 1} />
-          ) : (
-            <div
-              style={{
-                marginTop: "32px",
-                textAlign: "center",
-                fontSize: "12px",
-                letterSpacing: "0.16em",
-                textTransform: "uppercase",
-                color: "rgba(245, 233, 218, 0.3)",
-              }}
-            >
-              Tap a lit segment to view that day
-            </div>
-          )}
+          {/* Within-session gaze steadiness arc. */}
+          <section style={{ marginBottom: "36px" }}>
+            <SectionHeading label="gaze steadiness — last session" />
+            {lastWithArc ? (
+              <GazeSteadinessArc samples={lastWithArc.gazeStabilitySamples ?? []} />
+            ) : (
+              <div
+                style={{
+                  fontSize: "12px",
+                  color: "rgba(245, 233, 218, 0.35)",
+                  textAlign: "center",
+                  padding: "20px 0",
+                }}
+              >
+                steadiness will appear here after your next session
+              </div>
+            )}
+          </section>
+
+          {/* Longest gaze trend. */}
+          <section style={{ marginBottom: "36px" }}>
+            <SectionHeading label="longest gaze — across sessions" />
+            <TrendLine values={longestGazeTrend} unitLabel="s" />
+          </section>
+
+          {/* Blink rate during gaze trend. */}
+          <section style={{ marginBottom: "48px" }}>
+            <SectionHeading label="blink rate during gaze — across sessions" />
+            <TrendLine values={blinkRateTrend} unitLabel="/min" />
+          </section>
+
+          {/* Mandala below — the long arc. */}
+          <section style={{ marginTop: "24px" }}>
+            <SectionHeading label="the 48-day arc" />
+            <MandalaRing
+              history={history}
+              selectedDay={selectedDay}
+              onSelect={(i) => setSelectedDay((prev) => (prev === i ? null : i))}
+            />
+
+            {selectedSession ? (
+              <SessionDetail session={selectedSession} dayNumber={selectedDay! + 1} />
+            ) : (
+              <div
+                style={{
+                  marginTop: "20px",
+                  textAlign: "center",
+                  fontSize: "11px",
+                  letterSpacing: "0.16em",
+                  textTransform: "uppercase",
+                  color: "rgba(245, 233, 218, 0.3)",
+                }}
+              >
+                Tap a lit segment for that day
+              </div>
+            )}
+          </section>
         </>
       )}
     </div>

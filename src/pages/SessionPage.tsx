@@ -436,6 +436,13 @@ export default function SessionPage() {
   const longestGazeRef = useRef(0);
   // Total stillness seconds across the session.
   const totalStillnessRef = useRef(0);
+  // Per-second 0/1 stability samples captured during gaze phases only.
+  // Used to draw the within-session steadiness arc in History.
+  const gazeSamplesRef = useRef<number[]>([]);
+  // Count of seconds in gaze phases that contained a blink.
+  const blinksDuringGazeRef = useRef(0);
+  // Count of total seconds spent in gaze phases.
+  const gazeSecondsRef = useRef(0);
   // For UI: expose current values to debug panel without forcing re-renders elsewhere.
   const [debugGazeStreak, setDebugGazeStreak] = useState(0);
   const [debugLongestGaze, setDebugLongestGaze] = useState(0);
@@ -871,6 +878,13 @@ export default function SessionPage() {
       const heldGaze =
         facePresent && eyesOpen && noBlinkThisSecond && qualityOk && irisOk && headOk;
 
+      // Capture per-second stability sample for the within-session arc.
+      gazeSamplesRef.current.push(heldGaze ? 1 : 0);
+      gazeSecondsRef.current += 1;
+      if (blinkInCurrentSecondRef.current) {
+        blinksDuringGazeRef.current += 1;
+      }
+
       if (heldGaze) {
         currentGazeStreakRef.current += 1;
         totalStillnessRef.current += 1;
@@ -1268,6 +1282,9 @@ export default function SessionPage() {
     currentGazeStreakRef.current = 0;
     longestGazeRef.current = 0;
     totalStillnessRef.current = 0;
+    gazeSamplesRef.current = [];
+    blinksDuringGazeRef.current = 0;
+    gazeSecondsRef.current = 0;
     setDebugGazeStreak(0);
     setDebugLongestGaze(0);
     setDebugTotalStillness(0);
@@ -1307,6 +1324,12 @@ export default function SessionPage() {
       avgRecovery,
       longestGazeSec: longestGazeRef.current,
       totalStillnessSec: totalStillnessRef.current,
+      blinkRateDuringGaze:
+        gazeSecondsRef.current > 0
+          ? Number(((blinksDuringGazeRef.current / gazeSecondsRef.current) * 60).toFixed(1))
+          : undefined,
+      gazeStabilitySamples:
+        gazeSamplesRef.current.length > 0 ? [...gazeSamplesRef.current] : undefined,
       note: trimmedNote.length > 0 ? trimmedNote : undefined,
       newMilestones: pendingMilestones.length > 0 ? pendingMilestones : undefined,
     };
