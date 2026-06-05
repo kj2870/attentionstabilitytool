@@ -85,36 +85,7 @@ export default function OnboardingPage() {
         <button
           onClick={() => void handleGoogleSignIn()}
           disabled={isLoading}
-          style={{
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
-            gap: "12px",
-            padding: "14px 28px",
-            borderRadius: "999px",
-            border: "1px solid rgba(255,179,71,0.45)",
-            background: "rgba(255,179,71,0.18)",
-            color: "#ffd9a3",
-            fontSize: "16px",
-            fontWeight: 500,
-            letterSpacing: "0.06em",
-            cursor: isLoading ? "not-allowed" : "pointer",
-            opacity: isLoading ? 0.6 : 1,
-            backdropFilter: "blur(6px)",
-            transition: "background 0.3s ease, box-shadow 0.5s ease, color 0.3s ease",
-          }}
-          onMouseEnter={(e) => {
-            if (!isLoading) {
-              e.currentTarget.style.background = "rgba(255,179,71,0.28)";
-              e.currentTarget.style.boxShadow = "0 0 28px rgba(255,179,71,0.35)";
-              e.currentTarget.style.color = "#ffe6c2";
-            }
-          }}
-          onMouseLeave={(e) => {
-            e.currentTarget.style.background = "rgba(255,179,71,0.18)";
-            e.currentTarget.style.boxShadow = "none";
-            e.currentTarget.style.color = "#ffd9a3";
-          }}
+          className="cta-pill"
         >
           {!isLoading && (
             <svg width="18" height="18" viewBox="0 0 48 48" fill="none">

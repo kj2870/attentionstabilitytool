@@ -185,7 +185,7 @@ export default function HomePage() {
 
         {/* CTA */}
         <Link to="/session" style={{ textDecoration: "none", position: "relative", zIndex: 1 }}>
-          <button className="home-begin-button">Begin</button>
+          <button className="cta-pill">Begin</button>
         </Link>
       </div>
     </MeditationBackground>
