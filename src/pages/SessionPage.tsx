@@ -477,7 +477,9 @@ export default function SessionPage() {
   // 'idle' = waiting for camera, 'calibrating' = collecting samples, 'ready' = baseline locked.
   const [baselineStatus, setBaselineStatus] = useState<"idle" | "calibrating" | "ready">("idle");
   // How many usable frames we've collected. Used for the progress display.
-  const [baselineProgress, setBaselineProgress] = useState(0);
+  // Setter is still used by the calibration loop; we no longer surface the
+  // raw percentage in the UI (replaced by a quiet two-state status line).
+  const [, setBaselineProgress] = useState(0);
   // Threshold for "good enough" baseline — about 3 seconds at 30fps.
   const BASELINE_REQUIRED_FRAMES = 90;
   // Mirrors signalQuality state in a ref so the held-gaze tick can read it
@@ -485,6 +487,7 @@ export default function SessionPage() {
   const signalQualityRef = useRef<SignalQuality>("poor");
 
   const [isRunning, setIsRunning] = useState(false);
+  const [isPaused, setIsPaused] = useState(false);
   const [phaseIndex, setPhaseIndex] = useState(0);
   const [phaseSecondsLeft, setPhaseSecondsLeft] = useState(
     script[0]?.durationSec ?? 0
@@ -712,12 +715,14 @@ export default function SessionPage() {
     audioRef.current.syncPhase({
       phase: currentPhase,
       previousPhaseId: previousPhaseIdRef.current,
-      isRunning,
+      // Treat paused as not-running for the audio controller — fire sound
+      // stops, no transition tones replay on resume.
+      isRunning: isRunning && !isPaused,
       settings,
     });
 
     previousPhaseIdRef.current = currentPhase?.id;
-  }, [currentPhase, isRunning, settings]);
+  }, [currentPhase, isRunning, isPaused, settings]);
 
   // Plays closing cue and returns viewport to top when session ends.
   useEffect(() => {
@@ -751,8 +756,9 @@ export default function SessionPage() {
 
 
   // Core phase timer: advances script phases at 1-second cadence.
+  // Halts when isPaused — the user can resume without losing position.
   useEffect(() => {
-    if (!isRunning || !currentPhase) return;
+    if (!isRunning || isPaused || !currentPhase) return;
 
     const interval = window.setInterval(() => {
       setPhaseSecondsLeft((prev) => {
@@ -772,7 +778,7 @@ export default function SessionPage() {
     }, 1000);
 
     return () => window.clearInterval(interval);
-  }, [isRunning, phaseIndex, currentPhase, script]);
+  }, [isRunning, isPaused, phaseIndex, currentPhase, script]);
 
   // ---------------------------------------------------------------------------
   // Held-gaze tick — runs every 1s, only during gaze phases.
@@ -781,11 +787,11 @@ export default function SessionPage() {
   // only in debug panels and the final session record.
   // ---------------------------------------------------------------------------
   useEffect(() => {
-    if (!isRunning || !isGazePhase) {
-      // PAUSE the streak when leaving a gaze phase — do NOT reset.
-      // Eyes-closed segments between gaze phases shouldn't break a streak;
-      // only blinks, iris drift, or face loss during gaze should.
-      // The streak resumes when the next gaze phase starts.
+    if (!isRunning || isPaused || !isGazePhase) {
+      // PAUSE the streak when leaving a gaze phase OR when the session is
+      // paused — do NOT reset. Eyes-closed segments and pauses shouldn't
+      // break a streak. Only blinks, iris drift, or face loss during gaze
+      // should. The streak resumes when the next gaze phase starts.
       blinkInCurrentSecondRef.current = false;
       return;
     }
@@ -901,7 +907,7 @@ export default function SessionPage() {
     }, 1000);
 
     return () => window.clearInterval(interval);
-  }, [isRunning, isGazePhase]);
+  }, [isRunning, isPaused, isGazePhase]);
 
   useEffect(() => {
     attachStreamToVideo(sessionVideoRef.current, cameraStream);
@@ -1268,6 +1274,7 @@ export default function SessionPage() {
     if (sessionComplete) return;
 
     setSaved(false);
+    setIsPaused(false);
 
     // Reset per-session counters at session start.
     // NOTE: we deliberately do NOT clear iris/head baselines here — if
@@ -1302,6 +1309,20 @@ export default function SessionPage() {
 
     setIsRunning(true);
     await audioRef.current.playSoftTransitionCue(settings);
+  };
+
+  const handleTogglePause = () => {
+    if (!isRunning) return;
+    setIsPaused((prev) => !prev);
+  };
+
+  // Ends the session early — captures whatever data exists and routes the
+  // user to the summary screen. Used when life interrupts.
+  const handleEndEarly = () => {
+    if (!isRunning) return;
+    setIsRunning(false);
+    setIsPaused(false);
+    setSessionComplete(true);
   };
 
   const handleSaveSession = () => {
@@ -1615,11 +1636,16 @@ export default function SessionPage() {
               </div>
             )}
 
-            {/* Feedback — no heading, textarea speaks for itself */}
+            {/* Feedback — no heading, textarea speaks for itself. Auto-grows
+                as the user types so the box never scrolls internally. */}
             <textarea
               value={note}
-              onChange={(e) => setNote(e.target.value)}
-              rows={3}
+              onChange={(e) => {
+                setNote(e.target.value);
+                e.currentTarget.style.height = "auto";
+                e.currentTarget.style.height = `${e.currentTarget.scrollHeight}px`;
+              }}
+              rows={1}
               placeholder="A line about this session, if you want."
               style={{
                 width: "100%",
@@ -1631,6 +1657,8 @@ export default function SessionPage() {
                 fontSize: "14px",
                 lineHeight: 1.65,
                 fontFamily: "inherit",
+                minHeight: "44px",
+                overflow: "hidden",
                 resize: "none",
                 outline: "none",
                 textAlign: "center",
@@ -1644,25 +1672,126 @@ export default function SessionPage() {
               disabled={saved}
               className="cta-pill"
             >
-              {saved ? "Saved" : "Done"}
+              {saved ? "Saved ✓" : "Done"}
             </button>
           </div>
         ) : (
           <>
+            {/* In-session controls: quiet pause + end-early pills in the
+                bottom-right. Visible only while running, not during pre-session
+                or after completion. */}
+            {isRunning && (
+              <div
+                style={{
+                  position: "fixed",
+                  bottom: "calc(28px + env(safe-area-inset-bottom))",
+                  right: "calc(24px + env(safe-area-inset-right))",
+                  zIndex: 45,
+                  display: "flex",
+                  flexDirection: "column",
+                  gap: "10px",
+                  alignItems: "flex-end",
+                  pointerEvents: "auto",
+                }}
+              >
+                <button
+                  onClick={handleTogglePause}
+                  aria-label={isPaused ? "Resume" : "Pause"}
+                  style={{
+                    background: "rgba(20, 16, 10, 0.55)",
+                    border: "1px solid rgba(255,179,71,0.28)",
+                    color: "rgba(245, 233, 218, 0.78)",
+                    padding: "8px 18px",
+                    borderRadius: "999px",
+                    fontSize: "12px",
+                    letterSpacing: "0.16em",
+                    textTransform: "lowercase",
+                    fontFamily: "inherit",
+                    cursor: "pointer",
+                    backdropFilter: "blur(6px)",
+                    transition: "background 0.2s, color 0.2s, border-color 0.2s",
+                  }}
+                  onMouseEnter={(e) => {
+                    e.currentTarget.style.background = "rgba(255,179,71,0.16)";
+                    e.currentTarget.style.color = "rgba(255, 233, 200, 0.95)";
+                  }}
+                  onMouseLeave={(e) => {
+                    e.currentTarget.style.background = "rgba(20, 16, 10, 0.55)";
+                    e.currentTarget.style.color = "rgba(245, 233, 218, 0.78)";
+                  }}
+                >
+                  {isPaused ? "resume" : "pause"}
+                </button>
+                <button
+                  onClick={handleEndEarly}
+                  aria-label="End session early"
+                  style={{
+                    background: "transparent",
+                    border: "none",
+                    padding: "4px 8px",
+                    color: "rgba(217, 203, 184, 0.35)",
+                    fontSize: "11px",
+                    letterSpacing: "0.14em",
+                    textTransform: "lowercase",
+                    fontFamily: "inherit",
+                    cursor: "pointer",
+                  }}
+                  onMouseEnter={(e) => {
+                    e.currentTarget.style.color = "rgba(217, 203, 184, 0.65)";
+                  }}
+                  onMouseLeave={(e) => {
+                    e.currentTarget.style.color = "rgba(217, 203, 184, 0.35)";
+                  }}
+                >
+                  end early
+                </button>
+              </div>
+            )}
+
+            {/* Soft paused overlay — dims the screen and surfaces a quiet word. */}
+            {isRunning && isPaused && (
+              <div
+                style={{
+                  position: "fixed",
+                  inset: 0,
+                  background: "rgba(8, 6, 4, 0.62)",
+                  backdropFilter: "blur(2px)",
+                  zIndex: 38,
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  pointerEvents: "none",
+                  transition: "opacity 0.4s ease",
+                }}
+              >
+                <div
+                  style={{
+                    fontSize: "11px",
+                    letterSpacing: "0.32em",
+                    textTransform: "uppercase",
+                    color: "rgba(245, 233, 218, 0.7)",
+                    fontFamily: '"Playfair Display", Georgia, serif',
+                  }}
+                >
+                  paused
+                </div>
+              </div>
+            )}
+
             {((!isRunning && (cameraStream || cameraState === "requesting")) || (isRunning && isDebugMode)) && (
               <div
                 style={{
                   position: "fixed",
                   top: "calc(18px + env(safe-area-inset-top))",
                   right: "calc(18px + env(safe-area-inset-right))",
-                  width: "clamp(120px, 26vw, 220px)",
-                  borderRadius: "16px",
+                  width: "clamp(110px, 22vw, 180px)",
+                  borderRadius: "14px",
                   overflow: "hidden",
-                  background: "rgba(0,0,0,0.28)",
-                  border: "1px solid rgba(255,255,255,0.12)",
-                  boxShadow: "0 10px 30px rgba(0,0,0,0.28)",
+                  border: "1px solid rgba(255,179,71,0.18)",
+                  boxShadow: "0 10px 30px rgba(0,0,0,0.32)",
                   zIndex: 40,
-                  backdropFilter: "blur(8px)",
+                  opacity: cameraError ? 0.45 : 0.78,
+                  transition: "opacity 0.4s ease",
                 }}
               >
                 <video
@@ -1677,38 +1806,31 @@ export default function SessionPage() {
                     background: "#111",
                   }}
                 />
-
-                <div
-                  style={{
-                    padding: "8px 10px",
-                    fontSize: "12px",
-                    color: "#F5E9DA",
-                    textAlign: "left",
-                    lineHeight: 1.45,
-                  }}
-                >
-                  <div>
-                    Camera: {cameraState}
-                    {cameraError ? ` - ${cameraError}` : ""}
-                  </div>
-                  <div>Face: {faceStatus}</div>
-                  {faceSnapshot?.facePresent && (
-                    <div>
-                      Confidence: {Math.round(faceSnapshot.confidence * 100)}%
-                      {faceSnapshot.centered ? " • centered" : " • adjust position"}
-                    </div>
-                  )}
-                  <div>Eyes: {eyeStatus}</div>
-                  {eyeSnapshot?.facePresent && (
-                    <>
+                {/* Debug stats are kept behind ?debug=true only — pre-session
+                    users see a clean preview, not a developer panel. */}
+                {isRunning && isDebugMode && (
+                  <div
+                    style={{
+                      padding: "8px 10px",
+                      fontSize: "11px",
+                      color: "#F5E9DA",
+                      textAlign: "left",
+                      lineHeight: 1.45,
+                      fontFamily: "monospace",
+                    }}
+                  >
+                    <div>Camera: {cameraState}</div>
+                    <div>Face: {faceStatus}</div>
+                    {faceSnapshot?.facePresent && (
                       <div>
-                        Eye openness: {eyeSnapshot.eyeOpenAvg.toFixed(4)}
-                        {eyeSnapshot.blinkLikely ? " • blink likely" : ""}
+                        Conf: {Math.round(faceSnapshot.confidence * 100)}%
+                        {faceSnapshot.centered ? " • centered" : " • off"}
                       </div>
-                      <div>Blinks: {blinkCountLive}</div>
-                    </>
-                  )}
-                </div>
+                    )}
+                    <div>Eyes: {eyeStatus}</div>
+                    {eyeSnapshot?.facePresent && <div>Blinks: {blinkCountLive}</div>}
+                  </div>
+                )}
               </div>
             )}
 
@@ -1995,56 +2117,60 @@ export default function SessionPage() {
               )}
 
               {!isRunning && (
-                <div style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: "14px" }}>
-                  {/* Baseline calibration status — gives the user confidence
-                      that face/iris/head tracking is set up before starting. */}
+                <div style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: "20px" }}>
+                  {/* Quiet calibration status in the app's voice. */}
                   {cameraStream && (
                     <div
                       style={{
-                        display: "flex",
-                        alignItems: "center",
-                        gap: "10px",
-                        fontSize: "13px",
-                        fontFamily: '"Playfair Display", Georgia, serif',
+                        fontSize: "12px",
+                        letterSpacing: "0.18em",
+                        textTransform: "lowercase",
                         color:
                           baselineStatus === "ready"
-                            ? "rgba(180, 220, 160, 0.85)"
-                            : baselineStatus === "calibrating"
-                            ? "rgba(245, 233, 218, 0.6)"
-                            : "rgba(245, 233, 218, 0.4)",
+                            ? "rgba(255, 200, 130, 0.75)"
+                            : "rgba(217, 203, 184, 0.45)",
+                        transition: "color 0.4s ease",
                       }}
                     >
-                      <span style={{ fontSize: "16px" }}>
-                        {baselineStatus === "ready" ? "✓" : baselineStatus === "calibrating" ? "◐" : "○"}
-                      </span>
-                      <span>
-                        {baselineStatus === "ready"
-                          ? "Ready to begin"
-                          : baselineStatus === "calibrating"
-                          ? `Calibrating… ${Math.round((baselineProgress / BASELINE_REQUIRED_FRAMES) * 100)}%`
-                          : "Waiting for face"}
-                      </span>
+                      {baselineStatus === "ready"
+                        ? "ready when you are"
+                        : baselineStatus === "calibrating"
+                        ? "settling the lens"
+                        : "looking for you"}
                     </div>
                   )}
 
-                  <div
-                    style={{
-                      display: "flex",
-                      gap: "12px",
-                      flexWrap: "wrap",
-                      justifyContent: "center",
-                    }}
+                  <button
+                    className="cta-pill"
+                    onClick={handleStart}
                   >
-                    <button className="primary-button" onClick={handleStart}>
-                      Start Session
-                    </button>
+                    Begin
+                  </button>
 
-                    {cameraStream && (
-                      <button className="secondary-button" onClick={disableCamera}>
-                        Disconnect Camera
-                      </button>
-                    )}
-                  </div>
+                  {cameraStream && (
+                    <button
+                      onClick={disableCamera}
+                      style={{
+                        background: "transparent",
+                        border: "none",
+                        padding: 0,
+                        fontSize: "12px",
+                        letterSpacing: "0.08em",
+                        textTransform: "lowercase",
+                        color: "rgba(217, 203, 184, 0.4)",
+                        fontFamily: "inherit",
+                        cursor: "pointer",
+                      }}
+                      onMouseEnter={(e) => {
+                        e.currentTarget.style.color = "rgba(217, 203, 184, 0.7)";
+                      }}
+                      onMouseLeave={(e) => {
+                        e.currentTarget.style.color = "rgba(217, 203, 184, 0.4)";
+                      }}
+                    >
+                      disconnect camera
+                    </button>
+                  )}
                 </div>
               )}
             </div>

@@ -45,22 +45,15 @@ export function createSessionScript(): SessionPhase[] {
     {
       id: "settle-1",
       label: "Settle",
-      durationSec: 10,
-      instruction: "Sit tall on a chair with uncrossed arms and legs, device at eye level.",
+      durationSec: 15,
+      instruction: "Sit tall. Uncross your arms and legs. Place the device at eye level.",
       visualMode: "settle",
     },
     {
       id: "settle-2",
       label: "Settle",
-      durationSec: 10,
-      instruction: "Relax shoulders and jaw.",
-      visualMode: "settle",
-    },
-    {
-      id: "settle-3",
-      label: "Settle",
-      durationSec: 10,
-      instruction: "Anchor awareness in the present moment",
+      durationSec: 15,
+      instruction: "Soften your shoulders and jaw. Let your breath settle.",
       visualMode: "settle",
     },
   ];
