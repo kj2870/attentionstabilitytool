@@ -89,7 +89,7 @@ export function createSessionScript(): SessionPhase[] {
     });
   }
 
-  for (let i = 1; i <= 4; i += 1) {
+  for (let i = 1; i <= 5; i += 1) {
     phases.push({
       id: `gaze-${i}`,
       label: "Focus",
@@ -112,7 +112,7 @@ export function createSessionScript(): SessionPhase[] {
   phases.push({
     id: "integrate",
     label: "Integrate",
-    durationSec: 130,
+    durationSec: 114,
     instruction: "Open awareness",
     visualMode: "integrate",
     fireSoundOn: true,
