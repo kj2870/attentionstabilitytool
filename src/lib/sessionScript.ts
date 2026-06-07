@@ -62,7 +62,7 @@ export function createSessionScript(): SessionPhase[] {
     phases.push({
       id: `body-${index + 1}`,
       label: "Tense + Release",
-      durationSec: 10,
+      durationSec: 12,
       instruction: item.instruction,
       visualMode: "body",
       bodyRegion: item.region,

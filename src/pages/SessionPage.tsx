@@ -146,9 +146,9 @@ function attachStreamToVideo(
   });
 }
 
-// In the body phase, first 5 seconds are clench and last 5 are release.
+// In the body phase, first 8 seconds are clench and last 4 are release.
 function getBodyCue(phaseSecondsLeft: number) {
-  return phaseSecondsLeft > 5 ? "Clench" : "Release";
+  return phaseSecondsLeft > 4 ? "Clench" : "Release";
 }
 
 type CameraState = "idle" | "requesting" | "granted" | "denied" | "error";
