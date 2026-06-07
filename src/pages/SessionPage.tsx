@@ -1677,20 +1677,19 @@ export default function SessionPage() {
           </div>
         ) : (
           <>
-            {/* In-session controls: quiet pause + end-early pills in the
-                bottom-right. Visible only while running, not during pre-session
-                or after completion. */}
+            {/* In-session controls: pause + end-early, centred at the bottom. */}
             {isRunning && (
               <div
                 style={{
                   position: "fixed",
-                  bottom: "calc(28px + env(safe-area-inset-bottom))",
-                  right: "calc(24px + env(safe-area-inset-right))",
+                  bottom: "calc(32px + env(safe-area-inset-bottom))",
+                  left: "50%",
+                  transform: "translateX(-50%)",
                   zIndex: 45,
                   display: "flex",
                   flexDirection: "column",
                   gap: "10px",
-                  alignItems: "flex-end",
+                  alignItems: "center",
                   pointerEvents: "auto",
                 }}
               >
@@ -1698,26 +1697,29 @@ export default function SessionPage() {
                   onClick={handleTogglePause}
                   aria-label={isPaused ? "Resume" : "Pause"}
                   style={{
-                    background: "rgba(20, 16, 10, 0.55)",
-                    border: "1px solid rgba(255,179,71,0.28)",
-                    color: "rgba(245, 233, 218, 0.78)",
-                    padding: "8px 18px",
+                    background: "rgba(20, 16, 10, 0.65)",
+                    border: "1px solid rgba(255,179,71,0.35)",
+                    color: "rgba(245, 233, 218, 0.85)",
+                    padding: "10px 28px",
                     borderRadius: "999px",
-                    fontSize: "12px",
-                    letterSpacing: "0.16em",
+                    fontSize: "13px",
+                    letterSpacing: "0.18em",
                     textTransform: "lowercase",
                     fontFamily: "inherit",
                     cursor: "pointer",
-                    backdropFilter: "blur(6px)",
+                    backdropFilter: "blur(8px)",
                     transition: "background 0.2s, color 0.2s, border-color 0.2s",
+                    whiteSpace: "nowrap",
                   }}
                   onMouseEnter={(e) => {
-                    e.currentTarget.style.background = "rgba(255,179,71,0.16)";
+                    e.currentTarget.style.background = "rgba(255,179,71,0.18)";
                     e.currentTarget.style.color = "rgba(255, 233, 200, 0.95)";
+                    e.currentTarget.style.borderColor = "rgba(255,179,71,0.6)";
                   }}
                   onMouseLeave={(e) => {
-                    e.currentTarget.style.background = "rgba(20, 16, 10, 0.55)";
-                    e.currentTarget.style.color = "rgba(245, 233, 218, 0.78)";
+                    e.currentTarget.style.background = "rgba(20, 16, 10, 0.65)";
+                    e.currentTarget.style.color = "rgba(245, 233, 218, 0.85)";
+                    e.currentTarget.style.borderColor = "rgba(255,179,71,0.35)";
                   }}
                 >
                   {isPaused ? "resume" : "pause"}
@@ -1729,7 +1731,7 @@ export default function SessionPage() {
                     background: "transparent",
                     border: "none",
                     padding: "4px 8px",
-                    color: "rgba(217, 203, 184, 0.35)",
+                    color: "rgba(217, 203, 184, 0.38)",
                     fontSize: "11px",
                     letterSpacing: "0.14em",
                     textTransform: "lowercase",
@@ -1737,10 +1739,10 @@ export default function SessionPage() {
                     cursor: "pointer",
                   }}
                   onMouseEnter={(e) => {
-                    e.currentTarget.style.color = "rgba(217, 203, 184, 0.65)";
+                    e.currentTarget.style.color = "rgba(217, 203, 184, 0.68)";
                   }}
                   onMouseLeave={(e) => {
-                    e.currentTarget.style.color = "rgba(217, 203, 184, 0.35)";
+                    e.currentTarget.style.color = "rgba(217, 203, 184, 0.38)";
                   }}
                 >
                   end early
@@ -1921,10 +1923,10 @@ export default function SessionPage() {
                 >
                   <div
                     style={{
-                      fontSize: "10px",
-                      letterSpacing: "0.28em",
+                      fontSize: "13px",
+                      letterSpacing: "0.26em",
                       textTransform: "uppercase",
-                      color: "rgba(203, 183, 158, 0.42)",
+                      color: "rgba(203, 183, 158, 0.55)",
                       fontFamily: '"Playfair Display", Georgia, serif',
                       marginBottom: "10px",
                     }}
