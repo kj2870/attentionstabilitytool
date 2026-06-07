@@ -93,7 +93,7 @@ export function createSessionScript(): SessionPhase[] {
     phases.push({
       id: `gaze-${i}`,
       label: "Focus",
-      durationSec: 45,
+      durationSec: 55,
       instruction: "Gaze",
       visualMode: "gaze",
       fireSoundOn: true,
@@ -102,7 +102,7 @@ export function createSessionScript(): SessionPhase[] {
     phases.push({
       id: `eyes-closed-${i}`,
       label: "Eyes Closed",
-      durationSec: 15,
+      durationSec: 10,
       instruction: "Eyes closed",
       visualMode: "eyesClosed",
       fireSoundOn: true,
@@ -112,7 +112,7 @@ export function createSessionScript(): SessionPhase[] {
   phases.push({
     id: "integrate",
     label: "Integrate",
-    durationSec: 114,
+    durationSec: 89,
     instruction: "Open awareness",
     visualMode: "integrate",
     fireSoundOn: true,
