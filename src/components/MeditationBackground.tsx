@@ -15,44 +15,53 @@ export default function MeditationBackground({ children }: MeditationBackgroundP
       style={{
         position: "relative",
         minHeight: "100dvh",
-        overflow: "hidden",
         background: palette.sky,
       }}
     >
-      {/* soft halo behind diya — pulled slightly lower to sit behind the flame */}
+      {/* Decorative layers clipped to their own stacking context — keeps them
+          from leaking outside the viewport without creating a scroll boundary
+          on the outer wrapper. */}
       <div
         style={{
-          position: "absolute",
+          position: "fixed",
           inset: 0,
-          background: `radial-gradient(ellipse 60% 45% at center 48%, ${palette.glow} 0%, transparent 65%)`,
+          overflow: "hidden",
           pointerEvents: "none",
+          zIndex: 0,
         }}
-      />
+      >
+        {/* soft halo */}
+        <div
+          style={{
+            position: "absolute",
+            inset: 0,
+            background: `radial-gradient(ellipse 60% 45% at center 48%, ${palette.glow} 0%, transparent 65%)`,
+          }}
+        />
 
-      {/* vignette — corners gently darker to focus attention centre-screen */}
-      <div
-        style={{
-          position: "absolute",
-          inset: 0,
-          background:
-            "radial-gradient(circle at center, transparent 0%, transparent 40%, rgba(0,0,0,0.32) 75%, rgba(0,0,0,0.62) 100%)",
-          pointerEvents: "none",
-        }}
-      />
+        {/* vignette */}
+        <div
+          style={{
+            position: "absolute",
+            inset: 0,
+            background:
+              "radial-gradient(circle at center, transparent 0%, transparent 40%, rgba(0,0,0,0.32) 75%, rgba(0,0,0,0.62) 100%)",
+          }}
+        />
 
-      {/* Soft floor gradient — no border line, just a gentle warmth from below */}
-      <div
-        style={{
-          position: "absolute",
-          left: 0,
-          right: 0,
-          bottom: 0,
-          height: "32%",
-          background:
-            "linear-gradient(180deg, rgba(0,0,0,0) 0%, rgba(30,18,8,0.28) 40%, rgba(20,12,6,0.55) 100%)",
-          pointerEvents: "none",
-        }}
-      />
+        {/* floor gradient */}
+        <div
+          style={{
+            position: "absolute",
+            left: 0,
+            right: 0,
+            bottom: 0,
+            height: "32%",
+            background:
+              "linear-gradient(180deg, rgba(0,0,0,0) 0%, rgba(30,18,8,0.28) 40%, rgba(20,12,6,0.55) 100%)",
+          }}
+        />
+      </div>
 
       <div style={{ position: "relative", zIndex: 1 }}>{children}</div>
     </div>
