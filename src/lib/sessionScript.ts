@@ -93,26 +93,29 @@ export function createSessionScript(): SessionPhase[] {
     phases.push({
       id: `gaze-${i}`,
       label: "Focus",
-      durationSec: 55,
+      durationSec: 60,
       instruction: "Gaze",
       visualMode: "gaze",
       fireSoundOn: true,
     });
 
-    phases.push({
-      id: `eyes-closed-${i}`,
-      label: "Eyes Closed",
-      durationSec: 10,
-      instruction: "Eyes closed",
-      visualMode: "eyesClosed",
-      fireSoundOn: true,
-    });
+    // Round 5 flows directly into open awareness — no eyes-closed break.
+    if (i < 5) {
+      phases.push({
+        id: `eyes-closed-${i}`,
+        label: "Eyes Closed",
+        durationSec: 12,
+        instruction: "Eyes closed",
+        visualMode: "eyesClosed",
+        fireSoundOn: true,
+      });
+    }
   }
 
   phases.push({
     id: "integrate",
     label: "Integrate",
-    durationSec: 89,
+    durationSec: 66,
     instruction: "Open awareness",
     visualMode: "integrate",
     fireSoundOn: true,
