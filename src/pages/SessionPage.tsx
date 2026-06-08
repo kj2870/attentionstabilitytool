@@ -715,9 +715,8 @@ export default function SessionPage() {
     audioRef.current.syncPhase({
       phase: currentPhase,
       previousPhaseId: previousPhaseIdRef.current,
-      // Treat paused as not-running for the audio controller — fire sound
-      // stops, no transition tones replay on resume.
-      isRunning: isRunning && !isPaused,
+      isRunning,
+      isPaused,
       settings,
     });
 
@@ -727,6 +726,7 @@ export default function SessionPage() {
   // Plays closing cue and returns viewport to top when session ends.
   useEffect(() => {
     if (!sessionComplete) return;
+    audioRef.current.fadeOutAmbient();
     audioRef.current.playEndGong(settings);
     window.scrollTo({ top: 0, behavior: "auto" });
   }, [sessionComplete, settings]);
