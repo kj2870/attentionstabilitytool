@@ -2206,6 +2206,42 @@ export default function SessionPage() {
                 />
               </div>
 
+              {/* TEMP testing scrubber — always visible in-session so the
+                  product can be navigated back/forth while tuning. Remove
+                  before ship. */}
+              <div style={{ marginTop: "12px" }}>
+                <div
+                  style={{
+                    display: "flex",
+                    justifyContent: "space-between",
+                    fontSize: "11px",
+                    color: "rgba(255,255,255,0.4)",
+                    marginBottom: "4px",
+                    fontFamily: "monospace",
+                  }}
+                >
+                  <span>
+                    {Math.floor(elapsedSeconds / 60)}:
+                    {String(elapsedSeconds % 60).padStart(2, "0")}
+                  </span>
+                  <span style={{ color: "rgba(255,179,71,0.7)" }}>
+                    {currentPhase?.label ?? "—"}
+                  </span>
+                  <span>
+                    {Math.floor(totalDuration / 60)}:
+                    {String(totalDuration % 60).padStart(2, "0")}
+                  </span>
+                </div>
+                <input
+                  type="range"
+                  min={0}
+                  max={totalDuration}
+                  value={elapsedSeconds}
+                  onChange={(e) => scrubToElapsed(Number(e.target.value))}
+                  style={{ width: "100%", accentColor: "#ffb347", cursor: "pointer" }}
+                />
+              </div>
+
               {/* Debug scrubber — only visible at ?debug=true */}
               {isDebugMode && (
                 <div style={{ marginTop: "12px" }}>
