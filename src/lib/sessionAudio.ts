@@ -1,23 +1,20 @@
 import bell from "../assets/sounds/bell.mp3";
-import brownNoise from "../assets/sounds/brown-noise.flac";
 import type { SessionPhase } from "./sessionScript";
 import type { SessionSettings } from "./sessionSettings";
 
+// Minimal session audio:
+//   - one gong at the start, one at the end
+//   - a soft transition tone each time the eyes close / open
+//   - no continuous ambient bed
 export class SessionAudioController {
-  private fireAudio: HTMLAudioElement | null = null;
   private bellAudio: HTMLAudioElement | null = null;
   private audioContext: AudioContext | null = null;
-  private fireSoundPlaying = false;
   private activeBellFade: number | null = null;
 
   async preload() {
-    this.fireAudio = new Audio(brownNoise);
-    this.fireAudio.loop = true;
-    this.fireAudio.volume = 0.11;
-
     this.bellAudio = new Audio(bell);
     this.bellAudio.preload = "auto";
-    this.bellAudio.volume = 0.48;
+    this.bellAudio.volume = 0.5;
   }
 
   private async getAudioContext() {
@@ -38,6 +35,7 @@ export class SessionAudioController {
     return this.audioContext;
   }
 
+  // Strikes the gong and lets it ring out with a long natural fade.
   private async playBellWithFade(settings: SessionSettings) {
     if (!settings.soundEnabled || !this.bellAudio) return;
 
@@ -81,6 +79,7 @@ export class SessionAudioController {
     }, tickMs);
   }
 
+  // Soft synthesized tone used for the eyes-open / eyes-close transitions.
   private async playToneCluster(
     settings: SessionSettings,
     config: {
@@ -112,114 +111,81 @@ export class SessionAudioController {
       const gain = context.createGain();
       osc.type = config.type ?? "sine";
       osc.frequency.setValueAtTime(freq, now);
-      gain.gain.setValueAtTime(index === 0 ? 1 : 0.45, now);
+      gain.gain.setValueAtTime(index === 0 ? 1 : 0.4, now);
       osc.connect(gain);
       gain.connect(master);
-      osc.start(now + index * 0.02);
+      osc.start(now + index * 0.03);
       osc.stop(now + config.durationSec + config.releaseSec);
     });
   }
 
-  async playOpeningBell(settings: SessionSettings) {
+  // --- Public cues -----------------------------------------------------------
+
+  // Gong that opens the session.
+  async playStartGong(settings: SessionSettings) {
     await this.playBellWithFade(settings);
   }
 
-  async playClosingBell(settings: SessionSettings) {
-    await this.stopFireSound();
+  // Gong that closes the session.
+  async playEndGong(settings: SessionSettings) {
     await this.playBellWithFade(settings);
   }
 
-  async playSoftTransitionCue(settings: SessionSettings) {
+  // Eyes closing: a gentle descending tone — go inward, soften.
+  async playEyesCloseTransition(settings: SessionSettings) {
     await this.playToneCluster(settings, {
-      freqs: [1046, 1318, 1568],
-      durationSec: 0.42,
-      peakGain: 0.022,
-      attackSec: 0.06,
-      releaseSec: 0.6,
-      type: "sine",
-    });
-  }
-
-  async playAwarenessCue(settings: SessionSettings) {
-    await this.playToneCluster(settings, {
-      freqs: [392, 523, 659],
-      durationSec: 0.65,
-      peakGain: 0.026,
+      freqs: [659, 523, 392],
+      durationSec: 0.5,
+      peakGain: 0.024,
       attackSec: 0.08,
-      releaseSec: 0.95,
+      releaseSec: 0.9,
       type: "triangle",
     });
   }
 
-  async startFireSound(settings: SessionSettings) {
-    if (!settings.soundEnabled || !settings.fireSoundEnabled) return;
-    if (this.fireSoundPlaying || !this.fireAudio) return;
-
-    this.fireAudio.volume = 0.11;
-    this.fireSoundPlaying = true;
-
-    try {
-      await this.fireAudio.play();
-    } catch {
-      this.fireSoundPlaying = false;
-    }
+  // Eyes opening: a gentle rising tone — return to the flame.
+  async playEyesOpenTransition(settings: SessionSettings) {
+    await this.playToneCluster(settings, {
+      freqs: [523, 659, 784],
+      durationSec: 0.42,
+      peakGain: 0.022,
+      attackSec: 0.06,
+      releaseSec: 0.7,
+      type: "sine",
+    });
   }
 
-  async stopFireSound() {
-    if (!this.fireAudio) return;
-
-    this.fireSoundPlaying = false;
-    this.fireAudio.pause();
-    this.fireAudio.currentTime = 0;
-  }
-
+  // ---------------------------------------------------------------------------
+  // Phase-driven cues. Start/end gongs are fired directly by the page; this
+  // only handles the in-session eyes-open / eyes-close transitions.
+  // ---------------------------------------------------------------------------
   async syncPhase(params: {
     phase: SessionPhase | undefined;
     previousPhaseId?: string;
     isRunning: boolean;
     settings: SessionSettings;
   }) {
-    const { phase, previousPhaseId, isRunning, settings } = params;
+    const { phase, previousPhaseId, isRunning } = params;
+    const { settings } = params;
 
-    if (!phase || !isRunning) {
-      await this.stopFireSound();
+    if (!phase || !isRunning) return;
+
+    const isPhaseChange = previousPhaseId !== phase.id;
+    if (!isPhaseChange) return;
+
+    // Eyes close: gaze -> eyes-closed, or the final gaze -> open awareness
+    // (integrate is also done with eyes closed).
+    if (
+      previousPhaseId?.startsWith("gaze-") &&
+      (phase.visualMode === "eyesClosed" || phase.visualMode === "integrate")
+    ) {
+      await this.playEyesCloseTransition(settings);
       return;
     }
 
-    const isPhaseChange = previousPhaseId !== phase.id;
-    const isAmbientPhase =
-      phase.visualMode === "gaze" ||
-      phase.visualMode === "eyesClosed" ||
-      phase.visualMode === "integrate";
-
-    if (
-      isPhaseChange &&
-      previousPhaseId?.startsWith("settle") &&
-      phase.visualMode === "body"
-    ) {
-      await this.playOpeningBell(settings);
-    }
-
-    if (
-      isPhaseChange &&
-      ((previousPhaseId?.startsWith("gaze-") && phase.visualMode === "eyesClosed") ||
-        (previousPhaseId?.startsWith("eyes-closed-") && phase.visualMode === "gaze"))
-    ) {
-      await this.playSoftTransitionCue(settings);
-    }
-
-    if (
-      isPhaseChange &&
-      previousPhaseId?.startsWith("eyes-closed-") &&
-      phase.visualMode === "integrate"
-    ) {
-      await this.playAwarenessCue(settings);
-    }
-
-    if (isAmbientPhase) {
-      await this.startFireSound(settings);
-    } else {
-      await this.stopFireSound();
+    // Eyes open: eyes-closed -> gaze.
+    if (previousPhaseId?.startsWith("eyes-closed-") && phase.visualMode === "gaze") {
+      await this.playEyesOpenTransition(settings);
     }
   }
 
@@ -228,8 +194,6 @@ export class SessionAudioController {
       window.clearInterval(this.activeBellFade);
       this.activeBellFade = null;
     }
-
-    await this.stopFireSound();
 
     if (this.bellAudio) {
       this.bellAudio.pause();

@@ -727,7 +727,7 @@ export default function SessionPage() {
   // Plays closing cue and returns viewport to top when session ends.
   useEffect(() => {
     if (!sessionComplete) return;
-    audioRef.current.playClosingBell(settings);
+    audioRef.current.playEndGong(settings);
     window.scrollTo({ top: 0, behavior: "auto" });
   }, [sessionComplete, settings]);
 
@@ -1308,7 +1308,7 @@ export default function SessionPage() {
     }
 
     setIsRunning(true);
-    await audioRef.current.playSoftTransitionCue(settings);
+    await audioRef.current.playStartGong(settings);
   };
 
   const handleTogglePause = () => {
