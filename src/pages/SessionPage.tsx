@@ -1677,12 +1677,60 @@ export default function SessionPage() {
           </div>
         ) : (
           <>
+            {/* TEMP testing scrubber — pinned to the very bottom of the
+                viewport so it's reachable during any phase (including the
+                full-screen black gaze phase). Remove before ship. */}
+            <div
+              style={{
+                position: "fixed",
+                bottom: 0,
+                left: 0,
+                right: 0,
+                zIndex: 60,
+                padding: "8px 16px calc(8px + env(safe-area-inset-bottom))",
+                background: "rgba(8, 6, 4, 0.78)",
+                backdropFilter: "blur(6px)",
+                borderTop: "1px solid rgba(255,179,71,0.18)",
+              }}
+            >
+              <div
+                style={{
+                  display: "flex",
+                  justifyContent: "space-between",
+                  fontSize: "11px",
+                  color: "rgba(255,255,255,0.5)",
+                  marginBottom: "4px",
+                  fontFamily: "monospace",
+                }}
+              >
+                <span>
+                  {Math.floor(elapsedSeconds / 60)}:
+                  {String(elapsedSeconds % 60).padStart(2, "0")}
+                </span>
+                <span style={{ color: "rgba(255,179,71,0.8)" }}>
+                  {currentPhase?.label ?? "—"}
+                </span>
+                <span>
+                  {Math.floor(totalDuration / 60)}:
+                  {String(totalDuration % 60).padStart(2, "0")}
+                </span>
+              </div>
+              <input
+                type="range"
+                min={0}
+                max={totalDuration}
+                value={elapsedSeconds}
+                onChange={(e) => scrubToElapsed(Number(e.target.value))}
+                style={{ width: "100%", accentColor: "#ffb347", cursor: "pointer" }}
+              />
+            </div>
+
             {/* In-session controls: pause + end-early, centred at the bottom. */}
             {isRunning && (
               <div
                 style={{
                   position: "fixed",
-                  bottom: "calc(32px + env(safe-area-inset-bottom))",
+                  bottom: "calc(86px + env(safe-area-inset-bottom))",
                   left: "50%",
                   transform: "translateX(-50%)",
                   zIndex: 45,
@@ -2203,42 +2251,6 @@ export default function SessionPage() {
                     transition: isRunning ? "width 1s linear" : "width 0.35s ease",
                     boxShadow: "0 0 8px rgba(255,179,71,0.35)",
                   }}
-                />
-              </div>
-
-              {/* TEMP testing scrubber — always visible in-session so the
-                  product can be navigated back/forth while tuning. Remove
-                  before ship. */}
-              <div style={{ marginTop: "12px" }}>
-                <div
-                  style={{
-                    display: "flex",
-                    justifyContent: "space-between",
-                    fontSize: "11px",
-                    color: "rgba(255,255,255,0.4)",
-                    marginBottom: "4px",
-                    fontFamily: "monospace",
-                  }}
-                >
-                  <span>
-                    {Math.floor(elapsedSeconds / 60)}:
-                    {String(elapsedSeconds % 60).padStart(2, "0")}
-                  </span>
-                  <span style={{ color: "rgba(255,179,71,0.7)" }}>
-                    {currentPhase?.label ?? "—"}
-                  </span>
-                  <span>
-                    {Math.floor(totalDuration / 60)}:
-                    {String(totalDuration % 60).padStart(2, "0")}
-                  </span>
-                </div>
-                <input
-                  type="range"
-                  min={0}
-                  max={totalDuration}
-                  value={elapsedSeconds}
-                  onChange={(e) => scrubToElapsed(Number(e.target.value))}
-                  style={{ width: "100%", accentColor: "#ffb347", cursor: "pointer" }}
                 />
               </div>
 
