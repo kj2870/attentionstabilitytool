@@ -62,7 +62,7 @@ export function createSessionScript(): SessionPhase[] {
     phases.push({
       id: `body-${index + 1}`,
       label: "Tense + Release",
-      durationSec: 10,
+      durationSec: 12,
       instruction: item.instruction,
       visualMode: "body",
       bodyRegion: item.region,
@@ -89,30 +89,33 @@ export function createSessionScript(): SessionPhase[] {
     });
   }
 
-  for (let i = 1; i <= 4; i += 1) {
+  for (let i = 1; i <= 5; i += 1) {
     phases.push({
       id: `gaze-${i}`,
       label: "Focus",
-      durationSec: 45,
+      durationSec: 60,
       instruction: "Gaze",
       visualMode: "gaze",
       fireSoundOn: true,
     });
 
-    phases.push({
-      id: `eyes-closed-${i}`,
-      label: "Eyes Closed",
-      durationSec: 15,
-      instruction: "Eyes closed",
-      visualMode: "eyesClosed",
-      fireSoundOn: true,
-    });
+    // Round 5 flows directly into open awareness — no eyes-closed break.
+    if (i < 5) {
+      phases.push({
+        id: `eyes-closed-${i}`,
+        label: "Eyes Closed",
+        durationSec: 12,
+        instruction: "Eyes closed",
+        visualMode: "eyesClosed",
+        fireSoundOn: true,
+      });
+    }
   }
 
   phases.push({
     id: "integrate",
     label: "Integrate",
-    durationSec: 130,
+    durationSec: 66,
     instruction: "Open awareness",
     visualMode: "integrate",
     fireSoundOn: true,

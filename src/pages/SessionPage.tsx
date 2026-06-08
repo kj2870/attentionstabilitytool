@@ -146,9 +146,9 @@ function attachStreamToVideo(
   });
 }
 
-// In the body phase, first 5 seconds are clench and last 5 are release.
+// In the body phase, first 8 seconds are clench and last 4 are release.
 function getBodyCue(phaseSecondsLeft: number) {
-  return phaseSecondsLeft > 5 ? "Clench" : "Release";
+  return phaseSecondsLeft > 4 ? "Clench" : "Release";
 }
 
 type CameraState = "idle" | "requesting" | "granted" | "denied" | "error";
@@ -727,7 +727,7 @@ export default function SessionPage() {
   // Plays closing cue and returns viewport to top when session ends.
   useEffect(() => {
     if (!sessionComplete) return;
-    audioRef.current.playClosingBell(settings);
+    audioRef.current.playEndGong(settings);
     window.scrollTo({ top: 0, behavior: "auto" });
   }, [sessionComplete, settings]);
 
@@ -1308,7 +1308,7 @@ export default function SessionPage() {
     }
 
     setIsRunning(true);
-    await audioRef.current.playSoftTransitionCue(settings);
+    await audioRef.current.playStartGong(settings);
   };
 
   const handleTogglePause = () => {
@@ -2203,6 +2203,42 @@ export default function SessionPage() {
                     transition: isRunning ? "width 1s linear" : "width 0.35s ease",
                     boxShadow: "0 0 8px rgba(255,179,71,0.35)",
                   }}
+                />
+              </div>
+
+              {/* TEMP testing scrubber — always visible in-session so the
+                  product can be navigated back/forth while tuning. Remove
+                  before ship. */}
+              <div style={{ marginTop: "12px" }}>
+                <div
+                  style={{
+                    display: "flex",
+                    justifyContent: "space-between",
+                    fontSize: "11px",
+                    color: "rgba(255,255,255,0.4)",
+                    marginBottom: "4px",
+                    fontFamily: "monospace",
+                  }}
+                >
+                  <span>
+                    {Math.floor(elapsedSeconds / 60)}:
+                    {String(elapsedSeconds % 60).padStart(2, "0")}
+                  </span>
+                  <span style={{ color: "rgba(255,179,71,0.7)" }}>
+                    {currentPhase?.label ?? "—"}
+                  </span>
+                  <span>
+                    {Math.floor(totalDuration / 60)}:
+                    {String(totalDuration % 60).padStart(2, "0")}
+                  </span>
+                </div>
+                <input
+                  type="range"
+                  min={0}
+                  max={totalDuration}
+                  value={elapsedSeconds}
+                  onChange={(e) => scrubToElapsed(Number(e.target.value))}
+                  style={{ width: "100%", accentColor: "#ffb347", cursor: "pointer" }}
                 />
               </div>
 
