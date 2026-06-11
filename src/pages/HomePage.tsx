@@ -108,8 +108,8 @@ export default function HomePage() {
             marginBottom: "6px",
             fontWeight: 400,
             lineHeight: 1.1,
-            letterSpacing: "0.01em",
-            fontFamily: '"Playfair Display", Georgia, serif',
+            letterSpacing: "0.04em",
+            fontFamily: '"Samarkan", "Playfair Display", Georgia, serif',
           }}
         >
           drishti
