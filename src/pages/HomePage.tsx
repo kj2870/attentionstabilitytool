@@ -11,6 +11,16 @@ export default function HomePage() {
   const days = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"];
   const todayIndex = (new Date().getDay() + 6) % 7;
 
+  // Hooks must run unconditionally — this effect sits above the research-mode
+  // early return. It's a no-op cleanup-wise for the research layout.
+  useEffect(() => {
+    if (RESEARCH_MODE) return;
+    document.body.style.overflow = "hidden";
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, []);
+
   if (RESEARCH_MODE) {
     return (
         <div
@@ -42,13 +52,6 @@ export default function HomePage() {
         </div>
     );
   }
-
-  useEffect(() => {
-    document.body.style.overflow = "hidden";
-    return () => {
-      document.body.style.overflow = "";
-    };
-  }, []);
 
   return (
       <div
