@@ -139,6 +139,16 @@ export function saveSession(record: SessionRecord) {
   }));
 }
 
+// Patches the note on a locally-saved session record (matched by id).
+export function updateSessionNoteLocal(id: string, note: string) {
+  updateActiveProfile((profile) => ({
+    ...profile,
+    history: profile.history.map((r) =>
+      r.id === id ? { ...r, note: note || undefined } : r
+    ),
+  }));
+}
+
 export function clearHistory() {
   updateActiveProfile((profile) => ({
     ...profile,
@@ -304,7 +314,8 @@ export async function saveSessionRemote(record: SessionRecord): Promise<void> {
 
   if (!user) return; // not logged in; skip silently
 
-  const { error } = await supabase.from("sessions").insert({
+  // Core columns that exist in every deployed schema version.
+  const core = {
     user_id: user.id,
     date: record.date,
     duration_min: record.durationMin,
@@ -314,16 +325,60 @@ export async function saveSessionRemote(record: SessionRecord): Promise<void> {
     feeling: record.feeling || null,
     grade: record.grade,
     blink_count: record.blinkCount ?? null,
-    avg_drift: record.avgDrift ?? null,
-    avg_recovery: record.avgRecovery ?? null,
     longest_gaze_sec: record.longestGazeSec ?? null,
     total_stillness_sec: record.totalStillnessSec ?? null,
     note: record.note ?? null,
     new_milestones: record.newMilestones ?? null,
-  });
+  };
+
+  // Extended metric columns — may be missing or renamed depending on which
+  // migrations have been applied. Tried first; on failure we retry with the
+  // core columns so a schema mismatch never costs the user their session row.
+  const extended = {
+    ...core,
+    avg_drift: record.avgDrift ?? null,
+    avg_recovery: record.avgRecovery ?? null,
+    blink_rate_during_gaze: record.blinkRateDuringGaze ?? null,
+    gaze_stability_samples: record.gazeStabilitySamples ?? null,
+  };
+
+  const { error } = await supabase.from("sessions").insert(extended);
+  if (!error) return;
+
+  console.warn(
+    "[Drishti] Full session insert failed, retrying with core columns:",
+    error.message
+  );
+
+  const { error: coreError } = await supabase.from("sessions").insert(core);
+  if (coreError) {
+    console.error("[Drishti] Remote session save failed:", coreError.message);
+  }
+}
+
+// ---------------------------------------------------------------------------
+// Attach/replace the note on an already-saved remote session. Sessions are
+// auto-saved at completion (before the user writes a note), so the note is
+// patched in afterwards. Matched by exact ISO date string, which is unique
+// per user in practice.
+// ---------------------------------------------------------------------------
+export async function updateSessionNoteRemote(
+  date: string,
+  note: string
+): Promise<void> {
+  const {
+    data: { user },
+  } = await supabase.auth.getUser();
+  if (!user) return;
+
+  const { error } = await supabase
+    .from("sessions")
+    .update({ note })
+    .eq("user_id", user.id)
+    .eq("date", date);
 
   if (error) {
-    console.error("[Drishti] Remote session save failed:", error.message);
+    console.error("[Drishti] Remote note update failed:", error.message);
   }
 }
 
@@ -359,6 +414,8 @@ export async function loadHistoryRemote(): Promise<SessionRecord[]> {
     avgRecovery: row.avg_recovery ?? undefined,
     longestGazeSec: row.longest_gaze_sec ?? undefined,
     totalStillnessSec: row.total_stillness_sec ?? undefined,
+    blinkRateDuringGaze: row.blink_rate_during_gaze ?? undefined,
+    gazeStabilitySamples: row.gaze_stability_samples ?? undefined,
     note: row.note ?? undefined,
     newMilestones: row.new_milestones ?? undefined,
   }));

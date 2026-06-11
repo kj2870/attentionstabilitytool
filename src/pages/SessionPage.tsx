@@ -16,7 +16,10 @@ import {
   loadHistory,
   saveSession,
   saveSessionRemote,
+  updateSessionNoteLocal,
+  updateSessionNoteRemote,
   type SessionFeeling,
+  type SessionRecord,
 } from "../lib/storage";
 import { detectNewlyUnlocked, milestoneLabel } from "../lib/milestones";
 import { SessionAudioController } from "../lib/sessionAudio";
@@ -90,10 +93,16 @@ function FadeWrapper({
   useEffect(() => {
     if (timerRef.current !== null) clearTimeout(timerRef.current);
     if (active) {
+      // Deliberate animation driver (see note on the deactivation branch).
+      // eslint-disable-next-line react-hooks/set-state-in-effect
       setMounted(true);
       const rId = requestAnimationFrame(() => setOpacity(1));
       return () => cancelAnimationFrame(rId);
     } else {
+      // Deliberate: opacity must drop in the same frame the deactivation is
+      // observed so the CSS transition runs — this is an animation driver,
+      // not derived state.
+      // eslint-disable-next-line react-hooks/set-state-in-effect
       setOpacity(0);
       timerRef.current = setTimeout(() => setMounted(false), durationMs);
     }
@@ -116,12 +125,17 @@ function useCrossFadeText(text: string, halfDurationMs = 450) {
   useEffect(() => {
     if (text === displayed) return;
     if (timerRef.current !== null) clearTimeout(timerRef.current);
+    // Deliberate animation driver: fade out now, swap text at the midpoint.
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     setOpacity(0);
     timerRef.current = setTimeout(() => {
       setDisplayed(text);
       setOpacity(1);
     }, halfDurationMs);
-  }, [text]);
+    // `displayed` is intentionally omitted — including it would re-trigger the
+    // fade after each swap.
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [text, halfDurationMs]);
 
   return { displayed, opacity };
 }
@@ -494,6 +508,15 @@ export default function SessionPage() {
   );
   const [sessionComplete, setSessionComplete] = useState(false);
   const [saved, setSaved] = useState(false);
+  // Seconds of session actually elapsed when it ended — full duration on a
+  // natural finish, partial on "end early". This is what gets persisted, so
+  // an early end never records an 11-minute session.
+  const elapsedAtEndRef = useRef(0);
+  // The record auto-saved at completion. Also acts as a once-guard so the
+  // completion effect can't double-save (React StrictMode re-runs effects).
+  const completedRecordRef = useRef<SessionRecord | null>(null);
+  // Keeps the laptop display awake for the duration of the session.
+  const wakeLockRef = useRef<WakeLockSentinel | null>(null);
   // Free-form feedback note shown on summary screen (1000 char limit removed per user).
   const [note, setNote] = useState("");
   // Milestone IDs newly unlocked this session — computed when sessionComplete fires.
@@ -715,9 +738,8 @@ export default function SessionPage() {
     audioRef.current.syncPhase({
       phase: currentPhase,
       previousPhaseId: previousPhaseIdRef.current,
-      // Treat paused as not-running for the audio controller — fire sound
-      // stops, no transition tones replay on resume.
-      isRunning: isRunning && !isPaused,
+      isRunning,
+      isPaused,
       settings,
     });
 
@@ -727,29 +749,58 @@ export default function SessionPage() {
   // Plays closing cue and returns viewport to top when session ends.
   useEffect(() => {
     if (!sessionComplete) return;
+    audioRef.current.fadeOutAmbient();
     audioRef.current.playEndGong(settings);
     window.scrollTo({ top: 0, behavior: "auto" });
   }, [sessionComplete, settings]);
 
+  // Session completion: release the camera and auto-save the record
+  // immediately — closing the tab on the summary screen must never lose a
+  // completed session. "Done" only patches the optional note in afterwards.
   useEffect(() => {
     if (!sessionComplete) return;
+    if (completedRecordRef.current) return; // once-guard (StrictMode re-runs)
+
     disableCamera();
 
-    // Compute newly-unlocked milestones for the summary screen.
-    // We construct a provisional record with the session's gaze metrics
-    // so the milestone tests can evaluate "what's true after tonight."
+    if (wakeLockRef.current) {
+      void wakeLockRef.current.release().catch(() => {});
+      wakeLockRef.current = null;
+    }
+
     const history = loadHistory();
-    const provisional = {
-      id: "pending",
+    const record: SessionRecord = {
+      id: crypto.randomUUID(),
       date: new Date().toISOString(),
-      durationMin: Number((totalDuration / 60).toFixed(1)),
+      // True elapsed time — partial when the session was ended early.
+      durationMin: Number((elapsedAtEndRef.current / 60).toFixed(1)),
       attentionScore,
       feeling: "" as SessionFeeling,
-      grade: "B" as const,
+      grade: (attentionScore >= 85 ? "A" : attentionScore >= 72 ? "B" : "C") as
+        | "A"
+        | "B"
+        | "C",
+      blinkCount: metrics.blinkCount,
+      avgDrift,
+      avgRecovery,
       longestGazeSec: longestGazeRef.current,
       totalStillnessSec: totalStillnessRef.current,
+      blinkRateDuringGaze:
+        gazeSecondsRef.current > 0
+          ? Number(
+              ((blinksDuringGazeRef.current / gazeSecondsRef.current) * 60).toFixed(1)
+            )
+          : undefined,
+      gazeStabilitySamples:
+        gazeSamplesRef.current.length > 0 ? [...gazeSamplesRef.current] : undefined,
     };
-    const unlocked = detectNewlyUnlocked(history, provisional);
+
+    const unlocked = detectNewlyUnlocked(history, record);
+    if (unlocked.length > 0) record.newMilestones = unlocked;
+
+    completedRecordRef.current = record;
+    saveSession(record);            // local cache — instant
+    void saveSessionRemote(record); // Supabase — fire and forget
     setPendingMilestones(unlocked);
   }, [sessionComplete]);
 
@@ -767,6 +818,7 @@ export default function SessionPage() {
         const nextIndex = phaseIndex + 1;
         if (nextIndex >= script.length) {
           window.clearInterval(interval);
+          elapsedAtEndRef.current = totalDuration;
           setIsRunning(false);
           setSessionComplete(true);
           return 0;
@@ -778,7 +830,7 @@ export default function SessionPage() {
     }, 1000);
 
     return () => window.clearInterval(interval);
-  }, [isRunning, isPaused, phaseIndex, currentPhase, script]);
+  }, [isRunning, isPaused, phaseIndex, currentPhase, script, totalDuration]);
 
   // ---------------------------------------------------------------------------
   // Held-gaze tick — runs every 1s, only during gaze phases.
@@ -1269,6 +1321,16 @@ export default function SessionPage() {
     };
   }, []);
 
+  // Release the wake lock if the user navigates away mid-session.
+  useEffect(() => {
+    return () => {
+      if (wakeLockRef.current) {
+        void wakeLockRef.current.release().catch(() => {});
+        wakeLockRef.current = null;
+      }
+    };
+  }, []);
+
 
   const handleStart = async () => {
     if (sessionComplete) return;
@@ -1303,8 +1365,20 @@ export default function SessionPage() {
     setNote("");
     setPendingMilestones([]);
 
+    // Fresh run: clear completion bookkeeping from any previous attempt.
+    elapsedAtEndRef.current = 0;
+    completedRecordRef.current = null;
+
     if (!cameraStream) {
       await enableCamera();
+    }
+
+    // Keep the display awake for the full session — a laptop dimming the
+    // screen mid-gaze kills both the visual and the camera.
+    try {
+      wakeLockRef.current = (await navigator.wakeLock?.request("screen")) ?? null;
+    } catch {
+      // Wake lock unsupported or denied — session still works.
     }
 
     setIsRunning(true);
@@ -1316,43 +1390,27 @@ export default function SessionPage() {
     setIsPaused((prev) => !prev);
   };
 
-  // Ends the session early — captures whatever data exists and routes the
+  // Ends the session early — records the true elapsed time and routes the
   // user to the summary screen. Used when life interrupts.
   const handleEndEarly = () => {
     if (!isRunning) return;
+    elapsedAtEndRef.current = elapsedSeconds;
     setIsRunning(false);
     setIsPaused(false);
     setSessionComplete(true);
   };
 
+  // The session record is already saved by the completion effect; this only
+  // patches the optional note in (local + remote) and returns home.
   const handleSaveSession = () => {
     if (saved) return;
 
+    const record = completedRecordRef.current;
     const trimmedNote = note.trim();
-    const record = {
-      id: crypto.randomUUID(),
-      date: new Date().toISOString(),
-      durationMin: Number((totalDuration / 60).toFixed(1)),
-      attentionScore,
-      feeling: "" as SessionFeeling,
-      grade: (attentionScore >= 85 ? "A" : attentionScore >= 72 ? "B" : "C") as "A" | "B" | "C",
-      blinkCount: metrics.blinkCount,
-      avgDrift,
-      avgRecovery,
-      longestGazeSec: longestGazeRef.current,
-      totalStillnessSec: totalStillnessRef.current,
-      blinkRateDuringGaze:
-        gazeSecondsRef.current > 0
-          ? Number(((blinksDuringGazeRef.current / gazeSecondsRef.current) * 60).toFixed(1))
-          : undefined,
-      gazeStabilitySamples:
-        gazeSamplesRef.current.length > 0 ? [...gazeSamplesRef.current] : undefined,
-      note: trimmedNote.length > 0 ? trimmedNote : undefined,
-      newMilestones: pendingMilestones.length > 0 ? pendingMilestones : undefined,
-    };
-
-    saveSession(record);           // local cache — instant
-    void saveSessionRemote(record); // Supabase — fire and forget
+    if (record && trimmedNote.length > 0) {
+      updateSessionNoteLocal(record.id, trimmedNote);
+      void updateSessionNoteRemote(record.date, trimmedNote);
+    }
 
     setSaved(true);
     navigate("/");
@@ -1397,9 +1455,13 @@ export default function SessionPage() {
     return closureBurdenHistory[closureBurdenHistory.length - 1];
   }, [closureBurdenHistory]);
 
+  // Recomputed on each 1s closure-history tick; reading the clock here is
+  // intentional — the value is a rolling 30s window, not pure derived state.
   const recentLongClosures = useMemo(() => {
+    // eslint-disable-next-line react-hooks/purity
     const now = performance.now();
     return longClosureTimesRef.current.filter((time) => now - time <= 30000).length;
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [closureBurdenHistory]);
 
   const validSignalCoveragePercent = useMemo(() => {
@@ -1549,74 +1611,126 @@ export default function SessionPage() {
               color: "rgba(245, 233, 218, 0.85)",
             }}
           >
-            {/* Hero stat */}
-            <div style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: "10px" }}>
-              <div
-                style={{
-                  fontSize: "11px",
-                  letterSpacing: "0.2em",
-                  textTransform: "uppercase",
-                  color: "rgba(245, 233, 218, 0.38)",
-                }}
-              >
-                Longest gaze
-              </div>
-              {/* Number and unit on one line, modest size so digits stay legible */}
-              <div style={{ display: "flex", alignItems: "baseline", gap: "6px" }}>
+            {/* Hero stat — gaze steadiness when we measured it; otherwise a
+                duration-centred completion so a camera-free session never
+                reads as "Longest gaze: 0 sec". */}
+            {gazeSecondsRef.current > 0 ? (
+              <div style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: "10px" }}>
                 <div
                   style={{
-                    fontSize: "clamp(52px, 11vw, 80px)",
-                    fontFamily: '"Playfair Display", Georgia, serif',
-                    fontWeight: 400,
-                    color: "rgba(245, 233, 218, 0.95)",
-                    lineHeight: 1,
-                    letterSpacing: "-0.02em",
+                    fontSize: "11px",
+                    letterSpacing: "0.2em",
+                    textTransform: "uppercase",
+                    color: "rgba(245, 233, 218, 0.38)",
                   }}
                 >
-                  {longestGazeRef.current}
+                  Longest gaze
+                </div>
+                {/* Number and unit on one line, modest size so digits stay legible */}
+                <div style={{ display: "flex", alignItems: "baseline", gap: "6px" }}>
+                  <div
+                    style={{
+                      fontSize: "clamp(52px, 11vw, 80px)",
+                      fontFamily: '"Playfair Display", Georgia, serif',
+                      fontWeight: 400,
+                      color: "rgba(245, 233, 218, 0.95)",
+                      lineHeight: 1,
+                      letterSpacing: "-0.02em",
+                    }}
+                  >
+                    {longestGazeRef.current}
+                  </div>
+                  <div
+                    style={{
+                      fontSize: "22px",
+                      fontFamily: '"DM Sans", system-ui, sans-serif',
+                      fontWeight: 300,
+                      color: "rgba(245, 233, 218, 0.45)",
+                      lineHeight: 1,
+                    }}
+                  >
+                    sec
+                  </div>
                 </div>
                 <div
                   style={{
-                    fontSize: "22px",
-                    fontFamily: '"DM Sans", system-ui, sans-serif',
-                    fontWeight: 300,
-                    color: "rgba(245, 233, 218, 0.45)",
-                    lineHeight: 1,
+                    fontSize: "13px",
+                    color: "rgba(245, 233, 218, 0.42)",
+                    letterSpacing: "0.01em",
                   }}
                 >
-                  sec
+                  {(() => {
+                    // History already includes tonight's auto-saved record.
+                    const allHistory = [...loadHistory()];
+                    const sessionN = Math.max(allHistory.length, 1);
+                    const bestEver = Math.max(
+                      longestGazeRef.current,
+                      ...allHistory.map((r) => r.longestGazeSec ?? 0)
+                    );
+                    const blinkPerMin =
+                      gazeSecondsRef.current > 0
+                        ? (blinksDuringGazeRef.current / gazeSecondsRef.current) * 60
+                        : null;
+                    const blinkPart =
+                      blinkPerMin !== null ? `${blinkPerMin.toFixed(1)} blinks/min` : null;
+                    return [
+                      `Session ${sessionN}`,
+                      `${bestEver}s best`,
+                      blinkPart,
+                    ]
+                      .filter(Boolean)
+                      .join(" · ");
+                  })()}
                 </div>
               </div>
-              <div
-                style={{
-                  fontSize: "13px",
-                  color: "rgba(245, 233, 218, 0.42)",
-                  letterSpacing: "0.01em",
-                }}
-              >
-                {(() => {
-                  const allHistory = [...loadHistory()];
-                  const sessionN = allHistory.length + 1;
-                  const bestEver = Math.max(
-                    longestGazeRef.current,
-                    ...allHistory.map((r) => r.longestGazeSec ?? 0)
-                  );
-                  const blinkPerMin =
-                    gazeSecondsRef.current > 0
-                      ? (blinksDuringGazeRef.current / gazeSecondsRef.current) * 60
-                      : null;
-                  const blinkPart =
-                    blinkPerMin !== null ? `${blinkPerMin.toFixed(1)} blinks/min` : null;
-                  return [
-                    `Session ${sessionN}`,
-                    `${bestEver}s best`,
-                    blinkPart,
-                  ]
-                    .filter(Boolean)
-                    .join(" · ");
-                })()}
+            ) : (
+              <div style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: "10px" }}>
+                <div
+                  style={{
+                    fontSize: "11px",
+                    letterSpacing: "0.2em",
+                    textTransform: "uppercase",
+                    color: "rgba(245, 233, 218, 0.38)",
+                  }}
+                >
+                  You sat for
+                </div>
+                <div style={{ display: "flex", alignItems: "baseline", gap: "6px" }}>
+                  <div
+                    style={{
+                      fontSize: "clamp(52px, 11vw, 80px)",
+                      fontFamily: '"Playfair Display", Georgia, serif',
+                      fontWeight: 400,
+                      color: "rgba(245, 233, 218, 0.95)",
+                      lineHeight: 1,
+                      letterSpacing: "-0.02em",
+                    }}
+                  >
+                    {Math.max(1, Math.round(elapsedAtEndRef.current / 60))}
+                  </div>
+                  <div
+                    style={{
+                      fontSize: "22px",
+                      fontFamily: '"DM Sans", system-ui, sans-serif',
+                      fontWeight: 300,
+                      color: "rgba(245, 233, 218, 0.45)",
+                      lineHeight: 1,
+                    }}
+                  >
+                    min
+                  </div>
+                </div>
+                <div
+                  style={{
+                    fontSize: "13px",
+                    color: "rgba(245, 233, 218, 0.42)",
+                    letterSpacing: "0.01em",
+                  }}
+                >
+                  The practice counts with or without measurement.
+                </div>
               </div>
-            </div>
+            )}
 
             {/* Milestones */}
             {pendingMilestones.length > 0 && (
@@ -1995,7 +2109,9 @@ export default function SessionPage() {
                       maxWidth: "32ch",
                       textAlign: "center",
                       opacity: primaryInstructionOpacity,
-                      transition: "font-size 0.6s ease, opacity 0.45s ease",
+                      // Opacity only — animating font-size forces layout every
+                      // frame; the cross-fade already hides the size switch.
+                      transition: "opacity 0.45s ease",
                       marginBottom: isBreathPhase ? "clamp(28px, 7vh, 64px)" : undefined,
                     }}
                   >
@@ -2190,6 +2306,28 @@ export default function SessionPage() {
                     </div>
                   )}
 
+                  {/* Camera framing before the browser permission prompt, and a
+                      gentle note when permission was denied. */}
+                  {!cameraStream && (
+                    <div
+                      style={{
+                        fontSize: "12.5px",
+                        lineHeight: 1.7,
+                        letterSpacing: "0.02em",
+                        color:
+                          cameraState === "denied"
+                            ? "rgba(255, 200, 130, 0.6)"
+                            : "rgba(217, 203, 184, 0.45)",
+                        maxWidth: "38ch",
+                        textAlign: "center",
+                      }}
+                    >
+                      {cameraState === "denied"
+                        ? "Camera is off — tonight's practice won't be measured, but it still counts."
+                        : "Your camera measures gaze steadiness. Frames never leave this device."}
+                    </div>
+                  )}
+
                   <button
                     className="cta-pill"
                     onClick={handleStart}
@@ -2243,13 +2381,19 @@ export default function SessionPage() {
               >
                 <div
                   style={{
-                    width: `${Math.max(0.02, overallProgress) * 100}%`,
+                    width: "100%",
                     height: "100%",
                     borderRadius: "inherit",
                     background:
                       "linear-gradient(90deg, rgba(240,168,86,0.85), rgba(255,226,183,0.85))",
-                    transition: isRunning ? "width 1s linear" : "width 0.35s ease",
+                    // scaleX animates on the compositor — no layout work per tick.
+                    transform: `scaleX(${Math.max(0.02, overallProgress)})`,
+                    transformOrigin: "left",
+                    transition: isRunning
+                      ? "transform 1s linear"
+                      : "transform 0.35s ease",
                     boxShadow: "0 0 8px rgba(255,179,71,0.35)",
+                    willChange: "transform",
                   }}
                 />
               </div>

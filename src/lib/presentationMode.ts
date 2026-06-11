@@ -23,6 +23,13 @@ type AppMode = "research" | "consumer";
 function resolveMode(): AppMode {
   if (typeof window === "undefined") return "consumer";
 
+  // Production builds use only the env var — otherwise anyone could flip a
+  // deployed app into research mode with ?mode=research.
+  if (!import.meta.env.DEV) {
+    const envMode = import.meta.env.VITE_APP_MODE;
+    return envMode === "research" ? "research" : "consumer";
+  }
+
   // 1. URL param — highest priority
   const params = new URLSearchParams(window.location.search);
   const urlMode = params.get("mode");
