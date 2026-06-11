@@ -1929,11 +1929,13 @@ export default function SessionPage() {
               >
                 <div
                   style={{
-                    fontSize: "11px",
-                    letterSpacing: "0.32em",
+                    fontSize: "12px",
+                    letterSpacing: "0.4em",
+                    paddingLeft: "0.4em",
                     textTransform: "uppercase",
                     color: "rgba(245, 233, 218, 0.7)",
-                    fontFamily: '"Playfair Display", Georgia, serif',
+                    fontFamily: '"Mukta", "DM Sans", sans-serif',
+                    fontWeight: 300,
                   }}
                 >
                   paused
@@ -2022,26 +2024,30 @@ export default function SessionPage() {
                   flexDirection: "column",
                   alignItems: "center",
                   justifyContent: "flex-start",
-                  paddingTop: "clamp(24px, 5vh, 48px)",
+                  // Anchor the text at the very top of the screen — it never
+                  // competes with the visual, which centers in the space below.
+                  paddingTop: "clamp(8px, 1.5vh, 16px)",
                 }}
               >
                 {/* --- Unified text slot ------------------------------------
-                    Type scale (all Playfair Display):
-                      label     13px tracked caps
-                      cue       clamp(30-38px) tracked caps  (Clench/Inhale/…)
-                      sentence  clamp(19-23px) sentence case (settle copy)
-                      secondary 16px                          (body region)   */}
+                    Session voice: Mukta (light humanist sans).
+                      label     11px w300, 0.4em tracked caps
+                      cue       clamp(26-34px) w200, 0.24em tracked caps
+                      sentence  clamp(17-21px) w300 sentence case
+                      secondary 14px w300, 0.12em
+                    Note: tracked text gets paddingLeft equal to the tracking
+                    so the last letter's trailing space doesn't skew centering. */}
                 <div
                   style={{
-                    minHeight: "128px",
+                    minHeight: "120px",
                     display: "flex",
                     flexDirection: "column",
                     alignItems: "center",
                     justifyContent: "flex-start",
-                    gap: "12px",
+                    gap: "14px",
                   }}
                 >
-                  {/* Phase label — tracked caps, same spot in every phase.
+                  {/* Phase label — whisper caps, same spot in every phase.
                       Hidden only during gaze/eyes-closed (trataka is silent). */}
                   <FadeWrapper
                     active={
@@ -2053,11 +2059,13 @@ export default function SessionPage() {
                   >
                     <div
                       style={{
-                        fontSize: "13px",
-                        letterSpacing: "0.26em",
+                        fontSize: "11px",
+                        fontFamily: '"Mukta", "DM Sans", sans-serif',
+                        fontWeight: 300,
+                        letterSpacing: "0.4em",
+                        paddingLeft: "0.4em",
                         textTransform: "uppercase",
-                        color: "rgba(203, 183, 158, 0.55)",
-                        fontFamily: '"Playfair Display", Georgia, serif',
+                        color: "rgba(203, 183, 158, 0.5)",
                       }}
                     >
                       {currentPhase?.label}
@@ -2071,17 +2079,18 @@ export default function SessionPage() {
                         display: "flex",
                         flexDirection: "column",
                         alignItems: "center",
-                        gap: "8px",
+                        gap: "10px",
                       }}
                     >
                       <div
                         style={{
-                          fontSize: "clamp(30px, 3.4vw, 38px)",
-                          letterSpacing: "0.18em",
+                          fontSize: "clamp(26px, 3vw, 34px)",
+                          fontFamily: '"Mukta", "DM Sans", sans-serif',
+                          fontWeight: 200,
+                          letterSpacing: "0.24em",
+                          paddingLeft: "0.24em",
                           textTransform: "uppercase",
-                          color: "rgba(245, 233, 218, 0.88)",
-                          fontFamily: '"Playfair Display", Georgia, serif',
-                          fontWeight: 400,
+                          color: "rgba(245, 233, 218, 0.92)",
                           lineHeight: 1.1,
                           opacity: bodyCueOpacity,
                           transition: "opacity 0.7s ease",
@@ -2091,11 +2100,12 @@ export default function SessionPage() {
                       </div>
                       <div
                         style={{
-                          fontSize: "16px",
-                          letterSpacing: "0.04em",
-                          fontFamily: '"Playfair Display", Georgia, serif',
-                          fontWeight: 400,
-                          color: "rgba(203, 183, 158, 0.65)",
+                          fontSize: "14px",
+                          fontFamily: '"Mukta", "DM Sans", sans-serif',
+                          fontWeight: 300,
+                          letterSpacing: "0.12em",
+                          paddingLeft: "0.12em",
+                          color: "rgba(203, 183, 158, 0.6)",
                           lineHeight: 1.2,
                           opacity: bodyRegionLabelOpacity,
                           transition: "opacity 0.45s ease",
@@ -2106,24 +2116,24 @@ export default function SessionPage() {
                     </div>
                   </FadeWrapper>
 
-                  {/* Primary instruction — word cues (Inhale/Exhale, Open
-                      awareness) match the body cue exactly; settle sentences
-                      use the sentence scale. */}
+                  {/* Primary instruction — word cues (Inhale/Exhale) match the
+                      body cue exactly; settle sentences use the sentence scale. */}
                   <FadeWrapper active={!isBodyPhase && !!primaryInstruction}>
                     <div
                       style={{
                         fontSize: isSettlePhase
-                          ? "clamp(19px, 2.1vw, 23px)"
-                          : "clamp(30px, 3.4vw, 38px)",
-                        fontFamily: '"Playfair Display", Georgia, serif',
-                        fontWeight: 400,
+                          ? "clamp(17px, 1.9vw, 21px)"
+                          : "clamp(26px, 3vw, 34px)",
+                        fontFamily: '"Mukta", "DM Sans", sans-serif',
+                        fontWeight: isSettlePhase ? 300 : 200,
                         color: isSettlePhase
-                          ? "rgba(245, 233, 218, 0.78)"
-                          : "rgba(245, 233, 218, 0.88)",
-                        lineHeight: isSettlePhase ? 1.7 : 1.1,
-                        letterSpacing: isSettlePhase ? "0.01em" : "0.18em",
+                          ? "rgba(245, 233, 218, 0.8)"
+                          : "rgba(245, 233, 218, 0.92)",
+                        lineHeight: isSettlePhase ? 1.8 : 1.1,
+                        letterSpacing: isSettlePhase ? "0.02em" : "0.24em",
+                        paddingLeft: isSettlePhase ? 0 : "0.24em",
                         textTransform: isSettlePhase ? "none" : "uppercase",
-                        maxWidth: "34ch",
+                        maxWidth: "36ch",
                         textAlign: "center",
                         opacity: primaryInstructionOpacity,
                         // Opacity only — animating font-size forces layout every
@@ -2328,7 +2338,10 @@ export default function SessionPage() {
                     <div
                       style={{
                         fontSize: "12px",
+                        fontFamily: '"Mukta", "DM Sans", sans-serif',
+                        fontWeight: 300,
                         letterSpacing: "0.18em",
+                        paddingLeft: "0.18em",
                         textTransform: "lowercase",
                         color:
                           baselineStatus === "ready"
