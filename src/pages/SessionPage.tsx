@@ -16,8 +16,8 @@ import {
   loadHistory,
   saveSession,
   saveSessionRemote,
-  updateSessionNoteLocal,
-  updateSessionNoteRemote,
+  updateSessionDetailsLocal,
+  updateSessionDetailsRemote,
   type SessionFeeling,
   type SessionRecord,
 } from "../lib/storage";
@@ -519,6 +519,8 @@ export default function SessionPage() {
   const wakeLockRef = useRef<WakeLockSentinel | null>(null);
   // Free-form feedback note shown on summary screen (1000 char limit removed per user).
   const [note, setNote] = useState("");
+  // One-tap subjective state captured on the summary screen.
+  const [feeling, setFeeling] = useState<SessionFeeling>("");
   // Milestone IDs newly unlocked this session — computed when sessionComplete fires.
   const [pendingMilestones, setPendingMilestones] = useState<string[]>([]);
   const [settings] = useState<SessionSettings>(defaultSessionSettings);
@@ -1363,6 +1365,7 @@ export default function SessionPage() {
     setDebugIrisBaselineSet(irisBaselineRef.current !== null);
     // Clear summary-screen state from any previous session.
     setNote("");
+    setFeeling("");
     setPendingMilestones([]);
 
     // Fresh run: clear completion bookkeeping from any previous attempt.
@@ -1401,15 +1404,19 @@ export default function SessionPage() {
   };
 
   // The session record is already saved by the completion effect; this only
-  // patches the optional note in (local + remote) and returns home.
+  // patches the optional note/feeling in (local + remote) and returns home.
   const handleSaveSession = () => {
     if (saved) return;
 
     const record = completedRecordRef.current;
     const trimmedNote = note.trim();
-    if (record && trimmedNote.length > 0) {
-      updateSessionNoteLocal(record.id, trimmedNote);
-      void updateSessionNoteRemote(record.date, trimmedNote);
+    if (record && (trimmedNote.length > 0 || feeling)) {
+      const details = {
+        ...(trimmedNote.length > 0 ? { note: trimmedNote } : {}),
+        ...(feeling ? { feeling } : {}),
+      };
+      updateSessionDetailsLocal(record.id, details);
+      void updateSessionDetailsRemote(record.date, details);
     }
 
     setSaved(true);
@@ -1750,6 +1757,41 @@ export default function SessionPage() {
               </div>
             )}
 
+            {/* One-tap subjective state — the cheapest evidence the practice
+                helps. Tap again to deselect. */}
+            <div style={{ display: "flex", gap: "10px", justifyContent: "center" }}>
+              {(["Calm", "Neutral", "Restless"] as const).map((f) => {
+                const selected = feeling === f;
+                return (
+                  <button
+                    key={f}
+                    onClick={() => setFeeling(selected ? "" : f)}
+                    style={{
+                      background: selected
+                        ? "rgba(255, 179, 71, 0.16)"
+                        : "transparent",
+                      border: selected
+                        ? "1px solid rgba(255,179,71,0.5)"
+                        : "1px solid rgba(245, 233, 218, 0.14)",
+                      color: selected
+                        ? "rgba(255, 220, 170, 0.95)"
+                        : "rgba(217, 203, 184, 0.55)",
+                      padding: "7px 18px",
+                      borderRadius: "999px",
+                      fontSize: "13px",
+                      letterSpacing: "0.06em",
+                      textTransform: "lowercase",
+                      fontFamily: "inherit",
+                      cursor: "pointer",
+                      transition: "background 0.2s, color 0.2s, border-color 0.2s",
+                    }}
+                  >
+                    {f.toLowerCase()}
+                  </button>
+                );
+              })}
+            </div>
+
             {/* Feedback — no heading, textarea speaks for itself. Auto-grows
                 as the user types so the box never scrolls internally. */}
             <textarea
@@ -1780,6 +1822,20 @@ export default function SessionPage() {
               onFocus={(e) => (e.currentTarget.style.borderBottomColor = "rgba(255,179,71,0.35)")}
               onBlur={(e) => (e.currentTarget.style.borderBottomColor = "rgba(245, 233, 218, 0.10)")}
             />
+            {/* Honest disclosure — the note reads like a journal but syncs
+                to the developer. Shown only once the user starts typing. */}
+            {note.trim().length > 0 && (
+              <div
+                style={{
+                  fontSize: "11px",
+                  color: "rgba(217, 203, 184, 0.38)",
+                  letterSpacing: "0.04em",
+                  marginTop: "-24px",
+                }}
+              >
+                notes are shared with the developer
+              </div>
+            )}
 
             <button
               onClick={handleSaveSession}
@@ -2360,20 +2416,60 @@ export default function SessionPage() {
                   {!cameraStream && (
                     <div
                       style={{
-                        fontSize: "12.5px",
-                        lineHeight: 1.7,
-                        letterSpacing: "0.02em",
-                        color:
-                          cameraState === "denied"
-                            ? "rgba(255, 200, 130, 0.6)"
-                            : "rgba(217, 203, 184, 0.45)",
-                        maxWidth: "38ch",
+                        display: "flex",
+                        flexDirection: "column",
+                        alignItems: "center",
+                        gap: "8px",
+                        maxWidth: "40ch",
                         textAlign: "center",
                       }}
                     >
-                      {cameraState === "denied"
-                        ? "Camera is off — tonight's practice won't be measured, but it still counts."
-                        : "Your camera measures gaze steadiness. Frames never leave this device."}
+                      <div
+                        style={{
+                          fontSize: "12.5px",
+                          lineHeight: 1.7,
+                          letterSpacing: "0.02em",
+                          color:
+                            cameraState === "denied"
+                              ? "rgba(255, 200, 130, 0.6)"
+                              : "rgba(217, 203, 184, 0.45)",
+                        }}
+                      >
+                        {cameraState === "denied"
+                          ? "Camera is off — tonight's practice won't be measured, but it still counts."
+                          : "Your camera measures gaze steadiness. Frames never leave this device."}
+                      </div>
+                      {cameraState === "denied" && (
+                        <>
+                          <button
+                            onClick={() => void enableCamera()}
+                            style={{
+                              background: "transparent",
+                              border: "1px solid rgba(255,179,71,0.3)",
+                              borderRadius: "999px",
+                              padding: "6px 16px",
+                              fontSize: "12px",
+                              letterSpacing: "0.08em",
+                              textTransform: "lowercase",
+                              color: "rgba(255, 200, 130, 0.75)",
+                              fontFamily: "inherit",
+                              cursor: "pointer",
+                            }}
+                          >
+                            try camera again
+                          </button>
+                          <div
+                            style={{
+                              fontSize: "11px",
+                              lineHeight: 1.6,
+                              color: "rgba(217, 203, 184, 0.35)",
+                            }}
+                          >
+                            If it stays off, allow camera access in your
+                            browser's site settings, then refresh this page.
+                          </div>
+                        </>
+                      )}
                     </div>
                   )}
 

@@ -34,7 +34,6 @@ export type SessionRecord = {
 export type LocalProfile = {
   id: string;
   username: string;
-  pin: string;
   createdAt: string;
   onboardingComplete: boolean;
   // First-time gate: false until the user has read the Foundations page.
@@ -65,16 +64,12 @@ export function saveProfiles(profiles: LocalProfile[]) {
   localStorage.setItem(PROFILES_KEY, JSON.stringify(profiles));
 }
 
-export function createProfile(params: {
-  username: string;
-  pin: string;
-}): LocalProfile {
+export function createProfile(params: { username: string }): LocalProfile {
   const profiles = loadProfiles();
 
   const profile: LocalProfile = {
     id: crypto.randomUUID(),
     username: params.username.trim(),
-    pin: params.pin,
     createdAt: new Date().toISOString(),
     onboardingComplete: true,
     firstReadComplete: false,
@@ -139,12 +134,23 @@ export function saveSession(record: SessionRecord) {
   }));
 }
 
-// Patches the note on a locally-saved session record (matched by id).
-export function updateSessionNoteLocal(id: string, note: string) {
+// Patches the note and/or feeling on a locally-saved session record
+// (matched by id). Sessions auto-save at completion; these details come in
+// afterwards from the summary screen.
+export function updateSessionDetailsLocal(
+  id: string,
+  details: { note?: string; feeling?: SessionFeeling }
+) {
   updateActiveProfile((profile) => ({
     ...profile,
     history: profile.history.map((r) =>
-      r.id === id ? { ...r, note: note || undefined } : r
+      r.id === id
+        ? {
+            ...r,
+            note: details.note !== undefined ? details.note || undefined : r.note,
+            feeling: details.feeling !== undefined ? details.feeling : r.feeling,
+          }
+        : r
     ),
   }));
 }
@@ -357,28 +363,33 @@ export async function saveSessionRemote(record: SessionRecord): Promise<void> {
 }
 
 // ---------------------------------------------------------------------------
-// Attach/replace the note on an already-saved remote session. Sessions are
-// auto-saved at completion (before the user writes a note), so the note is
+// Attach/replace the note and/or feeling on an already-saved remote session.
+// Sessions auto-save at completion (before the summary screen), so these are
 // patched in afterwards. Matched by exact ISO date string, which is unique
 // per user in practice.
 // ---------------------------------------------------------------------------
-export async function updateSessionNoteRemote(
+export async function updateSessionDetailsRemote(
   date: string,
-  note: string
+  details: { note?: string; feeling?: SessionFeeling }
 ): Promise<void> {
   const {
     data: { user },
   } = await supabase.auth.getUser();
   if (!user) return;
 
+  const patch: Record<string, string | null> = {};
+  if (details.note !== undefined) patch.note = details.note || null;
+  if (details.feeling !== undefined) patch.feeling = details.feeling || null;
+  if (Object.keys(patch).length === 0) return;
+
   const { error } = await supabase
     .from("sessions")
-    .update({ note })
+    .update(patch)
     .eq("user_id", user.id)
     .eq("date", date);
 
   if (error) {
-    console.error("[Drishti] Remote note update failed:", error.message);
+    console.error("[Drishti] Remote session update failed:", error.message);
   }
 }
 
