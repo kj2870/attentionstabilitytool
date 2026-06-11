@@ -13,6 +13,7 @@ import {
   type SessionPhase,
 } from "../lib/sessionScript";
 import {
+  getMandalaDay,
   loadHistory,
   saveSession,
   saveSessionRemote,
@@ -21,6 +22,7 @@ import {
   type SessionFeeling,
   type SessionRecord,
 } from "../lib/storage";
+import { getQuoteForDay } from "../lib/quotes";
 import { detectNewlyUnlocked, milestoneLabel } from "../lib/milestones";
 import { SessionAudioController } from "../lib/sessionAudio";
 import {
@@ -1756,6 +1758,45 @@ export default function SessionPage() {
                 ))}
               </div>
             )}
+
+            {/* Daily quote — one per mandala day (1-48), so the session ends
+                inside a progression rather than with a random line. */}
+            {(() => {
+              const quote = getQuoteForDay(Math.max(1, getMandalaDay(loadHistory())));
+              return (
+                <div
+                  style={{
+                    display: "flex",
+                    flexDirection: "column",
+                    alignItems: "center",
+                    gap: "10px",
+                    maxWidth: "44ch",
+                  }}
+                >
+                  <div
+                    style={{
+                      fontSize: "15px",
+                      lineHeight: 1.75,
+                      color: "rgba(245, 233, 218, 0.62)",
+                      letterSpacing: "0.01em",
+                      fontFamily: '"Playfair Display", Georgia, serif',
+                    }}
+                  >
+                    {quote.text}
+                  </div>
+                  <div
+                    style={{
+                      fontSize: "11px",
+                      letterSpacing: "0.14em",
+                      textTransform: "lowercase",
+                      color: "rgba(203, 183, 158, 0.4)",
+                    }}
+                  >
+                    {quote.source}
+                  </div>
+                </div>
+              );
+            })()}
 
             {/* One-tap subjective state — the cheapest evidence the practice
                 helps. Tap again to deselect. */}
