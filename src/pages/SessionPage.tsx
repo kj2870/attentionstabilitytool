@@ -1845,13 +1845,12 @@ export default function SessionPage() {
                 style={{
                   position: "fixed",
                   bottom: "calc(86px + env(safe-area-inset-bottom))",
-                  left: "50%",
-                  transform: "translateX(-50%)",
+                  right: "calc(24px + env(safe-area-inset-right))",
                   zIndex: 45,
                   display: "flex",
                   flexDirection: "column",
                   gap: "10px",
-                  alignItems: "center",
+                  alignItems: "flex-end",
                   pointerEvents: "auto",
                 }}
               >
@@ -2138,7 +2137,7 @@ export default function SessionPage() {
                 >
                   <FadeWrapper
                     active={showDiya || isEyesClosedPhase}
-                    durationMs={700}
+                    durationMs={2400}
                     style={ABSOLUTE_CENTER_LAYER}
                   >
                     <div
@@ -2146,7 +2145,9 @@ export default function SessionPage() {
                         position: "relative",
                         mixBlendMode: "screen",
                         opacity: showDiya ? 1 : 0,
-                        transition: "opacity 0.8s ease-in-out",
+                        // Slow bloom in/out — the flame should arrive like it's
+                        // being lit, not switched on.
+                        transition: "opacity 2.4s ease-in-out",
                         lineHeight: 0,
                       }}
                     >
@@ -2179,6 +2180,13 @@ export default function SessionPage() {
                           filter: "brightness(0.88) contrast(1.6)",
                           pointerEvents: "none",
                           display: "block",
+                          // Feather the frame edges — the video's compressed
+                          // near-black isn't pure #000, so an unmasked rectangle
+                          // reads as a faint square against the backdrop.
+                          WebkitMaskImage:
+                            "radial-gradient(ellipse 74% 70% at 50% 52%, black 55%, transparent 92%)",
+                          maskImage:
+                            "radial-gradient(ellipse 74% 70% at 50% 52%, black 55%, transparent 92%)",
                         }}
                       />
                     </div>
@@ -2200,7 +2208,14 @@ export default function SessionPage() {
                     />
                   </FadeWrapper>
 
-                  <FadeWrapper active={isBreathPhase} style={ABSOLUTE_CENTER_LAYER}>
+                  {/* Longer exit fade so the orb dissolves into the dark while
+                      the diya blooms in — a true slow cross-fade rather than a
+                      quick swap. */}
+                  <FadeWrapper
+                    active={isBreathPhase}
+                    durationMs={1800}
+                    style={ABSOLUTE_CENTER_LAYER}
+                  >
                     <BreathGuide
                       action={currentPhase?.breathAction ?? "exhale"}
                       durationSec={currentPhase?.durationSec ?? 8}
