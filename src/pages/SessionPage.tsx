@@ -2221,16 +2221,9 @@ export default function SessionPage() {
                     </div>
                   </FadeWrapper>
 
-                  <FadeWrapper
-                    active={isBodyPhase}
-                    style={{
-                      ...ABSOLUTE_CENTER_LAYER,
-                      WebkitMaskImage:
-                        "linear-gradient(to bottom, transparent 0%, black 10%, black 90%, transparent 100%)",
-                      maskImage:
-                        "linear-gradient(to bottom, transparent 0%, black 10%, black 90%, transparent 100%)",
-                    }}
-                  >
+                  {/* No edge mask here — the figure must always be fully
+                      visible, feet to head. */}
+                  <FadeWrapper active={isBodyPhase} style={ABSOLUTE_CENTER_LAYER}>
                     <BodyGuideOverlay
                       activeRegion={currentPhase?.bodyRegion ?? "feet"}
                       phaseSecondsLeft={phaseSecondsLeft}

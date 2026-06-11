@@ -5,9 +5,10 @@ type BodyGuideOverlayProps = {
   phaseSecondsLeft: number;
 };
 
-// Matches sessionScript.ts — each body phase is 10s, halfway flips clench → release.
-const PHASE_TOTAL = 10;
-const PHASE_HALF = 5;
+// Matches sessionScript.ts — each body phase is 12s: 8s clench, 4s release.
+const PHASE_TOTAL = 12;
+const RELEASE_SECONDS = 4;
+const CLENCH_SECONDS = PHASE_TOTAL - RELEASE_SECONDS;
 
 // Terracotta palette adapted for the app's warm dark background.
 // Layered tones create paper-cut depth without competing with the diya colours.
@@ -37,11 +38,14 @@ export default function BodyGuideOverlay({
   activeRegion,
   phaseSecondsLeft,
 }: BodyGuideOverlayProps) {
-  const isClench = phaseSecondsLeft > PHASE_HALF;
+  const isClench = phaseSecondsLeft > RELEASE_SECONDS;
   const elapsedInHalf = isClench
     ? PHASE_TOTAL - phaseSecondsLeft
-    : PHASE_HALF - phaseSecondsLeft;
-  const halfProgress = Math.max(0, Math.min(1, elapsedInHalf / PHASE_HALF));
+    : RELEASE_SECONDS - phaseSecondsLeft;
+  const halfProgress = Math.max(
+    0,
+    Math.min(1, elapsedInHalf / (isClench ? CLENCH_SECONDS : RELEASE_SECONDS))
+  );
 
   // Glow builds during clench, softens during release — same envelope as the diya feel.
   const intensity = isClench
@@ -68,7 +72,10 @@ export default function BodyGuideOverlay({
     >
       <div
         style={{
-          width: "clamp(220px, 32vw, 300px)",
+          // Height-driven sizing: the figure always fits inside its container
+          // (feet to head visible), shrinking before it would ever be cut off.
+          height: "min(100%, 380px)",
+          maxWidth: "min(60vw, 300px)",
           aspectRatio: "300 / 400",
           position: "relative",
         }}
