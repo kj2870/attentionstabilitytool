@@ -1775,11 +1775,11 @@ export default function SessionPage() {
                 >
                   <div
                     style={{
-                      fontSize: "15px",
-                      lineHeight: 1.75,
-                      color: "rgba(245, 233, 218, 0.62)",
-                      letterSpacing: "0.01em",
-                      fontFamily: '"Playfair Display", Georgia, serif',
+                      fontSize: "16px",
+                      lineHeight: 1.85,
+                      color: "rgba(245, 233, 218, 0.66)",
+                      letterSpacing: "0.04em",
+                      fontFamily: '"Samarkan", "Playfair Display", Georgia, serif',
                     }}
                   >
                     {quote.text}
