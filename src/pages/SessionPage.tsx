@@ -2011,7 +2011,9 @@ export default function SessionPage() {
                 paddingTop: "8px",
               }}
             >
-              {/* Centered visual + text group */}
+              {/* Visual + text group. Text lives in a fixed-height slot at the
+                  same position every phase; the visual centers in the space
+                  below it — nothing shifts between phases. */}
               <div
                 style={{
                   flex: 1,
@@ -2019,105 +2021,134 @@ export default function SessionPage() {
                   display: "flex",
                   flexDirection: "column",
                   alignItems: "center",
-                  justifyContent: isBodyPhase || isSettlePhase || isIntegratePhase ? "flex-start" : "center",
-                  paddingTop: isBodyPhase ? "clamp(12px, 2vh, 28px)" : isSettlePhase || isIntegratePhase ? "clamp(36px, 8vh, 72px)" : 0,
-                  gap: "12px",
+                  justifyContent: "flex-start",
+                  paddingTop: "clamp(24px, 5vh, 48px)",
                 }}
               >
-                {/* Body cue: proper flex sibling ABOVE the figure container so
-                    it can never overlap the SVG regardless of viewport size. */}
-                <FadeWrapper active={isBodyPhase}>
-                  <div
-                    style={{
-                      display: "flex",
-                      flexDirection: "column",
-                      alignItems: "center",
-                      gap: "6px",
-                      marginBottom: "clamp(28px, 6vh, 56px)",
-                    }}
+                {/* --- Unified text slot ------------------------------------
+                    Type scale (all Playfair Display):
+                      label     13px tracked caps
+                      cue       clamp(30-38px) tracked caps  (Clench/Inhale/…)
+                      sentence  clamp(19-23px) sentence case (settle copy)
+                      secondary 16px                          (body region)   */}
+                <div
+                  style={{
+                    minHeight: "128px",
+                    display: "flex",
+                    flexDirection: "column",
+                    alignItems: "center",
+                    justifyContent: "flex-start",
+                    gap: "12px",
+                  }}
+                >
+                  {/* Phase label — tracked caps, same spot in every phase.
+                      Hidden only during gaze/eyes-closed (trataka is silent). */}
+                  <FadeWrapper
+                    active={
+                      !isGazePhase &&
+                      !isEyesClosedPhase &&
+                      !!currentPhase?.label &&
+                      !sessionComplete
+                    }
                   >
-                    {/* Primary cue — CLENCH / RELEASE is the action focus. */}
                     <div
                       style={{
-                        fontSize: "clamp(34px, 4.4vw, 46px)",
-                        letterSpacing: "0.18em",
+                        fontSize: "13px",
+                        letterSpacing: "0.26em",
                         textTransform: "uppercase",
-                        color: "rgba(245, 233, 218, 0.88)",
+                        color: "rgba(203, 183, 158, 0.55)",
                         fontFamily: '"Playfair Display", Georgia, serif',
-                        fontWeight: 400,
-                        lineHeight: 1.1,
-                        opacity: bodyCueOpacity,
-                        transition: "opacity 0.7s ease",
                       }}
                     >
-                      {shownBodyCue}
+                      {currentPhase?.label}
                     </div>
-                    {/* Secondary cue — which body region. */}
+                  </FadeWrapper>
+
+                  {/* Body cue — same size/tracking as the breath cue. */}
+                  <FadeWrapper active={isBodyPhase}>
                     <div
                       style={{
-                        fontSize: "15px",
-                        letterSpacing: "0.04em",
+                        display: "flex",
+                        flexDirection: "column",
+                        alignItems: "center",
+                        gap: "8px",
+                      }}
+                    >
+                      <div
+                        style={{
+                          fontSize: "clamp(30px, 3.4vw, 38px)",
+                          letterSpacing: "0.18em",
+                          textTransform: "uppercase",
+                          color: "rgba(245, 233, 218, 0.88)",
+                          fontFamily: '"Playfair Display", Georgia, serif',
+                          fontWeight: 400,
+                          lineHeight: 1.1,
+                          opacity: bodyCueOpacity,
+                          transition: "opacity 0.7s ease",
+                        }}
+                      >
+                        {shownBodyCue}
+                      </div>
+                      <div
+                        style={{
+                          fontSize: "16px",
+                          letterSpacing: "0.04em",
+                          fontFamily: '"Playfair Display", Georgia, serif',
+                          fontWeight: 400,
+                          color: "rgba(203, 183, 158, 0.65)",
+                          lineHeight: 1.2,
+                          opacity: bodyRegionLabelOpacity,
+                          transition: "opacity 0.45s ease",
+                        }}
+                      >
+                        {shownBodyRegionLabel}
+                      </div>
+                    </div>
+                  </FadeWrapper>
+
+                  {/* Primary instruction — word cues (Inhale/Exhale, Open
+                      awareness) match the body cue exactly; settle sentences
+                      use the sentence scale. */}
+                  <FadeWrapper active={!isBodyPhase && !!primaryInstruction}>
+                    <div
+                      style={{
+                        fontSize: isSettlePhase
+                          ? "clamp(19px, 2.1vw, 23px)"
+                          : "clamp(30px, 3.4vw, 38px)",
                         fontFamily: '"Playfair Display", Georgia, serif',
                         fontWeight: 400,
-                        color: "rgba(203, 183, 158, 0.65)",
-                        lineHeight: 1.2,
-                        opacity: bodyRegionLabelOpacity,
+                        color: isSettlePhase
+                          ? "rgba(245, 233, 218, 0.78)"
+                          : "rgba(245, 233, 218, 0.88)",
+                        lineHeight: isSettlePhase ? 1.7 : 1.1,
+                        letterSpacing: isSettlePhase ? "0.01em" : "0.18em",
+                        textTransform: isSettlePhase ? "none" : "uppercase",
+                        maxWidth: "34ch",
+                        textAlign: "center",
+                        opacity: primaryInstructionOpacity,
+                        // Opacity only — animating font-size forces layout every
+                        // frame; the cross-fade already hides the size switch.
                         transition: "opacity 0.45s ease",
                       }}
                     >
-                      {shownBodyRegionLabel}
+                      {shownPrimaryInstruction}
                     </div>
-                  </div>
-                </FadeWrapper>
+                  </FadeWrapper>
+                </div>
+                {/* --- end text slot --- */}
 
-                {/* Phase label — tiny tracked caps, orients the user in the arc.
-                    Hidden during body (cue text already conveys it), gaze, and
-                    eyes-closed (trataka stays visually silent). */}
-                <FadeWrapper
-                  active={
-                    !isBodyPhase &&
-                    !isGazePhase &&
-                    !isEyesClosedPhase &&
-                    !!currentPhase?.label &&
-                    !sessionComplete
-                  }
+                {/* Visual area — fills the space below the text slot and
+                    centers the active visual so it sits in the same spot in
+                    every phase. */}
+                <div
+                  style={{
+                    flex: 1,
+                    width: "100%",
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                  }}
                 >
-                  <div
-                    style={{
-                      fontSize: "13px",
-                      letterSpacing: "0.26em",
-                      textTransform: "uppercase",
-                      color: "rgba(203, 183, 158, 0.55)",
-                      fontFamily: '"Playfair Display", Georgia, serif',
-                      marginBottom: "10px",
-                    }}
-                  >
-                    {currentPhase?.label}
-                  </div>
-                </FadeWrapper>
-
-                <FadeWrapper active={!isBodyPhase && !!primaryInstruction}>
-                  <div
-                    style={{
-                      fontSize: isBreathPhase ? "clamp(26px, 3vw, 34px)" : "22px",
-                      fontFamily: '"Playfair Display", Georgia, serif',
-                      fontWeight: isBreathPhase ? 300 : 400,
-                      color: "rgba(245, 233, 218, 0.78)",
-                      lineHeight: 1.5,
-                      letterSpacing: isBreathPhase ? "0.05em" : "0.01em",
-                      maxWidth: "32ch",
-                      textAlign: "center",
-                      opacity: primaryInstructionOpacity,
-                      // Opacity only — animating font-size forces layout every
-                      // frame; the cross-fade already hides the size switch.
-                      transition: "opacity 0.45s ease",
-                      marginBottom: isBreathPhase ? "clamp(28px, 7vh, 64px)" : undefined,
-                    }}
-                  >
-                    {shownPrimaryInstruction}
-                  </div>
-                </FadeWrapper>
-
                 {/* Visual container — all layers stack absolutely at center via FadeWrappers
                     so cross-fades never push elements off-axis or overlap horizontally. */}
                 <div
@@ -2125,11 +2156,9 @@ export default function SessionPage() {
                     position: "relative",
                     width: "100%",
                     maxWidth: "760px",
-                    // One stable minHeight across all non-settle phases so the
-                    // container doesn't resize during cross-fades.
-                    minHeight: isSettlePhase
-                      ? "clamp(180px, 30vh, 260px)"
-                      : "clamp(360px, 56vh, 460px)",
+                    // One stable minHeight across all phases so the container
+                    // doesn't resize during cross-fades.
+                    minHeight: "clamp(320px, 48vh, 440px)",
                     display: "flex",
                     alignItems: "center",
                     justifyContent: "center",
@@ -2234,6 +2263,8 @@ export default function SessionPage() {
                     <BrushstrokeEyes />
                   </FadeWrapper>
                 </div>
+                </div>
+                {/* end visual area */}
               </div>{/* end centered group */}
 
               {isDebugMode && (

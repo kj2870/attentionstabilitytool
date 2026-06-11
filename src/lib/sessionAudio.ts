@@ -286,14 +286,16 @@ export class SessionAudioController {
     // fadeOutAmbient(); pre-session has nothing playing.
     if (!isRunning) return;
 
-    // Fire crackle covers the diya gaze through open awareness; the intro
-    // music bed covers everything before it.
+    // Fire crackle covers the diya gaze and the short eyes-closed holds; the
+    // intro music bed covers everything before it. Open awareness (integrate)
+    // is deliberately silent — the fire dissolves away and the only sound
+    // left is the closing gong.
     const isFirePhase =
-      phase.visualMode === "gaze" ||
-      phase.visualMode === "eyesClosed" ||
-      phase.visualMode === "integrate";
+      phase.visualMode === "gaze" || phase.visualMode === "eyesClosed";
 
-    if (isFirePhase) {
+    if (phase.visualMode === "integrate") {
+      this.fadeOutAmbient(3500);
+    } else if (isFirePhase) {
       await this.startFireBed(settings);
     } else {
       await this.startIntroBed(settings);
@@ -302,11 +304,9 @@ export class SessionAudioController {
     const isPhaseChange = previousPhaseId !== phase.id;
     if (!isPhaseChange) return;
 
-    // Eyes close: gaze -> eyes-closed, or the final gaze -> open awareness.
-    if (
-      previousPhaseId?.startsWith("gaze-") &&
-      (phase.visualMode === "eyesClosed" || phase.visualMode === "integrate")
-    ) {
+    // Eyes close: gaze -> eyes-closed. The move into open awareness gets no
+    // tone — the fire fading out is the cue, and the phase stays quiet.
+    if (previousPhaseId?.startsWith("gaze-") && phase.visualMode === "eyesClosed") {
       await this.playEyesCloseTransition(settings);
       return;
     }
