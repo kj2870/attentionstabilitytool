@@ -2084,14 +2084,15 @@ export default function SessionPage() {
                     >
                       <div
                         style={{
-                          fontSize: "clamp(26px, 3vw, 34px)",
+                          // Identical to the primary cue size in every phase.
+                          fontSize: "clamp(24px, 2.6vw, 30px)",
                           fontFamily: '"Mukta", "DM Sans", sans-serif',
-                          fontWeight: 200,
+                          fontWeight: 300,
                           letterSpacing: "0.24em",
                           paddingLeft: "0.24em",
                           textTransform: "uppercase",
                           color: "rgba(245, 233, 218, 0.92)",
-                          lineHeight: 1.1,
+                          lineHeight: 1.45,
                           opacity: bodyCueOpacity,
                           transition: "opacity 0.7s ease",
                         }}
@@ -2121,23 +2122,19 @@ export default function SessionPage() {
                   <FadeWrapper active={!isBodyPhase && !!primaryInstruction}>
                     <div
                       style={{
-                        fontSize: isSettlePhase
-                          ? "clamp(17px, 1.9vw, 21px)"
-                          : "clamp(26px, 3vw, 34px)",
+                        // One size for every phase — only case/tracking changes
+                        // between sentence copy and single-word cues.
+                        fontSize: "clamp(24px, 2.6vw, 30px)",
                         fontFamily: '"Mukta", "DM Sans", sans-serif',
-                        fontWeight: isSettlePhase ? 300 : 200,
-                        color: isSettlePhase
-                          ? "rgba(245, 233, 218, 0.8)"
-                          : "rgba(245, 233, 218, 0.92)",
-                        lineHeight: isSettlePhase ? 1.8 : 1.1,
+                        fontWeight: 300,
+                        color: "rgba(245, 233, 218, 0.92)",
+                        lineHeight: 1.45,
                         letterSpacing: isSettlePhase ? "0.02em" : "0.24em",
                         paddingLeft: isSettlePhase ? 0 : "0.24em",
                         textTransform: isSettlePhase ? "none" : "uppercase",
-                        maxWidth: "36ch",
+                        maxWidth: "30ch",
                         textAlign: "center",
                         opacity: primaryInstructionOpacity,
-                        // Opacity only — animating font-size forces layout every
-                        // frame; the cross-fade already hides the size switch.
                         transition: "opacity 0.45s ease",
                       }}
                     >
