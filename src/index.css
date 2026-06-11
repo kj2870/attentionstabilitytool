@@ -224,6 +224,19 @@ input:focus {
   box-shadow: 0 0 0 rgba(255, 179, 71, 0);
 }
 
+/* Accessibility: honour the user's reduced-motion preference. The app is
+   animation-heavy by design, so this collapses all motion to near-instant —
+   cross-fades become cuts, breathing orbs hold still. */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
 /* Soft fade-in on every route change so navigations feel like the
    in-session cross-fades rather than hard cuts. */
 @keyframes routeFadeIn {

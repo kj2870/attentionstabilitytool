@@ -29,3 +29,6 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+# graphify local cache — regenerated on every run, pure churn in diffs
+graphify-out/cache/

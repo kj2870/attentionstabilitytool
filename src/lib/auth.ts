@@ -39,7 +39,7 @@ export async function syncLocalProfileFromUser(user: User): Promise<void> {
       user.email?.split("@")[0] ??
       "User";
 
-    createProfile({ username, pin: "****" });
+    createProfile({ username });
   }
 
   // Pull remote history in the background — won't block the UI.

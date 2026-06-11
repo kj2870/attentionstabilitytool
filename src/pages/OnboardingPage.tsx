@@ -48,7 +48,8 @@ export default function OnboardingPage() {
             marginBottom: "10px",
             fontWeight: 400,
             lineHeight: 1.05,
-            fontFamily: '"Playfair Display", Georgia, serif',
+            letterSpacing: "0.04em",
+            fontFamily: '"Samarkan", "Playfair Display", Georgia, serif',
           }}
         >
           drishti
