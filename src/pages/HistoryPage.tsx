@@ -280,8 +280,8 @@ function TrendLine({
 // Build a plain-language observation from the history. Factual, no verdict.
 // ---------------------------------------------------------------------------
 function buildObservation(history: SessionRecord[]): string {
-  if (history.length === 0) return "your first session will start the arc";
-  if (history.length < 3) return "a few sessions in — patterns usually emerge by session 6 or 7";
+  if (history.length === 0) return "your first sit will start the arc";
+  if (history.length < 3) return "a few sits in — patterns usually emerge by sit 6 or 7";
 
   // Oldest-first
   const ordered = [...history].sort(
@@ -297,7 +297,7 @@ function buildObservation(history: SessionRecord[]): string {
     recentCount;
 
   if (baseline === 0 && recent === 0)
-    return "we'll have more to say once your sessions include held-gaze segments";
+    return "we'll have more to say once your sits include held-gaze segments";
 
   const delta = baseline === 0 ? 1 : (recent - baseline) / baseline;
   const fmt = (v: number) => `${v.toFixed(0)}s`;
@@ -591,7 +591,7 @@ export default function HistoryPage() {
               margin: 0,
             }}
           >
-            Complete your first session to begin the mandala.
+            Complete your first sit to begin the mandala.
           </p>
         </div>
       ) : (
@@ -613,7 +613,7 @@ export default function HistoryPage() {
 
           {/* Within-session gaze steadiness arc. */}
           <section style={{ marginBottom: "36px" }}>
-            <SectionHeading label="gaze steadiness — last session" />
+            <SectionHeading label="gaze steadiness — last sit" />
             {lastWithArc ? (
               <GazeSteadinessArc samples={lastWithArc.gazeStabilitySamples ?? []} />
             ) : (
@@ -625,20 +625,20 @@ export default function HistoryPage() {
                   padding: "20px 0",
                 }}
               >
-                steadiness will appear here after your next session
+                steadiness will appear here after your next sit
               </div>
             )}
           </section>
 
           {/* Longest gaze trend. */}
           <section style={{ marginBottom: "36px" }}>
-            <SectionHeading label="longest gaze — across sessions" />
+            <SectionHeading label="longest gaze — across sits" />
             <TrendLine values={longestGazeTrend} unitLabel="s" />
           </section>
 
           {/* Blink rate during gaze trend. */}
           <section style={{ marginBottom: "48px" }}>
-            <SectionHeading label="blink rate during gaze — across sessions" />
+            <SectionHeading label="blink rate during gaze — across sits" />
             <TrendLine values={blinkRateTrend} unitLabel="/min" />
           </section>
 

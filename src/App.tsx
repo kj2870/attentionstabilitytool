@@ -95,7 +95,9 @@ function AuthedRoutes() {
       <Routes>
         <Route path="/" element={<HomePage />} />
         <Route path="/session" element={<SessionPage />} />
-        <Route path="/history" element={<HistoryPage />} />
+        <Route path="/record" element={<HistoryPage />} />
+        {/* Back-compat: old bookmarks to /history now resolve to /record. */}
+        <Route path="/history" element={<Navigate to="/record" replace />} />
         <Route path="/instructions" element={<InstructionsPage />} />
         <Route path="/science" element={<SciencePage />} />
         <Route path="/philosophy" element={<PhilosophyPage />} />
