@@ -115,16 +115,51 @@ export default function HomePage() {
           drishti
         </h1>
 
+        {/* Tagline trio — matches the landing voice. Headline, the arc,
+            the lineage placard. (Post-vow, this trio will be replaced by
+            the Day N of 48 anchor.) */}
         <p
           style={{
-            maxWidth: "36ch",
-            fontSize: "clamp(16px, 1.9vw, 19px)",
-            lineHeight: 1.55,
-            color: "rgba(217, 203, 184, 0.68)",
-            marginBottom: "44px",
+            margin: 0,
+            maxWidth: "32ch",
+            fontSize: "clamp(17px, 1.9vw, 21px)",
+            fontFamily: '"Mukta", "DM Sans", sans-serif',
+            fontWeight: 300,
+            letterSpacing: "0.02em",
+            lineHeight: 1.4,
+            color: "rgba(245, 233, 218, 0.8)",
           }}
         >
-          A daily ritual to train attention and calm the mind.
+          A practice in steadiness.
+        </p>
+
+        <p
+          style={{
+            margin: "18px 0 0",
+            fontFamily: '"Mukta", "DM Sans", sans-serif',
+            fontWeight: 300,
+            fontSize: "12px",
+            letterSpacing: "0.32em",
+            paddingLeft: "0.32em",
+            textTransform: "lowercase",
+            color: "rgba(217, 203, 184, 0.52)",
+          }}
+        >
+          body · breath · gaze · awareness
+        </p>
+
+        <p
+          style={{
+            margin: "6px 0 40px",
+            fontFamily: '"Mukta", "DM Sans", sans-serif',
+            fontWeight: 200,
+            fontSize: "11px",
+            letterSpacing: "0.08em",
+            textTransform: "lowercase",
+            color: "rgba(217, 203, 184, 0.36)",
+          }}
+        >
+          from the yogic and contemplative traditions
         </p>
 
         {/* Weekly card */}

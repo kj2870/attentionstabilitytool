@@ -55,16 +55,50 @@ export default function OnboardingPage() {
           drishti
         </h1>
 
+        {/* Tagline trio: headline, the arc, the lineage placard. All Mukta
+            so the brand voice carries from landing into the session. */}
         <p
           style={{
-            maxWidth: "36ch",
-            fontSize: "clamp(16px, 1.9vw, 19px)",
-            lineHeight: 1.55,
-            color: "rgba(217, 203, 184, 0.68)",
-            marginBottom: "44px",
+            margin: 0,
+            maxWidth: "32ch",
+            fontSize: "clamp(18px, 2vw, 22px)",
+            fontFamily: '"Mukta", "DM Sans", sans-serif',
+            fontWeight: 300,
+            letterSpacing: "0.02em",
+            lineHeight: 1.4,
+            color: "rgba(245, 233, 218, 0.8)",
           }}
         >
-          A daily ritual to train attention and calm the mind.
+          A practice in steadiness.
+        </p>
+
+        <p
+          style={{
+            margin: "20px 0 0",
+            fontFamily: '"Mukta", "DM Sans", sans-serif',
+            fontWeight: 300,
+            fontSize: "12px",
+            letterSpacing: "0.32em",
+            paddingLeft: "0.32em",
+            textTransform: "lowercase",
+            color: "rgba(217, 203, 184, 0.52)",
+          }}
+        >
+          body · breath · gaze · awareness
+        </p>
+
+        <p
+          style={{
+            margin: "6px 0 44px",
+            fontFamily: '"Mukta", "DM Sans", sans-serif',
+            fontWeight: 200,
+            fontSize: "11px",
+            letterSpacing: "0.08em",
+            textTransform: "lowercase",
+            color: "rgba(217, 203, 184, 0.36)",
+          }}
+        >
+          from the yogic and contemplative traditions
         </p>
 
         {/* Fixed slot for auth errors so showing one doesn't shove the CTA down. */}
