@@ -31,6 +31,30 @@ export type SessionRecord = {
   newMilestones?: string[];
 };
 
+// A taken 48-day vow. The traditional sadhana period. Once taken, the home
+// screen becomes a single anchor (Day N of 48); two consecutive missed days
+// end it. Only `takenAt` is persisted — broken/fulfilled state is derived.
+export type VowState = {
+  // ISO timestamp of when the vow was taken. takenAt's local date = day 1.
+  takenAt: string;
+};
+
+// Computed snapshot of the active vow, used by the UI.
+export type VowSnapshot = {
+  takenAt: string;
+  // 1-based day number (today = how many days since takenAt + 1).
+  day: number;
+  // True once vow has been broken (two consecutive missed days in the past).
+  broken: boolean;
+  // True once day 48's sit has been completed.
+  fulfilled: boolean;
+  // Last day on which the user sat. 0 if no sits yet inside the vow window.
+  lastSitDay: number;
+  // True if the user has already sat today (used to block second sit / show
+  // "today's sit is complete" on home).
+  todaysSitComplete: boolean;
+};
+
 export type LocalProfile = {
   id: string;
   username: string;
@@ -41,6 +65,8 @@ export type LocalProfile = {
   // treated as `true` (grandfather) when the profile has history.
   firstReadComplete?: boolean;
   history: SessionRecord[];
+  // 48-day vow. Optional — only set after the user takes it up.
+  vow?: VowState;
 };
 
 const PROFILES_KEY = "drishti_profiles";
@@ -459,4 +485,108 @@ export function getMandalaDay(records: SessionRecord[] = loadHistory()) {
     .size;
 
   return Math.min(uniqueDaysCount, 48);
+}
+
+// ---------------------------------------------------------------------------
+// VOW: the 48-day commitment. Local-midnight calendar days throughout —
+// "today" is the user's local date, not UTC.
+// ---------------------------------------------------------------------------
+
+function parseLocalDateKey(key: string): Date {
+  const [y, m, d] = key.split("-").map(Number);
+  return new Date(y, m - 1, d);
+}
+
+function daysBetweenLocalKeys(startKey: string, endKey: string): number {
+  const start = parseLocalDateKey(startKey);
+  const end = parseLocalDateKey(endKey);
+  return Math.round((end.getTime() - start.getTime()) / 86_400_000);
+}
+
+// Takes up the 48-day vow. Overwrites any previous vow (used by both first-
+// sit prompt and the "take it up again" flow after a broken vow).
+export function takeVow() {
+  updateActiveProfile((profile) => ({
+    ...profile,
+    vow: { takenAt: new Date().toISOString() },
+  }));
+  window.dispatchEvent(new Event("drishti:profile-updated"));
+}
+
+// True if the active profile has sat at least once today (local time).
+export function isTodaysSitComplete(
+  records: SessionRecord[] = loadHistory()
+): boolean {
+  const todayKey = toLocalDateKey(new Date().toISOString());
+  return records.some((r) => toLocalDateKey(r.date) === todayKey);
+}
+
+// Computes the current state of the vow. Returns null if no vow taken.
+// Pure function over (vow, history) — no persistence needed for broken/
+// fulfilled state because it's derivable from the sit dates.
+export function getVowSnapshot(
+  profile: LocalProfile | null = getActiveProfile()
+): VowSnapshot | null {
+  if (!profile?.vow) return null;
+  const { vow, history } = profile;
+
+  const startKey = toLocalDateKey(vow.takenAt);
+  const todayKey = toLocalDateKey(new Date().toISOString());
+  const day = Math.max(1, daysBetweenLocalKeys(startKey, todayKey) + 1);
+
+  // Sit-day keys belonging to this vow window (>= takenAt local date).
+  const sitDayKeys = new Set(
+    history
+      .map((r) => toLocalDateKey(r.date))
+      .filter((k) => k >= startKey)
+  );
+
+  // Walk past days only (everything before today). Today's sit may still
+  // be pending, so it can't count as a "miss" yet.
+  let consecutiveMisses = 0;
+  let lastSitDay = 0;
+  let broken = false;
+
+  const pastDays = day - 1; // number of days fully elapsed before today
+  for (let offset = 0; offset < pastDays; offset++) {
+    const dayKey = shiftDateKey(parseLocalDateKey(startKey), offset);
+    const sat = sitDayKeys.has(dayKey);
+    const dayNumber = offset + 1;
+    if (sat) {
+      lastSitDay = dayNumber;
+      consecutiveMisses = 0;
+    } else {
+      consecutiveMisses += 1;
+      if (consecutiveMisses >= 2) {
+        broken = true;
+        break;
+      }
+    }
+  }
+
+  const todaysSitComplete = sitDayKeys.has(todayKey);
+  if (todaysSitComplete && day > lastSitDay) {
+    lastSitDay = day;
+  }
+
+  const fulfilled = day >= 48 && lastSitDay >= 48;
+
+  return {
+    takenAt: vow.takenAt,
+    day,
+    broken,
+    fulfilled,
+    lastSitDay,
+    todaysSitComplete,
+  };
+}
+
+// Discards the current vow (used after the user acknowledges a broken vow
+// from the home screen, before they take it up again).
+export function clearVow() {
+  updateActiveProfile((profile) => ({
+    ...profile,
+    vow: undefined,
+  }));
+  window.dispatchEvent(new Event("drishti:profile-updated"));
 }

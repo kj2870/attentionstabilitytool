@@ -67,10 +67,10 @@ const TABS: Tab[] = [
     matches: ["/"],
   },
   {
-    to: "/history",
-    label: "History",
+    to: "/record",
+    label: "Record",
     icon: (active) => <HistoryIcon active={active} />,
-    matches: ["/history"],
+    matches: ["/record", "/history"],
   },
   {
     to: "/about",
