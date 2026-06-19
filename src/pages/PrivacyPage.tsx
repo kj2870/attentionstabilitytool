@@ -67,8 +67,18 @@ export default function PrivacyPage() {
 
         <p style={{ margin: 0 }}>
           Session metrics (longest gaze, blink rate, duration) are saved to
-          your account so you can see your trend over time. Only you can see
-          them.
+          your account so you can see your trend over time.
+        </p>
+
+        <p style={{ margin: 0 }}>
+          Any feedback notes you write on the summary screen are saved
+          alongside them.
+        </p>
+
+        <p style={{ margin: 0 }}>
+          The developer can read this data — it's used to understand whether
+          the practice is helping people and to improve the app. It is not
+          sold or shared with anyone else.
         </p>
 
         <p style={{ margin: 0 }}>

@@ -199,7 +199,7 @@ function PreVowTagline({ days, todayIndex, weekly, sitDoneToday, onTakeVow }: Pr
 
       <p
         style={{
-          margin: "18px 0 0",
+          margin: "18px 0 40px",
           fontFamily: '"Mukta", "DM Sans", sans-serif',
           fontWeight: 300,
           fontSize: "12px",
@@ -210,20 +210,6 @@ function PreVowTagline({ days, todayIndex, weekly, sitDoneToday, onTakeVow }: Pr
         }}
       >
         body · breath · gaze · awareness
-      </p>
-
-      <p
-        style={{
-          margin: "6px 0 40px",
-          fontFamily: '"Mukta", "DM Sans", sans-serif',
-          fontWeight: 200,
-          fontSize: "11px",
-          letterSpacing: "0.08em",
-          textTransform: "lowercase",
-          color: "rgba(217, 203, 184, 0.36)",
-        }}
-      >
-        from the yogic and contemplative traditions
       </p>
 
       {/* Weekly card */}
