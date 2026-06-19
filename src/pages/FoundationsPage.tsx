@@ -62,7 +62,7 @@ export default function FoundationsPage() {
               maxWidth: "28ch",
             }}
           >
-            Attention is trained, not given.
+            Attention is trained, not inherited.
           </h1>
 
           <div
@@ -78,24 +78,34 @@ export default function FoundationsPage() {
             }}
           >
             <p style={{ margin: 0 }}>
-              Trataka is the practice of resting attention on a single point of
-              light. The flame holds your gaze. When the mind moves, you
-              return. That returning, repeated, is the whole training.
+              Trataka is an ancient practice of steady gazing. A single flame
+              becomes the object of attention. The eyes rest on the light, the
+              mind inevitably wanders, and attention is gently returned. This
+              simple act of returning is the practice.
             </p>
 
             <p style={{ margin: 0 }}>
-              Attention is a skill, not a fixed trait. Each time you bring
-              focus back, you strengthen the circuits between the prefrontal
-              cortex and the networks that produce mind-wandering. Over weeks,
-              the wandering quiets. Focus steadies. The space between stimulus
-              and reaction widens.
+              Many people believe focus is something they either have or do not
+              have. In reality, attention is a capacity that can be strengthened
+              through repetition. Each time you notice distraction and come
+              back to the flame, you reinforce the neural pathways involved in
+              sustained attention and self-regulation. Over time, mental
+              restlessness softens, concentration deepens, and a greater sense
+              of presence emerges.
             </p>
 
             <p style={{ margin: 0 }}>
-              Drishti is ten minutes. You will settle the body, slow the
-              breath, gaze at a flame in four rounds, and close in silence.
-              There is nothing to achieve in any one session. The practice
-              changes you only when it is repeated.
+              In this 11-minute practice, you will settle the body, slow the
+              breath, and move through five rounds of gazing. The invitation is
+              not to force concentration or achieve a particular state.
+              Instead, allow the flame to anchor your awareness. When the mind
+              drifts, simply return.
+            </p>
+
+            <p style={{ margin: 0 }}>
+              The benefit of Trataka is not found in a single session, but in
+              the steady accumulation of practice. One return strengthens
+              attention. Hundreds of returns transform it.
             </p>
           </div>
 
