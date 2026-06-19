@@ -1797,15 +1797,6 @@ export default function SessionPage() {
                     min
                   </div>
                 </div>
-                <div
-                  style={{
-                    fontSize: "13px",
-                    color: "rgba(245, 233, 218, 0.42)",
-                    letterSpacing: "0.01em",
-                  }}
-                >
-                  The practice counts with or without measurement.
-                </div>
               </div>
             )}
 
@@ -1843,11 +1834,12 @@ export default function SessionPage() {
                 >
                   <div
                     style={{
-                      fontSize: "16px",
-                      lineHeight: 1.85,
-                      color: "rgba(245, 233, 218, 0.66)",
-                      letterSpacing: "0.04em",
-                      fontFamily: '"Samarkan", "Playfair Display", Georgia, serif',
+                      fontSize: "17px",
+                      lineHeight: 1.7,
+                      color: "rgba(245, 233, 218, 0.78)",
+                      letterSpacing: "0.01em",
+                      fontFamily: '"Mukta", "DM Sans", sans-serif',
+                      fontWeight: 300,
                     }}
                   >
                     {quote.text}
@@ -1857,7 +1849,9 @@ export default function SessionPage() {
                       fontSize: "11px",
                       letterSpacing: "0.14em",
                       textTransform: "lowercase",
-                      color: "rgba(203, 183, 158, 0.4)",
+                      color: "rgba(203, 183, 158, 0.5)",
+                      fontFamily: '"Mukta", "DM Sans", sans-serif',
+                      fontWeight: 300,
                     }}
                   >
                     {quote.source}
