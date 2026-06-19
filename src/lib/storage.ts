@@ -6,12 +6,12 @@ export type SessionRecord = {
   id: string;
   date: string;
   durationMin: number;
-  // timeOfDay is legacy — kept optional so older saved records still load.
-  // Never set by new sessions; never shown in UI.
+  // Legacy fields — kept optional so older locally-cached records still load,
+  // but no longer written by new sits and no longer persisted remotely.
   timeOfDay?: "Morning" | "Midday" | "Night";
-  attentionScore: number;
+  attentionScore?: number;
+  grade?: "A" | "B" | "C";
   feeling: SessionFeeling;
-  grade: "A" | "B" | "C";
   blinkCount?: number;
   avgDrift?: number;
   avgRecovery?: number;
@@ -346,45 +346,25 @@ export async function saveSessionRemote(record: SessionRecord): Promise<void> {
 
   if (!user) return; // not logged in; skip silently
 
-  // Core columns that exist in every deployed schema version.
-  const core = {
+  const row = {
     user_id: user.id,
     date: record.date,
     duration_min: record.durationMin,
-    // Legacy column — kept populated for backward DB compatibility. Not used in UI.
-    time_of_day: record.timeOfDay ?? "Night",
-    attention_score: record.attentionScore,
     feeling: record.feeling || null,
-    grade: record.grade,
     blink_count: record.blinkCount ?? null,
     longest_gaze_sec: record.longestGazeSec ?? null,
     total_stillness_sec: record.totalStillnessSec ?? null,
-    note: record.note ?? null,
-    new_milestones: record.newMilestones ?? null,
-  };
-
-  // Extended metric columns — may be missing or renamed depending on which
-  // migrations have been applied. Tried first; on failure we retry with the
-  // core columns so a schema mismatch never costs the user their session row.
-  const extended = {
-    ...core,
     avg_drift: record.avgDrift ?? null,
     avg_recovery: record.avgRecovery ?? null,
     blink_rate_during_gaze: record.blinkRateDuringGaze ?? null,
     gaze_stability_samples: record.gazeStabilitySamples ?? null,
+    note: record.note ?? null,
+    new_milestones: record.newMilestones ?? null,
   };
 
-  const { error } = await supabase.from("sessions").insert(extended);
-  if (!error) return;
-
-  console.warn(
-    "[Drishti] Full session insert failed, retrying with core columns:",
-    error.message
-  );
-
-  const { error: coreError } = await supabase.from("sessions").insert(core);
-  if (coreError) {
-    console.error("[Drishti] Remote session save failed:", coreError.message);
+  const { error } = await supabase.from("sessions").insert(row);
+  if (error) {
+    console.error("[Drishti] Remote session save failed:", error.message);
   }
 }
 
@@ -442,10 +422,7 @@ export async function loadHistoryRemote(): Promise<SessionRecord[]> {
     id: row.id as string,
     date: row.date as string,
     durationMin: row.duration_min as number,
-    timeOfDay: (row.time_of_day ?? undefined) as "Morning" | "Midday" | "Night" | undefined,
-    attentionScore: row.attention_score as number,
     feeling: (row.feeling ?? "") as SessionFeeling,
-    grade: row.grade as "A" | "B" | "C",
     blinkCount: row.blink_count ?? undefined,
     avgDrift: row.avg_drift ?? undefined,
     avgRecovery: row.avg_recovery ?? undefined,
