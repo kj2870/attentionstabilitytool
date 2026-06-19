@@ -790,12 +790,7 @@ export default function SessionPage() {
       date: new Date().toISOString(),
       // True elapsed time — partial when the session was ended early.
       durationMin: Number((elapsedAtEndRef.current / 60).toFixed(1)),
-      attentionScore,
       feeling: "" as SessionFeeling,
-      grade: (attentionScore >= 85 ? "A" : attentionScore >= 72 ? "B" : "C") as
-        | "A"
-        | "B"
-        | "C",
       blinkCount: metrics.blinkCount,
       avgDrift,
       avgRecovery,

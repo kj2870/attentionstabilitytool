@@ -5,12 +5,10 @@
 --
 -- What this creates:
 --   - public.sessions  (one row per completed sit)
+--   - public.profiles  (one row per signed-in user — username lookup)
 --   - Row-level security so users only see/edit their own data
+--   - Auto-create trigger so a profile row is made on every Google signup
 --   - Indexes for fast per-user history queries
---
--- What this does NOT create:
---   - public.profiles  — vestigial in older schemas, not used by the app.
---     Usernames are read from auth.users.user_metadata directly.
 -- =============================================================================
 
 -- ---------------------------------------------------------------------------
@@ -33,11 +31,8 @@ create table public.sessions (
   -- Session context
   date                    text        not null,            -- ISO timestamp string from client
   duration_min            numeric     not null,            -- actual elapsed minutes (partial if ended early)
-  time_of_day             text        not null default 'Night',  -- legacy, never shown in UI
 
-  -- Outcome metrics
-  attention_score         integer     not null,            -- legacy 0–100 heuristic, never shown
-  grade                   text        not null,            -- legacy A | B | C, never shown
+  -- Subjective + free-form
   feeling                 text,                            -- Calm | Neutral | Restless | null
   note                    text,                            -- optional free-form feedback
   new_milestones          text[],                          -- milestone IDs unlocked this sit
@@ -57,7 +52,18 @@ create index sessions_user_id_created_at
 
 
 -- ---------------------------------------------------------------------------
--- Row-level security: each user sees and modifies only their own sits.
+-- profiles: username lookup, one row per user
+-- Useful in the dashboard so rows aren't anonymous UUIDs.
+-- ---------------------------------------------------------------------------
+create table public.profiles (
+  id          uuid        primary key references auth.users(id) on delete cascade,
+  username    text        not null,
+  created_at  timestamptz not null default now()
+);
+
+
+-- ---------------------------------------------------------------------------
+-- Row-level security: each user sees and modifies only their own data.
 -- The developer (you) can still see everything via the Supabase dashboard,
 -- which uses the service-role key and bypasses RLS.
 -- ---------------------------------------------------------------------------
@@ -76,20 +82,69 @@ create policy "Users can update their own sits"
   using (auth.uid() = user_id)
   with check (auth.uid() = user_id);
 
+alter table public.profiles enable row level security;
+
+create policy "Users can view their own profile"
+  on public.profiles for select
+  using (auth.uid() = id);
+
+create policy "Users can update their own profile"
+  on public.profiles for update
+  using (auth.uid() = id);
+
+
+-- ---------------------------------------------------------------------------
+-- Auto-create a profile row whenever a new auth.users row appears.
+-- Pulls the display name from Google OAuth metadata, falling back to the
+-- email's local-part.
+-- ---------------------------------------------------------------------------
+create or replace function public.handle_new_user()
+returns trigger
+language plpgsql
+security definer set search_path = public
+as $$
+begin
+  insert into public.profiles (id, username)
+  values (
+    new.id,
+    coalesce(
+      new.raw_user_meta_data->>'full_name',
+      new.raw_user_meta_data->>'name',
+      split_part(new.email, '@', 1)
+    )
+  );
+  return new;
+end;
+$$;
+
+create trigger on_auth_user_created
+  after insert on auth.users
+  for each row execute procedure public.handle_new_user();
+
 
 -- =============================================================================
 -- Done. After running:
---   1. Verify the schema with:
+--   1. Verify the schema:
 --        select column_name, data_type, is_nullable
 --        from information_schema.columns
 --        where table_schema = 'public' and table_name = 'sessions'
 --        order by ordinal_position;
 --
---   2. Complete a sit in the app — it should land here as a new row.
+--   2. Sign into the app — a profile row should appear in public.profiles.
 --
---   3. To see your feedback notes:
---        select created_at, date, feeling, longest_gaze_sec, note
---        from sessions
---        where note is not null and trim(note) <> ''
---        order by created_at desc;
+--   3. Complete a sit — a row should appear in public.sessions.
+--
+--   4. See sits with usernames in one view:
+--        select p.username, s.date, s.duration_min, s.longest_gaze_sec,
+--               s.blink_rate_during_gaze, s.feeling, s.note
+--        from sessions s
+--        join profiles p on p.id = s.user_id
+--        order by s.created_at desc;
+--
+--   5. Just feedback notes:
+--        select p.username, s.created_at, s.feeling, s.longest_gaze_sec, s.note
+--        from sessions s
+--        join profiles p on p.id = s.user_id
+--        where s.note is not null and trim(s.note) <> ''
+--        order by s.created_at desc;
 -- =============================================================================

@@ -15,9 +15,7 @@ function record(daysAgo: number): SessionRecord {
     id: `r-${daysAgo}`,
     date: d.toISOString(),
     durationMin: 11,
-    attentionScore: 80,
     feeling: "",
-    grade: "B",
   };
 }
 
