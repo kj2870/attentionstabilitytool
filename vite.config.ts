@@ -47,10 +47,11 @@ export default defineConfig({
         ],
       },
       workbox: {
-        // The diya video is large; include it explicitly so the session works offline.
-        globPatterns: ["**/*.{js,css,html,svg,png,ico,mp4,woff,woff2}"],
-        // Bump the cache size limit to accommodate the diya video (~few MB).
-        maximumFileSizeToCacheInBytes: 10 * 1024 * 1024,
+        // Precache the diya video and the ambient/transition audio so the
+        // session works offline and doesn't redownload on each visit.
+        globPatterns: ["**/*.{js,css,html,svg,png,ico,mp4,mp3,woff,woff2}"],
+        // Fire ambience is the largest precached asset (~7MB) — bump the cap.
+        maximumFileSizeToCacheInBytes: 12 * 1024 * 1024,
         // Don't cache MediaPipe WASM/model — they're large and update separately.
         navigateFallbackDenylist: [/^\/api\//, /\.task$/, /\.wasm$/],
       },
@@ -60,4 +61,17 @@ export default defineConfig({
       },
     }),
   ],
+  build: {
+    rollupOptions: {
+      output: {
+        // Split heavy vendor deps so the landing page TTI isn't blocked by
+        // session-only dependencies (MediaPipe vision is the biggest by far).
+        manualChunks: {
+          mediapipe: ["@mediapipe/tasks-vision"],
+          supabase: ["@supabase/supabase-js"],
+          react: ["react", "react-dom", "react-router-dom"],
+        },
+      },
+    },
+  },
 });
