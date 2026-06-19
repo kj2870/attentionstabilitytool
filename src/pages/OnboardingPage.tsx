@@ -74,7 +74,7 @@ export default function OnboardingPage() {
 
         <p
           style={{
-            margin: "20px 0 0",
+            margin: "20px 0 44px",
             fontFamily: '"Mukta", "DM Sans", sans-serif',
             fontWeight: 300,
             fontSize: "12px",
@@ -85,20 +85,6 @@ export default function OnboardingPage() {
           }}
         >
           body · breath · gaze · awareness
-        </p>
-
-        <p
-          style={{
-            margin: "6px 0 44px",
-            fontFamily: '"Mukta", "DM Sans", sans-serif',
-            fontWeight: 200,
-            fontSize: "11px",
-            letterSpacing: "0.08em",
-            textTransform: "lowercase",
-            color: "rgba(217, 203, 184, 0.36)",
-          }}
-        >
-          from the yogic and contemplative traditions
         </p>
 
         {/* Fixed slot for auth errors so showing one doesn't shove the CTA down. */}
