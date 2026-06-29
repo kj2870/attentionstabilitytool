@@ -373,9 +373,26 @@ export async function saveSessionRemote(record: SessionRecord): Promise<void> {
     new_milestones: record.newMilestones ?? null,
   };
 
-  const { error } = await supabase.from("sessions").insert(row);
-  if (error) {
-    console.error("[Drishti] Remote session save failed:", error.message);
+  // Upsert keeps retries idempotent — a transient network failure that's
+  // already partially landed won't double-insert when we retry.
+  const attempt = () =>
+    supabase.from("sessions").upsert(row, { onConflict: "id" });
+
+  const { error } = await attempt();
+  if (!error) return;
+
+  console.warn(
+    "[Drishti] Remote session save failed, retrying in 2s:",
+    error.message
+  );
+
+  await new Promise((resolve) => setTimeout(resolve, 2000));
+  const { error: retryError } = await attempt();
+  if (retryError) {
+    console.error(
+      "[Drishti] Remote session save failed after retry:",
+      retryError.message
+    );
   }
 }
 
@@ -459,9 +476,11 @@ export async function mergeRemoteHistory(): Promise<void> {
   if (remote.length === 0) return;
 
   const local = loadHistory();
-  const localDates = new Set(local.map((r) => r.date));
+  // Dedupe by record id — stable, unique, and consistent with how the
+  // remote insert/update path now matches rows.
+  const localIds = new Set(local.map((r) => r.id));
 
-  const newRecords = remote.filter((r) => !localDates.has(r.date));
+  const newRecords = remote.filter((r) => !localIds.has(r.id));
   if (newRecords.length === 0) return;
 
   updateActiveProfile((profile) => ({

@@ -1832,7 +1832,7 @@ export default function SessionPage() {
                 e.currentTarget.style.height = `${e.currentTarget.scrollHeight}px`;
               }}
               rows={1}
-              placeholder="A line about this session, if you want."
+              placeholder="Insights from session?"
               style={{
                 width: "100%",
                 padding: "10px 0",
@@ -1879,54 +1879,6 @@ export default function SessionPage() {
           </div>
         ) : (
           <>
-            {/* TEMP testing scrubber — pinned to the very bottom of the
-                viewport so it's reachable during any phase (including the
-                full-screen black gaze phase). Remove before ship. */}
-            <div
-              style={{
-                position: "fixed",
-                bottom: 0,
-                left: 0,
-                right: 0,
-                zIndex: 60,
-                padding: "8px 16px calc(8px + env(safe-area-inset-bottom))",
-                background: "rgba(8, 6, 4, 0.78)",
-                backdropFilter: "blur(6px)",
-                borderTop: "1px solid rgba(255,179,71,0.18)",
-              }}
-            >
-              <div
-                style={{
-                  display: "flex",
-                  justifyContent: "space-between",
-                  fontSize: "11px",
-                  color: "rgba(255,255,255,0.5)",
-                  marginBottom: "4px",
-                  fontFamily: "monospace",
-                }}
-              >
-                <span>
-                  {Math.floor(elapsedSeconds / 60)}:
-                  {String(elapsedSeconds % 60).padStart(2, "0")}
-                </span>
-                <span style={{ color: "rgba(255,179,71,0.8)" }}>
-                  {currentPhase?.label ?? "—"}
-                </span>
-                <span>
-                  {Math.floor(totalDuration / 60)}:
-                  {String(totalDuration % 60).padStart(2, "0")}
-                </span>
-              </div>
-              <input
-                type="range"
-                min={0}
-                max={totalDuration}
-                value={elapsedSeconds}
-                onChange={(e) => scrubToElapsed(Number(e.target.value))}
-                style={{ width: "100%", accentColor: "#ffb347", cursor: "pointer" }}
-              />
-            </div>
-
             {/* In-session controls: pause + end-early, centred at the bottom. */}
             {isRunning && (
               <div
