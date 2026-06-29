@@ -3,6 +3,7 @@ import { Navigate, Route, Routes, useLocation } from "react-router-dom";
 import type { User } from "@supabase/supabase-js";
 import Layout from "./components/Layout";
 import InstallPrompt from "./components/InstallPrompt";
+import UpdateBanner from "./components/UpdateBanner";
 import HomePage from "./pages/HomePage";
 import HistoryPage from "./pages/HistoryPage";
 import PrivacyPage from "./pages/PrivacyPage";
@@ -186,6 +187,7 @@ export default function App() {
       {isAuthenticated && needsFoundations && <FoundationsGate />}
       {isAuthenticated && !needsFoundations && <AuthedRoutes />}
       <InstallPrompt />
+      <UpdateBanner />
     </>
   );
 }

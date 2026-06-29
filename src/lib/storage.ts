@@ -31,30 +31,6 @@ export type SessionRecord = {
   newMilestones?: string[];
 };
 
-// A taken 48-day vow. The traditional sadhana period. Once taken, the home
-// screen becomes a single anchor (Day N of 48); two consecutive missed days
-// end it. Only `takenAt` is persisted — broken/fulfilled state is derived.
-export type VowState = {
-  // ISO timestamp of when the vow was taken. takenAt's local date = day 1.
-  takenAt: string;
-};
-
-// Computed snapshot of the active vow, used by the UI.
-export type VowSnapshot = {
-  takenAt: string;
-  // 1-based day number (today = how many days since takenAt + 1).
-  day: number;
-  // True once vow has been broken (two consecutive missed days in the past).
-  broken: boolean;
-  // True once day 48's sit has been completed.
-  fulfilled: boolean;
-  // Last day on which the user sat. 0 if no sits yet inside the vow window.
-  lastSitDay: number;
-  // True if the user has already sat today (used to block second sit / show
-  // "today's sit is complete" on home).
-  todaysSitComplete: boolean;
-};
-
 export type LocalProfile = {
   id: string;
   username: string;
@@ -65,8 +41,6 @@ export type LocalProfile = {
   // treated as `true` (grandfather) when the profile has history.
   firstReadComplete?: boolean;
   history: SessionRecord[];
-  // 48-day vow. Optional — only set after the user takes it up.
-  vow?: VowState;
 };
 
 const PROFILES_KEY = "drishti_profiles";
@@ -115,18 +89,45 @@ export function getActiveProfileId(): string | null {
 
 export function setActiveProfileId(profileId: string) {
   localStorage.setItem(ACTIVE_PROFILE_KEY, profileId);
+  invalidateProfileCache();
 }
 
 export function clearActiveProfile() {
   localStorage.removeItem(ACTIVE_PROFILE_KEY);
+  invalidateProfileCache();
+}
+
+// Module-level cache for the active profile. Reads avoid re-parsing
+// localStorage on every render (getActiveProfile is called from many places
+// per render); cache is invalidated on any mutation or external storage
+// change.
+let activeProfileCache: LocalProfile | null | undefined;
+
+function invalidateProfileCache() {
+  activeProfileCache = undefined;
+}
+
+if (typeof window !== "undefined") {
+  window.addEventListener("storage", (e) => {
+    if (e.key === PROFILES_KEY || e.key === ACTIVE_PROFILE_KEY) {
+      invalidateProfileCache();
+    }
+  });
+  window.addEventListener("drishti:profile-updated", invalidateProfileCache);
 }
 
 export function getActiveProfile(): LocalProfile | null {
+  if (activeProfileCache !== undefined) return activeProfileCache;
+
   const activeId = getActiveProfileId();
-  if (!activeId) return null;
+  if (!activeId) {
+    activeProfileCache = null;
+    return null;
+  }
 
   const profiles = loadProfiles();
-  return profiles.find((profile) => profile.id === activeId) ?? null;
+  activeProfileCache = profiles.find((profile) => profile.id === activeId) ?? null;
+  return activeProfileCache;
 }
 
 export function updateActiveProfile(
@@ -142,6 +143,7 @@ export function updateActiveProfile(
 
   profiles[index] = updater(profiles[index]);
   saveProfiles(profiles);
+  invalidateProfileCache();
 }
 
 export function hasCompletedOnboarding(): boolean {
@@ -153,10 +155,14 @@ export function loadHistory(): SessionRecord[] {
   return getActiveProfile()?.history ?? [];
 }
 
+// Local + remote history caps are both 200 — keeps them in sync so older
+// remote-only records don't get re-trimmed after a merge.
+const HISTORY_CAP = 200;
+
 export function saveSession(record: SessionRecord) {
   updateActiveProfile((profile) => ({
     ...profile,
-    history: [record, ...profile.history].slice(0, 100),
+    history: [record, ...profile.history].slice(0, HISTORY_CAP),
   }));
 }
 
@@ -346,7 +352,12 @@ export async function saveSessionRemote(record: SessionRecord): Promise<void> {
 
   if (!user) return; // not logged in; skip silently
 
+  // Send the client-generated UUID as the row id so subsequent updates
+  // (note/feeling patching) can match on a stable, unique key instead of
+  // the date string — which would mismatch on retries or near-simultaneous
+  // saves from two devices.
   const row = {
+    id: record.id,
     user_id: user.id,
     date: record.date,
     duration_min: record.durationMin,
@@ -362,20 +373,37 @@ export async function saveSessionRemote(record: SessionRecord): Promise<void> {
     new_milestones: record.newMilestones ?? null,
   };
 
-  const { error } = await supabase.from("sessions").insert(row);
-  if (error) {
-    console.error("[Drishti] Remote session save failed:", error.message);
+  // Upsert keeps retries idempotent — a transient network failure that's
+  // already partially landed won't double-insert when we retry.
+  const attempt = () =>
+    supabase.from("sessions").upsert(row, { onConflict: "id" });
+
+  const { error } = await attempt();
+  if (!error) return;
+
+  console.warn(
+    "[Drishti] Remote session save failed, retrying in 2s:",
+    error.message
+  );
+
+  await new Promise((resolve) => setTimeout(resolve, 2000));
+  const { error: retryError } = await attempt();
+  if (retryError) {
+    console.error(
+      "[Drishti] Remote session save failed after retry:",
+      retryError.message
+    );
   }
 }
 
 // ---------------------------------------------------------------------------
 // Attach/replace the note and/or feeling on an already-saved remote session.
 // Sessions auto-save at completion (before the summary screen), so these are
-// patched in afterwards. Matched by exact ISO date string, which is unique
-// per user in practice.
+// patched in afterwards. Matched on row id — the client-generated UUID is
+// stable, unique, and avoids the race conditions of date-string matching.
 // ---------------------------------------------------------------------------
 export async function updateSessionDetailsRemote(
-  date: string,
+  id: string,
   details: { note?: string; feeling?: SessionFeeling }
 ): Promise<void> {
   const {
@@ -392,7 +420,7 @@ export async function updateSessionDetailsRemote(
     .from("sessions")
     .update(patch)
     .eq("user_id", user.id)
-    .eq("date", date);
+    .eq("id", id);
 
   if (error) {
     console.error("[Drishti] Remote session update failed:", error.message);
@@ -401,6 +429,9 @@ export async function updateSessionDetailsRemote(
 
 // ---------------------------------------------------------------------------
 // Remote history load — fetches all sessions for the logged-in user.
+// Explicitly excludes gaze_stability_samples (the heaviest column, ~3KB of
+// integers per row) — it's only needed when rendering a single sit's arc,
+// not for the history list. Cuts egress by ~80%.
 // ---------------------------------------------------------------------------
 export async function loadHistoryRemote(): Promise<SessionRecord[]> {
   const { data: { user } } = await supabase.auth.getUser();
@@ -408,10 +439,12 @@ export async function loadHistoryRemote(): Promise<SessionRecord[]> {
 
   const { data, error } = await supabase
     .from("sessions")
-    .select("*")
+    .select(
+      "id, date, duration_min, feeling, blink_count, avg_drift, avg_recovery, longest_gaze_sec, total_stillness_sec, blink_rate_during_gaze, note, new_milestones"
+    )
     .eq("user_id", user.id)
     .order("created_at", { ascending: false })
-    .limit(200);
+    .limit(HISTORY_CAP);
 
   if (error) {
     console.error("[Drishti] Remote history load failed:", error.message);
@@ -429,7 +462,6 @@ export async function loadHistoryRemote(): Promise<SessionRecord[]> {
     longestGazeSec: row.longest_gaze_sec ?? undefined,
     totalStillnessSec: row.total_stillness_sec ?? undefined,
     blinkRateDuringGaze: row.blink_rate_during_gaze ?? undefined,
-    gazeStabilitySamples: row.gaze_stability_samples ?? undefined,
     note: row.note ?? undefined,
     newMilestones: row.new_milestones ?? undefined,
   }));
@@ -444,16 +476,18 @@ export async function mergeRemoteHistory(): Promise<void> {
   if (remote.length === 0) return;
 
   const local = loadHistory();
-  const localDates = new Set(local.map((r) => r.date));
+  // Dedupe by record id — stable, unique, and consistent with how the
+  // remote insert/update path now matches rows.
+  const localIds = new Set(local.map((r) => r.id));
 
-  const newRecords = remote.filter((r) => !localDates.has(r.date));
+  const newRecords = remote.filter((r) => !localIds.has(r.id));
   if (newRecords.length === 0) return;
 
   updateActiveProfile((profile) => ({
     ...profile,
     history: [...newRecords, ...profile.history]
       .sort((a, b) => (a.date < b.date ? 1 : -1))
-      .slice(0, 200),
+      .slice(0, HISTORY_CAP),
   }));
 }
 
@@ -464,106 +498,3 @@ export function getMandalaDay(records: SessionRecord[] = loadHistory()) {
   return Math.min(uniqueDaysCount, 48);
 }
 
-// ---------------------------------------------------------------------------
-// VOW: the 48-day commitment. Local-midnight calendar days throughout —
-// "today" is the user's local date, not UTC.
-// ---------------------------------------------------------------------------
-
-function parseLocalDateKey(key: string): Date {
-  const [y, m, d] = key.split("-").map(Number);
-  return new Date(y, m - 1, d);
-}
-
-function daysBetweenLocalKeys(startKey: string, endKey: string): number {
-  const start = parseLocalDateKey(startKey);
-  const end = parseLocalDateKey(endKey);
-  return Math.round((end.getTime() - start.getTime()) / 86_400_000);
-}
-
-// Takes up the 48-day vow. Overwrites any previous vow (used by both first-
-// sit prompt and the "take it up again" flow after a broken vow).
-export function takeVow() {
-  updateActiveProfile((profile) => ({
-    ...profile,
-    vow: { takenAt: new Date().toISOString() },
-  }));
-  window.dispatchEvent(new Event("drishti:profile-updated"));
-}
-
-// True if the active profile has sat at least once today (local time).
-export function isTodaysSitComplete(
-  records: SessionRecord[] = loadHistory()
-): boolean {
-  const todayKey = toLocalDateKey(new Date().toISOString());
-  return records.some((r) => toLocalDateKey(r.date) === todayKey);
-}
-
-// Computes the current state of the vow. Returns null if no vow taken.
-// Pure function over (vow, history) — no persistence needed for broken/
-// fulfilled state because it's derivable from the sit dates.
-export function getVowSnapshot(
-  profile: LocalProfile | null = getActiveProfile()
-): VowSnapshot | null {
-  if (!profile?.vow) return null;
-  const { vow, history } = profile;
-
-  const startKey = toLocalDateKey(vow.takenAt);
-  const todayKey = toLocalDateKey(new Date().toISOString());
-  const day = Math.max(1, daysBetweenLocalKeys(startKey, todayKey) + 1);
-
-  // Sit-day keys belonging to this vow window (>= takenAt local date).
-  const sitDayKeys = new Set(
-    history
-      .map((r) => toLocalDateKey(r.date))
-      .filter((k) => k >= startKey)
-  );
-
-  // Walk past days only (everything before today). Today's sit may still
-  // be pending, so it can't count as a "miss" yet.
-  let consecutiveMisses = 0;
-  let lastSitDay = 0;
-  let broken = false;
-
-  const pastDays = day - 1; // number of days fully elapsed before today
-  for (let offset = 0; offset < pastDays; offset++) {
-    const dayKey = shiftDateKey(parseLocalDateKey(startKey), offset);
-    const sat = sitDayKeys.has(dayKey);
-    const dayNumber = offset + 1;
-    if (sat) {
-      lastSitDay = dayNumber;
-      consecutiveMisses = 0;
-    } else {
-      consecutiveMisses += 1;
-      if (consecutiveMisses >= 2) {
-        broken = true;
-        break;
-      }
-    }
-  }
-
-  const todaysSitComplete = sitDayKeys.has(todayKey);
-  if (todaysSitComplete && day > lastSitDay) {
-    lastSitDay = day;
-  }
-
-  const fulfilled = day >= 48 && lastSitDay >= 48;
-
-  return {
-    takenAt: vow.takenAt,
-    day,
-    broken,
-    fulfilled,
-    lastSitDay,
-    todaysSitComplete,
-  };
-}
-
-// Discards the current vow (used after the user acknowledges a broken vow
-// from the home screen, before they take it up again).
-export function clearVow() {
-  updateActiveProfile((profile) => ({
-    ...profile,
-    vow: undefined,
-  }));
-  window.dispatchEvent(new Event("drishti:profile-updated"));
-}

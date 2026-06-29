@@ -14,12 +14,9 @@ import {
 } from "../lib/sessionScript";
 import {
   getMandalaDay,
-  getVowSnapshot,
-  isTodaysSitComplete,
   loadHistory,
   saveSession,
   saveSessionRemote,
-  takeVow,
   updateSessionDetailsLocal,
   updateSessionDetailsRemote,
   type SessionFeeling,
@@ -513,15 +510,6 @@ export default function SessionPage() {
   );
   const [sessionComplete, setSessionComplete] = useState(false);
   const [saved, setSaved] = useState(false);
-  // True if the user has already sat today — used to block a second sit and
-  // surface "today's sit is complete" instead. Captured once on page load so
-  // it doesn't flip during a sit in progress.
-  const [todaysSitCompleteOnLoad] = useState(() => isTodaysSitComplete());
-  // Vow state on load — used to decide whether to offer the take-up prompt
-  // on the summary screen.
-  const [vowOnLoad] = useState(() => getVowSnapshot());
-  // True once the user takes the vow from the summary screen.
-  const [vowJustTaken, setVowJustTaken] = useState(false);
   // Seconds of session actually elapsed when it ended — full duration on a
   // natural finish, partial on "end early". This is what gets persisted, so
   // an early end never records an 11-minute session.
@@ -1425,7 +1413,7 @@ export default function SessionPage() {
         ...(feeling ? { feeling } : {}),
       };
       updateSessionDetailsLocal(record.id, details);
-      void updateSessionDetailsRemote(record.date, details);
+      void updateSessionDetailsRemote(record.id, details);
     }
 
     setSaved(true);
@@ -1581,62 +1569,6 @@ export default function SessionPage() {
     liveBlinkRatePerMinute,
   ]);
 
-
-  // Hard block on second sit. If today's sit is already complete and the
-  // user navigates directly to /session, show the quiet block screen instead
-  // of starting another sit. (The home screen also surfaces this state, but
-  // we enforce here too in case they hit the route via URL or back button.)
-  if (todaysSitCompleteOnLoad && !sessionComplete) {
-    return (
-      <MeditationBackground>
-        <div
-          className="page-shell"
-          style={{
-            minHeight: "100dvh",
-            display: "flex",
-            flexDirection: "column",
-            justifyContent: "center",
-            alignItems: "center",
-            textAlign: "center",
-            padding: "32px 24px",
-            gap: "12px",
-            position: "relative",
-            zIndex: 1,
-          }}
-        >
-          <div
-            style={{
-              fontFamily: '"Mukta", "DM Sans", sans-serif',
-              fontWeight: 300,
-              fontSize: "clamp(20px, 2.2vw, 24px)",
-              letterSpacing: "0.04em",
-              color: "rgba(245, 233, 218, 0.78)",
-            }}
-          >
-            today's sit is complete.
-          </div>
-          <div
-            style={{
-              fontFamily: '"Mukta", "DM Sans", sans-serif',
-              fontWeight: 300,
-              fontSize: "13px",
-              letterSpacing: "0.06em",
-              color: "rgba(217, 203, 184, 0.5)",
-            }}
-          >
-            return tomorrow.
-          </div>
-          <button
-            onClick={() => navigate("/")}
-            className="cta-pill"
-            style={{ marginTop: "24px" }}
-          >
-            Home
-          </button>
-        </div>
-      </MeditationBackground>
-    );
-  }
 
   return (
     <MeditationBackground >
@@ -1900,7 +1832,7 @@ export default function SessionPage() {
                 e.currentTarget.style.height = `${e.currentTarget.scrollHeight}px`;
               }}
               rows={1}
-              placeholder="A line about this session, if you want."
+              placeholder="Insights from session?"
               style={{
                 width: "100%",
                 padding: "10px 0",
@@ -1935,85 +1867,6 @@ export default function SessionPage() {
               </div>
             )}
 
-            {/* Vow take-up prompt — only shown after the very first sit (no
-                vow yet, and this was their introduction to the practice). If
-                the user already had a vow that broke, the home page handles
-                re-take. */}
-            {!vowOnLoad && !vowJustTaken && loadHistory().length <= 1 && (
-              <div
-                style={{
-                  display: "flex",
-                  flexDirection: "column",
-                  alignItems: "center",
-                  gap: "16px",
-                  maxWidth: "36ch",
-                  marginTop: "8px",
-                  paddingTop: "28px",
-                  borderTop: "1px solid rgba(245, 233, 218, 0.08)",
-                }}
-              >
-                <p
-                  style={{
-                    margin: 0,
-                    fontFamily: '"Mukta", "DM Sans", sans-serif',
-                    fontWeight: 300,
-                    fontSize: "clamp(16px, 1.8vw, 19px)",
-                    lineHeight: 1.6,
-                    color: "rgba(245, 233, 218, 0.82)",
-                  }}
-                >
-                  This practice is traditionally taken as a vow.
-                  <br />
-                  Forty-eight days. One sit per day.
-                </p>
-                <div style={{ display: "flex", gap: "16px", alignItems: "center" }}>
-                  <button
-                    onClick={() => {
-                      takeVow();
-                      setVowJustTaken(true);
-                    }}
-                    className="cta-pill"
-                  >
-                    I take it up
-                  </button>
-                  <button
-                    onClick={() => setVowJustTaken(true)}
-                    style={{
-                      background: "transparent",
-                      border: "none",
-                      fontFamily: '"Mukta", "DM Sans", sans-serif',
-                      fontSize: "13px",
-                      fontWeight: 300,
-                      letterSpacing: "0.06em",
-                      color: "rgba(217, 203, 184, 0.5)",
-                      cursor: "pointer",
-                      padding: "8px 10px",
-                    }}
-                  >
-                    not yet
-                  </button>
-                </div>
-              </div>
-            )}
-
-            {/* Acknowledgment after taking the vow — quiet, no celebration. */}
-            {vowJustTaken && getVowSnapshot() && (
-              <div
-                style={{
-                  fontFamily: '"Mukta", "DM Sans", sans-serif',
-                  fontWeight: 300,
-                  fontSize: "15px",
-                  letterSpacing: "0.14em",
-                  paddingLeft: "0.14em",
-                  textTransform: "lowercase",
-                  color: "rgba(255, 200, 130, 0.78)",
-                  marginTop: "8px",
-                }}
-              >
-                day 1 of 48.
-              </div>
-            )}
-
             {/* Done button — dims on save, no checkmark or status. The brief
                 disabled state is the only acknowledgment as we navigate home. */}
             <button
@@ -2026,54 +1879,6 @@ export default function SessionPage() {
           </div>
         ) : (
           <>
-            {/* TEMP testing scrubber — pinned to the very bottom of the
-                viewport so it's reachable during any phase (including the
-                full-screen black gaze phase). Remove before ship. */}
-            <div
-              style={{
-                position: "fixed",
-                bottom: 0,
-                left: 0,
-                right: 0,
-                zIndex: 60,
-                padding: "8px 16px calc(8px + env(safe-area-inset-bottom))",
-                background: "rgba(8, 6, 4, 0.78)",
-                backdropFilter: "blur(6px)",
-                borderTop: "1px solid rgba(255,179,71,0.18)",
-              }}
-            >
-              <div
-                style={{
-                  display: "flex",
-                  justifyContent: "space-between",
-                  fontSize: "11px",
-                  color: "rgba(255,255,255,0.5)",
-                  marginBottom: "4px",
-                  fontFamily: "monospace",
-                }}
-              >
-                <span>
-                  {Math.floor(elapsedSeconds / 60)}:
-                  {String(elapsedSeconds % 60).padStart(2, "0")}
-                </span>
-                <span style={{ color: "rgba(255,179,71,0.8)" }}>
-                  {currentPhase?.label ?? "—"}
-                </span>
-                <span>
-                  {Math.floor(totalDuration / 60)}:
-                  {String(totalDuration % 60).padStart(2, "0")}
-                </span>
-              </div>
-              <input
-                type="range"
-                min={0}
-                max={totalDuration}
-                value={elapsedSeconds}
-                onChange={(e) => scrubToElapsed(Number(e.target.value))}
-                style={{ width: "100%", accentColor: "#ffb347", cursor: "pointer" }}
-              />
-            </div>
-
             {/* In-session controls: pause + end-early, centred at the bottom. */}
             {isRunning && (
               <div
