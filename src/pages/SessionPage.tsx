@@ -1444,10 +1444,11 @@ export default function SessionPage() {
   // Longer cross-fade on the body cue so CLENCH<->RELEASE feels deliberate.
   const { displayed: shownBodyCue, opacity: bodyCueOpacity } = useCrossFadeText(bodyCue, 700);
   const { displayed: shownBodyRegionLabel, opacity: bodyRegionLabelOpacity } = useCrossFadeText(bodyRegionLabel);
-  // Smoothly swap Inhale<->Exhale (FadeWrapper alone stays active across breath
-  // phases so the text would otherwise hard-cut).
+  // Cross-fade Inhale<->Exhale slowly enough that the swap reads as a
+  // breath boundary rather than a text change (FadeWrapper stays active
+  // across breath phases so the text would otherwise hard-cut).
   const { displayed: shownPrimaryInstruction, opacity: primaryInstructionOpacity } =
-    useCrossFadeText(primaryInstruction, 450);
+    useCrossFadeText(primaryInstruction, 750);
 
   const liveBlinkRatePerMinute = useMemo(() => {
     if (blinkRateHistory.length === 0) return 0;
@@ -2175,7 +2176,7 @@ export default function SessionPage() {
                         maxWidth: "30ch",
                         textAlign: "center",
                         opacity: primaryInstructionOpacity,
-                        transition: "opacity 0.45s ease",
+                        transition: "opacity 0.75s ease",
                       }}
                     >
                       {shownPrimaryInstruction}
@@ -2202,10 +2203,12 @@ export default function SessionPage() {
                   style={{
                     position: "relative",
                     width: "100%",
-                    maxWidth: "760px",
+                    maxWidth: "620px",
                     // One stable minHeight across all phases so the container
-                    // doesn't resize during cross-fades.
-                    minHeight: "clamp(320px, 48vh, 440px)",
+                    // doesn't resize during cross-fades. Sized to the diya
+                    // video's natural footprint so the layout doesn't feel
+                    // sparse on wider screens.
+                    minHeight: "clamp(280px, 42vh, 380px)",
                     display: "flex",
                     alignItems: "center",
                     justifyContent: "center",
@@ -2228,23 +2231,35 @@ export default function SessionPage() {
                       }}
                     >
                       {/* Slow drifting warmth — keeps long gaze holds feeling alive
-                          without competing with the flame. Sits behind the video. */}
+                          without competing with the flame. Two-layer setup so
+                          the centering translate lives on the outer positioner
+                          and the animation only pulses the inner glow (avoids
+                          the "bloom stuck bottom-right" bug when the animation
+                          hasn't yet applied its transform). */}
                       <div
                         aria-hidden
                         style={{
                           position: "absolute",
                           left: "50%",
                           top: "50%",
+                          transform: "translate(-50%, -50%)",
                           width: "180%",
                           height: "180%",
-                          borderRadius: "50%",
-                          background:
-                            "radial-gradient(circle, rgba(255,170,80,0.35) 0%, rgba(220,120,50,0.12) 35%, transparent 65%)",
-                          filter: "blur(40px)",
                           pointerEvents: "none",
-                          animation: "gazeAmbientDrift 22s ease-in-out infinite",
                         }}
-                      />
+                      >
+                        <div
+                          style={{
+                            position: "absolute",
+                            inset: 0,
+                            borderRadius: "50%",
+                            background:
+                              "radial-gradient(circle, rgba(255,170,80,0.35) 0%, rgba(220,120,50,0.12) 35%, transparent 65%)",
+                            filter: "blur(40px)",
+                            animation: "gazeAmbientPulse 22s ease-in-out infinite",
+                          }}
+                        />
+                      </div>
                       <video
                         src="/diya-session.mp4"
                         autoPlay
