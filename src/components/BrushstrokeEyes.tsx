@@ -1,17 +1,11 @@
-import { useEffect, useState } from "react";
-
 /**
  * BrushstrokeEyes — two brush-stroke closed eyes with a warm bloom behind.
  * Used between trataka gaze rounds (eyes-closed recovery phases).
- * Fades in on mount and breathes gently in sync with the recovery rest.
+ * The parent FadeWrapper owns the opacity transition; this component just
+ * renders — no internal fade-in, otherwise the two opacity transitions
+ * would multiply and the image would arrive later than the tone that cues it.
  */
 export default function BrushstrokeEyes() {
-  const [visible, setVisible] = useState(false);
-  useEffect(() => {
-    const id = requestAnimationFrame(() => setVisible(true));
-    return () => cancelAnimationFrame(id);
-  }, []);
-
   return (
     // Flow element — not absolutely positioned — so it contributes height
     // to the visual container and doesn't collapse to zero.
@@ -24,8 +18,6 @@ export default function BrushstrokeEyes() {
         alignItems: "center",
         justifyContent: "center",
         pointerEvents: "none",
-        opacity: visible ? 1 : 0,
-        transition: "opacity 1.4s ease-in-out",
       }}
     >
       {/* Stage — square, scales with the shorter viewport dimension. */}

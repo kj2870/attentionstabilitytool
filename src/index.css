@@ -244,14 +244,85 @@ input:focus {
   to   { opacity: 1; }
 }
 .route-fade-in {
-  animation: routeFadeIn 0.35s ease-out;
+  /* 900ms matches the FadeWrapper default so arriving on the session is
+     the same rhythm as any in-session cross-fade — no "dropped into" jolt. */
+  animation: routeFadeIn 0.9s ease-out;
 }
 
-/* Subtle session-phase animations. */
-@keyframes gazeAmbientDrift {
-  0%   { transform: translate(-50%, -50%) scale(1);    opacity: 0.55; }
-  50%  { transform: translate(-48%, -52%) scale(1.06); opacity: 0.85; }
-  100% { transform: translate(-50%, -50%) scale(1);    opacity: 0.55; }
+/* Session summary — two-column split (stats on the left, daily quote on the
+   right) with a soft vertical hairline between. Stacks vertically on narrow
+   screens so it's still usable on a small window. */
+.session-summary {
+  width: 100%;
+  max-width: 920px;
+  margin: 0 auto;
+  padding: 56px 40px 48px;
+  display: flex;
+  gap: 56px;
+  align-items: stretch;
+  color: rgba(245, 233, 218, 0.85);
+}
+
+.session-summary__stats {
+  flex: 1 1 380px;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 28px;
+  text-align: center;
+}
+
+.session-summary__divider {
+  width: 1px;
+  align-self: stretch;
+  background: linear-gradient(
+    180deg,
+    transparent 0%,
+    rgba(245, 233, 218, 0.14) 22%,
+    rgba(245, 233, 218, 0.14) 78%,
+    transparent 100%
+  );
+}
+
+.session-summary__quote {
+  flex: 1 1 320px;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: 12px 8px;
+}
+
+@media (max-width: 760px) {
+  .session-summary {
+    flex-direction: column;
+    gap: 40px;
+    padding: 40px 24px;
+  }
+  .session-summary__divider {
+    width: 60%;
+    height: 1px;
+    background: linear-gradient(
+      90deg,
+      transparent 0%,
+      rgba(245, 233, 218, 0.14) 22%,
+      rgba(245, 233, 218, 0.14) 78%,
+      transparent 100%
+    );
+    align-self: center;
+  }
+}
+
+/* Subtle session-phase animations. The pulse only touches scale + opacity
+   so the outer positioning translate on the wrapper stays untouched — that
+   way the bloom is always centred on the diya, even mid-fade-in. */
+@keyframes gazeAmbientPulse {
+  0%   { transform: scale(1);    opacity: 0.55; }
+  50%  { transform: scale(1.06); opacity: 0.85; }
+  100% { transform: scale(1);    opacity: 0.55; }
 }
 
 .secondary-button {

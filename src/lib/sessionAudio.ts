@@ -212,19 +212,26 @@ export class SessionAudioController {
 
   // --- Ambient beds ----------------------------------------------------------
 
+  // Symmetric crossfade duration — matches the diya's 2.4s bloom-in on the
+  // biggest ambience change of the session (Breath → Gaze). Equal-power in
+  // both directions so there's no audible silence dip between beds.
+  private static readonly BED_CROSSFADE_MS = 2000;
+
   private async startIntroBed(settings: SessionSettings) {
     if (!settings.soundEnabled || !this.introBed) return;
     if (this.activeBed === "intro" && !this.introBed.paused) return;
 
     this.activeBed = "intro";
-    if (this.fireBed && !this.fireBed.paused) this.fade(this.fireBed, 0, 1500, true);
+    if (this.fireBed && !this.fireBed.paused) {
+      this.fade(this.fireBed, 0, SessionAudioController.BED_CROSSFADE_MS, true);
+    }
 
     try {
       await this.introBed.play();
     } catch {
       return;
     }
-    this.fade(this.introBed, INTRO_VOLUME, 1500);
+    this.fade(this.introBed, INTRO_VOLUME, SessionAudioController.BED_CROSSFADE_MS);
   }
 
   private async startFireBed(settings: SessionSettings) {
@@ -232,14 +239,16 @@ export class SessionAudioController {
     if (this.activeBed === "fire" && !this.fireBed.paused) return;
 
     this.activeBed = "fire";
-    if (this.introBed && !this.introBed.paused) this.fade(this.introBed, 0, 1800, true);
+    if (this.introBed && !this.introBed.paused) {
+      this.fade(this.introBed, 0, SessionAudioController.BED_CROSSFADE_MS, true);
+    }
 
     try {
       await this.fireBed.play();
     } catch {
       return;
     }
-    this.fade(this.fireBed, FIRE_VOLUME, 1800);
+    this.fade(this.fireBed, FIRE_VOLUME, SessionAudioController.BED_CROSSFADE_MS);
   }
 
   private pauseBeds() {
@@ -286,35 +295,40 @@ export class SessionAudioController {
     // fadeOutAmbient(); pre-session has nothing playing.
     if (!isRunning) return;
 
+    // Fire the transition tone FIRST on any phase boundary — users key their
+    // eye-close/eye-open action to the tone, and any lag against the visual
+    // reads as unglued. The bed switch below is intentionally non-awaited so
+    // its play() latency doesn't push the tone late.
+    const isPhaseChange = previousPhaseId !== phase.id;
+
+    if (isPhaseChange) {
+      if (previousPhaseId?.startsWith("gaze-") && phase.visualMode === "eyesClosed") {
+        void this.playEyesCloseTransition(settings);
+      } else if (
+        previousPhaseId?.startsWith("eyes-closed-") &&
+        phase.visualMode === "gaze"
+      ) {
+        void this.playEyesOpenTransition(settings);
+      }
+    }
+
     // Fire crackle covers the diya gaze and the short eyes-closed holds; the
     // intro music bed covers everything before it. Open awareness (integrate)
-    // is deliberately silent — the fire dissolves away and the only sound
-    // left is the closing gong.
+    // is deliberately silent — the fire dissolves away over the same 2.4s the
+    // diya fades out, so the flame and the crackle disappear together.
     const isFirePhase =
       phase.visualMode === "gaze" || phase.visualMode === "eyesClosed";
 
     if (phase.visualMode === "integrate") {
-      this.fadeOutAmbient(3500);
+      this.fadeOutAmbient(2400);
     } else if (isFirePhase) {
-      await this.startFireBed(settings);
+      void this.startFireBed(settings);
     } else {
-      await this.startIntroBed(settings);
+      void this.startIntroBed(settings);
     }
 
-    const isPhaseChange = previousPhaseId !== phase.id;
-    if (!isPhaseChange) return;
-
-    // Eyes close: gaze -> eyes-closed. The move into open awareness gets no
-    // tone — the fire fading out is the cue, and the phase stays quiet.
-    if (previousPhaseId?.startsWith("gaze-") && phase.visualMode === "eyesClosed") {
-      await this.playEyesCloseTransition(settings);
-      return;
-    }
-
-    // Eyes open: eyes-closed -> gaze.
-    if (previousPhaseId?.startsWith("eyes-closed-") && phase.visualMode === "gaze") {
-      await this.playEyesOpenTransition(settings);
-    }
+    // Transition tones already fired above (before the bed switch) so users
+    // don't hear the tone lag behind bed play() latency. Nothing else to do.
   }
 
   async reset() {

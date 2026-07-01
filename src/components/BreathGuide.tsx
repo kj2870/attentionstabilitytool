@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import type { BreathAction } from "../lib/sessionScript";
 
 type BreathGuideProps = {
@@ -9,23 +9,38 @@ type BreathGuideProps = {
 // Natural breath easing — sine-like, no sharp midpoint.
 const BREATH_EASING = "cubic-bezier(0.37, 0, 0.63, 1)";
 
+// Wider scale range so the shrink / expand is unmistakably visible.
+const INHALE_SCALE = 1.35;
+const EXHALE_SCALE = 0.55;
+
 export default function BreathGuide({ action, durationSec }: BreathGuideProps) {
-  // Start small on the very first mount so the opening inhale visibly grows
-  // from a tiny seed. After the first frame we flip to the real target scale
-  // and the CSS transition carries it. Because this component stays mounted
-  // across all breath phases (inhale ↔ exhale phases share visualMode=breath),
-  // the action prop simply re-targets the transform — no remount, no jump.
-  const [mounted, setMounted] = useState(false);
+  // The component stays mounted across the whole breath phase (inhale ↔
+  // exhale share visualMode=breath), so the action prop just re-targets
+  // the CSS transition — no remount, no jump.
+  //
+  // On very first render we set the starting scale to the OPPOSITE of the
+  // first action, then flip on the next frame. That way the browser sees
+  // an actual value change and runs the transition, so the opening breath
+  // visibly grows/shrinks instead of appearing at target scale instantly.
+  const isInhale = action === "inhale";
+  const firstRenderRef = useRef(true);
+  const [primed, setPrimed] = useState(false);
 
   useEffect(() => {
-    const id = requestAnimationFrame(() => setMounted(true));
-    return () => cancelAnimationFrame(id);
-  }, []);
+    if (!primed) {
+      const id = requestAnimationFrame(() => setPrimed(true));
+      return () => cancelAnimationFrame(id);
+    }
+    firstRenderRef.current = false;
+  }, [primed]);
 
-  const isInhale = action === "inhale";
-  // Tighter range so the shift between inhale and exhale feels gentle rather
-  // than dramatic, and the perceived "shade" of the gradient stays uniform.
-  const targetScale = !mounted ? 0.42 : isInhale ? 1.12 : 0.7;
+  const targetScale = !primed
+    ? isInhale
+      ? EXHALE_SCALE
+      : INHALE_SCALE
+    : isInhale
+    ? INHALE_SCALE
+    : EXHALE_SCALE;
 
   return (
     <div
@@ -54,7 +69,7 @@ export default function BreathGuide({ action, durationSec }: BreathGuideProps) {
       {/* The breathing disc. Two stacked orbs (amber inhale, ember exhale) share
           the scale transform; opacity cross-fades between them on the same easing.
           Opacity interpolates cleanly in every browser, unlike radial-gradient
-          strings — so the colour shift is now smooth instead of snapping. */}
+          strings — so the colour shift is smooth instead of snapping. */}
       <div
         style={{
           position: "relative",
@@ -62,6 +77,7 @@ export default function BreathGuide({ action, durationSec }: BreathGuideProps) {
           height: "240px",
           transform: `scale(${targetScale})`,
           transition: `transform ${durationSec}s ${BREATH_EASING}`,
+          willChange: "transform",
           filter: "blur(2px)",
         }}
       >

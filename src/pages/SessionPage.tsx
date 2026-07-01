@@ -509,6 +509,11 @@ export default function SessionPage() {
     script[0]?.durationSec ?? 0
   );
   const [sessionComplete, setSessionComplete] = useState(false);
+  // Summary is held back for a ~2.5s "afterglow" — the closing gong needs
+  // to breathe against the dissolving visual, not against the bright summary
+  // card. sessionComplete triggers save/gong/fade-out; showSummary swaps the
+  // UI once the gong has been given room to speak.
+  const [showSummary, setShowSummary] = useState(false);
   const [saved, setSaved] = useState(false);
   // Seconds of session actually elapsed when it ended — full duration on a
   // natural finish, partial on "end early". This is what gets persisted, so
@@ -590,10 +595,13 @@ export default function SessionPage() {
   const isEyesClosedPhase = currentPhase?.visualMode === "eyesClosed";
   const isIntegratePhase = currentPhase?.visualMode === "integrate";
   const showDiya = isGazePhase;
-  // Pre-darken backdrop during the final breath phase so the diya appears on a
-  // fully-black field without the rectangular flash from a still-fading backdrop.
-  const isLastBreathPhase = currentPhase?.id === "breath-10-out";
-  const wantsBlackBackdrop = showDiya || isEyesClosedPhase || isLastBreathPhase || isIntegratePhase;
+  // Start pre-darkening only in the last 3s of the final exhale so the
+  // backdrop's 2.4s fade completes as the diya begins its own 2.4s bloom-in.
+  // The flame arrives INTO darkness instead of appearing after darkness.
+  const isLastBreathClosing =
+    currentPhase?.id === "breath-10-out" && phaseSecondsLeft <= 3;
+  const wantsBlackBackdrop =
+    showDiya || isEyesClosedPhase || isLastBreathClosing || isIntegratePhase;
 
   // Stops all media tracks safely when camera is disconnected/unmounted.
   const stopCameraStream = (stream: MediaStream | null) => {
@@ -751,11 +759,15 @@ export default function SessionPage() {
   }, [currentPhase, isRunning, isPaused, settings]);
 
   // Plays closing cue and returns viewport to top when session ends.
+  // The summary card is held back ~2.5s (via showSummary) so the gong rings
+  // over the fading integrate visual, not over a bright text-heavy card.
   useEffect(() => {
     if (!sessionComplete) return;
     audioRef.current.fadeOutAmbient();
     audioRef.current.playEndGong(settings);
     window.scrollTo({ top: 0, behavior: "auto" });
+    const id = window.setTimeout(() => setShowSummary(true), 2500);
+    return () => window.clearTimeout(id);
   }, [sessionComplete, settings]);
 
   // Session completion: release the camera and auto-save the record
@@ -1442,12 +1454,15 @@ export default function SessionPage() {
     : currentPhase?.instruction ?? "";
 
   // Longer cross-fade on the body cue so CLENCH<->RELEASE feels deliberate.
+  // Region label matches the same 700ms so "Feet" doesn't race ahead of
+  // "Clench" underneath it.
   const { displayed: shownBodyCue, opacity: bodyCueOpacity } = useCrossFadeText(bodyCue, 700);
-  const { displayed: shownBodyRegionLabel, opacity: bodyRegionLabelOpacity } = useCrossFadeText(bodyRegionLabel);
-  // Smoothly swap Inhale<->Exhale (FadeWrapper alone stays active across breath
-  // phases so the text would otherwise hard-cut).
+  const { displayed: shownBodyRegionLabel, opacity: bodyRegionLabelOpacity } =
+    useCrossFadeText(bodyRegionLabel, 700);
+  // 300ms half = 600ms total swap. A 4s inhale is only 4000ms — anything
+  // slower and "Inhale" is still fading in when the phase is a third done.
   const { displayed: shownPrimaryInstruction, opacity: primaryInstructionOpacity } =
-    useCrossFadeText(primaryInstruction, 450);
+    useCrossFadeText(primaryInstruction, 300);
 
   const liveBlinkRatePerMinute = useMemo(() => {
     if (blinkRateHistory.length === 0) return 0;
@@ -1580,7 +1595,8 @@ export default function SessionPage() {
           inset: 0,
           background: "#000",
           opacity: wantsBlackBackdrop ? 1 : 0,
-          transition: "opacity 1.4s ease-in-out",
+          // Matches the diya's bloom-in duration so the two arrive together.
+          transition: "opacity 2.4s ease-in-out",
           pointerEvents: "none",
           zIndex: 0,
         }}
@@ -1591,7 +1607,7 @@ export default function SessionPage() {
           minHeight: "100dvh",
           display: "flex",
           flexDirection: "column",
-          justifyContent: sessionComplete ? "flex-start" : "center",
+          justifyContent: showSummary ? "flex-start" : "center",
           alignItems: "center",
           padding: "20px 20px 32px",
           margin: "0 auto",
@@ -1599,283 +1615,286 @@ export default function SessionPage() {
           zIndex: 1,
         }}
       >
-        {sessionComplete ? (
-          <div
-            style={{
-              width: "100%",
-              maxWidth: "400px",
-              padding: "56px 28px 48px",
-              margin: "0 auto",
-              textAlign: "center",
-              display: "flex",
-              flexDirection: "column",
-              alignItems: "center",
-              gap: "36px",
-              fontFamily: '"DM Sans", system-ui, sans-serif',
-              color: "rgba(245, 233, 218, 0.85)",
-            }}
-          >
-            {/* Hero stat — gaze steadiness when we measured it; otherwise a
-                duration-centred completion so a camera-free session never
-                reads as "Longest gaze: 0 sec". */}
-            {gazeSecondsRef.current > 0 ? (
-              <div style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: "10px" }}>
-                <div
-                  style={{
-                    fontSize: "11px",
-                    letterSpacing: "0.2em",
-                    textTransform: "uppercase",
-                    color: "rgba(245, 233, 218, 0.38)",
-                  }}
-                >
-                  Longest gaze
-                </div>
-                {/* Number and unit on one line, modest size so digits stay legible */}
-                <div style={{ display: "flex", alignItems: "baseline", gap: "6px" }}>
+        {showSummary ? (
+          <div className="session-summary">
+            {/* Left column — measured stats, milestones, feeling, note, action.
+                All the "what and how" of the session lives here. */}
+            <div className="session-summary__stats">
+              {/* Hero stat — gaze steadiness when we measured it; otherwise a
+                  duration-centred completion so a camera-free session never
+                  reads as "Longest gaze: 0 sec". */}
+              {gazeSecondsRef.current > 0 ? (
+                <div style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: "8px" }}>
                   <div
                     style={{
-                      fontSize: "clamp(52px, 11vw, 80px)",
-                      fontFamily: '"Playfair Display", Georgia, serif',
-                      fontWeight: 400,
-                      color: "rgba(245, 233, 218, 0.95)",
-                      lineHeight: 1,
-                      letterSpacing: "-0.02em",
-                    }}
-                  >
-                    {longestGazeRef.current}
-                  </div>
-                  <div
-                    style={{
-                      fontSize: "22px",
-                      fontFamily: '"DM Sans", system-ui, sans-serif',
-                      fontWeight: 300,
-                      color: "rgba(245, 233, 218, 0.45)",
-                      lineHeight: 1,
-                    }}
-                  >
-                    sec
-                  </div>
-                </div>
-                <div
-                  style={{
-                    fontSize: "13px",
-                    color: "rgba(245, 233, 218, 0.42)",
-                    letterSpacing: "0.01em",
-                  }}
-                >
-                  {(() => {
-                    // History already includes tonight's auto-saved record.
-                    const allHistory = [...loadHistory()];
-                    const sessionN = Math.max(allHistory.length, 1);
-                    const bestEver = Math.max(
-                      longestGazeRef.current,
-                      ...allHistory.map((r) => r.longestGazeSec ?? 0)
-                    );
-                    const blinkPerMin =
-                      gazeSecondsRef.current > 0
-                        ? (blinksDuringGazeRef.current / gazeSecondsRef.current) * 60
-                        : null;
-                    const blinkPart =
-                      blinkPerMin !== null ? `${blinkPerMin.toFixed(1)} blinks/min` : null;
-                    return [
-                      `Session ${sessionN}`,
-                      `${bestEver}s best`,
-                      blinkPart,
-                    ]
-                      .filter(Boolean)
-                      .join(" · ");
-                  })()}
-                </div>
-              </div>
-            ) : (
-              <div style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: "10px" }}>
-                <div
-                  style={{
-                    fontSize: "11px",
-                    letterSpacing: "0.2em",
-                    textTransform: "uppercase",
-                    color: "rgba(245, 233, 218, 0.38)",
-                  }}
-                >
-                  You sat for
-                </div>
-                <div style={{ display: "flex", alignItems: "baseline", gap: "6px" }}>
-                  <div
-                    style={{
-                      fontSize: "clamp(52px, 11vw, 80px)",
-                      fontFamily: '"Playfair Display", Georgia, serif',
-                      fontWeight: 400,
-                      color: "rgba(245, 233, 218, 0.95)",
-                      lineHeight: 1,
-                      letterSpacing: "-0.02em",
-                    }}
-                  >
-                    {Math.max(1, Math.round(elapsedAtEndRef.current / 60))}
-                  </div>
-                  <div
-                    style={{
-                      fontSize: "22px",
-                      fontFamily: '"DM Sans", system-ui, sans-serif',
-                      fontWeight: 300,
-                      color: "rgba(245, 233, 218, 0.45)",
-                      lineHeight: 1,
-                    }}
-                  >
-                    min
-                  </div>
-                </div>
-              </div>
-            )}
-
-            {/* Milestones */}
-            {pendingMilestones.length > 0 && (
-              <div style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: "6px" }}>
-                {pendingMilestones.map((id) => (
-                  <div
-                    key={id}
-                    style={{
-                      fontSize: "13px",
-                      color: "rgba(255, 179, 71, 0.82)",
-                      letterSpacing: "0.02em",
-                    }}
-                  >
-                    ★ {milestoneLabel(id)}
-                  </div>
-                ))}
-              </div>
-            )}
-
-            {/* Daily quote — one per mandala day (1-48), so the session ends
-                inside a progression rather than with a random line. */}
-            {(() => {
-              const quote = getQuoteForDay(Math.max(1, getMandalaDay(loadHistory())));
-              return (
-                <div
-                  style={{
-                    display: "flex",
-                    flexDirection: "column",
-                    alignItems: "center",
-                    gap: "10px",
-                    maxWidth: "44ch",
-                  }}
-                >
-                  <div
-                    style={{
-                      fontSize: "17px",
-                      lineHeight: 1.7,
-                      color: "rgba(245, 233, 218, 0.78)",
-                      letterSpacing: "0.01em",
                       fontFamily: '"Mukta", "DM Sans", sans-serif',
                       fontWeight: 300,
-                    }}
-                  >
-                    {quote.text}
-                  </div>
-                  <div
-                    style={{
                       fontSize: "11px",
-                      letterSpacing: "0.14em",
-                      textTransform: "lowercase",
-                      color: "rgba(203, 183, 158, 0.5)",
+                      letterSpacing: "0.24em",
+                      paddingLeft: "0.24em",
+                      textTransform: "uppercase",
+                      color: "rgba(245, 233, 218, 0.4)",
+                    }}
+                  >
+                    Longest gaze
+                  </div>
+                  <div style={{ display: "flex", alignItems: "baseline", gap: "6px" }}>
+                    <div
+                      style={{
+                        fontSize: "clamp(48px, 6vw, 68px)",
+                        fontFamily: '"Playfair Display", Georgia, serif',
+                        fontWeight: 400,
+                        color: "rgba(245, 233, 218, 0.95)",
+                        lineHeight: 1,
+                        letterSpacing: "-0.02em",
+                      }}
+                    >
+                      {longestGazeRef.current}
+                    </div>
+                    <div
+                      style={{
+                        fontSize: "20px",
+                        fontFamily: '"Mukta", "DM Sans", sans-serif',
+                        fontWeight: 300,
+                        color: "rgba(245, 233, 218, 0.45)",
+                        lineHeight: 1,
+                      }}
+                    >
+                      sec
+                    </div>
+                  </div>
+                  <div
+                    style={{
                       fontFamily: '"Mukta", "DM Sans", sans-serif',
                       fontWeight: 300,
+                      fontSize: "12px",
+                      letterSpacing: "0.06em",
+                      color: "rgba(245, 233, 218, 0.42)",
+                      marginTop: "4px",
                     }}
                   >
-                    {quote.source}
+                    {(() => {
+                      // History already includes tonight's auto-saved record.
+                      const allHistory = [...loadHistory()];
+                      const sessionN = Math.max(allHistory.length, 1);
+                      const bestEver = Math.max(
+                        longestGazeRef.current,
+                        ...allHistory.map((r) => r.longestGazeSec ?? 0)
+                      );
+                      const blinkPerMin =
+                        gazeSecondsRef.current > 0
+                          ? (blinksDuringGazeRef.current / gazeSecondsRef.current) * 60
+                          : null;
+                      const blinkPart =
+                        blinkPerMin !== null ? `${blinkPerMin.toFixed(1)} blinks/min` : null;
+                      return [
+                        `Session ${sessionN}`,
+                        `${bestEver}s best`,
+                        blinkPart,
+                      ]
+                        .filter(Boolean)
+                        .join(" · ");
+                    })()}
                   </div>
                 </div>
-              );
-            })()}
-
-            {/* One-tap subjective state — the cheapest evidence the practice
-                helps. Tap again to deselect. */}
-            <div style={{ display: "flex", gap: "10px", justifyContent: "center" }}>
-              {(["Calm", "Neutral", "Restless"] as const).map((f) => {
-                const selected = feeling === f;
-                return (
-                  <button
-                    key={f}
-                    onClick={() => setFeeling(selected ? "" : f)}
+              ) : (
+                <div style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: "8px" }}>
+                  <div
                     style={{
-                      background: selected
-                        ? "rgba(255, 179, 71, 0.16)"
-                        : "transparent",
-                      border: selected
-                        ? "1px solid rgba(255,179,71,0.5)"
-                        : "1px solid rgba(245, 233, 218, 0.14)",
-                      color: selected
-                        ? "rgba(255, 220, 170, 0.95)"
-                        : "rgba(217, 203, 184, 0.55)",
-                      padding: "7px 18px",
-                      borderRadius: "999px",
-                      fontSize: "13px",
-                      letterSpacing: "0.06em",
-                      textTransform: "lowercase",
-                      fontFamily: "inherit",
-                      cursor: "pointer",
-                      transition: "background 0.2s, color 0.2s, border-color 0.2s",
+                      fontFamily: '"Mukta", "DM Sans", sans-serif',
+                      fontWeight: 300,
+                      fontSize: "11px",
+                      letterSpacing: "0.24em",
+                      paddingLeft: "0.24em",
+                      textTransform: "uppercase",
+                      color: "rgba(245, 233, 218, 0.4)",
                     }}
                   >
-                    {f.toLowerCase()}
-                  </button>
-                );
-              })}
+                    You sat for
+                  </div>
+                  <div style={{ display: "flex", alignItems: "baseline", gap: "6px" }}>
+                    <div
+                      style={{
+                        fontSize: "clamp(48px, 6vw, 68px)",
+                        fontFamily: '"Playfair Display", Georgia, serif',
+                        fontWeight: 400,
+                        color: "rgba(245, 233, 218, 0.95)",
+                        lineHeight: 1,
+                        letterSpacing: "-0.02em",
+                      }}
+                    >
+                      {Math.max(1, Math.round(elapsedAtEndRef.current / 60))}
+                    </div>
+                    <div
+                      style={{
+                        fontSize: "20px",
+                        fontFamily: '"Mukta", "DM Sans", sans-serif',
+                        fontWeight: 300,
+                        color: "rgba(245, 233, 218, 0.45)",
+                        lineHeight: 1,
+                      }}
+                    >
+                      min
+                    </div>
+                  </div>
+                </div>
+              )}
+
+              {/* Milestones — inline under the hero, quiet amber. */}
+              {pendingMilestones.length > 0 && (
+                <div style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: "4px" }}>
+                  {pendingMilestones.map((id) => (
+                    <div
+                      key={id}
+                      style={{
+                        fontFamily: '"Mukta", "DM Sans", sans-serif',
+                        fontWeight: 300,
+                        fontSize: "12px",
+                        letterSpacing: "0.06em",
+                        color: "rgba(255, 179, 71, 0.78)",
+                      }}
+                    >
+                      ★ {milestoneLabel(id)}
+                    </div>
+                  ))}
+                </div>
+              )}
+
+              {/* One-tap subjective state — cheapest evidence the practice helps. */}
+              <div style={{ display: "flex", gap: "8px", justifyContent: "center", flexWrap: "wrap" }}>
+                {(["Calm", "Neutral", "Restless"] as const).map((f) => {
+                  const selected = feeling === f;
+                  return (
+                    <button
+                      key={f}
+                      onClick={() => setFeeling(selected ? "" : f)}
+                      style={{
+                        background: selected ? "rgba(255, 179, 71, 0.16)" : "transparent",
+                        border: selected
+                          ? "1px solid rgba(255,179,71,0.5)"
+                          : "1px solid rgba(245, 233, 218, 0.14)",
+                        color: selected
+                          ? "rgba(255, 220, 170, 0.95)"
+                          : "rgba(217, 203, 184, 0.55)",
+                        padding: "7px 18px",
+                        borderRadius: "999px",
+                        fontSize: "13px",
+                        letterSpacing: "0.06em",
+                        textTransform: "lowercase",
+                        fontFamily: '"Mukta", "DM Sans", sans-serif',
+                        fontWeight: 300,
+                        cursor: "pointer",
+                        transition: "background 0.2s, color 0.2s, border-color 0.2s",
+                      }}
+                    >
+                      {f.toLowerCase()}
+                    </button>
+                  );
+                })}
+              </div>
+
+              {/* Feedback — no heading, textarea speaks for itself. */}
+              <div style={{ width: "100%", display: "flex", flexDirection: "column", alignItems: "center", gap: "8px" }}>
+                <textarea
+                  value={note}
+                  onChange={(e) => {
+                    setNote(e.target.value);
+                    e.currentTarget.style.height = "auto";
+                    e.currentTarget.style.height = `${e.currentTarget.scrollHeight}px`;
+                  }}
+                  rows={1}
+                  placeholder="Insights from session?"
+                  style={{
+                    width: "100%",
+                    padding: "10px 0",
+                    border: "none",
+                    borderBottom: "1px solid rgba(245, 233, 218, 0.10)",
+                    background: "transparent",
+                    color: "rgba(245, 233, 218, 0.88)",
+                    fontSize: "14px",
+                    lineHeight: 1.65,
+                    fontFamily: '"Mukta", "DM Sans", sans-serif',
+                    fontWeight: 300,
+                    minHeight: "44px",
+                    overflow: "hidden",
+                    resize: "none",
+                    outline: "none",
+                    textAlign: "center",
+                  }}
+                  onFocus={(e) => (e.currentTarget.style.borderBottomColor = "rgba(255,179,71,0.35)")}
+                  onBlur={(e) => (e.currentTarget.style.borderBottomColor = "rgba(245, 233, 218, 0.10)")}
+                />
+                {/* Honest disclosure — the note syncs to the developer. Shown
+                    only once the user starts typing. */}
+                {note.trim().length > 0 && (
+                  <div
+                    style={{
+                      fontFamily: '"Mukta", "DM Sans", sans-serif',
+                      fontSize: "10px",
+                      fontWeight: 300,
+                      color: "rgba(217, 203, 184, 0.38)",
+                      letterSpacing: "0.04em",
+                    }}
+                  >
+                    notes are shared with the developer
+                  </div>
+                )}
+              </div>
+
+              {/* Done — dims on save, no checkmark. */}
+              <button
+                onClick={handleSaveSession}
+                disabled={saved}
+                className="cta-pill"
+              >
+                Done
+              </button>
             </div>
 
-            {/* Feedback — no heading, textarea speaks for itself. Auto-grows
-                as the user types so the box never scrolls internally. */}
-            <textarea
-              value={note}
-              onChange={(e) => {
-                setNote(e.target.value);
-                e.currentTarget.style.height = "auto";
-                e.currentTarget.style.height = `${e.currentTarget.scrollHeight}px`;
-              }}
-              rows={1}
-              placeholder="Insights from session?"
-              style={{
-                width: "100%",
-                padding: "10px 0",
-                border: "none",
-                borderBottom: "1px solid rgba(245, 233, 218, 0.10)",
-                background: "transparent",
-                color: "rgba(245, 233, 218, 0.88)",
-                fontSize: "14px",
-                lineHeight: 1.65,
-                fontFamily: "inherit",
-                minHeight: "44px",
-                overflow: "hidden",
-                resize: "none",
-                outline: "none",
-                textAlign: "center",
-              }}
-              onFocus={(e) => (e.currentTarget.style.borderBottomColor = "rgba(255,179,71,0.35)")}
-              onBlur={(e) => (e.currentTarget.style.borderBottomColor = "rgba(245, 233, 218, 0.10)")}
-            />
-            {/* Honest disclosure — the note reads like a journal but syncs
-                to the developer. Shown only once the user starts typing. */}
-            {note.trim().length > 0 && (
-              <div
-                style={{
-                  fontSize: "11px",
-                  color: "rgba(217, 203, 184, 0.38)",
-                  letterSpacing: "0.04em",
-                  marginTop: "-24px",
-                }}
-              >
-                notes are shared with the developer
-              </div>
-            )}
+            {/* Vertical hairline — fades at top/bottom so it doesn't crop the
+                columns like a rule but breathes into the dark field. */}
+            <div className="session-summary__divider" aria-hidden />
 
-            {/* Done button — dims on save, no checkmark or status. The brief
-                disabled state is the only acknowledgment as we navigate home. */}
-            <button
-              onClick={handleSaveSession}
-              disabled={saved}
-              className="cta-pill"
-            >
-              Done
-            </button>
+            {/* Right column — the daily quote, given its own quiet field
+                to breathe in. Vertically centred so it doesn't stack tight
+                against the top when the left column runs long. */}
+            <div className="session-summary__quote">
+              {(() => {
+                const quote = getQuoteForDay(Math.max(1, getMandalaDay(loadHistory())));
+                return (
+                  <>
+                    <div
+                      style={{
+                        fontFamily: '"Playfair Display", Georgia, serif',
+                        fontStyle: "italic",
+                        fontWeight: 400,
+                        fontSize: "clamp(18px, 1.7vw, 22px)",
+                        lineHeight: 1.7,
+                        color: "rgba(245, 233, 218, 0.82)",
+                        letterSpacing: "0.005em",
+                        marginBottom: "18px",
+                        maxWidth: "26ch",
+                      }}
+                    >
+                      {quote.text}
+                    </div>
+                    <div
+                      style={{
+                        fontFamily: '"Mukta", "DM Sans", sans-serif',
+                        fontWeight: 300,
+                        fontSize: "11px",
+                        letterSpacing: "0.16em",
+                        paddingLeft: "0.16em",
+                        textTransform: "lowercase",
+                        color: "rgba(203, 183, 158, 0.5)",
+                      }}
+                    >
+                      {quote.source}
+                    </div>
+                  </>
+                );
+              })()}
+            </div>
           </div>
         ) : (
           <>
@@ -2149,7 +2168,7 @@ export default function SessionPage() {
                           color: "rgba(203, 183, 158, 0.6)",
                           lineHeight: 1.2,
                           opacity: bodyRegionLabelOpacity,
-                          transition: "opacity 0.45s ease",
+                          transition: "opacity 0.7s ease",
                         }}
                       >
                         {shownBodyRegionLabel}
@@ -2175,7 +2194,9 @@ export default function SessionPage() {
                         maxWidth: "30ch",
                         textAlign: "center",
                         opacity: primaryInstructionOpacity,
-                        transition: "opacity 0.45s ease",
+                        // Match the useCrossFadeText half-duration exactly —
+                        // 300ms fade-out, swap, 300ms fade-in = 600ms total.
+                        transition: "opacity 0.3s ease",
                       }}
                     >
                       {shownPrimaryInstruction}
@@ -2202,49 +2223,68 @@ export default function SessionPage() {
                   style={{
                     position: "relative",
                     width: "100%",
-                    maxWidth: "760px",
+                    maxWidth: "620px",
                     // One stable minHeight across all phases so the container
-                    // doesn't resize during cross-fades.
-                    minHeight: "clamp(320px, 48vh, 440px)",
+                    // doesn't resize during cross-fades. Sized to the diya
+                    // video's natural footprint so the layout doesn't feel
+                    // sparse on wider screens.
+                    minHeight: "clamp(280px, 42vh, 380px)",
                     display: "flex",
                     alignItems: "center",
                     justifyContent: "center",
                   }}
                 >
-                  <FadeWrapper
-                    active={showDiya || isEyesClosedPhase}
-                    durationMs={2400}
-                    style={ABSOLUTE_CENTER_LAYER}
+                  {/* Single opacity transition, no nested FadeWrapper — otherwise
+                      the wrapper's own opacity animation multiplies with this
+                      one on breath→gaze and gaze→integrate, making the bloom
+                      arrive muddier than a linear fade. Video stays mounted
+                      through the full gaze/eyes-closed sequence so the flame
+                      plays continuously across rounds. */}
+                  <div
+                    style={{
+                      ...ABSOLUTE_CENTER_LAYER,
+                      pointerEvents: "none",
+                      opacity: showDiya ? 1 : 0,
+                      transition: "opacity 2.4s ease-in-out",
+                    }}
                   >
                     <div
                       style={{
                         position: "relative",
                         mixBlendMode: "screen",
-                        opacity: showDiya ? 1 : 0,
-                        // Slow bloom in/out — the flame should arrive like it's
-                        // being lit, not switched on.
-                        transition: "opacity 2.4s ease-in-out",
                         lineHeight: 0,
                       }}
                     >
                       {/* Slow drifting warmth — keeps long gaze holds feeling alive
-                          without competing with the flame. Sits behind the video. */}
+                          without competing with the flame. Two-layer setup so
+                          the centering translate lives on the outer positioner
+                          and the animation only pulses the inner glow (avoids
+                          the "bloom stuck bottom-right" bug when the animation
+                          hasn't yet applied its transform). */}
                       <div
                         aria-hidden
                         style={{
                           position: "absolute",
                           left: "50%",
                           top: "50%",
+                          transform: "translate(-50%, -50%)",
                           width: "180%",
                           height: "180%",
-                          borderRadius: "50%",
-                          background:
-                            "radial-gradient(circle, rgba(255,170,80,0.35) 0%, rgba(220,120,50,0.12) 35%, transparent 65%)",
-                          filter: "blur(40px)",
                           pointerEvents: "none",
-                          animation: "gazeAmbientDrift 22s ease-in-out infinite",
                         }}
-                      />
+                      >
+                        <div
+                          style={{
+                            position: "absolute",
+                            inset: 0,
+                            borderRadius: "50%",
+                            background:
+                              "radial-gradient(circle, rgba(255,170,80,0.35) 0%, rgba(220,120,50,0.12) 35%, transparent 65%)",
+                            filter: "blur(40px)",
+                            animation: "gazeAmbientPulse 22s ease-in-out infinite",
+                          }}
+                        />
+                      </div>
                       <video
                         src="/diya-session.mp4"
                         autoPlay
@@ -2266,7 +2306,7 @@ export default function SessionPage() {
                         }}
                       />
                     </div>
-                  </FadeWrapper>
+                  </div>
 
                   {/* No edge mask here — the figure must always be fully
                       visible, feet to head. */}
