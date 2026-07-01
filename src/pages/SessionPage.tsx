@@ -509,6 +509,11 @@ export default function SessionPage() {
     script[0]?.durationSec ?? 0
   );
   const [sessionComplete, setSessionComplete] = useState(false);
+  // Summary is held back for a ~2.5s "afterglow" — the closing gong needs
+  // to breathe against the dissolving visual, not against the bright summary
+  // card. sessionComplete triggers save/gong/fade-out; showSummary swaps the
+  // UI once the gong has been given room to speak.
+  const [showSummary, setShowSummary] = useState(false);
   const [saved, setSaved] = useState(false);
   // Seconds of session actually elapsed when it ended — full duration on a
   // natural finish, partial on "end early". This is what gets persisted, so
@@ -590,10 +595,13 @@ export default function SessionPage() {
   const isEyesClosedPhase = currentPhase?.visualMode === "eyesClosed";
   const isIntegratePhase = currentPhase?.visualMode === "integrate";
   const showDiya = isGazePhase;
-  // Pre-darken backdrop during the final breath phase so the diya appears on a
-  // fully-black field without the rectangular flash from a still-fading backdrop.
-  const isLastBreathPhase = currentPhase?.id === "breath-10-out";
-  const wantsBlackBackdrop = showDiya || isEyesClosedPhase || isLastBreathPhase || isIntegratePhase;
+  // Start pre-darkening only in the last 3s of the final exhale so the
+  // backdrop's 2.4s fade completes as the diya begins its own 2.4s bloom-in.
+  // The flame arrives INTO darkness instead of appearing after darkness.
+  const isLastBreathClosing =
+    currentPhase?.id === "breath-10-out" && phaseSecondsLeft <= 3;
+  const wantsBlackBackdrop =
+    showDiya || isEyesClosedPhase || isLastBreathClosing || isIntegratePhase;
 
   // Stops all media tracks safely when camera is disconnected/unmounted.
   const stopCameraStream = (stream: MediaStream | null) => {
@@ -751,11 +759,15 @@ export default function SessionPage() {
   }, [currentPhase, isRunning, isPaused, settings]);
 
   // Plays closing cue and returns viewport to top when session ends.
+  // The summary card is held back ~2.5s (via showSummary) so the gong rings
+  // over the fading integrate visual, not over a bright text-heavy card.
   useEffect(() => {
     if (!sessionComplete) return;
     audioRef.current.fadeOutAmbient();
     audioRef.current.playEndGong(settings);
     window.scrollTo({ top: 0, behavior: "auto" });
+    const id = window.setTimeout(() => setShowSummary(true), 2500);
+    return () => window.clearTimeout(id);
   }, [sessionComplete, settings]);
 
   // Session completion: release the camera and auto-save the record
@@ -1444,11 +1456,10 @@ export default function SessionPage() {
   // Longer cross-fade on the body cue so CLENCH<->RELEASE feels deliberate.
   const { displayed: shownBodyCue, opacity: bodyCueOpacity } = useCrossFadeText(bodyCue, 700);
   const { displayed: shownBodyRegionLabel, opacity: bodyRegionLabelOpacity } = useCrossFadeText(bodyRegionLabel);
-  // Cross-fade Inhale<->Exhale slowly enough that the swap reads as a
-  // breath boundary rather than a text change (FadeWrapper stays active
-  // across breath phases so the text would otherwise hard-cut).
+  // 300ms half = 600ms total swap. A 4s inhale is only 4000ms — anything
+  // slower and "Inhale" is still fading in when the phase is a third done.
   const { displayed: shownPrimaryInstruction, opacity: primaryInstructionOpacity } =
-    useCrossFadeText(primaryInstruction, 750);
+    useCrossFadeText(primaryInstruction, 300);
 
   const liveBlinkRatePerMinute = useMemo(() => {
     if (blinkRateHistory.length === 0) return 0;
@@ -1581,7 +1592,8 @@ export default function SessionPage() {
           inset: 0,
           background: "#000",
           opacity: wantsBlackBackdrop ? 1 : 0,
-          transition: "opacity 1.4s ease-in-out",
+          // Matches the diya's bloom-in duration so the two arrive together.
+          transition: "opacity 2.4s ease-in-out",
           pointerEvents: "none",
           zIndex: 0,
         }}
@@ -1592,7 +1604,7 @@ export default function SessionPage() {
           minHeight: "100dvh",
           display: "flex",
           flexDirection: "column",
-          justifyContent: sessionComplete ? "flex-start" : "center",
+          justifyContent: showSummary ? "flex-start" : "center",
           alignItems: "center",
           padding: "20px 20px 32px",
           margin: "0 auto",
@@ -1600,7 +1612,7 @@ export default function SessionPage() {
           zIndex: 1,
         }}
       >
-        {sessionComplete ? (
+        {showSummary ? (
           <div
             style={{
               width: "100%",
@@ -2176,7 +2188,9 @@ export default function SessionPage() {
                         maxWidth: "30ch",
                         textAlign: "center",
                         opacity: primaryInstructionOpacity,
-                        transition: "opacity 0.75s ease",
+                        // Match the useCrossFadeText half-duration exactly —
+                        // 300ms fade-out, swap, 300ms fade-in = 600ms total.
+                        transition: "opacity 0.3s ease",
                       }}
                     >
                       {shownPrimaryInstruction}
