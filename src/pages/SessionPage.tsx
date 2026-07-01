@@ -1454,8 +1454,11 @@ export default function SessionPage() {
     : currentPhase?.instruction ?? "";
 
   // Longer cross-fade on the body cue so CLENCH<->RELEASE feels deliberate.
+  // Region label matches the same 700ms so "Feet" doesn't race ahead of
+  // "Clench" underneath it.
   const { displayed: shownBodyCue, opacity: bodyCueOpacity } = useCrossFadeText(bodyCue, 700);
-  const { displayed: shownBodyRegionLabel, opacity: bodyRegionLabelOpacity } = useCrossFadeText(bodyRegionLabel);
+  const { displayed: shownBodyRegionLabel, opacity: bodyRegionLabelOpacity } =
+    useCrossFadeText(bodyRegionLabel, 700);
   // 300ms half = 600ms total swap. A 4s inhale is only 4000ms — anything
   // slower and "Inhale" is still fading in when the phase is a third done.
   const { displayed: shownPrimaryInstruction, opacity: primaryInstructionOpacity } =
@@ -2162,7 +2165,7 @@ export default function SessionPage() {
                           color: "rgba(203, 183, 158, 0.6)",
                           lineHeight: 1.2,
                           opacity: bodyRegionLabelOpacity,
-                          transition: "opacity 0.45s ease",
+                          transition: "opacity 0.7s ease",
                         }}
                       >
                         {shownBodyRegionLabel}
@@ -2228,19 +2231,24 @@ export default function SessionPage() {
                     justifyContent: "center",
                   }}
                 >
-                  <FadeWrapper
-                    active={showDiya || isEyesClosedPhase}
-                    durationMs={2400}
-                    style={ABSOLUTE_CENTER_LAYER}
+                  {/* Single opacity transition, no nested FadeWrapper — otherwise
+                      the wrapper's own opacity animation multiplies with this
+                      one on breath→gaze and gaze→integrate, making the bloom
+                      arrive muddier than a linear fade. Video stays mounted
+                      through the full gaze/eyes-closed sequence so the flame
+                      plays continuously across rounds. */}
+                  <div
+                    style={{
+                      ...ABSOLUTE_CENTER_LAYER,
+                      pointerEvents: "none",
+                      opacity: showDiya ? 1 : 0,
+                      transition: "opacity 2.4s ease-in-out",
+                    }}
                   >
                     <div
                       style={{
                         position: "relative",
                         mixBlendMode: "screen",
-                        opacity: showDiya ? 1 : 0,
-                        // Slow bloom in/out — the flame should arrive like it's
-                        // being lit, not switched on.
-                        transition: "opacity 2.4s ease-in-out",
                         lineHeight: 0,
                       }}
                     >
@@ -2295,7 +2303,7 @@ export default function SessionPage() {
                         }}
                       />
                     </div>
-                  </FadeWrapper>
+                  </div>
 
                   {/* No edge mask here — the figure must always be fully
                       visible, feet to head. */}

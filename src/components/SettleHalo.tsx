@@ -16,12 +16,14 @@ export default function SettleHalo() {
         pointerEvents: "none",
       }}
     >
-      {/* Outer halo — larger, dimmer, slower rhythm, slightly offset. */}
+      {/* Outer halo — larger, dimmer, slower rhythm. Centered on the same
+          point as the inner halo so the two pulse concentrically rather than
+          wobbling optically off-axis. */}
       <div
         style={{
           position: "absolute",
-          left: "calc(50% + 14px)",
-          top: "calc(50% - 10px)",
+          left: "50%",
+          top: "50%",
           width: "300px",
           height: "300px",
           marginLeft: "-150px",

@@ -244,7 +244,9 @@ input:focus {
   to   { opacity: 1; }
 }
 .route-fade-in {
-  animation: routeFadeIn 0.35s ease-out;
+  /* 900ms matches the FadeWrapper default so arriving on the session is
+     the same rhythm as any in-session cross-fade — no "dropped into" jolt. */
+  animation: routeFadeIn 0.9s ease-out;
 }
 
 /* Subtle session-phase animations. The pulse only touches scale + opacity
