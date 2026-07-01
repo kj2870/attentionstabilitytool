@@ -2,7 +2,7 @@
   "name": "focusflow",
   "private": true,
   "version": "0.0.0",
-  "description": "FocusFlow guided attention app with Supabase-backed auth and session persistence.",
+  "description": "Drishti — an 11-minute daily attention-training practice built around trataka (candle-gazing). Runs entirely in-browser with on-device eye tracking via MediaPipe.",
   "homepage": "https://github.com/kj2870/attentionstabilitytool",
   "repository": {
     "type": "git",
