@@ -1616,282 +1616,285 @@ export default function SessionPage() {
         }}
       >
         {showSummary ? (
-          <div
-            style={{
-              width: "100%",
-              maxWidth: "400px",
-              padding: "56px 28px 48px",
-              margin: "0 auto",
-              textAlign: "center",
-              display: "flex",
-              flexDirection: "column",
-              alignItems: "center",
-              gap: "36px",
-              fontFamily: '"DM Sans", system-ui, sans-serif',
-              color: "rgba(245, 233, 218, 0.85)",
-            }}
-          >
-            {/* Hero stat — gaze steadiness when we measured it; otherwise a
-                duration-centred completion so a camera-free session never
-                reads as "Longest gaze: 0 sec". */}
-            {gazeSecondsRef.current > 0 ? (
-              <div style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: "10px" }}>
-                <div
-                  style={{
-                    fontSize: "11px",
-                    letterSpacing: "0.2em",
-                    textTransform: "uppercase",
-                    color: "rgba(245, 233, 218, 0.38)",
-                  }}
-                >
-                  Longest gaze
-                </div>
-                {/* Number and unit on one line, modest size so digits stay legible */}
-                <div style={{ display: "flex", alignItems: "baseline", gap: "6px" }}>
+          <div className="session-summary">
+            {/* Left column — measured stats, milestones, feeling, note, action.
+                All the "what and how" of the session lives here. */}
+            <div className="session-summary__stats">
+              {/* Hero stat — gaze steadiness when we measured it; otherwise a
+                  duration-centred completion so a camera-free session never
+                  reads as "Longest gaze: 0 sec". */}
+              {gazeSecondsRef.current > 0 ? (
+                <div style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: "8px" }}>
                   <div
                     style={{
-                      fontSize: "clamp(52px, 11vw, 80px)",
-                      fontFamily: '"Playfair Display", Georgia, serif',
-                      fontWeight: 400,
-                      color: "rgba(245, 233, 218, 0.95)",
-                      lineHeight: 1,
-                      letterSpacing: "-0.02em",
-                    }}
-                  >
-                    {longestGazeRef.current}
-                  </div>
-                  <div
-                    style={{
-                      fontSize: "22px",
-                      fontFamily: '"DM Sans", system-ui, sans-serif',
-                      fontWeight: 300,
-                      color: "rgba(245, 233, 218, 0.45)",
-                      lineHeight: 1,
-                    }}
-                  >
-                    sec
-                  </div>
-                </div>
-                <div
-                  style={{
-                    fontSize: "13px",
-                    color: "rgba(245, 233, 218, 0.42)",
-                    letterSpacing: "0.01em",
-                  }}
-                >
-                  {(() => {
-                    // History already includes tonight's auto-saved record.
-                    const allHistory = [...loadHistory()];
-                    const sessionN = Math.max(allHistory.length, 1);
-                    const bestEver = Math.max(
-                      longestGazeRef.current,
-                      ...allHistory.map((r) => r.longestGazeSec ?? 0)
-                    );
-                    const blinkPerMin =
-                      gazeSecondsRef.current > 0
-                        ? (blinksDuringGazeRef.current / gazeSecondsRef.current) * 60
-                        : null;
-                    const blinkPart =
-                      blinkPerMin !== null ? `${blinkPerMin.toFixed(1)} blinks/min` : null;
-                    return [
-                      `Session ${sessionN}`,
-                      `${bestEver}s best`,
-                      blinkPart,
-                    ]
-                      .filter(Boolean)
-                      .join(" · ");
-                  })()}
-                </div>
-              </div>
-            ) : (
-              <div style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: "10px" }}>
-                <div
-                  style={{
-                    fontSize: "11px",
-                    letterSpacing: "0.2em",
-                    textTransform: "uppercase",
-                    color: "rgba(245, 233, 218, 0.38)",
-                  }}
-                >
-                  You sat for
-                </div>
-                <div style={{ display: "flex", alignItems: "baseline", gap: "6px" }}>
-                  <div
-                    style={{
-                      fontSize: "clamp(52px, 11vw, 80px)",
-                      fontFamily: '"Playfair Display", Georgia, serif',
-                      fontWeight: 400,
-                      color: "rgba(245, 233, 218, 0.95)",
-                      lineHeight: 1,
-                      letterSpacing: "-0.02em",
-                    }}
-                  >
-                    {Math.max(1, Math.round(elapsedAtEndRef.current / 60))}
-                  </div>
-                  <div
-                    style={{
-                      fontSize: "22px",
-                      fontFamily: '"DM Sans", system-ui, sans-serif',
-                      fontWeight: 300,
-                      color: "rgba(245, 233, 218, 0.45)",
-                      lineHeight: 1,
-                    }}
-                  >
-                    min
-                  </div>
-                </div>
-              </div>
-            )}
-
-            {/* Milestones */}
-            {pendingMilestones.length > 0 && (
-              <div style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: "6px" }}>
-                {pendingMilestones.map((id) => (
-                  <div
-                    key={id}
-                    style={{
-                      fontSize: "13px",
-                      color: "rgba(255, 179, 71, 0.82)",
-                      letterSpacing: "0.02em",
-                    }}
-                  >
-                    ★ {milestoneLabel(id)}
-                  </div>
-                ))}
-              </div>
-            )}
-
-            {/* Daily quote — one per mandala day (1-48), so the session ends
-                inside a progression rather than with a random line. */}
-            {(() => {
-              const quote = getQuoteForDay(Math.max(1, getMandalaDay(loadHistory())));
-              return (
-                <div
-                  style={{
-                    display: "flex",
-                    flexDirection: "column",
-                    alignItems: "center",
-                    gap: "10px",
-                    maxWidth: "44ch",
-                  }}
-                >
-                  <div
-                    style={{
-                      fontSize: "17px",
-                      lineHeight: 1.7,
-                      color: "rgba(245, 233, 218, 0.78)",
-                      letterSpacing: "0.01em",
                       fontFamily: '"Mukta", "DM Sans", sans-serif',
                       fontWeight: 300,
-                    }}
-                  >
-                    {quote.text}
-                  </div>
-                  <div
-                    style={{
                       fontSize: "11px",
-                      letterSpacing: "0.14em",
-                      textTransform: "lowercase",
-                      color: "rgba(203, 183, 158, 0.5)",
+                      letterSpacing: "0.24em",
+                      paddingLeft: "0.24em",
+                      textTransform: "uppercase",
+                      color: "rgba(245, 233, 218, 0.4)",
+                    }}
+                  >
+                    Longest gaze
+                  </div>
+                  <div style={{ display: "flex", alignItems: "baseline", gap: "6px" }}>
+                    <div
+                      style={{
+                        fontSize: "clamp(48px, 6vw, 68px)",
+                        fontFamily: '"Playfair Display", Georgia, serif',
+                        fontWeight: 400,
+                        color: "rgba(245, 233, 218, 0.95)",
+                        lineHeight: 1,
+                        letterSpacing: "-0.02em",
+                      }}
+                    >
+                      {longestGazeRef.current}
+                    </div>
+                    <div
+                      style={{
+                        fontSize: "20px",
+                        fontFamily: '"Mukta", "DM Sans", sans-serif',
+                        fontWeight: 300,
+                        color: "rgba(245, 233, 218, 0.45)",
+                        lineHeight: 1,
+                      }}
+                    >
+                      sec
+                    </div>
+                  </div>
+                  <div
+                    style={{
                       fontFamily: '"Mukta", "DM Sans", sans-serif',
                       fontWeight: 300,
+                      fontSize: "12px",
+                      letterSpacing: "0.06em",
+                      color: "rgba(245, 233, 218, 0.42)",
+                      marginTop: "4px",
                     }}
                   >
-                    {quote.source}
+                    {(() => {
+                      // History already includes tonight's auto-saved record.
+                      const allHistory = [...loadHistory()];
+                      const sessionN = Math.max(allHistory.length, 1);
+                      const bestEver = Math.max(
+                        longestGazeRef.current,
+                        ...allHistory.map((r) => r.longestGazeSec ?? 0)
+                      );
+                      const blinkPerMin =
+                        gazeSecondsRef.current > 0
+                          ? (blinksDuringGazeRef.current / gazeSecondsRef.current) * 60
+                          : null;
+                      const blinkPart =
+                        blinkPerMin !== null ? `${blinkPerMin.toFixed(1)} blinks/min` : null;
+                      return [
+                        `Session ${sessionN}`,
+                        `${bestEver}s best`,
+                        blinkPart,
+                      ]
+                        .filter(Boolean)
+                        .join(" · ");
+                    })()}
                   </div>
                 </div>
-              );
-            })()}
-
-            {/* One-tap subjective state — the cheapest evidence the practice
-                helps. Tap again to deselect. */}
-            <div style={{ display: "flex", gap: "10px", justifyContent: "center" }}>
-              {(["Calm", "Neutral", "Restless"] as const).map((f) => {
-                const selected = feeling === f;
-                return (
-                  <button
-                    key={f}
-                    onClick={() => setFeeling(selected ? "" : f)}
+              ) : (
+                <div style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: "8px" }}>
+                  <div
                     style={{
-                      background: selected
-                        ? "rgba(255, 179, 71, 0.16)"
-                        : "transparent",
-                      border: selected
-                        ? "1px solid rgba(255,179,71,0.5)"
-                        : "1px solid rgba(245, 233, 218, 0.14)",
-                      color: selected
-                        ? "rgba(255, 220, 170, 0.95)"
-                        : "rgba(217, 203, 184, 0.55)",
-                      padding: "7px 18px",
-                      borderRadius: "999px",
-                      fontSize: "13px",
-                      letterSpacing: "0.06em",
-                      textTransform: "lowercase",
-                      fontFamily: "inherit",
-                      cursor: "pointer",
-                      transition: "background 0.2s, color 0.2s, border-color 0.2s",
+                      fontFamily: '"Mukta", "DM Sans", sans-serif',
+                      fontWeight: 300,
+                      fontSize: "11px",
+                      letterSpacing: "0.24em",
+                      paddingLeft: "0.24em",
+                      textTransform: "uppercase",
+                      color: "rgba(245, 233, 218, 0.4)",
                     }}
                   >
-                    {f.toLowerCase()}
-                  </button>
-                );
-              })}
+                    You sat for
+                  </div>
+                  <div style={{ display: "flex", alignItems: "baseline", gap: "6px" }}>
+                    <div
+                      style={{
+                        fontSize: "clamp(48px, 6vw, 68px)",
+                        fontFamily: '"Playfair Display", Georgia, serif',
+                        fontWeight: 400,
+                        color: "rgba(245, 233, 218, 0.95)",
+                        lineHeight: 1,
+                        letterSpacing: "-0.02em",
+                      }}
+                    >
+                      {Math.max(1, Math.round(elapsedAtEndRef.current / 60))}
+                    </div>
+                    <div
+                      style={{
+                        fontSize: "20px",
+                        fontFamily: '"Mukta", "DM Sans", sans-serif',
+                        fontWeight: 300,
+                        color: "rgba(245, 233, 218, 0.45)",
+                        lineHeight: 1,
+                      }}
+                    >
+                      min
+                    </div>
+                  </div>
+                </div>
+              )}
+
+              {/* Milestones — inline under the hero, quiet amber. */}
+              {pendingMilestones.length > 0 && (
+                <div style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: "4px" }}>
+                  {pendingMilestones.map((id) => (
+                    <div
+                      key={id}
+                      style={{
+                        fontFamily: '"Mukta", "DM Sans", sans-serif',
+                        fontWeight: 300,
+                        fontSize: "12px",
+                        letterSpacing: "0.06em",
+                        color: "rgba(255, 179, 71, 0.78)",
+                      }}
+                    >
+                      ★ {milestoneLabel(id)}
+                    </div>
+                  ))}
+                </div>
+              )}
+
+              {/* One-tap subjective state — cheapest evidence the practice helps. */}
+              <div style={{ display: "flex", gap: "8px", justifyContent: "center", flexWrap: "wrap" }}>
+                {(["Calm", "Neutral", "Restless"] as const).map((f) => {
+                  const selected = feeling === f;
+                  return (
+                    <button
+                      key={f}
+                      onClick={() => setFeeling(selected ? "" : f)}
+                      style={{
+                        background: selected ? "rgba(255, 179, 71, 0.16)" : "transparent",
+                        border: selected
+                          ? "1px solid rgba(255,179,71,0.5)"
+                          : "1px solid rgba(245, 233, 218, 0.14)",
+                        color: selected
+                          ? "rgba(255, 220, 170, 0.95)"
+                          : "rgba(217, 203, 184, 0.55)",
+                        padding: "7px 18px",
+                        borderRadius: "999px",
+                        fontSize: "13px",
+                        letterSpacing: "0.06em",
+                        textTransform: "lowercase",
+                        fontFamily: '"Mukta", "DM Sans", sans-serif',
+                        fontWeight: 300,
+                        cursor: "pointer",
+                        transition: "background 0.2s, color 0.2s, border-color 0.2s",
+                      }}
+                    >
+                      {f.toLowerCase()}
+                    </button>
+                  );
+                })}
+              </div>
+
+              {/* Feedback — no heading, textarea speaks for itself. */}
+              <div style={{ width: "100%", display: "flex", flexDirection: "column", alignItems: "center", gap: "8px" }}>
+                <textarea
+                  value={note}
+                  onChange={(e) => {
+                    setNote(e.target.value);
+                    e.currentTarget.style.height = "auto";
+                    e.currentTarget.style.height = `${e.currentTarget.scrollHeight}px`;
+                  }}
+                  rows={1}
+                  placeholder="Insights from session?"
+                  style={{
+                    width: "100%",
+                    padding: "10px 0",
+                    border: "none",
+                    borderBottom: "1px solid rgba(245, 233, 218, 0.10)",
+                    background: "transparent",
+                    color: "rgba(245, 233, 218, 0.88)",
+                    fontSize: "14px",
+                    lineHeight: 1.65,
+                    fontFamily: '"Mukta", "DM Sans", sans-serif',
+                    fontWeight: 300,
+                    minHeight: "44px",
+                    overflow: "hidden",
+                    resize: "none",
+                    outline: "none",
+                    textAlign: "center",
+                  }}
+                  onFocus={(e) => (e.currentTarget.style.borderBottomColor = "rgba(255,179,71,0.35)")}
+                  onBlur={(e) => (e.currentTarget.style.borderBottomColor = "rgba(245, 233, 218, 0.10)")}
+                />
+                {/* Honest disclosure — the note syncs to the developer. Shown
+                    only once the user starts typing. */}
+                {note.trim().length > 0 && (
+                  <div
+                    style={{
+                      fontFamily: '"Mukta", "DM Sans", sans-serif',
+                      fontSize: "10px",
+                      fontWeight: 300,
+                      color: "rgba(217, 203, 184, 0.38)",
+                      letterSpacing: "0.04em",
+                    }}
+                  >
+                    notes are shared with the developer
+                  </div>
+                )}
+              </div>
+
+              {/* Done — dims on save, no checkmark. */}
+              <button
+                onClick={handleSaveSession}
+                disabled={saved}
+                className="cta-pill"
+              >
+                Done
+              </button>
             </div>
 
-            {/* Feedback — no heading, textarea speaks for itself. Auto-grows
-                as the user types so the box never scrolls internally. */}
-            <textarea
-              value={note}
-              onChange={(e) => {
-                setNote(e.target.value);
-                e.currentTarget.style.height = "auto";
-                e.currentTarget.style.height = `${e.currentTarget.scrollHeight}px`;
-              }}
-              rows={1}
-              placeholder="Insights from session?"
-              style={{
-                width: "100%",
-                padding: "10px 0",
-                border: "none",
-                borderBottom: "1px solid rgba(245, 233, 218, 0.10)",
-                background: "transparent",
-                color: "rgba(245, 233, 218, 0.88)",
-                fontSize: "14px",
-                lineHeight: 1.65,
-                fontFamily: "inherit",
-                minHeight: "44px",
-                overflow: "hidden",
-                resize: "none",
-                outline: "none",
-                textAlign: "center",
-              }}
-              onFocus={(e) => (e.currentTarget.style.borderBottomColor = "rgba(255,179,71,0.35)")}
-              onBlur={(e) => (e.currentTarget.style.borderBottomColor = "rgba(245, 233, 218, 0.10)")}
-            />
-            {/* Honest disclosure — the note reads like a journal but syncs
-                to the developer. Shown only once the user starts typing. */}
-            {note.trim().length > 0 && (
-              <div
-                style={{
-                  fontSize: "11px",
-                  color: "rgba(217, 203, 184, 0.38)",
-                  letterSpacing: "0.04em",
-                  marginTop: "-24px",
-                }}
-              >
-                notes are shared with the developer
-              </div>
-            )}
+            {/* Vertical hairline — fades at top/bottom so it doesn't crop the
+                columns like a rule but breathes into the dark field. */}
+            <div className="session-summary__divider" aria-hidden />
 
-            {/* Done button — dims on save, no checkmark or status. The brief
-                disabled state is the only acknowledgment as we navigate home. */}
-            <button
-              onClick={handleSaveSession}
-              disabled={saved}
-              className="cta-pill"
-            >
-              Done
-            </button>
+            {/* Right column — the daily quote, given its own quiet field
+                to breathe in. Vertically centred so it doesn't stack tight
+                against the top when the left column runs long. */}
+            <div className="session-summary__quote">
+              {(() => {
+                const quote = getQuoteForDay(Math.max(1, getMandalaDay(loadHistory())));
+                return (
+                  <>
+                    <div
+                      style={{
+                        fontFamily: '"Playfair Display", Georgia, serif',
+                        fontStyle: "italic",
+                        fontWeight: 400,
+                        fontSize: "clamp(18px, 1.7vw, 22px)",
+                        lineHeight: 1.7,
+                        color: "rgba(245, 233, 218, 0.82)",
+                        letterSpacing: "0.005em",
+                        marginBottom: "18px",
+                        maxWidth: "26ch",
+                      }}
+                    >
+                      {quote.text}
+                    </div>
+                    <div
+                      style={{
+                        fontFamily: '"Mukta", "DM Sans", sans-serif',
+                        fontWeight: 300,
+                        fontSize: "11px",
+                        letterSpacing: "0.16em",
+                        paddingLeft: "0.16em",
+                        textTransform: "lowercase",
+                        color: "rgba(203, 183, 158, 0.5)",
+                      }}
+                    >
+                      {quote.source}
+                    </div>
+                  </>
+                );
+              })()}
+            </div>
           </div>
         ) : (
           <>
