@@ -119,6 +119,58 @@ function FadeWrapper({
   );
 }
 
+// A whisper cue: fades in when its phase becomes active, holds for visibleMs,
+// then fades itself out — orientation without persistent chatter. Styled
+// identically to the settle sentences so it reads as the same session voice.
+function TransientCue({
+  active,
+  text,
+  visibleMs = 6000,
+}: {
+  active: boolean;
+  text: string;
+  visibleMs?: number;
+}) {
+  const [show, setShow] = useState(false);
+
+  useEffect(() => {
+    if (!active) {
+      // eslint-disable-next-line react-hooks/set-state-in-effect
+      setShow(false);
+      return;
+    }
+    // Fade in on the next frame so the opacity transition runs, then
+    // self-dismiss after the hold.
+    const rId = requestAnimationFrame(() => setShow(true));
+    const tId = window.setTimeout(() => setShow(false), visibleMs);
+    return () => {
+      cancelAnimationFrame(rId);
+      window.clearTimeout(tId);
+    };
+  }, [active, visibleMs]);
+
+  if (!active) return null;
+
+  return (
+    <div
+      style={{
+        fontSize: "clamp(24px, 2.6vw, 30px)",
+        fontFamily: '"Mukta", "DM Sans", sans-serif',
+        fontWeight: 300,
+        color: "rgba(245, 233, 218, 0.85)",
+        lineHeight: 1.45,
+        letterSpacing: "0.02em",
+        maxWidth: "34ch",
+        textAlign: "center",
+        opacity: show ? 1 : 0,
+        transition: "opacity 1.1s ease-in-out",
+      }}
+    >
+      {text}
+    </div>
+  );
+}
+
 // Sequential text cross-fade: fades opacity to 0, swaps content, fades back to 1.
 function useCrossFadeText(text: string, halfDurationMs = 450) {
   const [displayed, setDisplayed] = useState(text);
@@ -515,6 +567,9 @@ export default function SessionPage() {
   // card. sessionComplete triggers save/gong/fade-out; showSummary swaps the
   // UI once the gong has been given room to speak.
   const [showSummary, setShowSummary] = useState(false);
+  // True on the user's very first sit — used for one-time teaching whispers
+  // (the tone vocabulary for eyes open/close). Captured once on page load.
+  const [isFirstSit] = useState(() => loadHistory().length === 0);
   const [saved, setSaved] = useState(false);
   // Seconds of session actually elapsed when it ended — full duration on a
   // natural finish, partial on "end early". This is what gets persisted, so
@@ -2242,6 +2297,24 @@ export default function SessionPage() {
                       {shownPrimaryInstruction}
                     </div>
                   </FadeWrapper>
+
+                  {/* Teaching whisper — first sit only, first gaze round only.
+                      Teaches the tone vocabulary once; every later sit stays
+                      silent here. */}
+                  <TransientCue
+                    active={isFirstSit && isRunning && currentPhase?.id === "gaze-1"}
+                    text="Rest your gaze on the flame. A falling tone closes your eyes, a rising tone opens them."
+                    visibleMs={9000}
+                  />
+
+                  {/* Open-awareness whisper — every sit. The one phase that
+                      begins with nothing needs a single orienting line before
+                      the silence takes over. */}
+                  <TransientCue
+                    active={isRunning && isIntegratePhase}
+                    text="Close your eyes and feel the sensations in body and breath. The gong will wake you."
+                    visibleMs={6000}
+                  />
                 </div>
                 {/* --- end text slot --- */}
 
