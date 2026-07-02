@@ -2318,13 +2318,20 @@ export default function SessionPage() {
                           filter: "brightness(0.88) contrast(1.6)",
                           pointerEvents: "none",
                           display: "block",
-                          // Feather the frame edges — the video's compressed
-                          // near-black isn't pure #000, so an unmasked rectangle
-                          // reads as a faint square against the backdrop.
+                          // Edge feathering. The video's compressed near-black
+                          // isn't pure #000, so an unmasked frame reads as a
+                          // faint square against the backdrop. A single radial
+                          // mask can't hug a rectangle (the mid-edges always
+                          // leak), so instead: two axis-aligned linear fades
+                          // INTERSECTED — each frame edge dissolves along its
+                          // own axis and the corners get a natural double-fade.
+                          // The diya sits inside the fully-opaque middle band.
                           WebkitMaskImage:
-                            "radial-gradient(ellipse 74% 70% at 50% 52%, black 55%, transparent 92%)",
+                            "linear-gradient(to right, transparent 0%, black 18%, black 82%, transparent 100%), linear-gradient(to bottom, transparent 0%, black 15%, black 85%, transparent 100%)",
                           maskImage:
-                            "radial-gradient(ellipse 74% 70% at 50% 52%, black 55%, transparent 92%)",
+                            "linear-gradient(to right, transparent 0%, black 18%, black 82%, transparent 100%), linear-gradient(to bottom, transparent 0%, black 15%, black 85%, transparent 100%)",
+                          WebkitMaskComposite: "source-in",
+                          maskComposite: "intersect",
                         }}
                       />
                     </div>
