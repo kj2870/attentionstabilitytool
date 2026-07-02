@@ -1453,16 +1453,18 @@ export default function SessionPage() {
     ? (currentPhase?.breathAction === "inhale" ? "Inhale" : "Exhale")
     : currentPhase?.instruction ?? "";
 
-  // Longer cross-fade on the body cue so CLENCH<->RELEASE feels deliberate.
-  // Region label matches the same 700ms so "Feet" doesn't race ahead of
-  // "Clench" underneath it.
-  const { displayed: shownBodyCue, opacity: bodyCueOpacity } = useCrossFadeText(bodyCue, 700);
+  // One cross-fade rhythm for ALL session text: 550ms out, swap, 550ms in
+  // (1.1s total). Gentle enough that nothing flashes, quick enough that a
+  // 4s inhale still shows its cue for most of the phase.
+  const TEXT_FADE_HALF_MS = 550;
+  const { displayed: shownBodyCue, opacity: bodyCueOpacity } = useCrossFadeText(
+    bodyCue,
+    TEXT_FADE_HALF_MS
+  );
   const { displayed: shownBodyRegionLabel, opacity: bodyRegionLabelOpacity } =
-    useCrossFadeText(bodyRegionLabel, 700);
-  // 300ms half = 600ms total swap. A 4s inhale is only 4000ms — anything
-  // slower and "Inhale" is still fading in when the phase is a third done.
+    useCrossFadeText(bodyRegionLabel, TEXT_FADE_HALF_MS);
   const { displayed: shownPrimaryInstruction, opacity: primaryInstructionOpacity } =
-    useCrossFadeText(primaryInstruction, 300);
+    useCrossFadeText(primaryInstruction, TEXT_FADE_HALF_MS);
 
   const liveBlinkRatePerMinute = useMemo(() => {
     if (blinkRateHistory.length === 0) return 0;
@@ -1898,6 +1900,54 @@ export default function SessionPage() {
           </div>
         ) : (
           <>
+            {/* TEMP testing scrubber — pinned to the bottom of the viewport so
+                any phase can be reached instantly while tuning. Remove before
+                sharing with testers. */}
+            <div
+              style={{
+                position: "fixed",
+                bottom: 0,
+                left: 0,
+                right: 0,
+                zIndex: 60,
+                padding: "8px 16px calc(8px + env(safe-area-inset-bottom))",
+                background: "rgba(8, 6, 4, 0.78)",
+                backdropFilter: "blur(6px)",
+                borderTop: "1px solid rgba(255,179,71,0.18)",
+              }}
+            >
+              <div
+                style={{
+                  display: "flex",
+                  justifyContent: "space-between",
+                  fontSize: "11px",
+                  color: "rgba(255,255,255,0.5)",
+                  marginBottom: "4px",
+                  fontFamily: "monospace",
+                }}
+              >
+                <span>
+                  {Math.floor(elapsedSeconds / 60)}:
+                  {String(elapsedSeconds % 60).padStart(2, "0")}
+                </span>
+                <span style={{ color: "rgba(255,179,71,0.8)" }}>
+                  {currentPhase?.label ?? "—"}
+                </span>
+                <span>
+                  {Math.floor(totalDuration / 60)}:
+                  {String(totalDuration % 60).padStart(2, "0")}
+                </span>
+              </div>
+              <input
+                type="range"
+                min={0}
+                max={totalDuration}
+                value={elapsedSeconds}
+                onChange={(e) => scrubToElapsed(Number(e.target.value))}
+                style={{ width: "100%", accentColor: "#ffb347", cursor: "pointer" }}
+              />
+            </div>
+
             {/* In-session controls: pause + end-early, centred at the bottom. */}
             {isRunning && (
               <div
@@ -2089,16 +2139,15 @@ export default function SessionPage() {
                 }}
               >
                 {/* --- Unified text slot ------------------------------------
-                    Session voice: Mukta (light humanist sans).
-                      label     11px w300, 0.4em tracked caps
-                      cue       clamp(26-34px) w200, 0.24em tracked caps
-                      sentence  clamp(17-21px) w300 sentence case
-                      secondary 14px w300, 0.12em
-                    Note: tracked text gets paddingLeft equal to the tracking
-                    so the last letter's trailing space doesn't skew centering. */}
+                    One voice for the whole session: Mukta, one size
+                    (clamp 24-30px), one tracking per case style. Hierarchy is
+                    carried by WEIGHT only — primary cue w400, secondary w200.
+                    No phase label row (removed: it was tiny and redundant).
+                    Tracked text gets paddingLeft equal to the tracking so the
+                    trailing letter-space doesn't skew centering. */}
                 <div
                   style={{
-                    minHeight: "120px",
+                    minHeight: "110px",
                     display: "flex",
                     flexDirection: "column",
                     alignItems: "center",
@@ -2106,69 +2155,44 @@ export default function SessionPage() {
                     gap: "14px",
                   }}
                 >
-                  {/* Phase label — whisper caps, same spot in every phase.
-                      Hidden only during gaze/eyes-closed (trataka is silent). */}
-                  <FadeWrapper
-                    active={
-                      !isGazePhase &&
-                      !isEyesClosedPhase &&
-                      !!currentPhase?.label &&
-                      !sessionComplete
-                    }
-                  >
-                    <div
-                      style={{
-                        fontSize: "11px",
-                        fontFamily: '"Mukta", "DM Sans", sans-serif',
-                        fontWeight: 300,
-                        letterSpacing: "0.4em",
-                        paddingLeft: "0.4em",
-                        textTransform: "uppercase",
-                        color: "rgba(203, 183, 158, 0.5)",
-                      }}
-                    >
-                      {currentPhase?.label}
-                    </div>
-                  </FadeWrapper>
-
-                  {/* Body cue — same size/tracking as the breath cue. */}
+                  {/* Body cue + region — same size, weight carries hierarchy. */}
                   <FadeWrapper active={isBodyPhase}>
                     <div
                       style={{
                         display: "flex",
                         flexDirection: "column",
                         alignItems: "center",
-                        gap: "10px",
+                        gap: "12px",
                       }}
                     >
                       <div
                         style={{
-                          // Identical to the primary cue size in every phase.
                           fontSize: "clamp(24px, 2.6vw, 30px)",
                           fontFamily: '"Mukta", "DM Sans", sans-serif',
-                          fontWeight: 300,
-                          letterSpacing: "0.24em",
-                          paddingLeft: "0.24em",
+                          fontWeight: 400,
+                          letterSpacing: "0.2em",
+                          paddingLeft: "0.2em",
                           textTransform: "uppercase",
                           color: "rgba(245, 233, 218, 0.92)",
-                          lineHeight: 1.45,
+                          lineHeight: 1.3,
                           opacity: bodyCueOpacity,
-                          transition: "opacity 0.7s ease",
+                          transition: "opacity 0.55s ease",
                         }}
                       >
                         {shownBodyCue}
                       </div>
                       <div
                         style={{
-                          fontSize: "14px",
+                          fontSize: "clamp(24px, 2.6vw, 30px)",
                           fontFamily: '"Mukta", "DM Sans", sans-serif',
-                          fontWeight: 300,
-                          letterSpacing: "0.12em",
-                          paddingLeft: "0.12em",
+                          fontWeight: 200,
+                          letterSpacing: "0.2em",
+                          paddingLeft: "0.2em",
+                          textTransform: "lowercase",
                           color: "rgba(203, 183, 158, 0.6)",
-                          lineHeight: 1.2,
+                          lineHeight: 1.3,
                           opacity: bodyRegionLabelOpacity,
-                          transition: "opacity 0.7s ease",
+                          transition: "opacity 0.55s ease",
                         }}
                       >
                         {shownBodyRegionLabel}
@@ -2177,26 +2201,24 @@ export default function SessionPage() {
                   </FadeWrapper>
 
                   {/* Primary instruction — word cues (Inhale/Exhale) match the
-                      body cue exactly; settle sentences use the sentence scale. */}
+                      body cue exactly; settle sentences keep sentence case. */}
                   <FadeWrapper active={!isBodyPhase && !!primaryInstruction}>
                     <div
                       style={{
-                        // One size for every phase — only case/tracking changes
-                        // between sentence copy and single-word cues.
                         fontSize: "clamp(24px, 2.6vw, 30px)",
                         fontFamily: '"Mukta", "DM Sans", sans-serif',
-                        fontWeight: 300,
+                        fontWeight: isSettlePhase ? 300 : 400,
                         color: "rgba(245, 233, 218, 0.92)",
                         lineHeight: 1.45,
-                        letterSpacing: isSettlePhase ? "0.02em" : "0.24em",
-                        paddingLeft: isSettlePhase ? 0 : "0.24em",
+                        letterSpacing: isSettlePhase ? "0.02em" : "0.2em",
+                        paddingLeft: isSettlePhase ? 0 : "0.2em",
                         textTransform: isSettlePhase ? "none" : "uppercase",
                         maxWidth: "30ch",
                         textAlign: "center",
                         opacity: primaryInstructionOpacity,
-                        // Match the useCrossFadeText half-duration exactly —
-                        // 300ms fade-out, swap, 300ms fade-in = 600ms total.
-                        transition: "opacity 0.3s ease",
+                        // Matches the useCrossFadeText half-duration — 550ms
+                        // out, swap, 550ms in. Gentle without being sluggish.
+                        transition: "opacity 0.55s ease",
                       }}
                     >
                       {shownPrimaryInstruction}

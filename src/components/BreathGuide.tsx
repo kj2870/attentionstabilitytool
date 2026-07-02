@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import type { BreathAction } from "../lib/sessionScript";
 
 type BreathGuideProps = {
@@ -23,16 +23,21 @@ export default function BreathGuide({ action, durationSec }: BreathGuideProps) {
   // an actual value change and runs the transition, so the opening breath
   // visibly grows/shrinks instead of appearing at target scale instantly.
   const isInhale = action === "inhale";
-  const firstRenderRef = useRef(true);
   const [primed, setPrimed] = useState(false);
 
   useEffect(() => {
-    if (!primed) {
-      const id = requestAnimationFrame(() => setPrimed(true));
-      return () => cancelAnimationFrame(id);
-    }
-    firstRenderRef.current = false;
-  }, [primed]);
+    // Double rAF: the first ensures the initial (opposite) scale has been
+    // painted, the second flips to the target — guaranteeing the browser
+    // sees a value change and runs the transition on the very first breath.
+    let id2 = 0;
+    const id1 = requestAnimationFrame(() => {
+      id2 = requestAnimationFrame(() => setPrimed(true));
+    });
+    return () => {
+      cancelAnimationFrame(id1);
+      cancelAnimationFrame(id2);
+    };
+  }, []);
 
   const targetScale = !primed
     ? isInhale
