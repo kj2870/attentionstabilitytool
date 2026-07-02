@@ -1,5 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import { markFoundationsRead } from "../lib/storage";
+import { track } from "../lib/analytics";
 
 /**
  * One-time gate shown to new users immediately after sign-in.
@@ -14,6 +15,7 @@ export default function FoundationsPage() {
 
   const handleBegin = () => {
     markFoundationsRead();
+    track("foundations_completed");
     navigate("/", { replace: true });
   };
 

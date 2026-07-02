@@ -1,7 +1,8 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import Diya from "../components/Diya";
 import { signInWithGoogle } from "../lib/auth";
+import { track } from "../lib/analytics";
 
 /**
  * Landing screen for first-time visitors. One screen, no scroll.
@@ -13,9 +14,14 @@ export default function OnboardingPage() {
   const [isLoading, setIsLoading] = useState(false);
   const [authError, setAuthError] = useState("");
 
+  useEffect(() => {
+    track("landing_viewed");
+  }, []);
+
   const handleGoogleSignIn = async () => {
     setIsLoading(true);
     setAuthError("");
+    track("signin_started");
     try {
       await signInWithGoogle();
     } catch (err) {

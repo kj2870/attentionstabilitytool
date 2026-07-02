@@ -4,7 +4,11 @@ import { BrowserRouter } from "react-router-dom";
 import * as Sentry from "@sentry/react";
 import App from "./App";
 import ErrorBoundary from "./components/ErrorBoundary";
+import { initAnalytics } from "./lib/analytics";
 import "./index.css";
+
+// Usage analytics — dormant unless VITE_POSTHOG_KEY is set (production only).
+initAnalytics();
 
 // Error tracking — opt-in via env var. If VITE_SENTRY_DSN isn't set (e.g.
 // local dev), Sentry stays dormant. Only enabled in production builds so
