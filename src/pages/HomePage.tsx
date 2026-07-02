@@ -1,12 +1,62 @@
-import { useEffect } from "react";
-import { Link } from "react-router-dom";
+import { useEffect, useRef, useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import Diya from "../components/Diya";
 import { RESEARCH_MODE } from "../lib/presentationMode";
 import { getWeeklyCompletion, loadHistory } from "../lib/storage";
 
+// The threshold sound — a low, heavy swell (72Hz + 48Hz sub) that rises and
+// settles over ~1.8s. Reads as a large door easing open, or a distant drum:
+// something with mass changed state. Synthesized so there's no asset to load;
+// swap for a recorded sample later if we find one with more grain.
+function playThresholdSound() {
+  try {
+    const Ctx =
+      window.AudioContext ||
+      (window as typeof window & { webkitAudioContext?: typeof AudioContext })
+        .webkitAudioContext;
+    if (!Ctx) return;
+    const ctx = new Ctx();
+    const now = ctx.currentTime;
+
+    const fundamental = ctx.createOscillator();
+    fundamental.type = "sine";
+    fundamental.frequency.setValueAtTime(72, now);
+    // Slight downward settle — the "weight" of the sound.
+    fundamental.frequency.exponentialRampToValueAtTime(58, now + 1.6);
+    const g1 = ctx.createGain();
+    g1.gain.setValueAtTime(0.0001, now);
+    g1.gain.exponentialRampToValueAtTime(0.16, now + 0.35);
+    g1.gain.exponentialRampToValueAtTime(0.0001, now + 1.7);
+
+    const sub = ctx.createOscillator();
+    sub.type = "sine";
+    sub.frequency.setValueAtTime(48, now);
+    const g2 = ctx.createGain();
+    g2.gain.setValueAtTime(0.0001, now);
+    g2.gain.exponentialRampToValueAtTime(0.09, now + 0.45);
+    g2.gain.exponentialRampToValueAtTime(0.0001, now + 1.9);
+
+    fundamental.connect(g1).connect(ctx.destination);
+    sub.connect(g2).connect(ctx.destination);
+    fundamental.start(now);
+    fundamental.stop(now + 1.9);
+    sub.start(now);
+    sub.stop(now + 2.1);
+
+    window.setTimeout(() => void ctx.close(), 2500);
+  } catch {
+    // Audio blocked or unavailable — the visual threshold carries it alone.
+  }
+}
+
 export default function HomePage() {
+  const navigate = useNavigate();
   const history = loadHistory();
   const weekly = getWeeklyCompletion(history);
+  // Threshold state: pressing Begin darkens the room around the flame for a
+  // breath before the session is entered. Rituals need doorways.
+  const [leaving, setLeaving] = useState(false);
+  const leaveTimerRef = useRef<number | null>(null);
 
   const days = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"];
   const todayIndex = (new Date().getDay() + 6) % 7;
@@ -20,6 +70,21 @@ export default function HomePage() {
       document.body.style.overflow = "";
     };
   }, []);
+
+  useEffect(() => {
+    return () => {
+      if (leaveTimerRef.current !== null) window.clearTimeout(leaveTimerRef.current);
+    };
+  }, []);
+
+  const handleBegin = () => {
+    if (leaving) return;
+    setLeaving(true);
+    playThresholdSound();
+    // Content fades (0.6s), the dark rises around the flame (1.4s), then we
+    // cross. The session route fades in over 0.9s on the other side.
+    leaveTimerRef.current = window.setTimeout(() => navigate("/session"), 1600);
+  };
 
   if (RESEARCH_MODE) {
     return (
@@ -80,8 +145,26 @@ export default function HomePage() {
           }}
         />
 
-        {/* Diya + warm bloom — makes the diya feel lit rather than placed. */}
-        <div style={{ position: "relative", marginBottom: "-4px", display: "flex", justifyContent: "center" }}>
+        {/* Threshold dark — rises around the flame when Begin is pressed.
+            Sits above everything except the diya, which holds alone in the
+            darkness for a breath before the session takes over. */}
+        <div
+          aria-hidden
+          style={{
+            position: "fixed",
+            inset: 0,
+            background: "#000",
+            opacity: leaving ? 1 : 0,
+            transition: "opacity 1.4s ease-in-out",
+            pointerEvents: "none",
+            zIndex: 4,
+          }}
+        />
+
+        {/* Diya + warm bloom — makes the diya feel lit rather than placed.
+            zIndex above the threshold dark so the flame is the last thing
+            standing as the room falls away. */}
+        <div style={{ position: "relative", zIndex: 5, marginBottom: "-4px", display: "flex", justifyContent: "center" }}>
           <div
             aria-hidden
             style={{
@@ -110,6 +193,8 @@ export default function HomePage() {
             lineHeight: 1.1,
             letterSpacing: "0.04em",
             fontFamily: '"Samarkan", "Playfair Display", Georgia, serif',
+            opacity: leaving ? 0 : 1,
+            transition: "opacity 0.6s ease",
           }}
         >
           drishti
@@ -125,6 +210,8 @@ export default function HomePage() {
             letterSpacing: "0.02em",
             lineHeight: 1.4,
             color: "rgba(245, 233, 218, 0.8)",
+            opacity: leaving ? 0 : 1,
+            transition: "opacity 0.6s ease",
           }}
         >
           A practice in steadiness.
@@ -140,6 +227,8 @@ export default function HomePage() {
             paddingLeft: "0.32em",
             textTransform: "lowercase",
             color: "rgba(217, 203, 184, 0.52)",
+            opacity: leaving ? 0 : 1,
+            transition: "opacity 0.6s ease",
           }}
         >
           body · breath · gaze · awareness
@@ -160,6 +249,8 @@ export default function HomePage() {
             gap: "6px",
             position: "relative",
             zIndex: 1,
+            opacity: leaving ? 0 : 1,
+            transition: "opacity 0.6s ease",
           }}
         >
           {days.map((day, index) => {
@@ -200,9 +291,19 @@ export default function HomePage() {
           })}
         </div>
 
-        <Link to="/session" style={{ textDecoration: "none", position: "relative", zIndex: 1 }}>
-          <button className="cta-pill">Begin</button>
-        </Link>
+        <button
+          className="cta-pill"
+          onClick={handleBegin}
+          disabled={leaving}
+          style={{
+            position: "relative",
+            zIndex: 1,
+            opacity: leaving ? 0 : 1,
+            transition: "opacity 0.6s ease",
+          }}
+        >
+          Begin
+        </button>
       </div>
   );
 }
