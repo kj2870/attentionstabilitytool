@@ -123,7 +123,17 @@ button {
     border-color 0.18s ease,
     box-shadow 0.18s ease,
     color 0.18s ease,
-    opacity 0.18s ease;
+    opacity 0.18s ease,
+    transform 0.4s ease;
+}
+
+/* Press acknowledgment — the button physically gives under the finger.
+   Press-down is near-instant (50ms), release springs back on the slower
+   0.4s base transition above. No overshoot: pressed into warm wax, not a
+   spring — bouncy reads wrong on meditation surfaces. */
+button:not(:disabled):active {
+  transform: scale(0.98);
+  transition-duration: 0.05s;
 }
 
 button:disabled {
@@ -152,6 +162,13 @@ input:focus {
   width: 100%;
   max-width: 1200px;
   margin: 0 auto;
+}
+
+/* Nav links get a quick opacity dip on press — the native-app link gesture.
+   No scale: wobbling text reads as a glitch, not physics. Instant both ways,
+   which is how platform link highlights behave. */
+nav a:active {
+  opacity: 0.45;
 }
 
 .glass-card {
@@ -207,6 +224,13 @@ input:focus {
   /* Opt out of the global button lift — meditation surfaces should feel
      grounded, not bouncy. */
   transform: none;
+}
+
+/* Press state — the glow tightens as the pill gives under the finger,
+   like pressing into warm wax. Scale comes from the global button:active. */
+.cta-pill:not(:disabled):active {
+  background: rgba(255, 179, 71, 0.24);
+  box-shadow: 0 0 12px rgba(255, 179, 71, 0.3);
 }
 
 .cta-pill:focus-visible {
