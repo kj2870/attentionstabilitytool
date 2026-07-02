@@ -1661,7 +1661,9 @@ export default function SessionPage() {
 
 
   return (
-    <MeditationBackground >
+    // timeAware off: the session room is always the same room — the world
+    // outside breathes with the day, the practice space doesn't.
+    <MeditationBackground timeAware={false}>
       {/* Black backdrop for gaze phase — makes screen-blend on the diya
           video work perfectly (screen with black = pass-through). */}
       <div
