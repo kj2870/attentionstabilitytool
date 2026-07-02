@@ -23,6 +23,7 @@ import {
   type SessionRecord,
 } from "../lib/storage";
 import { getQuoteForDay } from "../lib/quotes";
+import { track } from "../lib/analytics";
 import { detectNewlyUnlocked, milestoneLabel } from "../lib/milestones";
 import { SessionAudioController } from "../lib/sessionAudio";
 import {
@@ -813,6 +814,13 @@ export default function SessionPage() {
     saveSession(record);            // local cache — instant
     void saveSessionRemote(record); // Supabase — fire and forget
     setPendingMilestones(unlocked);
+
+    track("sit_completed", {
+      duration_min: record.durationMin,
+      full_session: elapsedAtEndRef.current >= totalDuration,
+      had_camera: gazeSecondsRef.current > 0,
+      longest_gaze_sec: record.longestGazeSec ?? 0,
+    });
   }, [sessionComplete]);
 
 
@@ -1394,6 +1402,7 @@ export default function SessionPage() {
     }
 
     setIsRunning(true);
+    track("sit_started", { with_camera: !!cameraStream });
     await audioRef.current.playStartGong(settings);
   };
 
@@ -1407,6 +1416,10 @@ export default function SessionPage() {
   const handleEndEarly = () => {
     if (!isRunning) return;
     elapsedAtEndRef.current = elapsedSeconds;
+    track("sit_ended_early", {
+      elapsed_sec: elapsedSeconds,
+      phase: currentPhase?.visualMode ?? "unknown",
+    });
     setIsRunning(false);
     setIsPaused(false);
     setSessionComplete(true);
@@ -1426,6 +1439,11 @@ export default function SessionPage() {
       };
       updateSessionDetailsLocal(record.id, details);
       void updateSessionDetailsRemote(record.id, details);
+      // Content of the note is deliberately NOT sent to analytics.
+      track("note_submitted", {
+        has_note: trimmedNote.length > 0,
+        has_feeling: !!feeling,
+      });
     }
 
     setSaved(true);

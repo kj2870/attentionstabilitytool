@@ -82,6 +82,12 @@ export default function PrivacyPage() {
         </p>
 
         <p style={{ margin: 0 }}>
+          We also collect anonymous usage events — which screens are visited
+          and whether sessions are completed. No camera data, no note
+          contents, no recordings.
+        </p>
+
+        <p style={{ margin: 0 }}>
           Your password is handled by Google. We do not store it.
         </p>
       </div>

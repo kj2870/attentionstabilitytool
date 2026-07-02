@@ -2,6 +2,7 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 import Diya from "../components/Diya";
 import { signInWithGoogle } from "../lib/auth";
+import { track } from "../lib/analytics";
 
 export default function LoginPage() {
   const [isLoading, setIsLoading] = useState(false);
@@ -10,6 +11,7 @@ export default function LoginPage() {
   const handleGoogleSignIn = async () => {
     setIsLoading(true);
     setError("");
+    track("signin_started");
     try {
       await signInWithGoogle();
     } catch (err) {

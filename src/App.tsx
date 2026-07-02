@@ -19,6 +19,7 @@ import PublicPageNav from "./components/PublicPageNav";
 import MeditationBackground from "./components/MeditationBackground";
 import { supabase } from "./lib/supabase";
 import { syncLocalProfileFromUser } from "./lib/auth";
+import { identifyUser, resetAnalyticsIdentity, track } from "./lib/analytics";
 import { getActiveProfile, hasCompletedOnboarding, hasReadFoundations } from "./lib/storage";
 
 // ---------------------------------------------------------------------------
@@ -136,16 +137,24 @@ export default function App() {
     // Resolve the existing session on first load.
     supabase.auth.getSession().then(async ({ data: { session } }) => {
       const u = session?.user ?? null;
-      if (u) await syncLocalProfileFromUser(u);
+      if (u) {
+        await syncLocalProfileFromUser(u);
+        identifyUser(u.id);
+      }
       setUser(u);
       setAuthReady(true);
     });
 
     // Keep user state in sync with any auth event (login, logout, token refresh).
     const { data: { subscription } } = supabase.auth.onAuthStateChange(
-      (_event, session) => {
+      (event, session) => {
         const u = session?.user ?? null;
-        if (u) void syncLocalProfileFromUser(u);
+        if (u) {
+          void syncLocalProfileFromUser(u);
+          identifyUser(u.id);
+          if (event === "SIGNED_IN") track("signin_completed");
+        }
+        if (event === "SIGNED_OUT") resetAnalyticsIdentity();
         setUser(u);
       }
     );
