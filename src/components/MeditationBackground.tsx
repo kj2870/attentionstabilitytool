@@ -32,13 +32,15 @@ const hexToRgb = (hex: string): Rgb => [
 ];
 
 // Anchors in clock order. Night wraps around midnight.
+// Separation between moods is deliberately wide enough to *perceive* on a
+// normal monitor — near-black differences under ~6 RGB points are invisible.
 const ANCHORS: PaletteAnchor[] = [
   // night — embers, darkest field; the flame carries more.
-  { hour: 1, top: hexToRgb("#080604"), mid1: hexToRgb("#0e0a06"), mid2: hexToRgb("#120d07"), glow: [255, 140, 60, 0.08] },
-  // dawn — pale, waking, faint rose cast.
-  { hour: 7, top: hexToRgb("#0d0b09"), mid1: hexToRgb("#17110b"), mid2: hexToRgb("#1b140d"), glow: [255, 185, 125, 0.11] },
-  // day — neutral warm, quietest glow.
-  { hour: 13, top: hexToRgb("#0c0a07"), mid1: hexToRgb("#141008"), mid2: hexToRgb("#181109"), glow: [255, 165, 85, 0.09] },
+  { hour: 1, top: hexToRgb("#050302"), mid1: hexToRgb("#0a0704"), mid2: hexToRgb("#0d0905"), glow: [255, 135, 55, 0.07] },
+  // dawn — pale, waking, clear rose cast.
+  { hour: 7, top: hexToRgb("#151009"), mid1: hexToRgb("#241a11"), mid2: hexToRgb("#2b1f14"), glow: [255, 195, 145, 0.16] },
+  // day — lighter neutral warm, quiet glow.
+  { hour: 13, top: hexToRgb("#100d08"), mid1: hexToRgb("#1c150c"), mid2: hexToRgb("#22190e"), glow: [255, 175, 95, 0.10] },
   // evening — the canonical drishti amber (unchanged from the original).
   { hour: 19, top: hexToRgb("#0a0805"), mid1: hexToRgb("#15100a"), mid2: hexToRgb("#1a120a"), glow: [255, 150, 70, 0.12] },
 ];
@@ -99,6 +101,15 @@ export default function MeditationBackground({
         sky: `linear-gradient(180deg, ${cssRgb(EVENING.top)} 0%, ${cssRgb(EVENING.mid1)} 40%, ${cssRgb(EVENING.mid2)} 70%, ${cssRgb(EVENING.top)} 100%)`,
         glow: cssRgba(EVENING.glow),
       };
+    }
+    // Dev-only override: ?hour=6 forces that hour so the palette can be
+    // verified without changing the system clock. Ignored in production.
+    if (import.meta.env.DEV && typeof window !== "undefined") {
+      const forced = new URLSearchParams(window.location.search).get("hour");
+      if (forced !== null) {
+        const h = Number(forced);
+        if (!Number.isNaN(h)) return paletteForHour(((h % 24) + 24) % 24);
+      }
     }
     const now = new Date();
     return paletteForHour(now.getHours() + now.getMinutes() / 60);
