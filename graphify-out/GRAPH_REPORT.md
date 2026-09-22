@@ -1,16 +1,16 @@
 # Graph Report - focusflow  (2026-09-22)
 
 ## Corpus Check
-- 55 files · ~40,295 words
+- 53 files · ~40,068 words
 - Verdict: corpus is large enough that graph structure adds value.
 
 ## Summary
-- 650 nodes · 976 edges · 35 communities (30 shown, 5 thin omitted)
+- 675 nodes · 1005 edges · 36 communities (31 shown, 5 thin omitted)
 - Extraction: 100% EXTRACTED · 0% INFERRED · 0% AMBIGUOUS · INFERRED: 1 edges (avg confidence: 0.8)
 - Token cost: 0 input · 0 output
 
 ## Graph Freshness
-- Built from commit: `29b7011d`
+- Built from commit: `ed5a1fca`
 - Run `git rev-parse HEAD` and compare to check if the graph is stale.
 - Run `graphify update .` after code changes (no API cost).
 
@@ -45,10 +45,11 @@
 - [[_COMMUNITY_Community 27|Community 27]]
 - [[_COMMUNITY_Community 28|Community 28]]
 - [[_COMMUNITY_Community 29|Community 29]]
+- [[_COMMUNITY_Community 30|Community 30]]
 
 ## God Nodes (most connected - your core abstractions)
-1. `SessionAudioController` - 25 edges
-2. `Drishti` - 19 edges
+1. `Drishti` - 26 edges
+2. `SessionAudioController` - 25 edges
 3. `getActiveProfile()` - 15 edges
 4. `updateActiveProfile()` - 15 edges
 5. `handleSaveSession()` - 14 edges
@@ -56,37 +57,37 @@
 7. `getVowSnapshot()` - 10 edges
 8. `track()` - 9 edges
 9. `createProfile()` - 9 edges
-10. `Local development` - 9 edges
+10. `Drishti — Research Framing and Study Design` - 9 edges
 
 ## Surprising Connections (you probably didn't know these)
 - `SessionPage()` --calls--> `getQuoteForStreak()`  [EXTRACTED]
   src/pages/SessionPage.tsx → .claude/worktrees/zen-kalam-eba609/src/lib/quotes.ts
-- `MandalaRing()` --calls--> `getMandalaDay()`  [EXTRACTED]
-  src/pages/HistoryPage.tsx → src/lib/storage.ts
 - `HistoryPage()` --calls--> `avg()`  [INFERRED]
   src/pages/HistoryPage.tsx → src/pages/SessionPage.tsx
 - `handleStart()` --calls--> `track()`  [EXTRACTED]
   src/pages/SessionPage.tsx → src/lib/analytics.ts
 - `handleEndEarly()` --calls--> `track()`  [EXTRACTED]
   src/pages/SessionPage.tsx → src/lib/analytics.ts
+- `handleSaveSession()` --calls--> `track()`  [EXTRACTED]
+  src/pages/SessionPage.tsx → src/lib/analytics.ts
 
-## Communities (35 total, 5 thin omitted)
+## Communities (36 total, 5 thin omitted)
 
 ### Community 0 - "Community 0"
 Cohesion: 0.01
 Nodes (142): ABSOLUTE_CENTER_LAYER, allHistory, [attentionHistory, setAttentionHistory], [attentionScore, setAttentionScore], audioRef, avgClosureDurationMs, [avgDrift, setAvgDrift], avgInterBlinkIntervalSec (+134 more)
 
 ### Community 1 - "Community 1"
-Cohesion: 0.05
-Nodes (34): LayoutProps, ANCHORS, cssRgb(), cssRgba(), lerp(), MeditationBackgroundProps, mixRgb(), PaletteAnchor (+26 more)
+Cohesion: 0.07
+Nodes (53): clearHistory(), clearVow(), createProfile(), daysBetweenLocalKeys(), getActiveProfile(), getActiveProfileId(), getCurrentStreak(), getFlexibleStreak() (+45 more)
 
 ### Community 2 - "Community 2"
-Cohesion: 0.07
-Nodes (50): clearHistory(), clearVow(), createProfile(), daysBetweenLocalKeys(), getActiveProfileId(), getCurrentStreak(), getFlexibleStreak(), getMandalaDay() (+42 more)
+Cohesion: 0.06
+Nodes (28): LayoutProps, ANCHORS, cssRgb(), cssRgba(), lerp(), MeditationBackgroundProps, mixRgb(), PaletteAnchor (+20 more)
 
 ### Community 3 - "Community 3"
-Cohesion: 0.07
-Nodes (36): Auth setup, code:block1 (Webcam frame), code:block2 (src/), code:bash (git clone https://github.com/kj2870/attentionstabilitytool.g), code:block4 (VITE_APP_MODE=consumer), code:bash (npm run dev       # http://localhost:5173), code:sql (select column_name, data_type), code:block7 (.) (+28 more)
+Cohesion: 0.06
+Nodes (46): 1. Every frame — what the eyes are doing, 2. Before you start — the baseline, 3. Once per second — was that a good second?, Auth setup, code:mermaid (flowchart TD), code:block2 (src/), code:bash (git clone https://github.com/kj2870/attentionstabilitytool.g), code:block4 (VITE_APP_MODE=consumer) (+38 more)
 
 ### Community 4 - "Community 4"
 Cohesion: 0.09
@@ -97,12 +98,12 @@ Cohesion: 0.06
 Nodes (30): Behavioral Signals, Feedback, Integration With Physiological Signals, Measurement Reliability, Open Questions, Paced Breathing, Post-Fixation Open Awareness, Posture Settling (+22 more)
 
 ### Community 6 - "Community 6"
+Cohesion: 0.09
+Nodes (15): AppMode, _mode, getMandalaDay(), avg(), AXIS_LABEL, CalendarHeatmap(), formatDate(), formatStillness() (+7 more)
+
+### Community 7 - "Community 7"
 Cohesion: 0.07
 Nodes (26): Algorithm Overview, Blink Event Detection, Design Approach, Eye-State Feature Extraction, Frame Processing, Inputs, Next Steps, Objective (+18 more)
-
-### Community 8 - "Community 8"
-Cohesion: 0.11
-Nodes (12): avg(), AXIS_LABEL, CalendarHeatmap(), formatDate(), formatStillness(), formatTime(), MandalaRing(), polar() (+4 more)
 
 ### Community 9 - "Community 9"
 Cohesion: 0.1
@@ -110,87 +111,91 @@ Nodes (18): code:mermaid (flowchart TD), code:mermaid (flowchart TD), code:merma
 
 ### Community 10 - "Community 10"
 Cohesion: 0.13
-Nodes (14): Commands, Current Wiring, FocusFlow, GitHub And Sharing, Local Setup, Research Docs, Supabase Setup, Commands (+6 more)
+Nodes (14): 1. The framing, 2. Why a wearable belongs in this, 3. Primary hypothesis, 4. Design, 5. What has to be fixed before any of this is defensible, 6. Staging, 7. Questions for the advisor, Analysis (+6 more)
 
 ### Community 11 - "Community 11"
+Cohesion: 0.13
+Nodes (14): Commands, Current Wiring, FocusFlow, GitHub And Sharing, Local Setup, Research Docs, Supabase Setup, Commands (+6 more)
+
+### Community 12 - "Community 12"
 Cohesion: 0.21
 Nodes (9): computeEAR(), computeIrisPosition(), dist(), extractEulerAngles(), EyeMetricsSnapshot, LEFT_EYE_EAR, Pt, RIGHT_EYE_EAR (+1 more)
 
-### Community 12 - "Community 12"
+### Community 13 - "Community 13"
 Cohesion: 0.15
 Nodes (13): updateSessionDetailsRemote(), updateSessionNoteRemote(), appendCsvWithHeader(), avg(), buildPilotCsvRow(), downloadTextFile(), formatTimestampForKey(), handleExportResearchCsv() (+5 more)
 
-### Community 13 - "Community 13"
+### Community 14 - "Community 14"
 Cohesion: 0.3
 Nodes (5): clamp(), SimulatedTrackingEngine, TrackingEngine, TrackingListener, TrackingMetrics
 
-### Community 14 - "Community 14"
+### Community 15 - "Community 15"
 Cohesion: 0.2
 Nodes (4): detectNewlyUnlocked(), Milestone, milestoneLabel(), MILESTONES
 
-### Community 15 - "Community 15"
+### Community 16 - "Community 16"
 Cohesion: 0.22
 Nodes (8): Agent Routing, /doc-agent, graphify, /lint-agent, Agent Routing, /doc-agent, graphify, /lint-agent
 
-### Community 16 - "Community 16"
+### Community 17 - "Community 17"
 Cohesion: 0.31
 Nodes (7): beginnerQuotes, DAILY_QUOTES, DailyQuote, deepQuotes, getQuoteForDay(), getQuoteForStreak(), midQuotes
 
-### Community 17 - "Community 17"
+### Community 18 - "Community 18"
 Cohesion: 0.25
 Nodes (7): __dirname, innerSize, outputs, padding, root, svgBuffer, svgPath
 
-### Community 18 - "Community 18"
+### Community 19 - "Community 19"
 Cohesion: 0.36
 Nodes (4): Diya(), DiyaProps, Flame(), FlameProps
 
-### Community 20 - "Community 20"
+### Community 21 - "Community 21"
 Cohesion: 0.29
 Nodes (3): ErrorBoundary, ErrorBoundaryProps, ErrorBoundaryState
 
-### Community 22 - "Community 22"
+### Community 23 - "Community 23"
 Cohesion: 0.4
 Nodes (3): BeforeInstallPromptEvent, InstallPrompt(), isIOS()
-
-### Community 23 - "Community 23"
-Cohesion: 0.6
-Nodes (3): SessionProgress(), SessionProgressProps, YogiIcon()
 
 ### Community 24 - "Community 24"
 Cohesion: 0.6
 Nodes (3): SessionProgress(), SessionProgressProps, YogiIcon()
 
-### Community 27 - "Community 27"
-Cohesion: 0.67
-Nodes (3): isPlausibleEyeOpenness(), processBlinkState, tick()
+### Community 25 - "Community 25"
+Cohesion: 0.6
+Nodes (3): SessionProgress(), SessionProgressProps, YogiIcon()
 
 ### Community 28 - "Community 28"
 Cohesion: 0.67
-Nodes (3): enableCamera(), handleContinueFromSetup(), handleStart()
+Nodes (3): disableCamera(), handleResetResearchFlow(), stopCameraStream()
 
 ### Community 29 - "Community 29"
 Cohesion: 0.67
-Nodes (3): disableCamera(), handleResetResearchFlow(), stopCameraStream()
+Nodes (3): enableCamera(), handleContinueFromSetup(), handleStart()
+
+### Community 30 - "Community 30"
+Cohesion: 0.67
+Nodes (3): isPlausibleEyeOpenness(), processBlinkState, tick()
 
 ## Knowledge Gaps
-- **286 isolated node(s):** `__dirname`, `root`, `svgPath`, `svgBuffer`, `outputs` (+281 more)
+- **303 isolated node(s):** `__dirname`, `root`, `svgPath`, `svgBuffer`, `outputs` (+298 more)
   These have ≤1 connection - possible missing edges or undocumented components.
 - **5 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
 
 ## Suggested Questions
 _Questions this graph is uniquely positioned to answer:_
 
-- **Why does `SessionAudioController` connect `Community 7` to `Community 0`, `Community 4`?**
-  _High betweenness centrality (0.049) - this node is a cross-community bridge._
-- **Why does `loadHistory()` connect `Community 2` to `Community 8`, `Community 1`, `Community 0`?**
+- **Why does `SessionAudioController` connect `Community 8` to `Community 0`, `Community 4`?**
+  _High betweenness centrality (0.046) - this node is a cross-community bridge._
+- **Why does `loadHistory()` connect `Community 1` to `Community 0`, `Community 6`?**
   _High betweenness centrality (0.010) - this node is a cross-community bridge._
-- **Why does `SessionRecord` connect `Community 2` to `Community 8`, `Community 0`, `Community 14`?**
+- **Why does `SessionRecord` connect `Community 1` to `Community 0`, `Community 6`, `Community 15`?**
   _High betweenness centrality (0.008) - this node is a cross-community bridge._
 - **What connects `__dirname`, `root`, `svgPath` to the rest of the system?**
-  _286 weakly-connected nodes found - possible documentation gaps or missing edges._
+  _303 weakly-connected nodes found - possible documentation gaps or missing edges._
 - **Should `Community 0` be split into smaller, more focused modules?**
   _Cohesion score 0.01 - nodes in this community are weakly interconnected._
 - **Should `Community 1` be split into smaller, more focused modules?**
-  _Cohesion score 0.05 - nodes in this community are weakly interconnected._
-- **Should `Community 2` be split into smaller, more focused modules?**
   _Cohesion score 0.07 - nodes in this community are weakly interconnected._
+- **Should `Community 2` be split into smaller, more focused modules?**
+  _Cohesion score 0.06 - nodes in this community are weakly interconnected._

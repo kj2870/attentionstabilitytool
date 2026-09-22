@@ -3,21 +3,9 @@
     "mtime": 1781178548.476925,
     "hash": "89f8146a689a56d21f095c864b232f86"
   },
-  "C:\\Users\\kj287\\Documents\\01_Projects\\focusflow\\supabase-migration-v2.sql": {
-    "mtime": 1776096070.0852768,
-    "hash": "1563beb77159c98983adfce31e1306fb"
-  },
-  "C:\\Users\\kj287\\Documents\\01_Projects\\focusflow\\supabase-migration-v3.sql": {
-    "mtime": 1781178548.8030975,
-    "hash": "a78d7bab7b36ac39808b1edc393ce69e"
-  },
   "C:\\Users\\kj287\\Documents\\01_Projects\\focusflow\\supabase-schema-v4.sql": {
     "mtime": 1790117412.6983118,
     "hash": "0f03326c532915d1343cc806495c0bf7"
-  },
-  "C:\\Users\\kj287\\Documents\\01_Projects\\focusflow\\supabase-schema.sql": {
-    "mtime": 1779792687.610033,
-    "hash": "d9e1e163f59b632300a0b79d1182a939"
   },
   "C:\\Users\\kj287\\Documents\\01_Projects\\focusflow\\vite.config.ts": {
     "mtime": 1790117412.7083135,
@@ -216,8 +204,12 @@
     "hash": "3013707b9b61f57c3acccf82d9abe150"
   },
   "C:\\Users\\kj287\\Documents\\01_Projects\\focusflow\\README.md": {
-    "mtime": 1790117412.4280827,
-    "hash": "ca8db5557b3f7a6a6d7fc5e4c1ea869b"
+    "mtime": 1790119146.7190921,
+    "hash": "32f24d0b0d85fd970c978a39b14c3530"
+  },
+  "C:\\Users\\kj287\\Documents\\01_Projects\\focusflow\\study-design.md": {
+    "mtime": 1790117586.062807,
+    "hash": "cbe2637d54a58c01bb8377e0ee807b17"
   },
   "C:\\Users\\kj287\\Documents\\01_Projects\\focusflow\\system-diagrams.md": {
     "mtime": 1776066276.693642,
