@@ -8,11 +8,15 @@ No video ever leaves your machine. All the vision processing runs on-device.
 
 > *drishti* (Sanskrit): *the gaze, the way of seeing.*
 
-<!-- TODO: add the Vercel URL and 2–3 screenshots here. This is the first thing a visitor sees.
-     Suggested: the flame-gaze screen, the summary card, and the Record page.
-     **[Try it →](https://your-app.vercel.app)**
-     <p align="center"><img src="docs/screens/gaze.png" width="32%"> …</p>
--->
+### **[Try it → attentionstabilitytool.vercel.app](https://attentionstabilitytool.vercel.app/)**
+
+<p align="center">
+  <img src="docs/screens/home.png" width="49%" alt="Home screen: the diya, the week so far, and a Begin button">
+  &nbsp;
+  <img src="docs/screens/gaze.png" width="49%" alt="Flame gaze: the room has darkened to a single point of light">
+</p>
+
+<p align="center"><sub>Home, and the flame-gaze phase — the room darkens around a single point of light for five minutes.</sub></p>
 
 ---
 
