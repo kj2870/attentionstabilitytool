@@ -326,6 +326,7 @@ Set `VITE_APP_MODE=research` in `.env` (or add `?mode=research` in **dev builds 
 ├── graphify-out/              # Knowledge graph (see below)
 ├── algorithm-overview.md      # Signal-extraction pipeline documentation
 ├── protocol-and-questions.md  # Protocol rationale + open research questions
+├── study-design.md            # Research framing, hypotheses, proposed study
 ├── system-diagrams.md         # Architecture diagrams
 └── CLAUDE.md                  # Instructions for AI coding assistants (agent routing)
 ```
@@ -358,7 +359,12 @@ Drishti also serves as a research prototype for whether webcam-derived eye-behav
 
 - [`algorithm-overview.md`](algorithm-overview.md) — signal extraction pipeline
 - [`protocol-and-questions.md`](protocol-and-questions.md) — protocol rationale and open questions
+- [`study-design.md`](study-design.md) — research framing, hypotheses, and the proposed validation + wearable-coupling study
 - [`system-diagrams.md`](system-diagrams.md) — architecture diagrams
+
+The system does **not** measure attention. It measures behavioral compliance with a fixation
+instruction — whether the eyes stayed near the target, and how often they blinked. Whether that
+covaries with attention is the open empirical question.
 
 ---
 

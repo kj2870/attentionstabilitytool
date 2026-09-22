@@ -27,7 +27,30 @@
       "mcp__plugin_bio-research_consensus__search",
       "Bash(ls \"C:\\\\Users\\\\kj287\\\\Downloads\" | grep -i \"body\\\\|figure\")",
       "Bash(npm install *)",
-      "Bash(node scripts/generate-icons.mjs)"
+      "Bash(node scripts/generate-icons.mjs)",
+      "Bash(npx tsc *)",
+      "Bash(gh pr create --title 'Merge render paths + cross-fade phase transitions' --body ' *)",
+      "PowerShell(Get-Command gh -ErrorAction SilentlyContinue)",
+      "Bash(git rm *)",
+      "Bash(ls src *)",
+      "Bash(ls .github/workflows)",
+      "Bash(ls *.config.*)",
+      "Bash(ffmpeg -version)",
+      "Bash(npx eslint *)",
+      "Bash(git checkout *)",
+      "Bash(git pull *)",
+      "Bash(git branch *)",
+      "Bash(git remote *)",
+      "Bash(git worktree *)",
+      "Bash(cd \"C:\\\\Users\\\\kj287\\\\Documents\\\\01_Projects\\\\focusflow\" && mkdir -p src/assets/fonts && cp \"C:\\\\Users\\\\kj287\\\\Downloads\\\\SAMAN___.TTF\" src/assets/fonts/Samarkan.ttf && ls -la src/assets/fonts/)",
+      "mcp__visualize__read_me",
+      "mcp__visualize__show_widget",
+      "Bash(npm i *)",
+      "Bash(npm pkg *)",
+      "Bash(npx vitest *)",
+      "Bash(cat vercel.json)",
+      "Bash(cat .env.example)",
+      "Bash(awk '/Single opacity transition/,/<FadeWrapper$|<FadeWrapper /' src/pages/SessionPage.tsx)"
     ]
   }
 }
