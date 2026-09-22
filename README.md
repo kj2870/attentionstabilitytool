@@ -224,13 +224,25 @@ npm run test
 
 ## Things worth knowing exist
 
-- **Pause / resume mid-sit** — timer freezes, audio holds, state survives
-- **End early** saves the real elapsed time rather than pretending
-- **Wake lock** so the display can't dim mid-gaze
-- **Camera-denied fallback** — the session still runs, the summary shows duration instead of a zeroed gaze stat, and a retry pill offers the camera again
-- **48 daily quotes** cycled by mandala day, with real citations (Yoga Sutras, Gita, Upanishads, Dhammapada, Zen, Vedanta)
-- **Bundle split** — `mediapipe`, `supabase` and `react` are separate chunks; main bundle went from ~500 KB to ~300 KB
-- **Note-field disclosure** appears the moment you start typing, because the developer can read notes
+```
+.
+├── src/                       # Application source (see structure above)
+├── public/                    # Static: diya video, favicons, PWA icons
+├── supabase-schema-v4.sql     # Canonical schema — run this on a fresh Supabase project
+├── supabase-schema.sql        # Historical — pre-v4
+├── supabase-migration-v2.sql  # Historical — pre-v4
+├── supabase-migration-v3.sql  # Historical — pre-v4
+├── vercel.json                # SPA rewrites + security headers
+├── vite.config.ts             # Bundle split + PWA workbox config
+├── vitest.config.ts           # Test runner config
+├── .github/workflows/ci.yml   # Typecheck + lint + tests on push / PR
+├── graphify-out/              # Knowledge graph (see below)
+├── algorithm-overview.md      # Signal-extraction pipeline documentation
+├── protocol-and-questions.md  # Protocol rationale + open research questions
+├── study-design.md            # Research framing, hypotheses, proposed study
+├── system-diagrams.md         # Architecture diagrams
+└── CLAUDE.md                  # Instructions for AI coding assistants (agent routing)
+```
 
 ## Engineering decisions
 
@@ -250,6 +262,23 @@ npm run test
 ```bash
 graphify update .
 ```
+
+[`graphify-out/GRAPH_REPORT.md`](graphify-out/GRAPH_REPORT.md) lists god nodes (most-connected abstractions), community structure, and cross-file relationships. AI coding assistants should read this before navigating.
+
+---
+
+## Research context
+
+Drishti also serves as a research prototype for whether webcam-derived eye-behavior signals can meaningfully track attentional change over repeated sessions. See:
+
+- [`algorithm-overview.md`](algorithm-overview.md) — signal extraction pipeline
+- [`protocol-and-questions.md`](protocol-and-questions.md) — protocol rationale and open questions
+- [`study-design.md`](study-design.md) — research framing, hypotheses, and the proposed validation + wearable-coupling study
+- [`system-diagrams.md`](system-diagrams.md) — architecture diagrams
+
+The system does **not** measure attention. It measures behavioral compliance with a fixation
+instruction — whether the eyes stayed near the target, and how often they blinked. Whether that
+covaries with attention is the open empirical question.
 
 ---
 
