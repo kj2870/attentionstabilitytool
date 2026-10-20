@@ -448,19 +448,6 @@ nav a:active {
   }
 }
 
-@media (min-width: 701px) {
-  .bottom-tab-bar {
-    display: none !important;
-  }
-}
-
-/* Prevent page content from being hidden under the bottom tab bar on mobile.
-   56px icon row + safe area handled inside the bar itself. */
-@media (max-width: 700px) {
-  main {
-    padding-bottom: calc(72px + env(safe-area-inset-bottom));
-  }
-}
 
 /* Narrower phones — tighten header nav so it doesn't overflow. */
 @media (max-width: 480px) {
