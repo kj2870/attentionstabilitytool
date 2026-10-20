@@ -9,7 +9,7 @@
       "source_file": "eslint.config.js",
       "source_location": "L1",
       "id": "eslint_config_js",
-      "community": 32,
+      "community": 33,
       "norm_label": "eslint.config.js"
     },
     {
@@ -18,7 +18,7 @@
       "source_file": "vite.config.ts",
       "source_location": "L1",
       "id": "vite_config_ts",
-      "community": 33,
+      "community": 34,
       "norm_label": "vite.config.ts"
     },
     {
@@ -27,7 +27,7 @@
       "source_file": "vitest.config.ts",
       "source_location": "L1",
       "id": "vitest_config_ts",
-      "community": 34,
+      "community": 35,
       "norm_label": "vitest.config.ts"
     },
     {
@@ -36,7 +36,7 @@
       "source_file": "scripts/generate-icons.mjs",
       "source_location": "L1",
       "id": "scripts_generate_icons_mjs",
-      "community": 17,
+      "community": 18,
       "norm_label": "generate-icons.mjs"
     },
     {
@@ -45,7 +45,7 @@
       "source_file": "scripts/generate-icons.mjs",
       "source_location": "L8",
       "id": "scripts_generate_icons_dirname",
-      "community": 17,
+      "community": 18,
       "norm_label": "__dirname"
     },
     {
@@ -54,7 +54,7 @@
       "source_file": "scripts/generate-icons.mjs",
       "source_location": "L9",
       "id": "scripts_generate_icons_root",
-      "community": 17,
+      "community": 18,
       "norm_label": "root"
     },
     {
@@ -63,7 +63,7 @@
       "source_file": "scripts/generate-icons.mjs",
       "source_location": "L10",
       "id": "scripts_generate_icons_svgpath",
-      "community": 17,
+      "community": 18,
       "norm_label": "svgpath"
     },
     {
@@ -72,7 +72,7 @@
       "source_file": "scripts/generate-icons.mjs",
       "source_location": "L11",
       "id": "scripts_generate_icons_svgbuffer",
-      "community": 17,
+      "community": 18,
       "norm_label": "svgbuffer"
     },
     {
@@ -81,7 +81,7 @@
       "source_file": "scripts/generate-icons.mjs",
       "source_location": "L13",
       "id": "scripts_generate_icons_outputs",
-      "community": 17,
+      "community": 18,
       "norm_label": "outputs"
     },
     {
@@ -90,7 +90,7 @@
       "source_file": "scripts/generate-icons.mjs",
       "source_location": "L23",
       "id": "scripts_generate_icons_innersize",
-      "community": 17,
+      "community": 18,
       "norm_label": "innersize"
     },
     {
@@ -99,7 +99,7 @@
       "source_file": "scripts/generate-icons.mjs",
       "source_location": "L24",
       "id": "scripts_generate_icons_padding",
-      "community": 17,
+      "community": 18,
       "norm_label": "padding"
     },
     {
@@ -108,7 +108,7 @@
       "source_file": "src/App.tsx",
       "source_location": "L1",
       "id": "src_app_tsx",
-      "community": 1,
+      "community": 2,
       "norm_label": "app.tsx"
     },
     {
@@ -117,7 +117,7 @@
       "source_file": "src/App.tsx",
       "source_location": "L28",
       "id": "src_app_unauthroutes",
-      "community": 1,
+      "community": 2,
       "norm_label": "unauthroutes()"
     },
     {
@@ -126,7 +126,7 @@
       "source_file": "src/App.tsx",
       "source_location": "L73",
       "id": "src_app_foundationsgate",
-      "community": 1,
+      "community": 2,
       "norm_label": "foundationsgate()"
     },
     {
@@ -135,7 +135,7 @@
       "source_file": "src/App.tsx",
       "source_location": "L94",
       "id": "src_app_authedroutes",
-      "community": 1,
+      "community": 2,
       "norm_label": "authedroutes()"
     },
     {
@@ -153,7 +153,7 @@
       "source_file": "src/main.tsx",
       "source_location": "L1",
       "id": "src_main_tsx",
-      "community": 1,
+      "community": 2,
       "norm_label": "main.tsx"
     },
     {
@@ -162,7 +162,7 @@
       "source_file": "src/vite-env.d.ts",
       "source_location": "L1",
       "id": "src_vite_env_d_ts",
-      "community": 26,
+      "community": 27,
       "norm_label": "vite-env.d.ts"
     },
     {
@@ -171,7 +171,7 @@
       "source_file": "src/vite-env.d.ts",
       "source_location": "L5",
       "id": "src_vite_env_d_importmetaenv",
-      "community": 26,
+      "community": 27,
       "norm_label": "importmetaenv"
     },
     {
@@ -180,7 +180,7 @@
       "source_file": "src/vite-env.d.ts",
       "source_location": "L14",
       "id": "src_vite_env_d_importmeta",
-      "community": 26,
+      "community": 27,
       "norm_label": "importmeta"
     },
     {
@@ -225,7 +225,7 @@
       "source_file": "src/components/BottomTabBar.tsx",
       "source_location": "L1",
       "id": "src_components_bottomtabbar_tsx",
-      "community": 19,
+      "community": 20,
       "norm_label": "bottomtabbar.tsx"
     },
     {
@@ -234,7 +234,7 @@
       "source_file": "src/components/BottomTabBar.tsx",
       "source_location": "L3",
       "id": "components_bottomtabbar_tab",
-      "community": 19,
+      "community": 20,
       "norm_label": "tab"
     },
     {
@@ -243,7 +243,7 @@
       "source_file": "src/components/BottomTabBar.tsx",
       "source_location": "L12",
       "id": "components_bottomtabbar_homeicon",
-      "community": 19,
+      "community": 20,
       "norm_label": "homeicon()"
     },
     {
@@ -252,7 +252,7 @@
       "source_file": "src/components/BottomTabBar.tsx",
       "source_location": "L26",
       "id": "components_bottomtabbar_historyicon",
-      "community": 19,
+      "community": 20,
       "norm_label": "historyicon()"
     },
     {
@@ -261,7 +261,7 @@
       "source_file": "src/components/BottomTabBar.tsx",
       "source_location": "L48",
       "id": "components_bottomtabbar_abouticon",
-      "community": 19,
+      "community": 20,
       "norm_label": "abouticon()"
     },
     {
@@ -270,7 +270,7 @@
       "source_file": "src/components/BottomTabBar.tsx",
       "source_location": "L62",
       "id": "components_bottomtabbar_tabs",
-      "community": 19,
+      "community": 20,
       "norm_label": "tabs"
     },
     {
@@ -279,7 +279,7 @@
       "source_file": "src/components/BottomTabBar.tsx",
       "source_location": "L85",
       "id": "components_bottomtabbar_bottomtabbar",
-      "community": 19,
+      "community": 20,
       "norm_label": "bottomtabbar()"
     },
     {
@@ -315,7 +315,7 @@
       "source_file": "src/components/BrushstrokeEyes.tsx",
       "source_location": "L1",
       "id": "src_components_brushstrokeeyes_tsx",
-      "community": 31,
+      "community": 32,
       "norm_label": "brushstrokeeyes.tsx"
     },
     {
@@ -324,7 +324,7 @@
       "source_file": "src/components/BrushstrokeEyes.tsx",
       "source_location": "L8",
       "id": "components_brushstrokeeyes_brushstrokeeyes",
-      "community": 31,
+      "community": 32,
       "norm_label": "brushstrokeeyes()"
     },
     {
@@ -333,7 +333,7 @@
       "source_file": "src/components/Diya.tsx",
       "source_location": "L1",
       "id": "src_components_diya_tsx",
-      "community": 18,
+      "community": 19,
       "norm_label": "diya.tsx"
     },
     {
@@ -342,7 +342,7 @@
       "source_file": "src/components/Diya.tsx",
       "source_location": "L3",
       "id": "components_diya_diyaprops",
-      "community": 18,
+      "community": 19,
       "norm_label": "diyaprops"
     },
     {
@@ -351,7 +351,7 @@
       "source_file": "src/components/Diya.tsx",
       "source_location": "L7",
       "id": "components_diya_diya",
-      "community": 18,
+      "community": 19,
       "norm_label": "diya()"
     },
     {
@@ -360,7 +360,7 @@
       "source_file": "src/components/ErrorBoundary.tsx",
       "source_location": "L1",
       "id": "src_components_errorboundary_tsx",
-      "community": 20,
+      "community": 21,
       "norm_label": "errorboundary.tsx"
     },
     {
@@ -369,7 +369,7 @@
       "source_file": "src/components/ErrorBoundary.tsx",
       "source_location": "L3",
       "id": "components_errorboundary_errorboundaryprops",
-      "community": 20,
+      "community": 21,
       "norm_label": "errorboundaryprops"
     },
     {
@@ -378,7 +378,7 @@
       "source_file": "src/components/ErrorBoundary.tsx",
       "source_location": "L7",
       "id": "components_errorboundary_errorboundarystate",
-      "community": 20,
+      "community": 21,
       "norm_label": "errorboundarystate"
     },
     {
@@ -387,7 +387,7 @@
       "source_file": "src/components/ErrorBoundary.tsx",
       "source_location": "L13",
       "id": "components_errorboundary_errorboundary",
-      "community": 20,
+      "community": 21,
       "norm_label": "errorboundary"
     },
     {
@@ -396,7 +396,7 @@
       "source_file": "src/components/ErrorBoundary.tsx",
       "source_location": "L19",
       "id": "components_errorboundary_errorboundary_getderivedstatefromerror",
-      "community": 20,
+      "community": 21,
       "norm_label": ".getderivedstatefromerror()"
     },
     {
@@ -405,7 +405,7 @@
       "source_file": "src/components/ErrorBoundary.tsx",
       "source_location": "L23",
       "id": "components_errorboundary_errorboundary_componentdidcatch",
-      "community": 20,
+      "community": 21,
       "norm_label": ".componentdidcatch()"
     },
     {
@@ -414,7 +414,7 @@
       "source_file": "src/components/ErrorBoundary.tsx",
       "source_location": "L27",
       "id": "components_errorboundary_errorboundary_render",
-      "community": 20,
+      "community": 21,
       "norm_label": ".render()"
     },
     {
@@ -423,7 +423,7 @@
       "source_file": "src/components/Flame.tsx",
       "source_location": "L1",
       "id": "src_components_flame_tsx",
-      "community": 18,
+      "community": 19,
       "norm_label": "flame.tsx"
     },
     {
@@ -432,7 +432,7 @@
       "source_file": "src/components/Flame.tsx",
       "source_location": "L1",
       "id": "components_flame_flameprops",
-      "community": 18,
+      "community": 19,
       "norm_label": "flameprops"
     },
     {
@@ -441,7 +441,7 @@
       "source_file": "src/components/Flame.tsx",
       "source_location": "L5",
       "id": "components_flame_flame",
-      "community": 18,
+      "community": 19,
       "norm_label": "flame()"
     },
     {
@@ -450,7 +450,7 @@
       "source_file": "src/components/InstallPrompt.tsx",
       "source_location": "L1",
       "id": "src_components_installprompt_tsx",
-      "community": 22,
+      "community": 23,
       "norm_label": "installprompt.tsx"
     },
     {
@@ -459,7 +459,7 @@
       "source_file": "src/components/InstallPrompt.tsx",
       "source_location": "L4",
       "id": "components_installprompt_beforeinstallpromptevent",
-      "community": 22,
+      "community": 23,
       "norm_label": "beforeinstallpromptevent"
     },
     {
@@ -468,7 +468,7 @@
       "source_file": "src/components/InstallPrompt.tsx",
       "source_location": "L13",
       "id": "components_installprompt_shouldshowagain",
-      "community": 22,
+      "community": 23,
       "norm_label": "shouldshowagain()"
     },
     {
@@ -477,7 +477,7 @@
       "source_file": "src/components/InstallPrompt.tsx",
       "source_location": "L20",
       "id": "components_installprompt_isstandalone",
-      "community": 22,
+      "community": 23,
       "norm_label": "isstandalone()"
     },
     {
@@ -486,7 +486,7 @@
       "source_file": "src/components/InstallPrompt.tsx",
       "source_location": "L29",
       "id": "components_installprompt_isios",
-      "community": 22,
+      "community": 23,
       "norm_label": "isios()"
     },
     {
@@ -495,7 +495,7 @@
       "source_file": "src/components/InstallPrompt.tsx",
       "source_location": "L38",
       "id": "components_installprompt_installprompt",
-      "community": 22,
+      "community": 23,
       "norm_label": "installprompt()"
     },
     {
@@ -504,7 +504,7 @@
       "source_file": "src/components/Layout.tsx",
       "source_location": "L1",
       "id": "src_components_layout_tsx",
-      "community": 1,
+      "community": 2,
       "norm_label": "layout.tsx"
     },
     {
@@ -513,7 +513,7 @@
       "source_file": "src/components/Layout.tsx",
       "source_location": "L7",
       "id": "components_layout_layoutprops",
-      "community": 1,
+      "community": 2,
       "norm_label": "layoutprops"
     },
     {
@@ -522,7 +522,7 @@
       "source_file": "src/components/Layout.tsx",
       "source_location": "L11",
       "id": "components_layout_layout",
-      "community": 1,
+      "community": 2,
       "norm_label": "layout()"
     },
     {
@@ -531,7 +531,7 @@
       "source_file": "src/components/MeditationBackground.tsx",
       "source_location": "L1",
       "id": "src_components_meditationbackground_tsx",
-      "community": 1,
+      "community": 2,
       "norm_label": "meditationbackground.tsx"
     },
     {
@@ -540,7 +540,7 @@
       "source_file": "src/components/MeditationBackground.tsx",
       "source_location": "L3",
       "id": "components_meditationbackground_meditationbackgroundprops",
-      "community": 1,
+      "community": 2,
       "norm_label": "meditationbackgroundprops"
     },
     {
@@ -549,7 +549,7 @@
       "source_file": "src/components/MeditationBackground.tsx",
       "source_location": "L17",
       "id": "components_meditationbackground_rgb",
-      "community": 1,
+      "community": 2,
       "norm_label": "rgb"
     },
     {
@@ -558,7 +558,7 @@
       "source_file": "src/components/MeditationBackground.tsx",
       "source_location": "L18",
       "id": "components_meditationbackground_rgba",
-      "community": 1,
+      "community": 2,
       "norm_label": "rgba"
     },
     {
@@ -567,7 +567,7 @@
       "source_file": "src/components/MeditationBackground.tsx",
       "source_location": "L20",
       "id": "components_meditationbackground_paletteanchor",
-      "community": 1,
+      "community": 2,
       "norm_label": "paletteanchor"
     },
     {
@@ -576,7 +576,7 @@
       "source_file": "src/components/MeditationBackground.tsx",
       "source_location": "L28",
       "id": "components_meditationbackground_hextorgb",
-      "community": 1,
+      "community": 2,
       "norm_label": "hextorgb()"
     },
     {
@@ -585,7 +585,7 @@
       "source_file": "src/components/MeditationBackground.tsx",
       "source_location": "L37",
       "id": "components_meditationbackground_anchors",
-      "community": 1,
+      "community": 2,
       "norm_label": "anchors"
     },
     {
@@ -594,7 +594,7 @@
       "source_file": "src/components/MeditationBackground.tsx",
       "source_location": "L50",
       "id": "components_meditationbackground_lerp",
-      "community": 1,
+      "community": 2,
       "norm_label": "lerp()"
     },
     {
@@ -603,7 +603,7 @@
       "source_file": "src/components/MeditationBackground.tsx",
       "source_location": "L51",
       "id": "components_meditationbackground_mixrgb",
-      "community": 1,
+      "community": 2,
       "norm_label": "mixrgb()"
     },
     {
@@ -612,7 +612,7 @@
       "source_file": "src/components/MeditationBackground.tsx",
       "source_location": "L56",
       "id": "components_meditationbackground_cssrgb",
-      "community": 1,
+      "community": 2,
       "norm_label": "cssrgb()"
     },
     {
@@ -621,7 +621,7 @@
       "source_file": "src/components/MeditationBackground.tsx",
       "source_location": "L57",
       "id": "components_meditationbackground_cssrgba",
-      "community": 1,
+      "community": 2,
       "norm_label": "cssrgba()"
     },
     {
@@ -630,7 +630,7 @@
       "source_file": "src/components/MeditationBackground.tsx",
       "source_location": "L60",
       "id": "components_meditationbackground_paletteforhour",
-      "community": 1,
+      "community": 2,
       "norm_label": "paletteforhour()"
     },
     {
@@ -639,7 +639,7 @@
       "source_file": "src/components/MeditationBackground.tsx",
       "source_location": "L92",
       "id": "components_meditationbackground_meditationbackground",
-      "community": 1,
+      "community": 2,
       "norm_label": "meditationbackground()"
     },
     {
@@ -648,7 +648,7 @@
       "source_file": "src/components/PublicPageNav.tsx",
       "source_location": "L1",
       "id": "src_components_publicpagenav_tsx",
-      "community": 1,
+      "community": 2,
       "norm_label": "publicpagenav.tsx"
     },
     {
@@ -657,7 +657,7 @@
       "source_file": "src/components/PublicPageNav.tsx",
       "source_location": "L13",
       "id": "components_publicpagenav_publicpagenav",
-      "community": 1,
+      "community": 2,
       "norm_label": "publicpagenav()"
     },
     {
@@ -666,7 +666,7 @@
       "source_file": "src/components/SettleHalo.tsx",
       "source_location": "L1",
       "id": "src_components_settlehalo_tsx",
-      "community": 30,
+      "community": 31,
       "norm_label": "settlehalo.tsx"
     },
     {
@@ -675,7 +675,7 @@
       "source_file": "src/components/SettleHalo.tsx",
       "source_location": "L7",
       "id": "components_settlehalo_settlehalo",
-      "community": 30,
+      "community": 31,
       "norm_label": "settlehalo()"
     },
     {
@@ -684,7 +684,7 @@
       "source_file": "src/components/UpdateBanner.tsx",
       "source_location": "L1",
       "id": "src_components_updatebanner_tsx",
-      "community": 1,
+      "community": 2,
       "norm_label": "updatebanner.tsx"
     },
     {
@@ -693,7 +693,7 @@
       "source_file": "src/components/UpdateBanner.tsx",
       "source_location": "L7",
       "id": "components_updatebanner_updatebanner",
-      "community": 1,
+      "community": 2,
       "norm_label": "updatebanner()"
     },
     {
@@ -702,7 +702,7 @@
       "source_file": "src/lib/analytics.ts",
       "source_location": "L1",
       "id": "src_lib_analytics_ts",
-      "community": 1,
+      "community": 2,
       "norm_label": "analytics.ts"
     },
     {
@@ -711,7 +711,7 @@
       "source_file": "src/lib/analytics.ts",
       "source_location": "L19",
       "id": "lib_analytics_initanalytics",
-      "community": 1,
+      "community": 2,
       "norm_label": "initanalytics()"
     },
     {
@@ -720,7 +720,7 @@
       "source_file": "src/lib/analytics.ts",
       "source_location": "L39",
       "id": "lib_analytics_identifyuser",
-      "community": 1,
+      "community": 2,
       "norm_label": "identifyuser()"
     },
     {
@@ -729,7 +729,7 @@
       "source_file": "src/lib/analytics.ts",
       "source_location": "L44",
       "id": "lib_analytics_resetanalyticsidentity",
-      "community": 1,
+      "community": 2,
       "norm_label": "resetanalyticsidentity()"
     },
     {
@@ -738,7 +738,7 @@
       "source_file": "src/lib/analytics.ts",
       "source_location": "L49",
       "id": "lib_analytics_eventname",
-      "community": 1,
+      "community": 2,
       "norm_label": "eventname"
     },
     {
@@ -747,7 +747,7 @@
       "source_file": "src/lib/analytics.ts",
       "source_location": "L59",
       "id": "lib_analytics_track",
-      "community": 1,
+      "community": 2,
       "norm_label": "track()"
     },
     {
@@ -756,7 +756,7 @@
       "source_file": "src/lib/auth.ts",
       "source_location": "L1",
       "id": "src_lib_auth_ts",
-      "community": 1,
+      "community": 2,
       "norm_label": "auth.ts"
     },
     {
@@ -765,7 +765,7 @@
       "source_file": "src/lib/auth.ts",
       "source_location": "L8",
       "id": "lib_auth_signinwithgoogle",
-      "community": 1,
+      "community": 2,
       "norm_label": "signinwithgoogle()"
     },
     {
@@ -774,7 +774,7 @@
       "source_file": "src/lib/auth.ts",
       "source_location": "L21",
       "id": "lib_auth_signout",
-      "community": 1,
+      "community": 2,
       "norm_label": "signout()"
     },
     {
@@ -783,7 +783,7 @@
       "source_file": "src/lib/auth.ts",
       "source_location": "L32",
       "id": "lib_auth_synclocalprofilefromuser",
-      "community": 1,
+      "community": 2,
       "norm_label": "synclocalprofilefromuser()"
     },
     {
@@ -792,7 +792,7 @@
       "source_file": "src/lib/faceDetection.ts",
       "source_location": "L1",
       "id": "src_lib_facedetection_ts",
-      "community": 21,
+      "community": 22,
       "norm_label": "facedetection.ts"
     },
     {
@@ -801,7 +801,7 @@
       "source_file": "src/lib/faceDetection.ts",
       "source_location": "L3",
       "id": "lib_facedetection_facedetectionsnapshot",
-      "community": 21,
+      "community": 22,
       "norm_label": "facedetectionsnapshot"
     },
     {
@@ -810,7 +810,7 @@
       "source_file": "src/lib/faceDetection.ts",
       "source_location": "L10",
       "id": "lib_facedetection_sessionfacedetector",
-      "community": 21,
+      "community": 22,
       "norm_label": "sessionfacedetector"
     },
     {
@@ -819,7 +819,7 @@
       "source_file": "src/lib/faceDetection.ts",
       "source_location": "L14",
       "id": "lib_facedetection_sessionfacedetector_init",
-      "community": 21,
+      "community": 22,
       "norm_label": ".init()"
     },
     {
@@ -828,7 +828,7 @@
       "source_file": "src/lib/faceDetection.ts",
       "source_location": "L37",
       "id": "lib_facedetection_sessionfacedetector_detect",
-      "community": 21,
+      "community": 22,
       "norm_label": ".detect()"
     },
     {
@@ -837,7 +837,7 @@
       "source_file": "src/lib/faceDetection.ts",
       "source_location": "L84",
       "id": "lib_facedetection_sessionfacedetector_close",
-      "community": 21,
+      "community": 22,
       "norm_label": ".close()"
     },
     {
@@ -846,7 +846,7 @@
       "source_file": "src/lib/faceLandmarks.ts",
       "source_location": "L1",
       "id": "src_lib_facelandmarks_ts",
-      "community": 11,
+      "community": 12,
       "norm_label": "facelandmarks.ts"
     },
     {
@@ -855,7 +855,7 @@
       "source_file": "src/lib/faceLandmarks.ts",
       "source_location": "L5",
       "id": "lib_facelandmarks_eyemetricssnapshot",
-      "community": 11,
+      "community": 12,
       "norm_label": "eyemetricssnapshot"
     },
     {
@@ -864,7 +864,7 @@
       "source_file": "src/lib/faceLandmarks.ts",
       "source_location": "L59",
       "id": "lib_facelandmarks_left_eye_ear",
-      "community": 11,
+      "community": 12,
       "norm_label": "left_eye_ear"
     },
     {
@@ -873,7 +873,7 @@
       "source_file": "src/lib/faceLandmarks.ts",
       "source_location": "L60",
       "id": "lib_facelandmarks_right_eye_ear",
-      "community": 11,
+      "community": 12,
       "norm_label": "right_eye_ear"
     },
     {
@@ -882,7 +882,7 @@
       "source_file": "src/lib/faceLandmarks.ts",
       "source_location": "L66",
       "id": "lib_facelandmarks_pt",
-      "community": 11,
+      "community": 12,
       "norm_label": "pt"
     },
     {
@@ -891,7 +891,7 @@
       "source_file": "src/lib/faceLandmarks.ts",
       "source_location": "L68",
       "id": "lib_facelandmarks_dist",
-      "community": 11,
+      "community": 12,
       "norm_label": "dist()"
     },
     {
@@ -900,7 +900,7 @@
       "source_file": "src/lib/faceLandmarks.ts",
       "source_location": "L75",
       "id": "lib_facelandmarks_computeear",
-      "community": 11,
+      "community": 12,
       "norm_label": "computeear()"
     },
     {
@@ -909,7 +909,7 @@
       "source_file": "src/lib/faceLandmarks.ts",
       "source_location": "L93",
       "id": "lib_facelandmarks_extracteulerangles",
-      "community": 11,
+      "community": 12,
       "norm_label": "extracteulerangles()"
     },
     {
@@ -918,7 +918,7 @@
       "source_file": "src/lib/faceLandmarks.ts",
       "source_location": "L126",
       "id": "lib_facelandmarks_computeirisposition",
-      "community": 11,
+      "community": 12,
       "norm_label": "computeirisposition()"
     },
     {
@@ -927,7 +927,7 @@
       "source_file": "src/lib/faceLandmarks.ts",
       "source_location": "L164",
       "id": "lib_facelandmarks_sessionfacelandmarker",
-      "community": 11,
+      "community": 12,
       "norm_label": "sessionfacelandmarker"
     },
     {
@@ -936,7 +936,7 @@
       "source_file": "src/lib/faceLandmarks.ts",
       "source_location": "L170",
       "id": "lib_facelandmarks_sessionfacelandmarker_init",
-      "community": 11,
+      "community": 12,
       "norm_label": ".init()"
     },
     {
@@ -945,7 +945,7 @@
       "source_file": "src/lib/faceLandmarks.ts",
       "source_location": "L200",
       "id": "lib_facelandmarks_sessionfacelandmarker_detect",
-      "community": 11,
+      "community": 12,
       "norm_label": ".detect()"
     },
     {
@@ -954,7 +954,7 @@
       "source_file": "src/lib/faceLandmarks.ts",
       "source_location": "L319",
       "id": "lib_facelandmarks_sessionfacelandmarker_close",
-      "community": 11,
+      "community": 12,
       "norm_label": ".close()"
     },
     {
@@ -963,7 +963,7 @@
       "source_file": "src/lib/milestones.ts",
       "source_location": "L1",
       "id": "src_lib_milestones_ts",
-      "community": 14,
+      "community": 15,
       "norm_label": "milestones.ts"
     },
     {
@@ -972,7 +972,7 @@
       "source_file": "src/lib/milestones.ts",
       "source_location": "L14",
       "id": "lib_milestones_milestone",
-      "community": 14,
+      "community": 15,
       "norm_label": "milestone"
     },
     {
@@ -981,7 +981,7 @@
       "source_file": "src/lib/milestones.ts",
       "source_location": "L22",
       "id": "lib_milestones_totalsessions",
-      "community": 14,
+      "community": 15,
       "norm_label": "totalsessions()"
     },
     {
@@ -990,7 +990,7 @@
       "source_file": "src/lib/milestones.ts",
       "source_location": "L26",
       "id": "lib_milestones_maxlongestgaze",
-      "community": 14,
+      "community": 15,
       "norm_label": "maxlongestgaze()"
     },
     {
@@ -999,7 +999,7 @@
       "source_file": "src/lib/milestones.ts",
       "source_location": "L30",
       "id": "lib_milestones_totalstillnessminutes",
-      "community": 14,
+      "community": 15,
       "norm_label": "totalstillnessminutes()"
     },
     {
@@ -1008,7 +1008,7 @@
       "source_file": "src/lib/milestones.ts",
       "source_location": "L36",
       "id": "lib_milestones_daystreak",
-      "community": 14,
+      "community": 15,
       "norm_label": "daystreak()"
     },
     {
@@ -1017,7 +1017,7 @@
       "source_file": "src/lib/milestones.ts",
       "source_location": "L58",
       "id": "lib_milestones_lastgapdays",
-      "community": 14,
+      "community": 15,
       "norm_label": "lastgapdays()"
     },
     {
@@ -1026,7 +1026,7 @@
       "source_file": "src/lib/milestones.ts",
       "source_location": "L69",
       "id": "lib_milestones_milestones",
-      "community": 14,
+      "community": 15,
       "norm_label": "milestones"
     },
     {
@@ -1035,7 +1035,7 @@
       "source_file": "src/lib/milestones.ts",
       "source_location": "L107",
       "id": "lib_milestones_detectnewlyunlocked",
-      "community": 14,
+      "community": 15,
       "norm_label": "detectnewlyunlocked()"
     },
     {
@@ -1044,7 +1044,7 @@
       "source_file": "src/lib/milestones.ts",
       "source_location": "L122",
       "id": "lib_milestones_milestonelabel",
-      "community": 14,
+      "community": 15,
       "norm_label": "milestonelabel()"
     },
     {
@@ -1053,7 +1053,7 @@
       "source_file": "src/lib/presentationMode.ts",
       "source_location": "L1",
       "id": "src_lib_presentationmode_ts",
-      "community": 1,
+      "community": 6,
       "norm_label": "presentationmode.ts"
     },
     {
@@ -1062,7 +1062,7 @@
       "source_file": "src/lib/presentationMode.ts",
       "source_location": "L21",
       "id": "lib_presentationmode_appmode",
-      "community": 1,
+      "community": 6,
       "norm_label": "appmode"
     },
     {
@@ -1071,7 +1071,7 @@
       "source_file": "src/lib/presentationMode.ts",
       "source_location": "L23",
       "id": "lib_presentationmode_resolvemode",
-      "community": 1,
+      "community": 6,
       "norm_label": "resolvemode()"
     },
     {
@@ -1080,7 +1080,7 @@
       "source_file": "src/lib/presentationMode.ts",
       "source_location": "L69",
       "id": "lib_presentationmode_mode",
-      "community": 1,
+      "community": 6,
       "norm_label": "_mode"
     },
     {
@@ -1089,7 +1089,7 @@
       "source_file": "src/lib/quotes.ts",
       "source_location": "L1",
       "id": "src_lib_quotes_ts",
-      "community": 16,
+      "community": 17,
       "norm_label": "quotes.ts"
     },
     {
@@ -1098,7 +1098,7 @@
       "source_file": "src/lib/quotes.ts",
       "source_location": "L5",
       "id": "lib_quotes_dailyquote",
-      "community": 16,
+      "community": 17,
       "norm_label": "dailyquote"
     },
     {
@@ -1107,7 +1107,7 @@
       "source_file": "src/lib/quotes.ts",
       "source_location": "L10",
       "id": "lib_quotes_daily_quotes",
-      "community": 16,
+      "community": 17,
       "norm_label": "daily_quotes"
     },
     {
@@ -1116,7 +1116,7 @@
       "source_file": "src/lib/quotes.ts",
       "source_location": "L212",
       "id": "lib_quotes_getquoteforday",
-      "community": 16,
+      "community": 17,
       "norm_label": "getquoteforday()"
     },
     {
@@ -1134,7 +1134,7 @@
       "source_file": "src/lib/sessionAudio.ts",
       "source_location": "L16",
       "id": "lib_sessionaudio_sessionaudiocontroller",
-      "community": 7,
+      "community": 8,
       "norm_label": "sessionaudiocontroller"
     },
     {
@@ -1143,7 +1143,7 @@
       "source_file": "src/lib/sessionAudio.ts",
       "source_location": "L25",
       "id": "lib_sessionaudio_sessionaudiocontroller_preload",
-      "community": 7,
+      "community": 8,
       "norm_label": ".preload()"
     },
     {
@@ -1152,7 +1152,7 @@
       "source_file": "src/lib/sessionAudio.ts",
       "source_location": "L41",
       "id": "lib_sessionaudio_sessionaudiocontroller_getaudiocontext",
-      "community": 7,
+      "community": 8,
       "norm_label": ".getaudiocontext()"
     },
     {
@@ -1161,7 +1161,7 @@
       "source_file": "src/lib/sessionAudio.ts",
       "source_location": "L60",
       "id": "lib_sessionaudio_sessionaudiocontroller_fade",
-      "community": 7,
+      "community": 8,
       "norm_label": ".fade()"
     },
     {
@@ -1170,7 +1170,7 @@
       "source_file": "src/lib/sessionAudio.ts",
       "source_location": "L93",
       "id": "lib_sessionaudio_sessionaudiocontroller_playbellwithfade",
-      "community": 7,
+      "community": 8,
       "norm_label": ".playbellwithfade()"
     },
     {
@@ -1179,7 +1179,7 @@
       "source_file": "src/lib/sessionAudio.ts",
       "source_location": "L137",
       "id": "lib_sessionaudio_sessionaudiocontroller_playtonecluster",
-      "community": 7,
+      "community": 8,
       "norm_label": ".playtonecluster()"
     },
     {
@@ -1188,7 +1188,7 @@
       "source_file": "src/lib/sessionAudio.ts",
       "source_location": "L179",
       "id": "lib_sessionaudio_sessionaudiocontroller_playstartgong",
-      "community": 7,
+      "community": 8,
       "norm_label": ".playstartgong()"
     },
     {
@@ -1197,7 +1197,7 @@
       "source_file": "src/lib/sessionAudio.ts",
       "source_location": "L184",
       "id": "lib_sessionaudio_sessionaudiocontroller_playendgong",
-      "community": 7,
+      "community": 8,
       "norm_label": ".playendgong()"
     },
     {
@@ -1206,7 +1206,7 @@
       "source_file": "src/lib/sessionAudio.ts",
       "source_location": "L190",
       "id": "lib_sessionaudio_sessionaudiocontroller_playeyesclosetransition",
-      "community": 7,
+      "community": 8,
       "norm_label": ".playeyesclosetransition()"
     },
     {
@@ -1215,7 +1215,7 @@
       "source_file": "src/lib/sessionAudio.ts",
       "source_location": "L202",
       "id": "lib_sessionaudio_sessionaudiocontroller_playeyesopentransition",
-      "community": 7,
+      "community": 8,
       "norm_label": ".playeyesopentransition()"
     },
     {
@@ -1224,7 +1224,7 @@
       "source_file": "src/lib/sessionAudio.ts",
       "source_location": "L220",
       "id": "lib_sessionaudio_sessionaudiocontroller_startintrobed",
-      "community": 7,
+      "community": 8,
       "norm_label": ".startintrobed()"
     },
     {
@@ -1233,7 +1233,7 @@
       "source_file": "src/lib/sessionAudio.ts",
       "source_location": "L237",
       "id": "lib_sessionaudio_sessionaudiocontroller_startfirebed",
-      "community": 7,
+      "community": 8,
       "norm_label": ".startfirebed()"
     },
     {
@@ -1242,7 +1242,7 @@
       "source_file": "src/lib/sessionAudio.ts",
       "source_location": "L254",
       "id": "lib_sessionaudio_sessionaudiocontroller_pausebeds",
-      "community": 7,
+      "community": 8,
       "norm_label": ".pausebeds()"
     },
     {
@@ -1251,7 +1251,7 @@
       "source_file": "src/lib/sessionAudio.ts",
       "source_location": "L267",
       "id": "lib_sessionaudio_sessionaudiocontroller_fadeoutambient",
-      "community": 7,
+      "community": 8,
       "norm_label": ".fadeoutambient()"
     },
     {
@@ -1260,7 +1260,7 @@
       "source_file": "src/lib/sessionAudio.ts",
       "source_location": "L277",
       "id": "lib_sessionaudio_sessionaudiocontroller_syncphase",
-      "community": 7,
+      "community": 8,
       "norm_label": ".syncphase()"
     },
     {
@@ -1269,7 +1269,7 @@
       "source_file": "src/lib/sessionAudio.ts",
       "source_location": "L334",
       "id": "lib_sessionaudio_sessionaudiocontroller_reset",
-      "community": 7,
+      "community": 8,
       "norm_label": ".reset()"
     },
     {
@@ -1278,7 +1278,7 @@
       "source_file": "src/lib/sessionAudio.ts",
       "source_location": "L358",
       "id": "lib_sessionaudio_sessionaudiocontroller_cleanup",
-      "community": 7,
+      "community": 8,
       "norm_label": ".cleanup()"
     },
     {
@@ -1449,7 +1449,7 @@
       "source_file": "src/lib/storage.test.ts",
       "source_location": "L1",
       "id": "src_lib_storage_test_ts",
-      "community": 2,
+      "community": 1,
       "norm_label": "storage.test.ts"
     },
     {
@@ -1458,7 +1458,7 @@
       "source_file": "src/lib/storage.test.ts",
       "source_location": "L8",
       "id": "lib_storage_test_record",
-      "community": 2,
+      "community": 1,
       "norm_label": "record()"
     },
     {
@@ -1467,7 +1467,7 @@
       "source_file": "src/lib/storage.ts",
       "source_location": "L1",
       "id": "src_lib_storage_ts",
-      "community": 2,
+      "community": 1,
       "norm_label": "storage.ts"
     },
     {
@@ -1476,7 +1476,7 @@
       "source_file": "src/lib/storage.ts",
       "source_location": "L3",
       "id": "lib_storage_sessionfeeling",
-      "community": 2,
+      "community": 1,
       "norm_label": "sessionfeeling"
     },
     {
@@ -1485,7 +1485,7 @@
       "source_file": "src/lib/storage.ts",
       "source_location": "L5",
       "id": "lib_storage_sessionrecord",
-      "community": 2,
+      "community": 1,
       "norm_label": "sessionrecord"
     },
     {
@@ -1494,7 +1494,7 @@
       "source_file": "src/lib/storage.ts",
       "source_location": "L34",
       "id": "lib_storage_localprofile",
-      "community": 2,
+      "community": 1,
       "norm_label": "localprofile"
     },
     {
@@ -1503,7 +1503,7 @@
       "source_file": "src/lib/storage.ts",
       "source_location": "L49",
       "id": "lib_storage_safeparse",
-      "community": 2,
+      "community": 1,
       "norm_label": "safeparse()"
     },
     {
@@ -1512,7 +1512,7 @@
       "source_file": "src/lib/storage.ts",
       "source_location": "L59",
       "id": "lib_storage_loadprofiles",
-      "community": 2,
+      "community": 1,
       "norm_label": "loadprofiles()"
     },
     {
@@ -1521,7 +1521,7 @@
       "source_file": "src/lib/storage.ts",
       "source_location": "L63",
       "id": "lib_storage_saveprofiles",
-      "community": 2,
+      "community": 1,
       "norm_label": "saveprofiles()"
     },
     {
@@ -1530,7 +1530,7 @@
       "source_file": "src/lib/storage.ts",
       "source_location": "L67",
       "id": "lib_storage_createprofile",
-      "community": 2,
+      "community": 1,
       "norm_label": "createprofile()"
     },
     {
@@ -1539,7 +1539,7 @@
       "source_file": "src/lib/storage.ts",
       "source_location": "L86",
       "id": "lib_storage_getactiveprofileid",
-      "community": 2,
+      "community": 1,
       "norm_label": "getactiveprofileid()"
     },
     {
@@ -1548,7 +1548,7 @@
       "source_file": "src/lib/storage.ts",
       "source_location": "L90",
       "id": "lib_storage_setactiveprofileid",
-      "community": 2,
+      "community": 1,
       "norm_label": "setactiveprofileid()"
     },
     {
@@ -1557,7 +1557,7 @@
       "source_file": "src/lib/storage.ts",
       "source_location": "L95",
       "id": "lib_storage_clearactiveprofile",
-      "community": 1,
+      "community": 2,
       "norm_label": "clearactiveprofile()"
     },
     {
@@ -1566,7 +1566,7 @@
       "source_file": "src/lib/storage.ts",
       "source_location": "L106",
       "id": "lib_storage_invalidateprofilecache",
-      "community": 2,
+      "community": 1,
       "norm_label": "invalidateprofilecache()"
     },
     {
@@ -1584,7 +1584,7 @@
       "source_file": "src/lib/storage.ts",
       "source_location": "L133",
       "id": "lib_storage_updateactiveprofile",
-      "community": 2,
+      "community": 1,
       "norm_label": "updateactiveprofile()"
     },
     {
@@ -1602,7 +1602,7 @@
       "source_file": "src/lib/storage.ts",
       "source_location": "L154",
       "id": "lib_storage_loadhistory",
-      "community": 2,
+      "community": 1,
       "norm_label": "loadhistory()"
     },
     {
@@ -1611,7 +1611,7 @@
       "source_file": "src/lib/storage.ts",
       "source_location": "L162",
       "id": "lib_storage_savesession",
-      "community": 2,
+      "community": 1,
       "norm_label": "savesession()"
     },
     {
@@ -1620,7 +1620,7 @@
       "source_file": "src/lib/storage.ts",
       "source_location": "L172",
       "id": "lib_storage_updatesessiondetailslocal",
-      "community": 2,
+      "community": 1,
       "norm_label": "updatesessiondetailslocal()"
     },
     {
@@ -1629,7 +1629,7 @@
       "source_file": "src/lib/storage.ts",
       "source_location": "L190",
       "id": "lib_storage_clearhistory",
-      "community": 2,
+      "community": 1,
       "norm_label": "clearhistory()"
     },
     {
@@ -1647,7 +1647,7 @@
       "source_file": "src/lib/storage.ts",
       "source_location": "L212",
       "id": "lib_storage_markfoundationsread",
-      "community": 2,
+      "community": 1,
       "norm_label": "markfoundationsread()"
     },
     {
@@ -1656,7 +1656,7 @@
       "source_file": "src/lib/storage.ts",
       "source_location": "L222",
       "id": "lib_storage_tolocaldatekey",
-      "community": 2,
+      "community": 1,
       "norm_label": "tolocaldatekey()"
     },
     {
@@ -1665,7 +1665,7 @@
       "source_file": "src/lib/storage.ts",
       "source_location": "L230",
       "id": "lib_storage_shiftdatekey",
-      "community": 2,
+      "community": 1,
       "norm_label": "shiftdatekey()"
     },
     {
@@ -1674,7 +1674,7 @@
       "source_file": "src/lib/storage.ts",
       "source_location": "L239",
       "id": "lib_storage_getcurrentstreak",
-      "community": 2,
+      "community": 1,
       "norm_label": "getcurrentstreak()"
     },
     {
@@ -1683,7 +1683,7 @@
       "source_file": "src/lib/storage.ts",
       "source_location": "L279",
       "id": "lib_storage_getflexiblestreak",
-      "community": 2,
+      "community": 1,
       "norm_label": "getflexiblestreak()"
     },
     {
@@ -1692,7 +1692,7 @@
       "source_file": "src/lib/storage.ts",
       "source_location": "L323",
       "id": "lib_storage_getweeklycompletion",
-      "community": 2,
+      "community": 1,
       "norm_label": "getweeklycompletion()"
     },
     {
@@ -1701,7 +1701,7 @@
       "source_file": "src/lib/storage.ts",
       "source_location": "L348",
       "id": "lib_storage_savesessionremote",
-      "community": 2,
+      "community": 1,
       "norm_label": "savesessionremote()"
     },
     {
@@ -1710,7 +1710,7 @@
       "source_file": "src/lib/storage.ts",
       "source_location": "L405",
       "id": "lib_storage_updatesessiondetailsremote",
-      "community": 12,
+      "community": 13,
       "norm_label": "updatesessiondetailsremote()"
     },
     {
@@ -1719,7 +1719,7 @@
       "source_file": "src/lib/storage.ts",
       "source_location": "L436",
       "id": "lib_storage_loadhistoryremote",
-      "community": 2,
+      "community": 1,
       "norm_label": "loadhistoryremote()"
     },
     {
@@ -1728,7 +1728,7 @@
       "source_file": "src/lib/storage.ts",
       "source_location": "L474",
       "id": "lib_storage_mergeremotehistory",
-      "community": 2,
+      "community": 1,
       "norm_label": "mergeremotehistory()"
     },
     {
@@ -1737,7 +1737,7 @@
       "source_file": "src/lib/storage.ts",
       "source_location": "L494",
       "id": "lib_storage_getmandaladay",
-      "community": 2,
+      "community": 6,
       "norm_label": "getmandaladay()"
     },
     {
@@ -1746,7 +1746,7 @@
       "source_file": "src/lib/supabase.ts",
       "source_location": "L1",
       "id": "src_lib_supabase_ts",
-      "community": 1,
+      "community": 2,
       "norm_label": "supabase.ts"
     },
     {
@@ -1755,7 +1755,7 @@
       "source_file": "src/lib/supabase.ts",
       "source_location": "L13",
       "id": "lib_supabase_supabase",
-      "community": 1,
+      "community": 2,
       "norm_label": "supabase"
     },
     {
@@ -1764,7 +1764,7 @@
       "source_file": "src/lib/trackingEngine.ts",
       "source_location": "L1",
       "id": "src_lib_trackingengine_ts",
-      "community": 13,
+      "community": 14,
       "norm_label": "trackingengine.ts"
     },
     {
@@ -1773,7 +1773,7 @@
       "source_file": "src/lib/trackingEngine.ts",
       "source_location": "L1",
       "id": "lib_trackingengine_trackingmetrics",
-      "community": 13,
+      "community": 14,
       "norm_label": "trackingmetrics"
     },
     {
@@ -1782,7 +1782,7 @@
       "source_file": "src/lib/trackingEngine.ts",
       "source_location": "L9",
       "id": "lib_trackingengine_trackinglistener",
-      "community": 13,
+      "community": 14,
       "norm_label": "trackinglistener"
     },
     {
@@ -1791,7 +1791,7 @@
       "source_file": "src/lib/trackingEngine.ts",
       "source_location": "L11",
       "id": "lib_trackingengine_trackingengine",
-      "community": 13,
+      "community": 14,
       "norm_label": "trackingengine"
     },
     {
@@ -1800,7 +1800,7 @@
       "source_file": "src/pages/AboutPage.tsx",
       "source_location": "L1",
       "id": "src_pages_aboutpage_tsx",
-      "community": 1,
+      "community": 2,
       "norm_label": "aboutpage.tsx"
     },
     {
@@ -1809,7 +1809,7 @@
       "source_file": "src/pages/AboutPage.tsx",
       "source_location": "L5",
       "id": "pages_aboutpage_sections",
-      "community": 1,
+      "community": 2,
       "norm_label": "sections"
     },
     {
@@ -1818,7 +1818,7 @@
       "source_file": "src/pages/AboutPage.tsx",
       "source_location": "L28",
       "id": "pages_aboutpage_aboutpage",
-      "community": 1,
+      "community": 2,
       "norm_label": "aboutpage()"
     },
     {
@@ -1845,7 +1845,7 @@
       "source_file": "src/pages/HistoryPage.tsx",
       "source_location": "L1",
       "id": "src_pages_historypage_tsx",
-      "community": 8,
+      "community": 6,
       "norm_label": "historypage.tsx"
     },
     {
@@ -1854,7 +1854,7 @@
       "source_file": "src/pages/HistoryPage.tsx",
       "source_location": "L8",
       "id": "pages_historypage_smallflame",
-      "community": 8,
+      "community": 6,
       "norm_label": "smallflame()"
     },
     {
@@ -1863,7 +1863,7 @@
       "source_file": "src/pages/HistoryPage.tsx",
       "source_location": "L49",
       "id": "pages_historypage_polar",
-      "community": 8,
+      "community": 6,
       "norm_label": "polar()"
     },
     {
@@ -1872,7 +1872,7 @@
       "source_file": "src/pages/HistoryPage.tsx",
       "source_location": "L54",
       "id": "pages_historypage_segmentpath",
-      "community": 8,
+      "community": 6,
       "norm_label": "segmentpath()"
     },
     {
@@ -1881,7 +1881,7 @@
       "source_file": "src/pages/HistoryPage.tsx",
       "source_location": "L72",
       "id": "pages_historypage_builddaysessions",
-      "community": 8,
+      "community": 6,
       "norm_label": "builddaysessions()"
     },
     {
@@ -1890,7 +1890,7 @@
       "source_file": "src/pages/HistoryPage.tsx",
       "source_location": "L88",
       "id": "pages_historypage_formatdate",
-      "community": 8,
+      "community": 6,
       "norm_label": "formatdate()"
     },
     {
@@ -1899,7 +1899,7 @@
       "source_file": "src/pages/HistoryPage.tsx",
       "source_location": "L96",
       "id": "pages_historypage_formattime",
-      "community": 8,
+      "community": 6,
       "norm_label": "formattime()"
     },
     {
@@ -1908,7 +1908,7 @@
       "source_file": "src/pages/HistoryPage.tsx",
       "source_location": "L106",
       "id": "pages_historypage_axis_label",
-      "community": 8,
+      "community": 6,
       "norm_label": "axis_label"
     },
     {
@@ -1917,7 +1917,7 @@
       "source_file": "src/pages/HistoryPage.tsx",
       "source_location": "L114",
       "id": "pages_historypage_emptychartnote",
-      "community": 8,
+      "community": 6,
       "norm_label": "emptychartnote()"
     },
     {
@@ -1926,7 +1926,7 @@
       "source_file": "src/pages/HistoryPage.tsx",
       "source_location": "L140",
       "id": "pages_historypage_gazesteadinessarc",
-      "community": 8,
+      "community": 6,
       "norm_label": "gazesteadinessarc()"
     },
     {
@@ -1935,7 +1935,7 @@
       "source_file": "src/pages/HistoryPage.tsx",
       "source_location": "L297",
       "id": "pages_historypage_trendchart",
-      "community": 8,
+      "community": 6,
       "norm_label": "trendchart()"
     },
     {
@@ -1944,7 +1944,7 @@
       "source_file": "src/pages/HistoryPage.tsx",
       "source_location": "L484",
       "id": "pages_historypage_stattiles",
-      "community": 8,
+      "community": 6,
       "norm_label": "stattiles()"
     },
     {
@@ -1953,7 +1953,7 @@
       "source_file": "src/pages/HistoryPage.tsx",
       "source_location": "L536",
       "id": "pages_historypage_sectionheading",
-      "community": 8,
+      "community": 6,
       "norm_label": "sectionheading()"
     },
     {
@@ -1962,7 +1962,7 @@
       "source_file": "src/pages/HistoryPage.tsx",
       "source_location": "L557",
       "id": "pages_historypage_sessiondetail",
-      "community": 8,
+      "community": 6,
       "norm_label": "sessiondetail()"
     },
     {
@@ -1971,7 +1971,7 @@
       "source_file": "src/pages/HistoryPage.tsx",
       "source_location": "L612",
       "id": "pages_historypage_mandalaring",
-      "community": 8,
+      "community": 6,
       "norm_label": "mandalaring()"
     },
     {
@@ -1980,7 +1980,7 @@
       "source_file": "src/pages/HistoryPage.tsx",
       "source_location": "L731",
       "id": "pages_historypage_historypage",
-      "community": 2,
+      "community": 1,
       "norm_label": "historypage()"
     },
     {
@@ -1989,7 +1989,7 @@
       "source_file": "src/pages/HomePage.tsx",
       "source_location": "L1",
       "id": "src_pages_homepage_tsx",
-      "community": 2,
+      "community": 1,
       "norm_label": "homepage.tsx"
     },
     {
@@ -1998,7 +1998,7 @@
       "source_file": "src/pages/HomePage.tsx",
       "source_location": "L11",
       "id": "pages_homepage_playthresholdsound",
-      "community": 2,
+      "community": 1,
       "norm_label": "playthresholdsound()"
     },
     {
@@ -2007,7 +2007,7 @@
       "source_file": "src/pages/HomePage.tsx",
       "source_location": "L52",
       "id": "pages_homepage_homepage",
-      "community": 2,
+      "community": 1,
       "norm_label": "homepage()"
     },
     {
@@ -2016,7 +2016,7 @@
       "source_file": "src/pages/InstructionsPage.tsx",
       "source_location": "L1",
       "id": "src_pages_instructionspage_tsx",
-      "community": 1,
+      "community": 2,
       "norm_label": "instructionspage.tsx"
     },
     {
@@ -2025,7 +2025,7 @@
       "source_file": "src/pages/InstructionsPage.tsx",
       "source_location": "L6",
       "id": "pages_instructionspage_steps",
-      "community": 1,
+      "community": 2,
       "norm_label": "steps"
     },
     {
@@ -2034,7 +2034,7 @@
       "source_file": "src/pages/InstructionsPage.tsx",
       "source_location": "L39",
       "id": "pages_instructionspage_instructionspage",
-      "community": 1,
+      "community": 2,
       "norm_label": "instructionspage()"
     },
     {
@@ -2043,7 +2043,7 @@
       "source_file": "src/pages/LoginPage.tsx",
       "source_location": "L1",
       "id": "src_pages_loginpage_tsx",
-      "community": 1,
+      "community": 2,
       "norm_label": "loginpage.tsx"
     },
     {
@@ -2052,7 +2052,7 @@
       "source_file": "src/pages/LoginPage.tsx",
       "source_location": "L7",
       "id": "pages_loginpage_loginpage",
-      "community": 1,
+      "community": 2,
       "norm_label": "loginpage()"
     },
     {
@@ -2061,7 +2061,7 @@
       "source_file": "src/pages/OnboardingPage.tsx",
       "source_location": "L1",
       "id": "src_pages_onboardingpage_tsx",
-      "community": 1,
+      "community": 2,
       "norm_label": "onboardingpage.tsx"
     },
     {
@@ -2070,7 +2070,7 @@
       "source_file": "src/pages/OnboardingPage.tsx",
       "source_location": "L13",
       "id": "pages_onboardingpage_onboardingpage",
-      "community": 1,
+      "community": 2,
       "norm_label": "onboardingpage()"
     },
     {
@@ -2079,7 +2079,7 @@
       "source_file": "src/pages/PhilosophyPage.tsx",
       "source_location": "L1",
       "id": "src_pages_philosophypage_tsx",
-      "community": 1,
+      "community": 2,
       "norm_label": "philosophypage.tsx"
     },
     {
@@ -2088,7 +2088,7 @@
       "source_file": "src/pages/PhilosophyPage.tsx",
       "source_location": "L1",
       "id": "pages_philosophypage_philosophypage",
-      "community": 1,
+      "community": 2,
       "norm_label": "philosophypage()"
     },
     {
@@ -2097,7 +2097,7 @@
       "source_file": "src/pages/PrivacyPage.tsx",
       "source_location": "L1",
       "id": "src_pages_privacypage_tsx",
-      "community": 1,
+      "community": 2,
       "norm_label": "privacypage.tsx"
     },
     {
@@ -2106,7 +2106,7 @@
       "source_file": "src/pages/PrivacyPage.tsx",
       "source_location": "L5",
       "id": "pages_privacypage_privacypage",
-      "community": 1,
+      "community": 2,
       "norm_label": "privacypage()"
     },
     {
@@ -2115,7 +2115,7 @@
       "source_file": "src/pages/SciencePage.tsx",
       "source_location": "L1",
       "id": "src_pages_sciencepage_tsx",
-      "community": 1,
+      "community": 2,
       "norm_label": "sciencepage.tsx"
     },
     {
@@ -2124,7 +2124,7 @@
       "source_file": "src/pages/SciencePage.tsx",
       "source_location": "L1",
       "id": "pages_sciencepage_findings",
-      "community": 1,
+      "community": 2,
       "norm_label": "findings"
     },
     {
@@ -2133,7 +2133,7 @@
       "source_file": "src/pages/SciencePage.tsx",
       "source_location": "L46",
       "id": "pages_sciencepage_sciencepage",
-      "community": 1,
+      "community": 2,
       "norm_label": "sciencepage()"
     },
     {
@@ -2160,7 +2160,7 @@
       "source_file": "src/pages/SessionPage.tsx",
       "source_location": "L54",
       "id": "pages_sessionpage_avg",
-      "community": 12,
+      "community": 13,
       "norm_label": "avg()"
     },
     {
@@ -2178,7 +2178,7 @@
       "source_file": "src/pages/SessionPage.tsx",
       "source_location": "L63",
       "id": "pages_sessionpage_standarddeviation",
-      "community": 12,
+      "community": 13,
       "norm_label": "standarddeviation()"
     },
     {
@@ -2214,7 +2214,7 @@
       "source_file": "src/pages/SessionPage.tsx",
       "source_location": "L175",
       "id": "pages_sessionpage_usecrossfadetext",
-      "community": 2,
+      "community": 1,
       "norm_label": "usecrossfadetext()"
     },
     {
@@ -2232,7 +2232,7 @@
       "source_file": "src/pages/SessionPage.tsx",
       "source_location": "L219",
       "id": "pages_sessionpage_getbodycue",
-      "community": 2,
+      "community": 1,
       "norm_label": "getbodycue()"
     },
     {
@@ -2304,7 +2304,7 @@
       "source_file": "src/pages/SessionPage.tsx",
       "source_location": "L264",
       "id": "pages_sessionpage_isplausibleeyeopenness",
-      "community": 27,
+      "community": 30,
       "norm_label": "isplausibleeyeopenness()"
     },
     {
@@ -2349,7 +2349,7 @@
       "source_file": "src/pages/SessionPage.tsx",
       "source_location": "L448",
       "id": "pages_sessionpage_sessionpage",
-      "community": 2,
+      "community": 1,
       "norm_label": "sessionpage()"
     },
     {
@@ -2358,7 +2358,7 @@
       "source_file": "algorithm-overview.md",
       "source_location": "L1",
       "id": "algorithm_overview_md",
-      "community": 6,
+      "community": 7,
       "norm_label": "algorithm-overview.md"
     },
     {
@@ -2367,7 +2367,7 @@
       "source_file": "algorithm-overview.md",
       "source_location": "L1",
       "id": "focusflow_algorithm_overview_algorithm_overview",
-      "community": 6,
+      "community": 7,
       "norm_label": "algorithm overview"
     },
     {
@@ -2376,7 +2376,7 @@
       "source_file": "algorithm-overview.md",
       "source_location": "L3",
       "id": "focusflow_algorithm_overview_objective",
-      "community": 6,
+      "community": 7,
       "norm_label": "objective"
     },
     {
@@ -2385,7 +2385,7 @@
       "source_file": "algorithm-overview.md",
       "source_location": "L11",
       "id": "focusflow_algorithm_overview_inputs",
-      "community": 6,
+      "community": 7,
       "norm_label": "inputs"
     },
     {
@@ -2394,7 +2394,7 @@
       "source_file": "algorithm-overview.md",
       "source_location": "L23",
       "id": "focusflow_algorithm_overview_processing_pipeline",
-      "community": 6,
+      "community": 7,
       "norm_label": "processing pipeline"
     },
     {
@@ -2403,7 +2403,7 @@
       "source_file": "algorithm-overview.md",
       "source_location": "L25",
       "id": "focusflow_algorithm_overview_frame_processing",
-      "community": 6,
+      "community": 7,
       "norm_label": "frame processing"
     },
     {
@@ -2412,7 +2412,7 @@
       "source_file": "algorithm-overview.md",
       "source_location": "L31",
       "id": "focusflow_algorithm_overview_eye_state_feature_extraction",
-      "community": 6,
+      "community": 7,
       "norm_label": "eye-state feature extraction"
     },
     {
@@ -2421,7 +2421,7 @@
       "source_file": "algorithm-overview.md",
       "source_location": "L39",
       "id": "focusflow_algorithm_overview_blink_event_detection",
-      "community": 6,
+      "community": 7,
       "norm_label": "blink event detection"
     },
     {
@@ -2430,7 +2430,7 @@
       "source_file": "algorithm-overview.md",
       "source_location": "L47",
       "id": "focusflow_algorithm_overview_target_relative_eye_position",
-      "community": 6,
+      "community": 7,
       "norm_label": "target-relative eye position"
     },
     {
@@ -2439,7 +2439,7 @@
       "source_file": "algorithm-overview.md",
       "source_location": "L55",
       "id": "focusflow_algorithm_overview_time_series_feature_construction",
-      "community": 6,
+      "community": 7,
       "norm_label": "time-series feature construction"
     },
     {
@@ -2448,7 +2448,7 @@
       "source_file": "algorithm-overview.md",
       "source_location": "L68",
       "id": "focusflow_algorithm_overview_session_level_summary",
-      "community": 6,
+      "community": 7,
       "norm_label": "session-level summary"
     },
     {
@@ -2457,7 +2457,7 @@
       "source_file": "algorithm-overview.md",
       "source_location": "L76",
       "id": "focusflow_algorithm_overview_design_approach",
-      "community": 6,
+      "community": 7,
       "norm_label": "design approach"
     },
     {
@@ -2466,7 +2466,7 @@
       "source_file": "algorithm-overview.md",
       "source_location": "L84",
       "id": "focusflow_algorithm_overview_technical_constraints",
-      "community": 6,
+      "community": 7,
       "norm_label": "technical constraints"
     },
     {
@@ -2475,7 +2475,7 @@
       "source_file": "algorithm-overview.md",
       "source_location": "L97",
       "id": "focusflow_algorithm_overview_next_steps",
-      "community": 6,
+      "community": 7,
       "norm_label": "next steps"
     },
     {
@@ -2484,7 +2484,7 @@
       "source_file": "CLAUDE.md",
       "source_location": "L1",
       "id": "claude_md",
-      "community": 15,
+      "community": 16,
       "norm_label": "claude.md"
     },
     {
@@ -2493,7 +2493,7 @@
       "source_file": "CLAUDE.md",
       "source_location": "L1",
       "id": "focusflow_claude_agent_routing",
-      "community": 15,
+      "community": 16,
       "norm_label": "agent routing"
     },
     {
@@ -2502,7 +2502,7 @@
       "source_file": "CLAUDE.md",
       "source_location": "L16",
       "id": "focusflow_claude_lint_agent",
-      "community": 15,
+      "community": 16,
       "norm_label": "/lint-agent"
     },
     {
@@ -2511,7 +2511,7 @@
       "source_file": "CLAUDE.md",
       "source_location": "L25",
       "id": "focusflow_claude_doc_agent",
-      "community": 15,
+      "community": 16,
       "norm_label": "/doc-agent"
     },
     {
@@ -2520,7 +2520,7 @@
       "source_file": "CLAUDE.md",
       "source_location": "L34",
       "id": "focusflow_claude_graphify",
-      "community": 15,
+      "community": 16,
       "norm_label": "graphify"
     },
     {
@@ -2673,7 +2673,7 @@
       "source_file": "README.md",
       "source_location": "L1",
       "id": "readme_md",
-      "community": 10,
+      "community": 11,
       "norm_label": "readme.md"
     },
     {
@@ -2686,46 +2686,73 @@
       "norm_label": "drishti"
     },
     {
-      "label": "What it does",
+      "label": "How it works",
       "file_type": "document",
       "source_file": "README.md",
-      "source_location": "L11",
-      "id": "focusflow_readme_what_it_does",
+      "source_location": "L19",
+      "id": "focusflow_readme_how_it_works",
       "community": 3,
-      "norm_label": "what it does"
+      "norm_label": "how it works"
     },
     {
-      "label": "Session structure",
+      "label": "code:mermaid (flowchart TD)",
       "file_type": "document",
       "source_file": "README.md",
       "source_location": "L21",
-      "id": "focusflow_readme_session_structure",
-      "community": 3,
-      "norm_label": "session structure"
-    },
-    {
-      "label": "Eye tracking",
-      "file_type": "document",
-      "source_file": "README.md",
-      "source_location": "L40",
-      "id": "focusflow_readme_eye_tracking",
-      "community": 3,
-      "norm_label": "eye tracking"
-    },
-    {
-      "label": "code:block1 (Webcam frame)",
-      "file_type": "document",
-      "source_file": "README.md",
-      "source_location": "L46",
       "id": "focusflow_readme_codeblock_1",
       "community": 3,
-      "norm_label": "code:block1 (webcam frame)"
+      "norm_label": "code:mermaid (flowchart td)"
+    },
+    {
+      "label": "1. Every frame \u2014 what the eyes are doing",
+      "file_type": "document",
+      "source_file": "README.md",
+      "source_location": "L44",
+      "id": "focusflow_readme_1_every_frame_what_the_eyes_are_doing",
+      "community": 3,
+      "norm_label": "1. every frame \u2014 what the eyes are doing"
+    },
+    {
+      "label": "2. Before you start \u2014 the baseline",
+      "file_type": "document",
+      "source_file": "README.md",
+      "source_location": "L54",
+      "id": "focusflow_readme_2_before_you_start_the_baseline",
+      "community": 3,
+      "norm_label": "2. before you start \u2014 the baseline"
+    },
+    {
+      "label": "3. Once per second \u2014 was that a good second?",
+      "file_type": "document",
+      "source_file": "README.md",
+      "source_location": "L60",
+      "id": "focusflow_readme_3_once_per_second_was_that_a_good_second",
+      "community": 3,
+      "norm_label": "3. once per second \u2014 was that a good second?"
+    },
+    {
+      "label": "The session",
+      "file_type": "document",
+      "source_file": "README.md",
+      "source_location": "L77",
+      "id": "focusflow_readme_the_session",
+      "community": 3,
+      "norm_label": "the session"
+    },
+    {
+      "label": "What gets saved",
+      "file_type": "document",
+      "source_file": "README.md",
+      "source_location": "L92",
+      "id": "focusflow_readme_what_gets_saved",
+      "community": 3,
+      "norm_label": "what gets saved"
     },
     {
       "label": "Tech stack",
       "file_type": "document",
       "source_file": "README.md",
-      "source_location": "L86",
+      "source_location": "L112",
       "id": "focusflow_readme_tech_stack",
       "community": 3,
       "norm_label": "tech stack"
@@ -2734,7 +2761,7 @@
       "label": "Project structure",
       "file_type": "document",
       "source_file": "README.md",
-      "source_location": "L110",
+      "source_location": "L133",
       "id": "focusflow_readme_project_structure",
       "community": 3,
       "norm_label": "project structure"
@@ -2743,25 +2770,25 @@
       "label": "code:block2 (src/)",
       "file_type": "document",
       "source_file": "README.md",
-      "source_location": "L112",
+      "source_location": "L135",
       "id": "focusflow_readme_codeblock_2",
       "community": 3,
       "norm_label": "code:block2 (src/)"
     },
     {
-      "label": "Local development",
+      "label": "Running it locally",
       "file_type": "document",
       "source_file": "README.md",
-      "source_location": "L167",
-      "id": "focusflow_readme_local_development",
+      "source_location": "L178",
+      "id": "focusflow_readme_running_it_locally",
       "community": 3,
-      "norm_label": "local development"
+      "norm_label": "running it locally"
     },
     {
       "label": "code:bash (git clone https://github.com/kj2870/attentionstabilitytool.g)",
       "file_type": "document",
       "source_file": "README.md",
-      "source_location": "L171",
+      "source_location": "L182",
       "id": "focusflow_readme_codeblock_3",
       "community": 3,
       "norm_label": "code:bash (git clone https://github.com/kj2870/attentionstabilitytool.g)"
@@ -2770,7 +2797,7 @@
       "label": "code:block4 (VITE_APP_MODE=consumer)",
       "file_type": "document",
       "source_file": "README.md",
-      "source_location": "L179",
+      "source_location": "L190",
       "id": "focusflow_readme_codeblock_4",
       "community": 3,
       "norm_label": "code:block4 (vite_app_mode=consumer)"
@@ -2779,172 +2806,199 @@
       "label": "code:bash (npm run dev       # http://localhost:5173)",
       "file_type": "document",
       "source_file": "README.md",
-      "source_location": "L187",
+      "source_location": "L196",
       "id": "focusflow_readme_codeblock_5",
       "community": 3,
       "norm_label": "code:bash (npm run dev       # http://localhost:5173)"
     },
     {
-      "label": "Database setup (fresh install)",
+      "label": "Design notes",
       "file_type": "document",
       "source_file": "README.md",
-      "source_location": "L197",
-      "id": "focusflow_readme_database_setup_fresh_install",
+      "source_location": "L209",
+      "id": "focusflow_readme_design_notes",
       "community": 3,
-      "norm_label": "database setup (fresh install)"
+      "norm_label": "design notes"
     },
     {
-      "label": "code:sql (select column_name, data_type)",
+      "label": "Things worth knowing exist",
       "file_type": "document",
       "source_file": "README.md",
-      "source_location": "L203",
-      "id": "focusflow_readme_codeblock_6",
+      "source_location": "L221",
+      "id": "focusflow_readme_things_worth_knowing_exist",
       "community": 3,
-      "norm_label": "code:sql (select column_name, data_type)"
+      "norm_label": "things worth knowing exist"
     },
     {
-      "label": "Auth setup",
-      "file_type": "document",
-      "source_file": "README.md",
-      "source_location": "L212",
-      "id": "focusflow_readme_auth_setup",
-      "community": 3,
-      "norm_label": "auth setup"
-    },
-    {
-      "label": "Deployment (Vercel)",
-      "file_type": "document",
-      "source_file": "README.md",
-      "source_location": "L220",
-      "id": "focusflow_readme_deployment_vercel",
-      "community": 3,
-      "norm_label": "deployment (vercel)"
-    },
-    {
-      "label": "Design system",
+      "label": "Engineering decisions",
       "file_type": "document",
       "source_file": "README.md",
       "source_location": "L231",
-      "id": "focusflow_readme_design_system",
+      "id": "focusflow_readme_engineering_decisions",
       "community": 3,
-      "norm_label": "design system"
-    },
-    {
-      "label": "Typography",
-      "file_type": "document",
-      "source_file": "README.md",
-      "source_location": "L233",
-      "id": "focusflow_readme_typography",
-      "community": 3,
-      "norm_label": "typography"
-    },
-    {
-      "label": "Color",
-      "file_type": "document",
-      "source_file": "README.md",
-      "source_location": "L240",
-      "id": "focusflow_readme_color",
-      "community": 3,
-      "norm_label": "color"
-    },
-    {
-      "label": "Motion",
-      "file_type": "document",
-      "source_file": "README.md",
-      "source_location": "L244",
-      "id": "focusflow_readme_motion",
-      "community": 3,
-      "norm_label": "motion"
-    },
-    {
-      "label": "Layout scale",
-      "file_type": "document",
-      "source_file": "README.md",
-      "source_location": "L253",
-      "id": "focusflow_readme_layout_scale",
-      "community": 3,
-      "norm_label": "layout scale"
-    },
-    {
-      "label": "Features (things worth knowing exist)",
-      "file_type": "document",
-      "source_file": "README.md",
-      "source_location": "L261",
-      "id": "focusflow_readme_features_things_worth_knowing_exist",
-      "community": 3,
-      "norm_label": "features (things worth knowing exist)"
-    },
-    {
-      "label": "Research mode",
-      "file_type": "document",
-      "source_file": "README.md",
-      "source_location": "L302",
-      "id": "focusflow_readme_research_mode",
-      "community": 3,
-      "norm_label": "research mode"
-    },
-    {
-      "label": "Repository layout",
-      "file_type": "document",
-      "source_file": "README.md",
-      "source_location": "L312",
-      "id": "focusflow_readme_repository_layout",
-      "community": 3,
-      "norm_label": "repository layout"
-    },
-    {
-      "label": "code:block7 (.)",
-      "file_type": "document",
-      "source_file": "README.md",
-      "source_location": "L314",
-      "id": "focusflow_readme_codeblock_7",
-      "community": 3,
-      "norm_label": "code:block7 (.)"
-    },
-    {
-      "label": "Key design decisions",
-      "file_type": "document",
-      "source_file": "README.md",
-      "source_location": "L333",
-      "id": "focusflow_readme_key_design_decisions",
-      "community": 3,
-      "norm_label": "key design decisions"
+      "norm_label": "engineering decisions"
     },
     {
       "label": "Knowledge graph",
       "file_type": "document",
       "source_file": "README.md",
-      "source_location": "L343",
+      "source_location": "L242",
       "id": "focusflow_readme_knowledge_graph",
       "community": 3,
       "norm_label": "knowledge graph"
     },
     {
-      "label": "code:bash (python -m graphify update .)",
+      "label": "code:bash (graphify update .)",
       "file_type": "document",
       "source_file": "README.md",
-      "source_location": "L347",
-      "id": "focusflow_readme_codeblock_8",
+      "source_location": "L246",
+      "id": "focusflow_readme_codeblock_6",
       "community": 3,
-      "norm_label": "code:bash (python -m graphify update .)"
-    },
-    {
-      "label": "Research context",
-      "file_type": "document",
-      "source_file": "README.md",
-      "source_location": "L355",
-      "id": "focusflow_readme_research_context",
-      "community": 3,
-      "norm_label": "research context"
+      "norm_label": "code:bash (graphify update .)"
     },
     {
       "label": "License",
       "file_type": "document",
       "source_file": "README.md",
-      "source_location": "L365",
+      "source_location": "L252",
       "id": "focusflow_readme_license",
       "community": 3,
       "norm_label": "license"
+    },
+    {
+      "label": "study-design.md",
+      "file_type": "document",
+      "source_file": "study-design.md",
+      "source_location": "L1",
+      "id": "study_design_md",
+      "community": 10,
+      "norm_label": "study-design.md"
+    },
+    {
+      "label": "Drishti \u2014 Research Framing and Study Design",
+      "file_type": "document",
+      "source_file": "study-design.md",
+      "source_location": "L1",
+      "id": "focusflow_study_design_drishti_research_framing_and_study_design",
+      "community": 10,
+      "norm_label": "drishti \u2014 research framing and study design"
+    },
+    {
+      "label": "1. The framing",
+      "file_type": "document",
+      "source_file": "study-design.md",
+      "source_location": "L7",
+      "id": "focusflow_study_design_1_the_framing",
+      "community": 10,
+      "norm_label": "1. the framing"
+    },
+    {
+      "label": "What the system honestly measures",
+      "file_type": "document",
+      "source_file": "study-design.md",
+      "source_location": "L28",
+      "id": "focusflow_study_design_what_the_system_honestly_measures",
+      "community": 10,
+      "norm_label": "what the system honestly measures"
+    },
+    {
+      "label": "2. Why a wearable belongs in this",
+      "file_type": "document",
+      "source_file": "study-design.md",
+      "source_location": "L37",
+      "id": "focusflow_study_design_2_why_a_wearable_belongs_in_this",
+      "community": 10,
+      "norm_label": "2. why a wearable belongs in this"
+    },
+    {
+      "label": "3. Primary hypothesis",
+      "file_type": "document",
+      "source_file": "study-design.md",
+      "source_location": "L51",
+      "id": "focusflow_study_design_3_primary_hypothesis",
+      "community": 10,
+      "norm_label": "3. primary hypothesis"
+    },
+    {
+      "label": "Secondary hypotheses",
+      "file_type": "document",
+      "source_file": "study-design.md",
+      "source_location": "L65",
+      "id": "focusflow_study_design_secondary_hypotheses",
+      "community": 10,
+      "norm_label": "secondary hypotheses"
+    },
+    {
+      "label": "4. Design",
+      "file_type": "document",
+      "source_file": "study-design.md",
+      "source_location": "L79",
+      "id": "focusflow_study_design_4_design",
+      "community": 10,
+      "norm_label": "4. design"
+    },
+    {
+      "label": "Measures",
+      "file_type": "document",
+      "source_file": "study-design.md",
+      "source_location": "L92",
+      "id": "focusflow_study_design_measures",
+      "community": 10,
+      "norm_label": "measures"
+    },
+    {
+      "label": "Analysis",
+      "file_type": "document",
+      "source_file": "study-design.md",
+      "source_location": "L112",
+      "id": "focusflow_study_design_analysis",
+      "community": 10,
+      "norm_label": "analysis"
+    },
+    {
+      "label": "code:block1 (gaze_stability ~ HRV_z_within + sleep_z_within + day_in_stud)",
+      "file_type": "document",
+      "source_file": "study-design.md",
+      "source_location": "L116",
+      "id": "focusflow_study_design_codeblock_1",
+      "community": 10,
+      "norm_label": "code:block1 (gaze_stability ~ hrv_z_within + sleep_z_within + day_in_stud)"
+    },
+    {
+      "label": "5. What has to be fixed before any of this is defensible",
+      "file_type": "document",
+      "source_file": "study-design.md",
+      "source_location": "L132",
+      "id": "focusflow_study_design_5_what_has_to_be_fixed_before_any_of_this_is_defensible",
+      "community": 10,
+      "norm_label": "5. what has to be fixed before any of this is defensible"
+    },
+    {
+      "label": "6. Staging",
+      "file_type": "document",
+      "source_file": "study-design.md",
+      "source_location": "L162",
+      "id": "focusflow_study_design_6_staging",
+      "community": 10,
+      "norm_label": "6. staging"
+    },
+    {
+      "label": "7. Questions for the advisor",
+      "file_type": "document",
+      "source_file": "study-design.md",
+      "source_location": "L178",
+      "id": "focusflow_study_design_7_questions_for_the_advisor",
+      "community": 10,
+      "norm_label": "7. questions for the advisor"
+    },
+    {
+      "label": "Related documents",
+      "file_type": "document",
+      "source_file": "study-design.md",
+      "source_location": "L188",
+      "id": "focusflow_study_design_related_documents",
+      "community": 10,
+      "norm_label": "related documents"
     },
     {
       "label": "system-diagrams.md",
@@ -3037,11 +3091,182 @@
       "norm_label": "code:mermaid (flowchart lr)"
     },
     {
+      "label": "What it does",
+      "file_type": "document",
+      "source_file": "README.md",
+      "source_location": "L11",
+      "community": 3,
+      "norm_label": "what it does",
+      "id": "focusflow_readme_what_it_does"
+    },
+    {
+      "label": "Session structure",
+      "file_type": "document",
+      "source_file": "README.md",
+      "source_location": "L21",
+      "community": 3,
+      "norm_label": "session structure",
+      "id": "focusflow_readme_session_structure"
+    },
+    {
+      "label": "Eye tracking",
+      "file_type": "document",
+      "source_file": "README.md",
+      "source_location": "L40",
+      "community": 3,
+      "norm_label": "eye tracking",
+      "id": "focusflow_readme_eye_tracking"
+    },
+    {
+      "label": "Local development",
+      "file_type": "document",
+      "source_file": "README.md",
+      "source_location": "L167",
+      "community": 3,
+      "norm_label": "local development",
+      "id": "focusflow_readme_local_development"
+    },
+    {
+      "label": "Database setup (fresh install)",
+      "file_type": "document",
+      "source_file": "README.md",
+      "source_location": "L197",
+      "community": 3,
+      "norm_label": "database setup (fresh install)",
+      "id": "focusflow_readme_database_setup_fresh_install"
+    },
+    {
+      "label": "Auth setup",
+      "file_type": "document",
+      "source_file": "README.md",
+      "source_location": "L212",
+      "community": 3,
+      "norm_label": "auth setup",
+      "id": "focusflow_readme_auth_setup"
+    },
+    {
+      "label": "Deployment (Vercel)",
+      "file_type": "document",
+      "source_file": "README.md",
+      "source_location": "L220",
+      "community": 3,
+      "norm_label": "deployment (vercel)",
+      "id": "focusflow_readme_deployment_vercel"
+    },
+    {
+      "label": "Design system",
+      "file_type": "document",
+      "source_file": "README.md",
+      "source_location": "L231",
+      "community": 3,
+      "norm_label": "design system",
+      "id": "focusflow_readme_design_system"
+    },
+    {
+      "label": "Typography",
+      "file_type": "document",
+      "source_file": "README.md",
+      "source_location": "L233",
+      "community": 3,
+      "norm_label": "typography",
+      "id": "focusflow_readme_typography"
+    },
+    {
+      "label": "Color",
+      "file_type": "document",
+      "source_file": "README.md",
+      "source_location": "L240",
+      "community": 3,
+      "norm_label": "color",
+      "id": "focusflow_readme_color"
+    },
+    {
+      "label": "Motion",
+      "file_type": "document",
+      "source_file": "README.md",
+      "source_location": "L244",
+      "community": 3,
+      "norm_label": "motion",
+      "id": "focusflow_readme_motion"
+    },
+    {
+      "label": "Layout scale",
+      "file_type": "document",
+      "source_file": "README.md",
+      "source_location": "L253",
+      "community": 3,
+      "norm_label": "layout scale",
+      "id": "focusflow_readme_layout_scale"
+    },
+    {
+      "label": "Features (things worth knowing exist)",
+      "file_type": "document",
+      "source_file": "README.md",
+      "source_location": "L261",
+      "community": 3,
+      "norm_label": "features (things worth knowing exist)",
+      "id": "focusflow_readme_features_things_worth_knowing_exist"
+    },
+    {
+      "label": "Research mode",
+      "file_type": "document",
+      "source_file": "README.md",
+      "source_location": "L302",
+      "community": 3,
+      "norm_label": "research mode",
+      "id": "focusflow_readme_research_mode"
+    },
+    {
+      "label": "Repository layout",
+      "file_type": "document",
+      "source_file": "README.md",
+      "source_location": "L312",
+      "community": 3,
+      "norm_label": "repository layout",
+      "id": "focusflow_readme_repository_layout"
+    },
+    {
+      "label": "code:block7 (.)",
+      "file_type": "document",
+      "source_file": "README.md",
+      "source_location": "L314",
+      "community": 3,
+      "norm_label": "code:block7 (.)",
+      "id": "focusflow_readme_codeblock_7"
+    },
+    {
+      "label": "Key design decisions",
+      "file_type": "document",
+      "source_file": "README.md",
+      "source_location": "L334",
+      "community": 3,
+      "norm_label": "key design decisions",
+      "id": "focusflow_readme_key_design_decisions"
+    },
+    {
+      "label": "code:bash (python -m graphify update .)",
+      "file_type": "document",
+      "source_file": "README.md",
+      "source_location": "L348",
+      "community": 3,
+      "norm_label": "code:bash (python -m graphify update .)",
+      "id": "focusflow_readme_codeblock_8"
+    },
+    {
+      "label": "Research context",
+      "file_type": "document",
+      "source_file": "README.md",
+      "source_location": "L356",
+      "community": 3,
+      "norm_label": "research context",
+      "id": "focusflow_readme_research_context"
+    },
+    {
       "label": "Diya.tsx",
       "file_type": "code",
       "source_file": ".claude/worktrees/zen-kalam-eba609/src/components/Diya.tsx",
       "source_location": "L1",
-      "community": 18,
+      "community": 19,
       "norm_label": "diya.tsx",
       "id": "c_users_kj287_documents_01_projects_focusflow_claude_worktrees_zen_kalam_eba609_src_components_diya_tsx"
     },
@@ -3050,7 +3275,7 @@
       "file_type": "code",
       "source_file": ".claude/worktrees/zen-kalam-eba609/src/components/Flame.tsx",
       "source_location": "L1",
-      "community": 18,
+      "community": 19,
       "norm_label": "flame.tsx",
       "id": "c_users_kj287_documents_01_projects_focusflow_claude_worktrees_zen_kalam_eba609_src_components_flame_tsx"
     },
@@ -3059,7 +3284,7 @@
       "file_type": "code",
       "source_file": ".claude/worktrees/zen-kalam-eba609/src/lib/faceDetection.ts",
       "source_location": "L1",
-      "community": 21,
+      "community": 22,
       "norm_label": "facedetection.ts",
       "id": "c_users_kj287_documents_01_projects_focusflow_claude_worktrees_zen_kalam_eba609_src_lib_facedetection_ts"
     },
@@ -3077,7 +3302,7 @@
       "file_type": "code",
       "source_file": ".claude/worktrees/zen-kalam-eba609/src/lib/trackingEngine.ts",
       "source_location": "L1",
-      "community": 13,
+      "community": 14,
       "norm_label": "trackingengine.ts",
       "id": "c_users_kj287_documents_01_projects_focusflow_claude_worktrees_zen_kalam_eba609_src_lib_trackingengine_ts"
     },
@@ -3086,7 +3311,7 @@
       "file_type": "document",
       "source_file": ".claude/worktrees/zen-kalam-eba609/algorithm-overview.md",
       "source_location": "L1",
-      "community": 6,
+      "community": 7,
       "norm_label": "algorithm-overview.md",
       "id": "c_users_kj287_documents_01_projects_focusflow_claude_worktrees_zen_kalam_eba609_algorithm_overview_md"
     },
@@ -3095,7 +3320,7 @@
       "file_type": "document",
       "source_file": ".claude/worktrees/zen-kalam-eba609/algorithm-overview.md",
       "source_location": "L1",
-      "community": 6,
+      "community": 7,
       "norm_label": "algorithm overview",
       "id": "zen_kalam_eba609_algorithm_overview_algorithm_overview"
     },
@@ -3104,7 +3329,7 @@
       "file_type": "document",
       "source_file": ".claude/worktrees/zen-kalam-eba609/algorithm-overview.md",
       "source_location": "L3",
-      "community": 6,
+      "community": 7,
       "norm_label": "objective",
       "id": "zen_kalam_eba609_algorithm_overview_objective"
     },
@@ -3113,7 +3338,7 @@
       "file_type": "document",
       "source_file": ".claude/worktrees/zen-kalam-eba609/algorithm-overview.md",
       "source_location": "L11",
-      "community": 6,
+      "community": 7,
       "norm_label": "inputs",
       "id": "zen_kalam_eba609_algorithm_overview_inputs"
     },
@@ -3122,7 +3347,7 @@
       "file_type": "document",
       "source_file": ".claude/worktrees/zen-kalam-eba609/algorithm-overview.md",
       "source_location": "L23",
-      "community": 6,
+      "community": 7,
       "norm_label": "processing pipeline",
       "id": "zen_kalam_eba609_algorithm_overview_processing_pipeline"
     },
@@ -3131,7 +3356,7 @@
       "file_type": "document",
       "source_file": ".claude/worktrees/zen-kalam-eba609/algorithm-overview.md",
       "source_location": "L25",
-      "community": 6,
+      "community": 7,
       "norm_label": "frame processing",
       "id": "zen_kalam_eba609_algorithm_overview_frame_processing"
     },
@@ -3140,7 +3365,7 @@
       "file_type": "document",
       "source_file": ".claude/worktrees/zen-kalam-eba609/algorithm-overview.md",
       "source_location": "L31",
-      "community": 6,
+      "community": 7,
       "norm_label": "eye-state feature extraction",
       "id": "zen_kalam_eba609_algorithm_overview_eye_state_feature_extraction"
     },
@@ -3149,7 +3374,7 @@
       "file_type": "document",
       "source_file": ".claude/worktrees/zen-kalam-eba609/algorithm-overview.md",
       "source_location": "L39",
-      "community": 6,
+      "community": 7,
       "norm_label": "blink event detection",
       "id": "zen_kalam_eba609_algorithm_overview_blink_event_detection"
     },
@@ -3158,7 +3383,7 @@
       "file_type": "document",
       "source_file": ".claude/worktrees/zen-kalam-eba609/algorithm-overview.md",
       "source_location": "L47",
-      "community": 6,
+      "community": 7,
       "norm_label": "target-relative eye position",
       "id": "zen_kalam_eba609_algorithm_overview_target_relative_eye_position"
     },
@@ -3167,7 +3392,7 @@
       "file_type": "document",
       "source_file": ".claude/worktrees/zen-kalam-eba609/algorithm-overview.md",
       "source_location": "L55",
-      "community": 6,
+      "community": 7,
       "norm_label": "time-series feature construction",
       "id": "zen_kalam_eba609_algorithm_overview_time_series_feature_construction"
     },
@@ -3176,7 +3401,7 @@
       "file_type": "document",
       "source_file": ".claude/worktrees/zen-kalam-eba609/algorithm-overview.md",
       "source_location": "L68",
-      "community": 6,
+      "community": 7,
       "norm_label": "session-level summary",
       "id": "zen_kalam_eba609_algorithm_overview_session_level_summary"
     },
@@ -3185,7 +3410,7 @@
       "file_type": "document",
       "source_file": ".claude/worktrees/zen-kalam-eba609/algorithm-overview.md",
       "source_location": "L76",
-      "community": 6,
+      "community": 7,
       "norm_label": "design approach",
       "id": "zen_kalam_eba609_algorithm_overview_design_approach"
     },
@@ -3194,7 +3419,7 @@
       "file_type": "document",
       "source_file": ".claude/worktrees/zen-kalam-eba609/algorithm-overview.md",
       "source_location": "L84",
-      "community": 6,
+      "community": 7,
       "norm_label": "technical constraints",
       "id": "zen_kalam_eba609_algorithm_overview_technical_constraints"
     },
@@ -3203,7 +3428,7 @@
       "file_type": "document",
       "source_file": ".claude/worktrees/zen-kalam-eba609/algorithm-overview.md",
       "source_location": "L97",
-      "community": 6,
+      "community": 7,
       "norm_label": "next steps",
       "id": "zen_kalam_eba609_algorithm_overview_next_steps"
     },
@@ -3212,7 +3437,7 @@
       "file_type": "document",
       "source_file": ".claude/worktrees/zen-kalam-eba609/CLAUDE.md",
       "source_location": "L1",
-      "community": 15,
+      "community": 16,
       "norm_label": "claude.md",
       "id": "c_users_kj287_documents_01_projects_focusflow_claude_worktrees_zen_kalam_eba609_claude_md"
     },
@@ -3221,7 +3446,7 @@
       "file_type": "document",
       "source_file": ".claude/worktrees/zen-kalam-eba609/CLAUDE.md",
       "source_location": "L1",
-      "community": 15,
+      "community": 16,
       "norm_label": "agent routing",
       "id": "zen_kalam_eba609_claude_agent_routing"
     },
@@ -3230,7 +3455,7 @@
       "file_type": "document",
       "source_file": ".claude/worktrees/zen-kalam-eba609/CLAUDE.md",
       "source_location": "L16",
-      "community": 15,
+      "community": 16,
       "norm_label": "/lint-agent",
       "id": "zen_kalam_eba609_claude_lint_agent"
     },
@@ -3239,7 +3464,7 @@
       "file_type": "document",
       "source_file": ".claude/worktrees/zen-kalam-eba609/CLAUDE.md",
       "source_location": "L25",
-      "community": 15,
+      "community": 16,
       "norm_label": "/doc-agent",
       "id": "zen_kalam_eba609_claude_doc_agent"
     },
@@ -3248,7 +3473,7 @@
       "file_type": "document",
       "source_file": ".claude/worktrees/zen-kalam-eba609/CLAUDE.md",
       "source_location": "L34",
-      "community": 15,
+      "community": 16,
       "norm_label": "graphify",
       "id": "zen_kalam_eba609_claude_graphify"
     },
@@ -3491,7 +3716,7 @@
       "file_type": "code",
       "source_file": "src/pages/SessionPage.tsx",
       "source_location": "L449",
-      "community": 12,
+      "community": 13,
       "norm_label": "navigate",
       "id": "pages_sessionpage_navigate"
     },
@@ -4256,7 +4481,7 @@
       "file_type": "code",
       "source_file": "src/pages/SessionPage.tsx",
       "source_location": "L663",
-      "community": 29,
+      "community": 28,
       "norm_label": "stopcamerastream()",
       "id": "pages_sessionpage_stopcamerastream"
     },
@@ -4265,7 +4490,7 @@
       "file_type": "code",
       "source_file": "src/pages/SessionPage.tsx",
       "source_location": "L668",
-      "community": 29,
+      "community": 28,
       "norm_label": "disablecamera()",
       "id": "pages_sessionpage_disablecamera"
     },
@@ -4274,7 +4499,7 @@
       "file_type": "code",
       "source_file": "src/pages/SessionPage.tsx",
       "source_location": "L707",
-      "community": 28,
+      "community": 29,
       "norm_label": "enablecamera()",
       "id": "pages_sessionpage_enablecamera"
     },
@@ -4283,7 +4508,7 @@
       "file_type": "code",
       "source_file": "src/pages/SessionPage.tsx",
       "source_location": "L750",
-      "community": 27,
+      "community": 30,
       "norm_label": "processblinkstate",
       "id": "pages_sessionpage_processblinkstate"
     },
@@ -4409,7 +4634,7 @@
       "file_type": "code",
       "source_file": "src/pages/SessionPage.tsx",
       "source_location": "L1117",
-      "community": 27,
+      "community": 30,
       "norm_label": "tick()",
       "id": "pages_sessionpage_tick"
     },
@@ -4418,7 +4643,7 @@
       "file_type": "code",
       "source_file": "src/pages/SessionPage.tsx",
       "source_location": "L1409",
-      "community": 28,
+      "community": 29,
       "norm_label": "handlestart()",
       "id": "pages_sessionpage_handlestart"
     },
@@ -4436,7 +4661,7 @@
       "file_type": "code",
       "source_file": "src/pages/SessionPage.tsx",
       "source_location": "L1471",
-      "community": 1,
+      "community": 2,
       "norm_label": "handleendearly()",
       "id": "pages_sessionpage_handleendearly"
     },
@@ -4445,7 +4670,7 @@
       "file_type": "code",
       "source_file": "src/pages/SessionPage.tsx",
       "source_location": "L1485",
-      "community": 12,
+      "community": 13,
       "norm_label": "handlesavesession()",
       "id": "pages_sessionpage_handlesavesession"
     },
@@ -4589,7 +4814,7 @@
       "file_type": "code",
       "source_file": "src/pages/HistoryPage.tsx",
       "source_location": "L188",
-      "community": 8,
+      "community": 6,
       "norm_label": "trendline()",
       "id": "pages_historypage_trendline"
     },
@@ -4598,7 +4823,7 @@
       "file_type": "code",
       "source_file": "src/pages/HistoryPage.tsx",
       "source_location": "L282",
-      "community": 8,
+      "community": 6,
       "norm_label": "buildobservation()",
       "id": "pages_historypage_buildobservation"
     },
@@ -4661,7 +4886,7 @@
       "file_type": "code",
       "source_file": "src/pages/HomePage.tsx",
       "source_location": "L174",
-      "community": 2,
+      "community": 1,
       "norm_label": "prevowtaglineprops",
       "id": "pages_homepage_prevowtaglineprops"
     },
@@ -4670,7 +4895,7 @@
       "file_type": "code",
       "source_file": "src/pages/HomePage.tsx",
       "source_location": "L182",
-      "community": 2,
+      "community": 1,
       "norm_label": "prevowtagline()",
       "id": "pages_homepage_prevowtagline"
     },
@@ -4679,7 +4904,7 @@
       "file_type": "code",
       "source_file": "src/pages/HomePage.tsx",
       "source_location": "L311",
-      "community": 2,
+      "community": 1,
       "norm_label": "activevowdisplayprops",
       "id": "pages_homepage_activevowdisplayprops"
     },
@@ -4688,7 +4913,7 @@
       "file_type": "code",
       "source_file": "src/pages/HomePage.tsx",
       "source_location": "L317",
-      "community": 2,
+      "community": 1,
       "norm_label": "activevowdisplay()",
       "id": "pages_homepage_activevowdisplay"
     },
@@ -4697,7 +4922,7 @@
       "file_type": "code",
       "source_file": "src/pages/HomePage.tsx",
       "source_location": "L364",
-      "community": 2,
+      "community": 1,
       "norm_label": "brokenvownoticeprops",
       "id": "pages_homepage_brokenvownoticeprops"
     },
@@ -4706,7 +4931,7 @@
       "file_type": "code",
       "source_file": "src/pages/HomePage.tsx",
       "source_location": "L369",
-      "community": 2,
+      "community": 1,
       "norm_label": "brokenvownotice()",
       "id": "pages_homepage_brokenvownotice"
     },
@@ -4715,7 +4940,7 @@
       "file_type": "code",
       "source_file": "src/pages/HomePage.tsx",
       "source_location": "L419",
-      "community": 2,
+      "community": 1,
       "norm_label": "vowpromptinlineprops",
       "id": "pages_homepage_vowpromptinlineprops"
     },
@@ -4724,7 +4949,7 @@
       "file_type": "code",
       "source_file": "src/pages/HomePage.tsx",
       "source_location": "L424",
-      "community": 2,
+      "community": 1,
       "norm_label": "vowpromptinline()",
       "id": "pages_homepage_vowpromptinline"
     },
@@ -4733,7 +4958,7 @@
       "file_type": "code",
       "source_file": "src/pages/HomePage.tsx",
       "source_location": "L481",
-      "community": 2,
+      "community": 1,
       "norm_label": "sitcompleteline()",
       "id": "pages_homepage_sitcompleteline"
     },
@@ -4742,7 +4967,7 @@
       "file_type": "code",
       "source_file": "src/lib/storage.test.ts",
       "source_location": "L54",
-      "community": 2,
+      "community": 1,
       "norm_label": "profilewithvow()",
       "id": "lib_storage_test_profilewithvow"
     },
@@ -4751,7 +4976,7 @@
       "file_type": "code",
       "source_file": "src/lib/storage.test.ts",
       "source_location": "L82",
-      "community": 2,
+      "community": 1,
       "norm_label": "snap",
       "id": "lib_storage_test_snap"
     },
@@ -4760,7 +4985,7 @@
       "file_type": "code",
       "source_file": "src/lib/storage.test.ts",
       "source_location": "L119",
-      "community": 2,
+      "community": 1,
       "norm_label": "sits",
       "id": "lib_storage_test_sits"
     },
@@ -4769,7 +4994,7 @@
       "file_type": "code",
       "source_file": "src/lib/storage.ts",
       "source_location": "L446",
-      "community": 2,
+      "community": 1,
       "norm_label": "parselocaldatekey()",
       "id": "lib_storage_parselocaldatekey"
     },
@@ -4778,7 +5003,7 @@
       "file_type": "code",
       "source_file": "src/lib/storage.ts",
       "source_location": "L451",
-      "community": 2,
+      "community": 1,
       "norm_label": "daysbetweenlocalkeys()",
       "id": "lib_storage_daysbetweenlocalkeys"
     },
@@ -4787,7 +5012,7 @@
       "file_type": "code",
       "source_file": "src/lib/storage.ts",
       "source_location": "L459",
-      "community": 2,
+      "community": 1,
       "norm_label": "takevow()",
       "id": "lib_storage_takevow"
     },
@@ -4796,7 +5021,7 @@
       "file_type": "code",
       "source_file": "src/lib/storage.ts",
       "source_location": "L468",
-      "community": 2,
+      "community": 1,
       "norm_label": "istodayssitcomplete()",
       "id": "lib_storage_istodayssitcomplete"
     },
@@ -4805,7 +5030,7 @@
       "file_type": "code",
       "source_file": "src/lib/storage.ts",
       "source_location": "L478",
-      "community": 2,
+      "community": 1,
       "norm_label": "getvowsnapshot()",
       "id": "lib_storage_getvowsnapshot"
     },
@@ -4814,7 +5039,7 @@
       "file_type": "code",
       "source_file": "src/lib/storage.ts",
       "source_location": "L537",
-      "community": 2,
+      "community": 1,
       "norm_label": "clearvow()",
       "id": "lib_storage_clearvow"
     },
@@ -4823,7 +5048,7 @@
       "file_type": "code",
       "source_file": "src/lib/storage.ts",
       "source_location": "L37",
-      "community": 2,
+      "community": 1,
       "norm_label": "vowstate",
       "id": "lib_storage_vowstate"
     },
@@ -4832,7 +5057,7 @@
       "file_type": "code",
       "source_file": "src/lib/storage.ts",
       "source_location": "L43",
-      "community": 2,
+      "community": 1,
       "norm_label": "vowsnapshot",
       "id": "lib_storage_vowsnapshot"
     },
@@ -4841,7 +5066,7 @@
       "file_type": "code",
       "source_file": ".claude/worktrees/zen-kalam-eba609/src/lib/quotes.ts",
       "source_location": "L1",
-      "community": 16,
+      "community": 17,
       "norm_label": "quotes.ts",
       "id": "c_users_kj287_documents_01_projects_focusflow_claude_worktrees_zen_kalam_eba609_src_lib_quotes_ts"
     },
@@ -4850,7 +5075,7 @@
       "file_type": "code",
       "source_file": ".claude/worktrees/zen-kalam-eba609/src/lib/quotes.ts",
       "source_location": "L1",
-      "community": 16,
+      "community": 17,
       "norm_label": "beginnerquotes",
       "id": "lib_quotes_beginnerquotes"
     },
@@ -4859,7 +5084,7 @@
       "file_type": "code",
       "source_file": ".claude/worktrees/zen-kalam-eba609/src/lib/quotes.ts",
       "source_location": "L7",
-      "community": 16,
+      "community": 17,
       "norm_label": "midquotes",
       "id": "lib_quotes_midquotes"
     },
@@ -4868,7 +5093,7 @@
       "file_type": "code",
       "source_file": ".claude/worktrees/zen-kalam-eba609/src/lib/quotes.ts",
       "source_location": "L13",
-      "community": 16,
+      "community": 17,
       "norm_label": "deepquotes",
       "id": "lib_quotes_deepquotes"
     },
@@ -4877,7 +5102,7 @@
       "file_type": "code",
       "source_file": ".claude/worktrees/zen-kalam-eba609/src/lib/quotes.ts",
       "source_location": "L19",
-      "community": 16,
+      "community": 17,
       "norm_label": "getquoteforstreak()",
       "id": "lib_quotes_getquoteforstreak"
     },
@@ -4886,7 +5111,7 @@
       "file_type": "code",
       "source_file": "src/lib/storage.ts",
       "source_location": "L371",
-      "community": 12,
+      "community": 13,
       "norm_label": "updatesessionnoteremote()",
       "id": "lib_storage_updatesessionnoteremote"
     },
@@ -4895,7 +5120,7 @@
       "file_type": "code",
       "source_file": "src/lib/storage.ts",
       "source_location": "L138",
-      "community": 2,
+      "community": 1,
       "norm_label": "updatesessionnotelocal()",
       "id": "lib_storage_updatesessionnotelocal"
     },
@@ -4904,7 +5129,7 @@
       "file_type": "code",
       "source_file": ".claude/worktrees/zen-kalam-eba609/src/lib/auth.ts",
       "source_location": "L1",
-      "community": 1,
+      "community": 2,
       "norm_label": "auth.ts",
       "id": "c_users_kj287_documents_01_projects_focusflow_claude_worktrees_zen_kalam_eba609_src_lib_auth_ts"
     },
@@ -4913,7 +5138,7 @@
       "file_type": "code",
       "source_file": ".claude/worktrees/zen-kalam-eba609/src/components/CameraPreview.tsx",
       "source_location": "L1",
-      "community": 25,
+      "community": 26,
       "norm_label": "camerapreview.tsx",
       "id": "c_users_kj287_documents_01_projects_focusflow_claude_worktrees_zen_kalam_eba609_src_components_camerapreview_tsx"
     },
@@ -4922,7 +5147,7 @@
       "file_type": "code",
       "source_file": ".claude/worktrees/zen-kalam-eba609/src/components/CameraPreview.tsx",
       "source_location": "L3",
-      "community": 25,
+      "community": 26,
       "norm_label": "camerapreviewprops",
       "id": "components_camerapreview_camerapreviewprops"
     },
@@ -4931,7 +5156,7 @@
       "file_type": "code",
       "source_file": ".claude/worktrees/zen-kalam-eba609/src/components/CameraPreview.tsx",
       "source_location": "L8",
-      "community": 25,
+      "community": 26,
       "norm_label": "camerapreview()",
       "id": "components_camerapreview_camerapreview"
     },
@@ -4940,7 +5165,7 @@
       "file_type": "code",
       "source_file": ".claude/worktrees/zen-kalam-eba609/src/lib/simulatedTracking.ts",
       "source_location": "L1",
-      "community": 13,
+      "community": 14,
       "norm_label": "simulatedtracking.ts",
       "id": "c_users_kj287_documents_01_projects_focusflow_claude_worktrees_zen_kalam_eba609_src_lib_simulatedtracking_ts"
     },
@@ -4949,7 +5174,7 @@
       "file_type": "code",
       "source_file": ".claude/worktrees/zen-kalam-eba609/src/lib/simulatedTracking.ts",
       "source_location": "L3",
-      "community": 13,
+      "community": 14,
       "norm_label": "clamp()",
       "id": "lib_simulatedtracking_clamp"
     },
@@ -4958,7 +5183,7 @@
       "file_type": "code",
       "source_file": ".claude/worktrees/zen-kalam-eba609/src/lib/simulatedTracking.ts",
       "source_location": "L7",
-      "community": 13,
+      "community": 14,
       "norm_label": "simulatedtrackingengine",
       "id": "lib_simulatedtracking_simulatedtrackingengine"
     },
@@ -4967,7 +5192,7 @@
       "file_type": "code",
       "source_file": ".claude/worktrees/zen-kalam-eba609/src/lib/simulatedTracking.ts",
       "source_location": "L16",
-      "community": 13,
+      "community": 14,
       "norm_label": ".start()",
       "id": "lib_simulatedtracking_simulatedtrackingengine_start"
     },
@@ -4976,7 +5201,7 @@
       "file_type": "code",
       "source_file": ".claude/worktrees/zen-kalam-eba609/src/lib/simulatedTracking.ts",
       "source_location": "L63",
-      "community": 13,
+      "community": 14,
       "norm_label": ".stop()",
       "id": "lib_simulatedtracking_simulatedtrackingengine_stop"
     },
@@ -4985,7 +5210,7 @@
       "file_type": "code",
       "source_file": ".claude/worktrees/zen-kalam-eba609/src/lib/simulatedTracking.ts",
       "source_location": "L70",
-      "community": 13,
+      "community": 14,
       "norm_label": ".reset()",
       "id": "lib_simulatedtracking_simulatedtrackingengine_reset"
     },
@@ -4994,7 +5219,7 @@
       "file_type": "code",
       "source_file": "src/lib/useHistory.ts",
       "source_location": "L1",
-      "community": 2,
+      "community": 1,
       "norm_label": "usehistory.ts",
       "id": "src_lib_usehistory_ts"
     },
@@ -5003,7 +5228,7 @@
       "file_type": "code",
       "source_file": "src/lib/useHistory.ts",
       "source_location": "L22",
-      "community": 2,
+      "community": 1,
       "norm_label": "usehistoryresult",
       "id": "lib_usehistory_usehistoryresult"
     },
@@ -5012,7 +5237,7 @@
       "file_type": "code",
       "source_file": "src/lib/useHistory.ts",
       "source_location": "L29",
-      "community": 2,
+      "community": 1,
       "norm_label": "usehistory()",
       "id": "lib_usehistory_usehistory"
     },
@@ -5030,7 +5255,7 @@
       "file_type": "code",
       "source_file": ".claude/worktrees/zen-kalam-eba609/src/lib/sessionAudio.ts",
       "source_location": "L123",
-      "community": 7,
+      "community": 8,
       "norm_label": ".playopeningbell()",
       "id": "lib_sessionaudio_sessionaudiocontroller_playopeningbell"
     },
@@ -5039,7 +5264,7 @@
       "file_type": "code",
       "source_file": ".claude/worktrees/zen-kalam-eba609/src/lib/sessionAudio.ts",
       "source_location": "L127",
-      "community": 7,
+      "community": 8,
       "norm_label": ".playclosingbell()",
       "id": "lib_sessionaudio_sessionaudiocontroller_playclosingbell"
     },
@@ -5048,7 +5273,7 @@
       "file_type": "code",
       "source_file": ".claude/worktrees/zen-kalam-eba609/src/lib/sessionAudio.ts",
       "source_location": "L132",
-      "community": 7,
+      "community": 8,
       "norm_label": ".playsofttransitioncue()",
       "id": "lib_sessionaudio_sessionaudiocontroller_playsofttransitioncue"
     },
@@ -5057,7 +5282,7 @@
       "file_type": "code",
       "source_file": ".claude/worktrees/zen-kalam-eba609/src/lib/sessionAudio.ts",
       "source_location": "L143",
-      "community": 7,
+      "community": 8,
       "norm_label": ".playawarenesscue()",
       "id": "lib_sessionaudio_sessionaudiocontroller_playawarenesscue"
     },
@@ -5066,7 +5291,7 @@
       "file_type": "code",
       "source_file": ".claude/worktrees/zen-kalam-eba609/src/lib/sessionAudio.ts",
       "source_location": "L154",
-      "community": 7,
+      "community": 8,
       "norm_label": ".startfiresound()",
       "id": "lib_sessionaudio_sessionaudiocontroller_startfiresound"
     },
@@ -5075,7 +5300,7 @@
       "file_type": "code",
       "source_file": ".claude/worktrees/zen-kalam-eba609/src/lib/sessionAudio.ts",
       "source_location": "L168",
-      "community": 7,
+      "community": 8,
       "norm_label": ".stopfiresound()",
       "id": "lib_sessionaudio_sessionaudiocontroller_stopfiresound"
     },
@@ -5084,7 +5309,7 @@
       "file_type": "code",
       "source_file": "src/pages/RoutinePage.tsx",
       "source_location": "L1",
-      "community": 2,
+      "community": 1,
       "norm_label": "routinepage.tsx",
       "id": "src_pages_routinepage_tsx"
     },
@@ -5093,7 +5318,7 @@
       "file_type": "code",
       "source_file": "src/pages/RoutinePage.tsx",
       "source_location": "L5",
-      "community": 2,
+      "community": 1,
       "norm_label": "routinepage()",
       "id": "pages_routinepage_routinepage"
     },
@@ -5102,7 +5327,7 @@
       "file_type": "code",
       "source_file": "src/lib/storage.ts",
       "source_location": "L149",
-      "community": 2,
+      "community": 1,
       "norm_label": "saveroutineselection()",
       "id": "lib_storage_saveroutineselection"
     },
@@ -5111,7 +5336,7 @@
       "file_type": "code",
       "source_file": "src/lib/storage.ts",
       "source_location": "L156",
-      "community": 2,
+      "community": 1,
       "norm_label": "loadroutineselection()",
       "id": "lib_storage_loadroutineselection"
     },
@@ -5120,7 +5345,7 @@
       "file_type": "code",
       "source_file": "src/lib/storage.ts",
       "source_location": "L3",
-      "community": 2,
+      "community": 1,
       "norm_label": "routineselection",
       "id": "lib_storage_routineselection"
     },
@@ -5129,7 +5354,7 @@
       "file_type": "code",
       "source_file": "src/pages/HistoryPage.tsx",
       "source_location": "L110",
-      "community": 8,
+      "community": 6,
       "norm_label": "formatstillness()",
       "id": "pages_historypage_formatstillness"
     },
@@ -5138,7 +5363,7 @@
       "file_type": "code",
       "source_file": ".claude/worktrees/zen-kalam-eba609/src/components/SessionEndModal.tsx",
       "source_location": "L1",
-      "community": 23,
+      "community": 24,
       "norm_label": "sessionendmodal.tsx",
       "id": "c_users_kj287_documents_01_projects_focusflow_claude_worktrees_zen_kalam_eba609_src_components_sessionendmodal_tsx"
     },
@@ -5147,7 +5372,7 @@
       "file_type": "code",
       "source_file": ".claude/worktrees/zen-kalam-eba609/src/components/SessionEndModal.tsx",
       "source_location": "L1",
-      "community": 23,
+      "community": 24,
       "norm_label": "sessionprogressprops",
       "id": "components_sessionendmodal_sessionprogressprops"
     },
@@ -5156,7 +5381,7 @@
       "file_type": "code",
       "source_file": ".claude/worktrees/zen-kalam-eba609/src/components/SessionEndModal.tsx",
       "source_location": "L5",
-      "community": 23,
+      "community": 24,
       "norm_label": "yogiicon()",
       "id": "components_sessionendmodal_yogiicon"
     },
@@ -5165,7 +5390,7 @@
       "file_type": "code",
       "source_file": ".claude/worktrees/zen-kalam-eba609/src/components/SessionEndModal.tsx",
       "source_location": "L37",
-      "community": 23,
+      "community": 24,
       "norm_label": "sessionprogress()",
       "id": "components_sessionendmodal_sessionprogress"
     },
@@ -5174,7 +5399,7 @@
       "file_type": "code",
       "source_file": ".claude/worktrees/zen-kalam-eba609/src/components/SessionProgress.tsx",
       "source_location": "L1",
-      "community": 24,
+      "community": 25,
       "norm_label": "sessionprogress.tsx",
       "id": "c_users_kj287_documents_01_projects_focusflow_claude_worktrees_zen_kalam_eba609_src_components_sessionprogress_tsx"
     },
@@ -5183,7 +5408,7 @@
       "file_type": "code",
       "source_file": ".claude/worktrees/zen-kalam-eba609/src/components/SessionProgress.tsx",
       "source_location": "L1",
-      "community": 24,
+      "community": 25,
       "norm_label": "sessionprogressprops",
       "id": "components_sessionprogress_sessionprogressprops"
     },
@@ -5192,7 +5417,7 @@
       "file_type": "code",
       "source_file": ".claude/worktrees/zen-kalam-eba609/src/components/SessionProgress.tsx",
       "source_location": "L5",
-      "community": 24,
+      "community": 25,
       "norm_label": "yogiicon()",
       "id": "components_sessionprogress_yogiicon"
     },
@@ -5201,7 +5426,7 @@
       "file_type": "code",
       "source_file": ".claude/worktrees/zen-kalam-eba609/src/components/SessionProgress.tsx",
       "source_location": "L42",
-      "community": 24,
+      "community": 25,
       "norm_label": "sessionprogress()",
       "id": "components_sessionprogress_sessionprogress"
     },
@@ -5210,7 +5435,7 @@
       "file_type": "code",
       "source_file": ".claude/worktrees/zen-kalam-eba609/src/lib/storage.ts",
       "source_location": "L1",
-      "community": 2,
+      "community": 1,
       "norm_label": "storage.ts",
       "id": "c_users_kj287_documents_01_projects_focusflow_claude_worktrees_zen_kalam_eba609_src_lib_storage_ts"
     },
@@ -5228,7 +5453,7 @@
       "file_type": "code",
       "source_file": "src/pages/SessionPage.tsx",
       "source_location": "L1469",
-      "community": 12,
+      "community": 13,
       "norm_label": "renderresearchsummarycard()",
       "id": "pages_sessionpage_renderresearchsummarycard"
     },
@@ -5273,7 +5498,7 @@
       "file_type": "code",
       "source_file": "src/pages/SessionPage.tsx",
       "source_location": "L65",
-      "community": 12,
+      "community": 13,
       "norm_label": "formattimestampforkey()",
       "id": "pages_sessionpage_formattimestampforkey"
     },
@@ -5291,7 +5516,7 @@
       "file_type": "code",
       "source_file": "src/pages/SessionPage.tsx",
       "source_location": "L77",
-      "community": 12,
+      "community": 13,
       "norm_label": "buildpilotcsvrow()",
       "id": "pages_sessionpage_buildpilotcsvrow"
     },
@@ -5300,7 +5525,7 @@
       "file_type": "code",
       "source_file": "src/pages/SessionPage.tsx",
       "source_location": "L126",
-      "community": 12,
+      "community": 13,
       "norm_label": "appendcsvwithheader()",
       "id": "pages_sessionpage_appendcsvwithheader"
     },
@@ -5309,7 +5534,7 @@
       "file_type": "code",
       "source_file": "src/pages/SessionPage.tsx",
       "source_location": "L133",
-      "community": 12,
+      "community": 13,
       "norm_label": "readresearchuserid()",
       "id": "pages_sessionpage_readresearchuserid"
     },
@@ -5318,7 +5543,7 @@
       "file_type": "code",
       "source_file": "src/pages/SessionPage.tsx",
       "source_location": "L144",
-      "community": 12,
+      "community": 13,
       "norm_label": "downloadtextfile()",
       "id": "pages_sessionpage_downloadtextfile"
     },
@@ -5336,7 +5561,7 @@
       "file_type": "document",
       "source_file": "README.md",
       "source_location": "L1",
-      "community": 10,
+      "community": 11,
       "norm_label": "focusflow",
       "id": "focusflow_readme_focusflow"
     },
@@ -5345,7 +5570,7 @@
       "file_type": "document",
       "source_file": "README.md",
       "source_location": "L11",
-      "community": 10,
+      "community": 11,
       "norm_label": "current wiring",
       "id": "focusflow_readme_current_wiring"
     },
@@ -5354,7 +5579,7 @@
       "file_type": "document",
       "source_file": "README.md",
       "source_location": "L19",
-      "community": 10,
+      "community": 11,
       "norm_label": "research docs",
       "id": "focusflow_readme_research_docs"
     },
@@ -5363,7 +5588,7 @@
       "file_type": "document",
       "source_file": "README.md",
       "source_location": "L25",
-      "community": 10,
+      "community": 11,
       "norm_label": "local setup",
       "id": "focusflow_readme_local_setup"
     },
@@ -5372,7 +5597,7 @@
       "file_type": "document",
       "source_file": "README.md",
       "source_location": "L33",
-      "community": 10,
+      "community": 11,
       "norm_label": "supabase setup",
       "id": "focusflow_readme_supabase_setup"
     },
@@ -5381,7 +5606,7 @@
       "file_type": "document",
       "source_file": "README.md",
       "source_location": "L42",
-      "community": 10,
+      "community": 11,
       "norm_label": "github and sharing",
       "id": "focusflow_readme_github_and_sharing"
     },
@@ -5390,7 +5615,7 @@
       "file_type": "document",
       "source_file": "README.md",
       "source_location": "L50",
-      "community": 10,
+      "community": 11,
       "norm_label": "commands",
       "id": "focusflow_readme_commands"
     },
@@ -5399,7 +5624,7 @@
       "file_type": "code",
       "source_file": "src/components/CameraPreview.tsx",
       "source_location": "L1",
-      "community": 25,
+      "community": 26,
       "norm_label": "camerapreview.tsx",
       "id": "src_components_camerapreview_tsx"
     },
@@ -5408,7 +5633,7 @@
       "file_type": "code",
       "source_file": "src/components/SessionEndModal.tsx",
       "source_location": "L1",
-      "community": 23,
+      "community": 24,
       "norm_label": "sessionendmodal.tsx",
       "id": "src_components_sessionendmodal_tsx"
     },
@@ -5417,7 +5642,7 @@
       "file_type": "code",
       "source_file": "src/components/SessionProgress.tsx",
       "source_location": "L1",
-      "community": 24,
+      "community": 25,
       "norm_label": "sessionprogress.tsx",
       "id": "src_components_sessionprogress_tsx"
     },
@@ -5426,7 +5651,7 @@
       "file_type": "code",
       "source_file": "src/lib/simulatedTracking.ts",
       "source_location": "L1",
-      "community": 13,
+      "community": 14,
       "norm_label": "simulatedtracking.ts",
       "id": "src_lib_simulatedtracking_ts"
     },
@@ -5444,7 +5669,7 @@
       "file_type": "document",
       "source_file": "README.md",
       "source_location": "L1",
-      "community": 10,
+      "community": 11,
       "norm_label": "focusflow",
       "id": "zen_kalam_eba609_readme_focusflow"
     },
@@ -5453,7 +5678,7 @@
       "file_type": "document",
       "source_file": "README.md",
       "source_location": "L11",
-      "community": 10,
+      "community": 11,
       "norm_label": "current wiring",
       "id": "zen_kalam_eba609_readme_current_wiring"
     },
@@ -5462,7 +5687,7 @@
       "file_type": "document",
       "source_file": "README.md",
       "source_location": "L19",
-      "community": 10,
+      "community": 11,
       "norm_label": "research docs",
       "id": "zen_kalam_eba609_readme_research_docs"
     },
@@ -5471,7 +5696,7 @@
       "file_type": "document",
       "source_file": "README.md",
       "source_location": "L25",
-      "community": 10,
+      "community": 11,
       "norm_label": "local setup",
       "id": "zen_kalam_eba609_readme_local_setup"
     },
@@ -5480,7 +5705,7 @@
       "file_type": "document",
       "source_file": "README.md",
       "source_location": "L33",
-      "community": 10,
+      "community": 11,
       "norm_label": "supabase setup",
       "id": "zen_kalam_eba609_readme_supabase_setup"
     },
@@ -5489,7 +5714,7 @@
       "file_type": "document",
       "source_file": "README.md",
       "source_location": "L42",
-      "community": 10,
+      "community": 11,
       "norm_label": "github and sharing",
       "id": "zen_kalam_eba609_readme_github_and_sharing"
     },
@@ -5498,7 +5723,7 @@
       "file_type": "document",
       "source_file": "README.md",
       "source_location": "L50",
-      "community": 10,
+      "community": 11,
       "norm_label": "commands",
       "id": "zen_kalam_eba609_readme_commands"
     },
@@ -5525,7 +5750,7 @@
       "file_type": "code",
       "source_file": "src/pages/HistoryPage.tsx",
       "source_location": "L8",
-      "community": 8,
+      "community": 6,
       "norm_label": "avg()",
       "id": "pages_historypage_avg"
     },
@@ -5534,7 +5759,7 @@
       "file_type": "code",
       "source_file": "src/pages/HistoryPage.tsx",
       "source_location": "L80",
-      "community": 8,
+      "community": 6,
       "norm_label": "mandalaflame()",
       "id": "pages_historypage_mandalaflame"
     },
@@ -5723,7 +5948,7 @@
       "file_type": "code",
       "source_file": "src/pages/SessionPage.tsx",
       "source_location": "L1152",
-      "community": 28,
+      "community": 29,
       "norm_label": "handlecontinuefromsetup()",
       "id": "pages_sessionpage_handlecontinuefromsetup"
     },
@@ -5732,7 +5957,7 @@
       "file_type": "code",
       "source_file": "src/pages/SessionPage.tsx",
       "source_location": "L1250",
-      "community": 12,
+      "community": 13,
       "norm_label": "handleexportresearchcsv()",
       "id": "pages_sessionpage_handleexportresearchcsv"
     },
@@ -5741,7 +5966,7 @@
       "file_type": "code",
       "source_file": "src/pages/SessionPage.tsx",
       "source_location": "L1261",
-      "community": 29,
+      "community": 28,
       "norm_label": "handleresetresearchflow()",
       "id": "pages_sessionpage_handleresetresearchflow"
     },
@@ -5804,7 +6029,7 @@
       "file_type": "code",
       "source_file": "src/pages/HistoryPage.tsx",
       "source_location": "L401",
-      "community": 8,
+      "community": 6,
       "norm_label": "calendarheatmap()",
       "id": "pages_historypage_calendarheatmap"
     },
@@ -5813,7 +6038,7 @@
       "file_type": "code",
       "source_file": "src/pages/HistoryPage.tsx",
       "source_location": "L8",
-      "community": 8,
+      "community": 6,
       "norm_label": "todatekey()",
       "id": "pages_historypage_todatekey"
     },
@@ -5822,7 +6047,7 @@
       "file_type": "code",
       "source_file": "src/pages/HistoryPage.tsx",
       "source_location": "L289",
-      "community": 8,
+      "community": 6,
       "norm_label": "weeklysummary()",
       "id": "pages_historypage_weeklysummary"
     },
@@ -5831,7 +6056,7 @@
       "file_type": "code",
       "source_file": "src/lib/auth.ts",
       "source_location": "L8",
-      "community": 1,
+      "community": 2,
       "norm_label": "signup()",
       "id": "lib_auth_signup"
     },
@@ -5840,7 +6065,7 @@
       "file_type": "code",
       "source_file": "src/lib/auth.ts",
       "source_location": "L37",
-      "community": 1,
+      "community": 2,
       "norm_label": "signin()",
       "id": "lib_auth_signin"
     },
@@ -5849,7 +6074,7 @@
       "file_type": "code",
       "source_file": "src/pages/LoginPage.tsx",
       "source_location": "L7",
-      "community": 1,
+      "community": 2,
       "norm_label": "inputstyle",
       "id": "pages_loginpage_inputstyle"
     }
@@ -13868,9 +14093,9 @@
       "source_file": "algorithm-overview.md",
       "source_location": "L1",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "algorithm_overview_md",
-      "target": "focusflow_algorithm_overview_algorithm_overview",
-      "confidence_score": 1.0
+      "target": "focusflow_algorithm_overview_algorithm_overview"
     },
     {
       "relation": "contains",
@@ -13888,9 +14113,9 @@
       "source_file": "algorithm-overview.md",
       "source_location": "L3",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "focusflow_algorithm_overview_algorithm_overview",
-      "target": "focusflow_algorithm_overview_objective",
-      "confidence_score": 1.0
+      "target": "focusflow_algorithm_overview_objective"
     },
     {
       "relation": "contains",
@@ -13898,9 +14123,9 @@
       "source_file": "algorithm-overview.md",
       "source_location": "L11",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "focusflow_algorithm_overview_algorithm_overview",
-      "target": "focusflow_algorithm_overview_inputs",
-      "confidence_score": 1.0
+      "target": "focusflow_algorithm_overview_inputs"
     },
     {
       "relation": "contains",
@@ -13908,9 +14133,9 @@
       "source_file": "algorithm-overview.md",
       "source_location": "L23",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "focusflow_algorithm_overview_algorithm_overview",
-      "target": "focusflow_algorithm_overview_processing_pipeline",
-      "confidence_score": 1.0
+      "target": "focusflow_algorithm_overview_processing_pipeline"
     },
     {
       "relation": "contains",
@@ -13918,9 +14143,9 @@
       "source_file": "algorithm-overview.md",
       "source_location": "L76",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "focusflow_algorithm_overview_algorithm_overview",
-      "target": "focusflow_algorithm_overview_design_approach",
-      "confidence_score": 1.0
+      "target": "focusflow_algorithm_overview_design_approach"
     },
     {
       "relation": "contains",
@@ -13928,9 +14153,9 @@
       "source_file": "algorithm-overview.md",
       "source_location": "L84",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "focusflow_algorithm_overview_algorithm_overview",
-      "target": "focusflow_algorithm_overview_technical_constraints",
-      "confidence_score": 1.0
+      "target": "focusflow_algorithm_overview_technical_constraints"
     },
     {
       "relation": "contains",
@@ -13938,9 +14163,9 @@
       "source_file": "algorithm-overview.md",
       "source_location": "L97",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "focusflow_algorithm_overview_algorithm_overview",
-      "target": "focusflow_algorithm_overview_next_steps",
-      "confidence_score": 1.0
+      "target": "focusflow_algorithm_overview_next_steps"
     },
     {
       "relation": "contains",
@@ -13948,9 +14173,9 @@
       "source_file": "algorithm-overview.md",
       "source_location": "L25",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "focusflow_algorithm_overview_processing_pipeline",
-      "target": "focusflow_algorithm_overview_frame_processing",
-      "confidence_score": 1.0
+      "target": "focusflow_algorithm_overview_frame_processing"
     },
     {
       "relation": "contains",
@@ -13958,9 +14183,9 @@
       "source_file": "algorithm-overview.md",
       "source_location": "L31",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "focusflow_algorithm_overview_processing_pipeline",
-      "target": "focusflow_algorithm_overview_eye_state_feature_extraction",
-      "confidence_score": 1.0
+      "target": "focusflow_algorithm_overview_eye_state_feature_extraction"
     },
     {
       "relation": "contains",
@@ -13968,9 +14193,9 @@
       "source_file": "algorithm-overview.md",
       "source_location": "L39",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "focusflow_algorithm_overview_processing_pipeline",
-      "target": "focusflow_algorithm_overview_blink_event_detection",
-      "confidence_score": 1.0
+      "target": "focusflow_algorithm_overview_blink_event_detection"
     },
     {
       "relation": "contains",
@@ -13978,9 +14203,9 @@
       "source_file": "algorithm-overview.md",
       "source_location": "L47",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "focusflow_algorithm_overview_processing_pipeline",
-      "target": "focusflow_algorithm_overview_target_relative_eye_position",
-      "confidence_score": 1.0
+      "target": "focusflow_algorithm_overview_target_relative_eye_position"
     },
     {
       "relation": "contains",
@@ -13988,9 +14213,9 @@
       "source_file": "algorithm-overview.md",
       "source_location": "L55",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "focusflow_algorithm_overview_processing_pipeline",
-      "target": "focusflow_algorithm_overview_time_series_feature_construction",
-      "confidence_score": 1.0
+      "target": "focusflow_algorithm_overview_time_series_feature_construction"
     },
     {
       "relation": "contains",
@@ -13998,9 +14223,9 @@
       "source_file": "algorithm-overview.md",
       "source_location": "L68",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "focusflow_algorithm_overview_processing_pipeline",
-      "target": "focusflow_algorithm_overview_session_level_summary",
-      "confidence_score": 1.0
+      "target": "focusflow_algorithm_overview_session_level_summary"
     },
     {
       "relation": "contains",
@@ -14008,9 +14233,9 @@
       "source_file": "CLAUDE.md",
       "source_location": "L1",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "claude_md",
-      "target": "focusflow_claude_agent_routing",
-      "confidence_score": 1.0
+      "target": "focusflow_claude_agent_routing"
     },
     {
       "relation": "contains",
@@ -14018,9 +14243,9 @@
       "source_file": "CLAUDE.md",
       "source_location": "L34",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "claude_md",
-      "target": "focusflow_claude_graphify",
-      "confidence_score": 1.0
+      "target": "focusflow_claude_graphify"
     },
     {
       "relation": "contains",
@@ -14048,9 +14273,9 @@
       "source_file": "CLAUDE.md",
       "source_location": "L16",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "focusflow_claude_agent_routing",
-      "target": "focusflow_claude_lint_agent",
-      "confidence_score": 1.0
+      "target": "focusflow_claude_lint_agent"
     },
     {
       "relation": "contains",
@@ -14058,9 +14283,9 @@
       "source_file": "CLAUDE.md",
       "source_location": "L25",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "focusflow_claude_agent_routing",
-      "target": "focusflow_claude_doc_agent",
-      "confidence_score": 1.0
+      "target": "focusflow_claude_doc_agent"
     },
     {
       "relation": "contains",
@@ -14068,9 +14293,9 @@
       "source_file": "protocol-and-questions.md",
       "source_location": "L1",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "protocol_and_questions_md",
-      "target": "focusflow_protocol_and_questions_protocol_and_open_questions",
-      "confidence_score": 1.0
+      "target": "focusflow_protocol_and_questions_protocol_and_open_questions"
     },
     {
       "relation": "contains",
@@ -14088,9 +14313,9 @@
       "source_file": "protocol-and-questions.md",
       "source_location": "L3",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "focusflow_protocol_and_questions_protocol_and_open_questions",
-      "target": "focusflow_protocol_and_questions_protocol_overview",
-      "confidence_score": 1.0
+      "target": "focusflow_protocol_and_questions_protocol_overview"
     },
     {
       "relation": "contains",
@@ -14098,9 +14323,9 @@
       "source_file": "protocol-and-questions.md",
       "source_location": "L23",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "focusflow_protocol_and_questions_protocol_and_open_questions",
-      "target": "focusflow_protocol_and_questions_protocol_structure",
-      "confidence_score": 1.0
+      "target": "focusflow_protocol_and_questions_protocol_structure"
     },
     {
       "relation": "contains",
@@ -14108,9 +14333,9 @@
       "source_file": "protocol-and-questions.md",
       "source_location": "L57",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "focusflow_protocol_and_questions_protocol_and_open_questions",
-      "target": "focusflow_protocol_and_questions_open_questions",
-      "confidence_score": 1.0
+      "target": "focusflow_protocol_and_questions_open_questions"
     },
     {
       "relation": "contains",
@@ -14118,9 +14343,9 @@
       "source_file": "protocol-and-questions.md",
       "source_location": "L108",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "focusflow_protocol_and_questions_protocol_and_open_questions",
-      "target": "focusflow_protocol_and_questions_feedback",
-      "confidence_score": 1.0
+      "target": "focusflow_protocol_and_questions_feedback"
     },
     {
       "relation": "contains",
@@ -14128,9 +14353,9 @@
       "source_file": "protocol-and-questions.md",
       "source_location": "L25",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "focusflow_protocol_and_questions_protocol_structure",
-      "target": "focusflow_protocol_and_questions_posture_settling",
-      "confidence_score": 1.0
+      "target": "focusflow_protocol_and_questions_posture_settling"
     },
     {
       "relation": "contains",
@@ -14138,9 +14363,9 @@
       "source_file": "protocol-and-questions.md",
       "source_location": "L31",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "focusflow_protocol_and_questions_protocol_structure",
-      "target": "focusflow_protocol_and_questions_whole_body_tension_and_release",
-      "confidence_score": 1.0
+      "target": "focusflow_protocol_and_questions_whole_body_tension_and_release"
     },
     {
       "relation": "contains",
@@ -14148,9 +14373,9 @@
       "source_file": "protocol-and-questions.md",
       "source_location": "L37",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "focusflow_protocol_and_questions_protocol_structure",
-      "target": "focusflow_protocol_and_questions_paced_breathing",
-      "confidence_score": 1.0
+      "target": "focusflow_protocol_and_questions_paced_breathing"
     },
     {
       "relation": "contains",
@@ -14158,9 +14383,9 @@
       "source_file": "protocol-and-questions.md",
       "source_location": "L43",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "focusflow_protocol_and_questions_protocol_structure",
-      "target": "focusflow_protocol_and_questions_sustained_visual_fixation",
-      "confidence_score": 1.0
+      "target": "focusflow_protocol_and_questions_sustained_visual_fixation"
     },
     {
       "relation": "contains",
@@ -14168,9 +14393,9 @@
       "source_file": "protocol-and-questions.md",
       "source_location": "L51",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "focusflow_protocol_and_questions_protocol_structure",
-      "target": "focusflow_protocol_and_questions_post_fixation_open_awareness",
-      "confidence_score": 1.0
+      "target": "focusflow_protocol_and_questions_post_fixation_open_awareness"
     },
     {
       "relation": "contains",
@@ -14178,9 +14403,9 @@
       "source_file": "protocol-and-questions.md",
       "source_location": "L63",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "focusflow_protocol_and_questions_open_questions",
-      "target": "focusflow_protocol_and_questions_behavioral_signals",
-      "confidence_score": 1.0
+      "target": "focusflow_protocol_and_questions_behavioral_signals"
     },
     {
       "relation": "contains",
@@ -14188,9 +14413,9 @@
       "source_file": "protocol-and-questions.md",
       "source_location": "L72",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "focusflow_protocol_and_questions_open_questions",
-      "target": "focusflow_protocol_and_questions_protocol_design",
-      "confidence_score": 1.0
+      "target": "focusflow_protocol_and_questions_protocol_design"
     },
     {
       "relation": "contains",
@@ -14198,9 +14423,9 @@
       "source_file": "protocol-and-questions.md",
       "source_location": "L81",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "focusflow_protocol_and_questions_open_questions",
-      "target": "focusflow_protocol_and_questions_measurement_reliability",
-      "confidence_score": 1.0
+      "target": "focusflow_protocol_and_questions_measurement_reliability"
     },
     {
       "relation": "contains",
@@ -14208,9 +14433,9 @@
       "source_file": "protocol-and-questions.md",
       "source_location": "L90",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "focusflow_protocol_and_questions_open_questions",
-      "target": "focusflow_protocol_and_questions_repeated_measurement",
-      "confidence_score": 1.0
+      "target": "focusflow_protocol_and_questions_repeated_measurement"
     },
     {
       "relation": "contains",
@@ -14218,9 +14443,9 @@
       "source_file": "protocol-and-questions.md",
       "source_location": "L99",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "focusflow_protocol_and_questions_open_questions",
-      "target": "focusflow_protocol_and_questions_integration_with_physiological_signals",
-      "confidence_score": 1.0
+      "target": "focusflow_protocol_and_questions_integration_with_physiological_signals"
     },
     {
       "relation": "contains",
@@ -14256,6 +14481,116 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "README.md",
+      "source_location": "L19",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "focusflow_readme_drishti",
+      "target": "focusflow_readme_how_it_works"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "README.md",
+      "source_location": "L76",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "focusflow_readme_drishti",
+      "target": "focusflow_readme_the_session"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "README.md",
+      "source_location": "L91",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "focusflow_readme_drishti",
+      "target": "focusflow_readme_what_gets_saved"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "README.md",
+      "source_location": "L33",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "focusflow_readme_drishti",
+      "target": "focusflow_readme_tech_stack"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "README.md",
+      "source_location": "L50",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "focusflow_readme_drishti",
+      "target": "focusflow_readme_project_structure"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "README.md",
+      "source_location": "L177",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "focusflow_readme_drishti",
+      "target": "focusflow_readme_running_it_locally"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "README.md",
+      "source_location": "L208",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "focusflow_readme_drishti",
+      "target": "focusflow_readme_design_notes"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "README.md",
+      "source_location": "L220",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "focusflow_readme_drishti",
+      "target": "focusflow_readme_things_worth_knowing_exist"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "README.md",
+      "source_location": "L230",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "focusflow_readme_drishti",
+      "target": "focusflow_readme_engineering_decisions"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "README.md",
+      "source_location": "L207",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "focusflow_readme_drishti",
+      "target": "focusflow_readme_knowledge_graph"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "README.md",
+      "source_location": "L365",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "focusflow_readme_drishti",
+      "target": "focusflow_readme_license"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "README.md",
       "source_location": "L9",
       "weight": 1.0,
       "confidence_score": 1.0,
@@ -14281,26 +14616,6 @@
       "confidence_score": 1.0,
       "source": "focusflow_readme_drishti",
       "target": "focusflow_readme_eye_tracking"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "README.md",
-      "source_location": "L33",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "focusflow_readme_drishti",
-      "target": "focusflow_readme_tech_stack"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "README.md",
-      "source_location": "L50",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "focusflow_readme_drishti",
-      "target": "focusflow_readme_project_structure"
     },
     {
       "relation": "contains",
@@ -14376,31 +14691,11 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "README.md",
-      "source_location": "L207",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "focusflow_readme_drishti",
-      "target": "focusflow_readme_knowledge_graph"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "README.md",
       "source_location": "L229",
       "weight": 1.0,
       "confidence_score": 1.0,
       "source": "focusflow_readme_drishti",
       "target": "focusflow_readme_research_context"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "README.md",
-      "source_location": "L365",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "focusflow_readme_drishti",
-      "target": "focusflow_readme_license"
     },
     {
       "relation": "contains",
@@ -14431,6 +14726,46 @@
       "confidence_score": 1.0,
       "source": "focusflow_readme_drishti",
       "target": "focusflow_readme_database_schema"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "README.md",
+      "source_location": "L21",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "focusflow_readme_how_it_works",
+      "target": "focusflow_readme_codeblock_1"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "README.md",
+      "source_location": "L43",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "focusflow_readme_how_it_works",
+      "target": "focusflow_readme_1_every_frame_what_the_eyes_are_doing"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "README.md",
+      "source_location": "L53",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "focusflow_readme_how_it_works",
+      "target": "focusflow_readme_2_before_you_start_the_baseline"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "README.md",
+      "source_location": "L59",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "focusflow_readme_how_it_works",
+      "target": "focusflow_readme_3_once_per_second_was_that_a_good_second"
     },
     {
       "relation": "contains",
@@ -14476,10 +14811,50 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "README.md",
+      "source_location": "L181",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "focusflow_readme_running_it_locally",
+      "target": "focusflow_readme_codeblock_3"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "README.md",
+      "source_location": "L189",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "focusflow_readme_running_it_locally",
+      "target": "focusflow_readme_codeblock_4"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "README.md",
+      "source_location": "L195",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "focusflow_readme_running_it_locally",
+      "target": "focusflow_readme_codeblock_5"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "README.md",
       "source_location": "L171",
       "weight": 1.0,
       "confidence_score": 1.0,
       "source": "focusflow_readme_local_development",
+      "target": "focusflow_readme_codeblock_3"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "README.md",
+      "source_location": "L157",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "focusflow_readme_setup",
       "target": "focusflow_readme_codeblock_3"
     },
     {
@@ -14496,11 +14871,321 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "README.md",
+      "source_location": "L165",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "focusflow_readme_setup",
+      "target": "focusflow_readme_codeblock_4"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "README.md",
       "source_location": "L187",
       "weight": 1.0,
       "confidence_score": 1.0,
       "source": "focusflow_readme_local_development",
       "target": "focusflow_readme_codeblock_5"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "README.md",
+      "source_location": "L170",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "focusflow_readme_setup",
+      "target": "focusflow_readme_codeblock_5"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "README.md",
+      "source_location": "L245",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "focusflow_readme_knowledge_graph",
+      "target": "focusflow_readme_codeblock_6"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "README.md",
+      "source_location": "L211",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "focusflow_readme_knowledge_graph",
+      "target": "focusflow_readme_codeblock_7"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "README.md",
+      "source_location": "L347",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "focusflow_readme_knowledge_graph",
+      "target": "focusflow_readme_codeblock_8"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "README.md",
+      "source_location": "L203",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "focusflow_readme_database_setup_fresh_install",
+      "target": "focusflow_readme_codeblock_6"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "README.md",
+      "source_location": "L189",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "focusflow_readme_deployment_vercel",
+      "target": "focusflow_readme_codeblock_6"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "study-design.md",
+      "source_location": "L1",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "study_design_md",
+      "target": "focusflow_study_design_drishti_research_framing_and_study_design"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "study-design.md",
+      "source_location": "L7",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "focusflow_study_design_drishti_research_framing_and_study_design",
+      "target": "focusflow_study_design_1_the_framing"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "study-design.md",
+      "source_location": "L37",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "focusflow_study_design_drishti_research_framing_and_study_design",
+      "target": "focusflow_study_design_2_why_a_wearable_belongs_in_this"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "study-design.md",
+      "source_location": "L51",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "focusflow_study_design_drishti_research_framing_and_study_design",
+      "target": "focusflow_study_design_3_primary_hypothesis"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "study-design.md",
+      "source_location": "L79",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "focusflow_study_design_drishti_research_framing_and_study_design",
+      "target": "focusflow_study_design_4_design"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "study-design.md",
+      "source_location": "L132",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "focusflow_study_design_drishti_research_framing_and_study_design",
+      "target": "focusflow_study_design_5_what_has_to_be_fixed_before_any_of_this_is_defensible"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "study-design.md",
+      "source_location": "L162",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "focusflow_study_design_drishti_research_framing_and_study_design",
+      "target": "focusflow_study_design_6_staging"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "study-design.md",
+      "source_location": "L178",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "focusflow_study_design_drishti_research_framing_and_study_design",
+      "target": "focusflow_study_design_7_questions_for_the_advisor"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "study-design.md",
+      "source_location": "L188",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "focusflow_study_design_drishti_research_framing_and_study_design",
+      "target": "focusflow_study_design_related_documents"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "study-design.md",
+      "source_location": "L28",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "focusflow_study_design_1_the_framing",
+      "target": "focusflow_study_design_what_the_system_honestly_measures"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "study-design.md",
+      "source_location": "L65",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "focusflow_study_design_3_primary_hypothesis",
+      "target": "focusflow_study_design_secondary_hypotheses"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "study-design.md",
+      "source_location": "L92",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "focusflow_study_design_4_design",
+      "target": "focusflow_study_design_measures"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "study-design.md",
+      "source_location": "L112",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "focusflow_study_design_4_design",
+      "target": "focusflow_study_design_analysis"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "study-design.md",
+      "source_location": "L116",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "focusflow_study_design_analysis",
+      "target": "focusflow_study_design_codeblock_1"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "system-diagrams.md",
+      "source_location": "L1",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "system_diagrams_md",
+      "target": "focusflow_system_diagrams_system_diagrams"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "system-diagrams.md",
+      "source_location": "L1",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "system_diagrams_md",
+      "target": "zen_kalam_eba609_system_diagrams_system_diagrams"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "system-diagrams.md",
+      "source_location": "L7",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "focusflow_system_diagrams_system_diagrams",
+      "target": "focusflow_system_diagrams_figure_1_high_level_measurement_pipeline"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "system-diagrams.md",
+      "source_location": "L31",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "focusflow_system_diagrams_system_diagrams",
+      "target": "focusflow_system_diagrams_figure_2_eye_feature_extraction_pathway"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "system-diagrams.md",
+      "source_location": "L59",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "focusflow_system_diagrams_system_diagrams",
+      "target": "focusflow_system_diagrams_figure_3_protocol_structure"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "system-diagrams.md",
+      "source_location": "L73",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "focusflow_system_diagrams_system_diagrams",
+      "target": "focusflow_system_diagrams_figure_4_repeated_session_comparison"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "system-diagrams.md",
+      "source_location": "L11",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "focusflow_system_diagrams_figure_1_high_level_measurement_pipeline",
+      "target": "focusflow_system_diagrams_codeblock_1"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "system-diagrams.md",
+      "source_location": "L35",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "focusflow_system_diagrams_figure_2_eye_feature_extraction_pathway",
+      "target": "focusflow_system_diagrams_codeblock_2"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "system-diagrams.md",
+      "source_location": "L63",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "focusflow_system_diagrams_figure_3_protocol_structure",
+      "target": "focusflow_system_diagrams_codeblock_3"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "system-diagrams.md",
+      "source_location": "L77",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "focusflow_system_diagrams_figure_4_repeated_session_comparison",
+      "target": "focusflow_system_diagrams_codeblock_4"
     },
     {
       "relation": "contains",
@@ -14556,56 +15241,6 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "README.md",
-      "source_location": "L157",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "focusflow_readme_setup",
-      "target": "focusflow_readme_codeblock_3"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "README.md",
-      "source_location": "L165",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "focusflow_readme_setup",
-      "target": "focusflow_readme_codeblock_4"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "README.md",
-      "source_location": "L170",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "focusflow_readme_setup",
-      "target": "focusflow_readme_codeblock_5"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "README.md",
-      "source_location": "L203",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "focusflow_readme_database_setup_fresh_install",
-      "target": "focusflow_readme_codeblock_6"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "README.md",
-      "source_location": "L189",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "focusflow_readme_deployment_vercel",
-      "target": "focusflow_readme_codeblock_6"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "README.md",
       "source_location": "L233",
       "weight": 1.0,
       "confidence_score": 1.0,
@@ -14651,126 +15286,6 @@
       "confidence_score": 1.0,
       "source": "focusflow_readme_repository_layout",
       "target": "focusflow_readme_codeblock_7"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "README.md",
-      "source_location": "L211",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "focusflow_readme_knowledge_graph",
-      "target": "focusflow_readme_codeblock_7"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "README.md",
-      "source_location": "L347",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "focusflow_readme_knowledge_graph",
-      "target": "focusflow_readme_codeblock_8"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "system-diagrams.md",
-      "source_location": "L1",
-      "weight": 1.0,
-      "source": "system_diagrams_md",
-      "target": "focusflow_system_diagrams_system_diagrams",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "system-diagrams.md",
-      "source_location": "L1",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "system_diagrams_md",
-      "target": "zen_kalam_eba609_system_diagrams_system_diagrams"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "system-diagrams.md",
-      "source_location": "L7",
-      "weight": 1.0,
-      "source": "focusflow_system_diagrams_system_diagrams",
-      "target": "focusflow_system_diagrams_figure_1_high_level_measurement_pipeline",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "system-diagrams.md",
-      "source_location": "L31",
-      "weight": 1.0,
-      "source": "focusflow_system_diagrams_system_diagrams",
-      "target": "focusflow_system_diagrams_figure_2_eye_feature_extraction_pathway",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "system-diagrams.md",
-      "source_location": "L59",
-      "weight": 1.0,
-      "source": "focusflow_system_diagrams_system_diagrams",
-      "target": "focusflow_system_diagrams_figure_3_protocol_structure",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "system-diagrams.md",
-      "source_location": "L73",
-      "weight": 1.0,
-      "source": "focusflow_system_diagrams_system_diagrams",
-      "target": "focusflow_system_diagrams_figure_4_repeated_session_comparison",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "system-diagrams.md",
-      "source_location": "L11",
-      "weight": 1.0,
-      "source": "focusflow_system_diagrams_figure_1_high_level_measurement_pipeline",
-      "target": "focusflow_system_diagrams_codeblock_1",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "system-diagrams.md",
-      "source_location": "L35",
-      "weight": 1.0,
-      "source": "focusflow_system_diagrams_figure_2_eye_feature_extraction_pathway",
-      "target": "focusflow_system_diagrams_codeblock_2",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "system-diagrams.md",
-      "source_location": "L63",
-      "weight": 1.0,
-      "source": "focusflow_system_diagrams_figure_3_protocol_structure",
-      "target": "focusflow_system_diagrams_codeblock_3",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "system-diagrams.md",
-      "source_location": "L77",
-      "weight": 1.0,
-      "source": "focusflow_system_diagrams_figure_4_repeated_session_comparison",
-      "target": "focusflow_system_diagrams_codeblock_4",
-      "confidence_score": 1.0
     },
     {
       "relation": "imports_from",
@@ -15942,5 +16457,5 @@
     }
   ],
   "hyperedges": [],
-  "built_at_commit": "29b7011d82a58bac753a0e158fc08c063251f710"
+  "built_at_commit": "ed5a1fca883aa96872fe23de2b021b0307615141"
 }
